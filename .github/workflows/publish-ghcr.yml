@@ -222,7 +222,8 @@ jobs:
           prerelease: false
           generate_release_notes: false
 
-
+      - name: Publish Summary
+        if: github.ref == 'refs/heads/main'
         run: |
           echo "## ✅ Build & Publish Complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
