@@ -140,7 +140,46 @@ Your personal addiction recovery companion. A comprehensive Node.js + React appl
 - Specific withdrawal symptom descriptions
 - Addiction-specific recovery tips
 
-## 🛠️ Technical Stack
+## � Screenshots
+
+To add screenshots to this section:
+
+1. **Run the application locally** or in Docker:
+   ```bash
+   # Local development
+   npm run dev
+   
+   # Or with Docker
+   docker compose up
+   ```
+
+2. **Access at**: `http://localhost:3000`
+
+3. **Take screenshots** of key pages (e.g., Login, Dashboard, Addiction Detail, Achievements)
+
+4. **Create directory** and add images:
+   ```bash
+   mkdir -p docs/screenshots
+   # Add your images here
+   ```
+
+5. **Update README** with image references:
+   ```markdown
+   ![Dashboard Screenshot](docs/screenshots/dashboard.png)
+   ![Addiction Detail](docs/screenshots/addiction-detail.png)
+   ```
+
+### Example Section Structure
+- 🏠 Dashboard Overview
+- ➕ Add/Track Addiction
+- 📊 Withdrawal Timeline
+- 🏆 Achievements
+- 🧘 Meditation & Support Tools
+- 🎮 Craving Game
+
+> **Note**: Screenshots help users understand the app's interface and features at a glance. Consider adding both light and dark mode examples!
+
+## �🛠️ Technical Stack
 
 ### **Backend**
 - **Runtime**: Node.js with Express.js

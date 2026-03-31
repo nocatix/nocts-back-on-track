@@ -27,9 +27,11 @@ services:
     ports:
       - "5000:5000"
     environment:
+      NODE_ENV: development
       MONGODB_URI: mongodb://tracker_user:tracker_password@mongodb:27017/back-on-track?authSource=admin
       JWT_SECRET: your-secret-key-change-in-production
       PORT: 5000
+      IP_WHITELIST: "192.168.2.0/24"
     depends_on:
       mongodb:
         condition: service_healthy

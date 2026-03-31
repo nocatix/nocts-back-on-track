@@ -14,6 +14,7 @@ const moodRoutes = require('./routes/moods');
 const weightRoutes = require('./routes/weights');
 const memoryRoutes = require('./routes/memories');
 const trophyRoutes = require('./routes/trophies');
+const { createIPWhitelistMiddleware } = require('./utils/ipWhitelist');
 
 const app = express();
 
@@ -52,6 +53,10 @@ const getAllowedOrigins = () => {
 };
 
 app.use(cors(getAllowedOrigins()));
+
+// IP Whitelist Middleware
+const ipWhitelist = process.env.IP_WHITELIST || '192.168.2.0/24';
+app.use(createIPWhitelistMiddleware(ipWhitelist));
 
 // Force HTTPS redirect (with exceptions for local network)
 app.use((req, res, next) => {
