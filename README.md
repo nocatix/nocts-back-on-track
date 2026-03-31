@@ -12,10 +12,8 @@ Your personal addiction recovery companion. A comprehensive Node.js + React appl
 [![MongoDB](https://img.shields.io/badge/MongoDB-7.0-13AA52?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Express](https://img.shields.io/badge/Express-4.x-000000?logo=express&logoColor=white)](https://expressjs.com/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
-[![Container Registry](https://img.shields.io/badge/GHCR-Containers-4B0082?logo=github&logoColor=white)](https://github.com/nocatix/nocts-back-on-track/pkgs/container/nocts-back-on-track-backend)
+[![Container Registry](https://img.shields.io/badge/GHCR-Containers-4B0082?logo=github&logoColor=white)](https://github.com/nocatix/nocts-back-on-track/pkgs/container)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-**Version:** v1.0.0
 
 ---
 
@@ -327,19 +325,19 @@ Or use this configuration:
 ```yaml
 services:
   backend:
-    image: ghcr.io/nocatix/nocts-back-on-track-backend:v1.0.0
+    image: ghcr.io/nocatix/nocts-back-on-track-backend:latest
     ports:
       - "5000:5000"
     environment:
       MONGODB_URI: mongodb://mongo:27017/nocts-back-on-track
       JWT_SECRET: your_secure_random_key_here
-      ENCRYPTION_KEY: ${ENCRYPTION_KEY:-your_encryption_key}
+      ENCRYPTION_KEY: your_encryption_key
       NODE_ENV: production
     depends_on:
       - mongo
 
   frontend:
-    image: ghcr.io/nocatix/nocts-back-on-track-frontend:v1.0.0
+    image: ghcr.io/nocatix/nocts-back-on-track-frontend:latest
     ports:
       - "3000:3000"
     depends_on:
