@@ -1,174 +1,385 @@
-# noct's Back on Track
+# 🎯 Back on Track - Recovery Companion
 
-Your personal addiction recovery companion. A Node.js application for tracking your recovery journey, providing a personalized experience to monitor progress and stay motivated.
+Your personal addiction recovery companion. A comprehensive Node.js + React application for tracking your recovery journey, providing a holistic support system to monitor progress, stay motivated, and maintain emotional well-being.
 
-## Features
-* **User Authentication**: Secure registration and login system with JWT tokens
-* **Recovery Dashboard**: A user-friendly dashboard to view all tracked addictions and daily predictions
-* **Add New Addiction**: Create new addiction tracking entries with:
-    + Name of the addiction (or custom entry)
-    + Date and time when stopped
-    + Frequency of use per day
-    + Money spent per day
-    + Additional notes
-* **Individual Addiction Page**: Dedicated page for each addiction showing:
-    + Name of the addiction
-    + Time elapsed since stopping (in days)
-    + Total money saved (calculated automatically)
-    + Daily usage frequency
-    + Money spent per day
-    + Interactive withdrawal timeline with milestones and symptoms
-    + Personalized motivational messages
-* **Withdrawal Timelines**: Pre-built timelines for common addictions with:
-    + Day-by-day milestones
-    + Expected symptoms and their severity
-    + Progress tracking visual indicators
-    + Motivational messages at each milestone
-* **Meditation & Mindfulness**: Guided meditations with embedded YouTube music players
-* **Recovery Diary**: Write daily reflections with markdown support
-* **Wordle Game**: Guess 5-letter recovery words in 6 attempts
-* **Achievement System**: Unlock milestones and receive notifications
-* **Dark Mode**: Full dark mode support with system preference detection
-* **Privacy-Focused**: All data stays on your device or private server
+## 🌟 Core Features
 
-## Technical Stack
-* **Backend**:
-    + Node.js as the runtime environment
-    + Express.js for the REST API framework
-    + MongoDB for data persistence
-    + JWT for secure authentication
-    + bcryptjs for password hashing
-    + CORS for cross-origin requests
-* **Frontend**:
-    + React for the user interface
-    + React Router for client-side routing
-    + Axios for HTTP requests
-    + Custom CSS with CSS variables for theming
-    + Dark mode support
+### **Dashboard & Tracking**
+* 🏠 **Recovery Dashboard** - Overview of all tracked addictions with daily savings and progress predictions
+* ➕ **Add Addiction** - Track any of 15+ addiction types with:
+  - Addiction type with emoji indicators
+  - Date and time when stopped (format adapts to user's locale preference)
+  - Addiction-specific frequency measurements (drinks/day, grams/day, hours/day, etc.)
+  - Addiction-specific cost units ($/drink, $/gram, $/hour, etc.)
+  - Personal notes and triggers
+* 📊 **Individual Addiction Pages** - Detailed tracking for each addiction:
+  - Days stopped counter (automatically calculated)
+  - Total money saved (calculated daily)
+  - Withdrawal timeline with day-by-day milestones
+  - Personalized recovery tips based on addiction type
+  - "I Caved" button for tracking relapse events
+  - Achievement tracking per addiction
 
-## Project Structure
+### **Crisis Support & Motivation**
+* 🚨 **"I'm About to Cave" Support** - Emergency button that:
+  - Shows encouraging motivational message
+  - Displays random saved memory (photo/message) for emotional support
+  - Offers options to track craving management
+  - Quick access to addiction logging if needed
+* 💭 **Memories** - Save motivational photos and messages to view during cravings
+  - Upload photos (optional)
+  - Write inspirational messages (optional)
+  - Either alone or combined
+
+### **Mood & Emotional Well-being**
+* 🎭 **Mood Tracker** - Comprehensive emotion tracking with:
+  - Emotion wheel with 8 primary emotions (Happy, Sad, Angry, Anxious, Calm, Energetic, Tired, Neutral)
+  - 5 secondary emotions per primary emotion with color gradients
+  - Intensity slider (1-5 scale)
+  - Trigger identification
+  - Personal notes
+  - Monthly calendar view with color-coded moods
+  - Emoji indicators for quick visual reference
+
+### **Lifestyle Tracking**
+* 📔 **Recovery Diary** - Write reflections with:
+  - Markdown formatting support
+  - Markdown formatting tips (collapsible)
+  - "Journaling Tips for Recovery" bento box (collapsible)
+  - Encrypted storage for privacy
+* ⚖️ **Weight Tracker** - Monitor physical health with:
+  - Weight logging with imperial/metric unit preference
+  - Goal weight setting and progress tracking
+  - Monthly calendar with weigh-ins
+  - Weight history with delete option
+  - SVG graphs showing weight progression
+  - Unit preference from profile settings
+
+### **Meditation & Mindfulness**
+* 🧘 **Guided Meditations** - Mental health support with:
+  - Multiple meditation tips (collapsible)
+  - Embedded music player for ambient sounds
+  - Meditation guide sections
+  - Pre-recorded meditation recommendations
+
+### **Games & Activities**
+* 🎮 **Craving Game** - Productive distraction during cravings:
+  - Wordle-style 5-letter word guessing
+  - 550+ English language words
+  - 6 attempts per game
+  - Collapsible "How to Play" instructions
+  - Perfect for occupying the mind during urges
+
+### **Achievements & Motivation**
+* 🏆 **Trophy System** - Cumulative milestones for recovery:
+  - **Daily Trophies** (Days 1-6)
+  - **Weekly Trophies** (Weeks 1-3 after day 6)
+  - **Monthly Trophies** (Months 1-11 after week 3)
+  - **Yearly Trophies** (Year 1+)
+  - Progress tracking showing current trophy + next milestone
+* 🎖️ **Achievements** - Per-addiction milestones:
+  - 1 week, 1 month, 3 months, 6 months, 1 year per addiction
+  - Automatic achievement notifications
+
+### **User Experience**
+* 👤 **Profile Management** - Full user control:
+  - Edit full name
+  - Change password with validation
+  - Delete account option
+  - Measurement preference (Imperial/Metric) affecting:
+    - Weight tracker units
+    - Time format (12h with AM/PM vs 24h)
+    - All measurements across the app
+* 🎨 **Dark Mode** - Full dark/light mode support with:
+  - System preference detection
+  - Manual toggle in sidebar
+  - Consistent theming across all pages
+  - Color-coded elements based on addiction type
+* 💾 **Cookie Persistence** - Settings saved locally:
+  - Login information (token)
+  - Dark mode preference
+  - Sidebar collapsed state
+  - Hint collapse states per page
+* 📱 **Responsive Design** - Mobile, tablet, and desktop optimized
+* ℹ️ **Why Use This** - Educational page explaining:
+  - Science behind recovery tools
+  - Benefits of meditation, mood tracking, journaling
+  - Weight tracking motivation
+  - Recovery statistics
+
+### **Supported Addiction Types**
+🍺 Alcohol • 🌿 Cannabis • 💉 Hard Drugs • 🚬 Nicotine • 🎰 Gambling • 📱 Social Media • 📰 Doomscrolling • 🎮 Video Games • 🔞 Pornography • 🛍️ Shopping • 🍬 Sugar • ☕ Coffee • 🍽️ Overeating • ❓ Other
+
+## 🛠️ Technical Stack
+
+### **Backend**
+- **Runtime**: Node.js with Express.js
+- **Database**: MongoDB with Mongoose ODM
+- **Authentication**: JWT (JSON Web Tokens) with bcryptjs password hashing
+- **Security**: Helmet.js for security headers, HTTPS enforcement, AES-256-GCM encryption for sensitive data
+- **API**: RESTful architecture with modular route structure
+
+### **Frontend**
+- **Framework**: React with React Router for navigation
+- **HTTP Client**: Axios with automatic token authentication
+- **Styling**: Custom CSS with CSS variables for dynamic theming
+- **Dark Mode**: System preference detection + manual toggle
+- **State Management**: React Context API for auth, dark mode, and user preferences
+- **Charts/Graphs**: SVG-based data visualization for weight and mood tracking
+
+## 📁 Project Structure
+
 ```
-back-on-track/
+nocts-back-on-track/
 ├── server/
 │   ├── config/
-│   │   └── database.js
-│   ├── models/
+│   │   └── database.js                    # MongoDB connection
+│   ├── middleware/
+│   │   └── auth.js                        # JWT authentication middleware
+│   ├── models/                            # Database schemas
 │   │   ├── User.js
 │   │   ├── Addiction.js
+│   │   ├── Diary.js
+│   │   ├── Mood.js
+│   │   ├── Weight.js
+│   │   ├── Memory.js
 │   │   ├── Achievement.js
-│   │   └── Diary.js
-│   ├── routes/
+│   │   └── Trophy.js
+│   ├── routes/                            # API endpoints
 │   │   ├── auth.js
-│   │   └── addictions.js
-│   ├── middleware/
-│   │   └── auth.js
-│   └── index.js
+│   │   ├── addictions.js
+│   │   ├── diary.js
+│   │   ├── moods.js
+│   │   ├── weights.js
+│   │   ├── memories.js
+│   │   ├── achievements.js
+│   │   └── trophies.js
+│   ├── utils/
+│   │   └── encryption.js                  # Data encryption/decryption
+│   └── index.js                           # Express server setup
+│
 ├── client/
 │   ├── src/
-│   │   ├── pages/
-│   │   │   ├── Login.js
-│   │   │   ├── Register.js
+│   │   ├── pages/                         # React page components
+│   │   │   ├── Auth.js
 │   │   │   ├── MainMenu.js
 │   │   │   ├── AddNewAddiction.js
-│   │   │   └── AddictionDetail.js
-│   │   ├── components/
+│   │   │   ├── AddictionDetail.js
+│   │   │   ├── Diary.js
+│   │   │   ├── Meditation.js
+│   │   │   ├── CravingGame.js
+│   │   │   ├── Mood.js
+│   │   │   ├── Weight.js
+│   │   │   ├── Memories.js
+│   │   │   ├── Achievements.js
+│   │   │   ├── Profile.js
+│   │   │   └── Whyusethis.js
+│   │   ├── components/                    # Reusable components
 │   │   │   ├── Header.js
+│   │   │   ├── Sidebar.js
+│   │   │   ├── Footer.js
 │   │   │   ├── AddictionCard.js
-│   │   │   └── WithdrawalTimeline.js
-│   │   ├── context/
-│   │   │   └── AuthContext.js
-│   │   ├── styles/ (CSS files)
-│   │   ├── App.js
+│   │   │   ├── WithdrawalTimeline.js
+│   │   │   └── AchievementNotification.js
+│   │   ├── context/                       # React Context providers
+│   │   │   ├── AuthContext.js
+│   │   │   └── DarkModeContext.js
+│   │   ├── data/                          # Static data
+│   │   │   ├── addictions/                # Per-addiction configs
+│   │   │   │   ├── index.js
+│   │   │   │   ├── alcohol.js
+│   │   │   │   ├── cannabis.js
+│   │   │   │   └── ... (13 more)
+│   │   │   └── cravingGameWords.js        # 550+ 5-letter words
+│   │   ├── utils/                         # Utilities
+│   │   │   ├── withdrawalHelper.js        # Addiction-specific helpers
+│   │   │   └── cookieHelper.js            # Cookie persistence
+│   │   ├── App.js                         # Main app component
+│   │   ├── App.css
 │   │   └── index.js
-│   └── public/
-│       └── index.html
-├── package.json
+│   ├── public/
+│   │   ├── index.html
+│   │   ├── logo.png                       # App logo
+│   │   └── cravingWords.txt
+│   └── package.json
+│
 ├── .env.example
-└── README.md
+├── docker-compose.yml
+├── package.json
+├── README.md
+└── SECURITY.md
 ```
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
-* Node.js (v14 or higher)
-* MongoDB (running locally or cloud instance)
-* npm or yarn package manager
+- **Node.js** v14+ ([Download](https://nodejs.org))
+- **npm** (comes with Node.js)
+- **MongoDB** v4.4+ (local or [Atlas](https://www.mongodb.com/cloud/atlas))
+- **distrobox** (on Fedora systems) for Node.js environment
 
-### Installation
+### Installation Steps
 
-1. **Clone the repository**
-   ```bash
-   cd back-on-track
-   ```
+#### 1. Clone & Setup
+```bash
+cd nocts-back-on-track
+cp .env.example .env
+```
 
-2. **Set up environment variables**
-   ```bash
-   cp .env.example .env
-   ```
-   Update `.env` with your MongoDB URI and JWT secret:
-   ```
-   PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/back-on-track
-   JWT_SECRET=your_secure_jwt_secret_key
-   NODE_ENV=development
-   ```
+#### 2. Configure Environment (.env)
+```bash
+# Database
+MONGODB_URI=mongodb://localhost:27017/nocts-back-on-track
 
-3. **Install backend dependencies**
-   ```bash
-   npm install
-   ```
+# Authentication
+JWT_SECRET=your_secure_random_key_here
 
-4. **Install frontend dependencies**
-   ```bash
-   cd client
-   npm install
-   cd ..
-   ```
+# Security
+ENCRYPTION_KEY=<run: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))">
+NODE_ENV=development
 
-### Running the Application
+# Server
+PORT=5000
+CLIENT_URL=http://127.0.0.1:3000
+```
 
-1. **Start MongoDB** (if running locally)
-   ```bash
-   mongod
-   ```
+#### 3. Install Dependencies
+```bash
+# Enter distrobox on Fedora
+distrobox enter
 
-2. **Start the backend server**
-   ```bash
-   npm run dev
-   ```
-   The server will run on `http://localhost:5000`
+# Install all dependencies
+npm install
+```
 
-3. **In another terminal, start the frontend**
-   ```bash
-   npm run client
-   ```
-   The React app will open at `http://localhost:3000`
+#### 4. Start Development Servers
 
-### API Endpoints
+**Terminal 1 - Backend:**
+```bash
+npm run dev
+# Runs on http://127.0.0.1:5000
+```
 
-#### Authentication
-* `POST /api/auth/register` - Register a new user
-* `POST /api/auth/login` - Login user
+**Terminal 2 - Frontend:**
+```bash
+cd client
+npm start
+# Runs on http://127.0.0.1:3000
+```
 
-#### Addictions
-* `GET /api/addictions` - Get all addictions for logged-in user
-* `GET /api/addictions/:id` - Get specific addiction details
-* `POST /api/addictions` - Create new addiction entry
-* `PUT /api/addictions/:id` - Update addiction entry
-* `DELETE /api/addictions/:id` - Delete addiction entry
+### Docker Setup (Alternative)
+```bash
+distrobox enter
+docker-compose up
+```
 
-## Usage
+## 📡 API Endpoints
 
-1. **Register/Login**: Create an account or log in with existing credentials
-2. **Add Addiction**: Click "Add New Addiction" and fill in the details
-3. **View Progress**: See your addiction on the main menu with days stopped and money saved
-4. **Check Timeline**: Click on an addiction to view detailed withdrawal timeline and milestones
-5. **Track Progress**: Money saved is calculated automatically based on days and daily cost
+### Authentication
+- `POST /api/auth/register` - Create new account
+- `POST /api/auth/login` - Login with credentials
+- `GET /api/auth/me` - Get current user profile
+- `PUT /api/auth/profile` - Update user name
+- `PUT /api/auth/unit-preference` - Set measurement units
+- `PUT /api/auth/change-password` - Change password
+- `DELETE /api/auth/profile` - Delete account
 
-## Future Development
-* Implement social features for users to share experiences
-* Add push notifications for milestone achievements
-* Integrate with wearable devices for health metrics
+### Addictions
+- `GET /api/addictions` - List all addictions
+- `GET /api/addictions/:id` - Get addiction details
+- `POST /api/addictions` - Create new addiction
+- `PUT /api/addictions/:id` - Update addiction
+- `DELETE /api/addictions/:id` - Delete addiction
+
+### Diary
+- `POST /api/diary` - Create diary entry
+- `GET /api/diary` - Get all entries
+- `GET /api/diary/:date` - Get entry by date
+- `PUT /api/diary/:id` - Update entry
+- `DELETE /api/diary/:id` - Delete entry
+
+### Mood Tracking
+- `POST /api/moods` - Log mood
+- `GET /api/moods` - Get all moods
+- `GET /api/moods/month/:year/:month` - Get monthly moods
+- `DELETE /api/moods/:id` - Delete mood entry
+
+### Weight Tracking
+- `POST /api/weights` - Log weight
+- `GET /api/weights` - Get all weights
+- `GET /api/weights/month/:year/:month` - Get monthly weights
+- `DELETE /api/weights/:id` - Delete weight entry
+
+### Memories
+- `POST /api/memories` - Save memory (photo/message/both)
+- `GET /api/memories` - Get all memories
+- `GET /api/memories/random` - Get random memory (for craving support)
+- `DELETE /api/memories/:id` - Delete memory
+
+### Achievements & Trophies
+- `GET /api/achievements` - Get all achievements
+- `POST /api/achievements/check` - Check for new achievements
+- `GET /api/trophies` - Get all trophies
+- `POST /api/trophies/check` - Check for new trophies
+- `GET /api/trophies/progress` - Get trophy progress
+
+## 🔐 Security Features
+
+- ✅ **AES-256-GCM Encryption** for sensitive data at rest
+- ✅ **JWT Authentication** with secure token storage
+- ✅ **Bcryptjs Hashing** for passwords (salt rounds: 10)
+- ✅ **HTTPS Enforcement** in production with local network exceptions
+- ✅ **Security Headers** via Helmet.js
+- ✅ **CORS Protection** with origin validation
+- ✅ **HTTP-Only Cookies** for development environment
+- ✅ **encrypted Data Fields**: Diary entries, mood notes, addiction notes, memory messages
+
+See [SECURITY.md](SECURITY.md) for detailed security documentation.
+
+## 📚 Usage Guide
+
+1. **Register**: Create account with username and password
+2. **Add Addiction**: Choose addiction type, set start date/time, frequency, and cost
+3. **Track Recovery**: Watch days counter and money saved increase automatically
+4. **View Timeline**: See withdrawal symptoms and recovery tips adapted to your timeline
+5. **Use Support Tools**: 
+   - Meditate when anxious
+   - Track mood patterns
+   - Journal daily reflections
+   - Log weight for motivation
+   - Play craving game to distract during urges
+   - View memories for emotional support
+6. **Collect Trophies**: Earn daily/weekly/monthly/yearly trophies for sustained recovery
+7. **Celebrate Achievements**: Get notifications and badges for milestones
+
+## 🎯 Recovery Features Explained
+
+### Why Mood Tracking?
+Recognizing emotional patterns helps identify relapse triggers early. Studies show 30% better outcomes with emotional tracking + recovery treatment.
+
+### Why Journaling?
+Writing processes emotions and identifies coping patterns. Research shows expressive writing reduces anxiety and increases clarity on triggers.
+
+### Why Weight Tracking?
+Physical health is mental health. Exercise-focused weight tracking increases motivation 25% and provides visible recovery progress.
+
+### Why Meditation?
+Meditation reduces cravings by 25%, manages stress response, and helps rebuild reward pathways damaged by addiction.
+
+### Why Memories?
+Visual + emotional anchors provide immediate motivation when willpower is lowest. Seeing photos/messages of goals and support reduces relapse impulses.
+
+## 🤝 Contributing
+
+Contributions welcome! Areas for improvement:
+- Additional addiction types and timelines
+- Social features for peer support
+- Wearable device integration
+- Push notifications
+- Multi-language support
+- Mobile app (React Native)
+
+# 
 * Create mobile app version
 * Add support for group challenges
 * Implement AI-powered motivational messages

@@ -99,6 +99,23 @@ html.dark .marker-circle {
   transition: color 0.3s ease;
 }
 
+.milestone-content p.symptom {
+  color: var(--text-primary);
+}
+
+.milestone-content p.tip {
+  margin-top: 8px;
+  color: var(--accent-color);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.timeline-empty {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 20px;
+}
+
 @media (max-width: 600px) {
   .timeline-container::before {
     left: 20px;

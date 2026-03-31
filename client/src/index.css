@@ -96,6 +96,10 @@ html.dark .btn-primary:hover {
 .btn-secondary {
   background-color: #6c757d;
   color: white;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-secondary:hover {
@@ -119,6 +123,12 @@ html.dark .btn-primary:hover {
   background-color: var(--danger-color);
   color: white;
   transition: background-color 0.3s ease;
+  max-width: 50px;
+  padding: 8px 12px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-danger:hover {

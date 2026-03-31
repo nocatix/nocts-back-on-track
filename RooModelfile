@@ -1,5 +1,0 @@
-FROM qwen3-coder:32b
-# 32k context is the minimum for agentic work; 
-# with 64GB RAM, you can comfortably go to 64k.
-PARAMETER num_ctx 65536
-PARAMETER temperature 0.0

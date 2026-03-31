@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 import './Achievements.css';
 
 const Achievements = () => {
-  const { user, token } = useAuth();
+  const { token } = useAuth();
   const [achievements, setAchievements] = useState([]);
   const [trophies, setTrophies] = useState([]);
   const [trophyProgress, setTrophyProgress] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const hasInitializedRef = useRef(false);
 
   useEffect(() => {
+    // Prevent duplicate fetches in development mode (React StrictMode)
+    if (hasInitializedRef.current) return;
+    hasInitializedRef.current = true;
+
     const fetchAchievementsAndTrophies = async () => {
       try {
         // Check and award new trophies
@@ -95,7 +100,6 @@ const Achievements = () => {
     if (currentIndex === 0) return 100;
     
     // For other milestones, calculate progress based on the previous milestone
-    const previousMilestone = milestones[currentIndex - 1];
     return Math.min(100, Math.round((milestoneDays / milestones[milestones.length - 1]) * 100));
   };
 

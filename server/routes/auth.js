@@ -1,3 +1,8 @@
+/**
+ * Authentication Routes
+ * Handles user registration, login, profile management, and account deletion
+ */
+
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
@@ -5,23 +10,34 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-// Register
+/**
+ * @route   POST /api/auth/register
+ * @desc    Create a new user account
+ * @param   {string} username - Unique user identifier
+ * @param   {string} fullName - User's full name
+ * @param   {string} password - User's password (will be hashed)
+ * @returns {Object} JWT token and user info
+ */
 router.post('/register', async (req, res) => {
   try {
     const { username, fullName, password } = req.body;
     
+    // Validate all required fields are provided
     if (!username || !fullName || !password) {
       return res.status(400).json({ message: 'All fields are required' });
     }
     
+    // Check if username is already taken
     const existingUser = await User.findOne({ username });
     if (existingUser) {
       return res.status(409).json({ message: 'Username already taken' });
     }
     
+    // Create new user (password will be hashed by User model pre-save middleware)
     const user = new User({ username, fullName, password });
     await user.save();
     
+    // Generate JWT token for immediate login
     const token = jwt.sign(
       { userId: user._id },
       process.env.JWT_SECRET,
@@ -38,15 +54,23 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Login
+/**
+ * @route   POST /api/auth/login
+ * @desc    Authenticate user and return JWT token
+ * @param   {string} username - User's username
+ * @param   {string} password - User's password
+ * @returns {Object} JWT token and user info
+ */
 router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
     
+    // Validate required fields
     if (!username || !password) {
       return res.status(400).json({ message: 'Username and password are required' });
     }
     
+    // Find user by username
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(401).json({ message: 'Invalid credentials' });
@@ -73,7 +97,12 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Get Current User
+/**
+ * @route   GET /api/auth/me
+ * @desc    Get current authenticated user's information
+ * @access  Private (requires JWT token)
+ * @returns {Object} User info including unit preference
+ */
 router.get('/me', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId);

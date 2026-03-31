@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './MainMenu.css';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import AddictionCard from '../components/AddictionCard';
-import { calculateDailyPredictions, formatDayCount } from '../utils/withdrawalHelper';
+import { calculateDailyPredictions, formatDayCount, getWithdrawalStage } from '../utils/withdrawalHelper';
 import { getCookie, setCookie } from '../utils/cookieHelper';
+import { getRandomQuote } from '../data/motivationalQuotes';
 
 export default function MainMenu() {
   const [addictions, setAddictions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const { token, user } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const navigate = useNavigate();
   const [predictions, setPredictions] = useState([]);
   const [showCravingModal, setShowCravingModal] = useState(false);
@@ -22,6 +22,7 @@ export default function MainMenu() {
     const saved = getCookie('showDailyTip');
     return saved !== null ? saved : true;
   });
+  const [dailyQuote, setDailyQuote] = useState('');
 
   useEffect(() => {
     const fetchAddictions = async () => {
@@ -48,6 +49,11 @@ export default function MainMenu() {
   useEffect(() => {
     setCookie('showDailyTip', showDailyTip, 365);
   }, [showDailyTip]);
+
+  // Set daily motivational quote
+  useEffect(() => {
+    setDailyQuote(getRandomQuote());
+  }, []);
 
   const handleCravingSupport = () => {
     setShowCravingModal(true);
@@ -181,7 +187,7 @@ export default function MainMenu() {
           <h2>📊 Today's Outlook</h2>
           <div className="predictions-grid">
             {predictions.map((pred, idx) => (
-              <div key={idx} className="prediction-card">
+              <div key={idx} className="prediction-card" onClick={() => navigate(`/addiction/${pred._id}`)}>
                 <div className="prediction-header">
                   <h3>{pred.name}</h3>
                   <span className="days-count">{formatDayCount(pred.daysSoFar)}</span>
@@ -232,6 +238,12 @@ export default function MainMenu() {
               </div>
             )}
           </div>
+        </div>
+      )}
+
+      {dailyQuote && (
+        <div className="motivational-quote-section">
+          <p className="motivational-quote">✨ {dailyQuote}</p>
         </div>
       )}
     </div>
