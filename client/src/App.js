@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
+import axios from 'axios';
 import { AuthContext } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -21,6 +22,10 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import AchievementNotification from './components/AchievementNotification';
 import Sidebar from './components/Sidebar.js';
+
+// Configure axios to use backend API URL
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+axios.defaults.baseURL = API_BASE_URL;
 
 function ProtectedRoute({ children, isAuthenticated }) {
   return isAuthenticated ? children : <Navigate to="/login" />;

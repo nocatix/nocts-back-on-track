@@ -1,6 +1,6 @@
 FROM node:18-alpine
 
-WORKDIR /app
+WORKDIR /app/client
 
 COPY client/package*.json ./
 
@@ -8,8 +8,18 @@ RUN npm install
 
 COPY client .
 
+# Build the React app with the backend URL environment variable
+# Use localhost since the browser will access the backend via the exposed port
+ENV REACT_APP_API_URL=http://localhost:5000
+RUN npm run build
+
+# Use a lighter image for serving the built app
+FROM node:18-alpine
+RUN npm install -g serve
+WORKDIR /app/client
+
+COPY --from=0 /app/client/build ./build
+
 EXPOSE 3000
 
-ENV REACT_APP_API_URL=http://localhost:5000
-
-CMD ["npm", "start"]
+CMD ["serve", "-s", "build", "-l", "3000"]

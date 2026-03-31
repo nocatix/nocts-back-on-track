@@ -172,8 +172,8 @@ export const calculateDailyPredictions = (addictions) => {
     const stopDate = new Date(addiction.stopDate);
     stopDate.setHours(0, 0, 0, 0);
     
-    // Calculate days since addiction was started
-    const daysSoFar = Math.floor((today - stopDate) / (1000 * 60 * 60 * 24)) - 1;
+    // Calculate days since addiction was started (at least 1 to show day1 withdrawal info)
+    const daysSoFar = Math.max(1, Math.floor((today - stopDate) / (1000 * 60 * 60 * 24)));
     const addictionType = addiction.name.toLowerCase();
     
     // Get the withdrawal timeline for this addiction

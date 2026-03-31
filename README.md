@@ -2,6 +2,20 @@
 
 Your personal addiction recovery companion. A comprehensive Node.js + React application for tracking your recovery journey, providing a holistic support system to monitor progress, stay motivated, and maintain emotional well-being.
 
+---
+
+### 📊 Project Status
+
+![Publish to GHCR](https://github.com/nocts/back-on-track/actions/workflows/publish-ghcr.yml/badge.svg)
+[![Node.js](https://img.shields.io/badge/Node.js-v18-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)](https://react.dev/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-7.0-13AA52?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Express](https://img.shields.io/badge/Express-4.x-000000?logo=express&logoColor=white)](https://expressjs.com/)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+---
+
 ## 🌟 Core Features
 
 ### **Dashboard & Tracking**

@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   # MongoDB Database
   mongodb:
@@ -17,39 +19,38 @@ services:
       timeout: 5s
       retries: 5
 
-  # Backend Server
+  # Backend Server from ghcr.io
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile.server
+    image: ghcr.io/marcel/nocts-back-on-track-backend:latest
     container_name: back-on-track-api
     restart: unless-stopped
     ports:
       - "5000:5000"
     environment:
-      MONGODB_URI: mongodb://tracker_user:tracker_password@mongodb:27017/back-on-track?authSource=admin
-      JWT_SECRET: your-secret-key-change-in-production
+      MONGO_URI: mongodb://tracker_user:tracker_password@mongodb:27017/addictionTracker?authSource=admin
+      NODE_ENV: production
       PORT: 5000
     depends_on:
       mongodb:
         condition: service_healthy
+    networks:
+      - back-on-track-network
 
-  # Frontend Client
+  # Frontend from ghcr.io
   frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile.client
+    image: ghcr.io/marcel/nocts-back-on-track-frontend:latest
     container_name: back-on-track-web
     restart: unless-stopped
     ports:
       - "3000:3000"
     depends_on:
       - backend
+    networks:
+      - back-on-track-network
 
 volumes:
   mongodb_data:
-    driver: local
 
 networks:
-  default:
-    name: back-on-track-network
+  back-on-track-network:
+    driver: bridge
