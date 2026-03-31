@@ -40,13 +40,24 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Extract version
+      - name: Extract and increment version
         id: version
         run: |
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/}
           else
-            VERSION=$(cat version.txt 2>/dev/null || echo "dev-${GITHUB_SHA::7}")
+            # Read current version
+            CURRENT=$(cat version.txt 2>/dev/null || echo "1.0.0")
+            
+            # Parse MAJOR.MINOR.REVISION
+            IFS='.' read -r MAJOR MINOR REVISION <<< "$CURRENT"
+            
+            # Increment REVISION by default
+            NEW_REVISION=$((REVISION + 1))
+            VERSION="${MAJOR}.${MINOR}.${NEW_REVISION}"
+            
+            # Update version.txt
+            echo "$VERSION" > version.txt
           fi
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
           echo "Publishing version: ${VERSION}"
@@ -84,19 +95,31 @@ jobs:
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:buildcache
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:buildcache,mode=max
 
-      - name: Update version file
+      - name: Configure Git
         if: github.ref == 'refs/heads/main'
         run: |
-          echo "${{ steps.version.outputs.version }}" > version.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Create Release
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Commit and push version update
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git add version.txt
+          if git diff --cached --quiet; then
+            echo "No version changes to commit"
+          else
+            git commit -m "Bump version to ${{ steps.version.outputs.version }}"
+            git push origin main
+          fi
+
+      - name: Create Release for Main Branch
+        if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}
-          name: Release ${{ steps.version.outputs.version }}
+          tag_name: v${{ steps.version.outputs.version }}
+          name: Release v${{ steps.version.outputs.version }}
           body: |
-            # 🎯 NOCTS - Back On Track ${{ steps.version.outputs.version }}
+            # 🎯 NOCTS - Back On Track v${{ steps.version.outputs.version }}
             
             An addiction recovery companion app that helps users track their journey to sobriety with personalized support, motivation, and science-backed withdrawal timeline tracking.
             
@@ -149,8 +172,8 @@ jobs:
             ```
             
             ### Docker Images
-            - **Backend**: `${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:${{ steps.version.outputs.version }}`
-            - **Frontend**: `${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:${{ steps.version.outputs.version }}`
+            - **Backend**: `${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:v${{ steps.version.outputs.version }}`
+            - **Frontend**: `${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:v${{ steps.version.outputs.version }}`
             
             ### Manual Setup
             ```bash
@@ -199,7 +222,7 @@ jobs:
           prerelease: false
           generate_release_notes: false
 
-      - name: Publish Summary
+
         run: |
           echo "## ✅ Build & Publish Complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
