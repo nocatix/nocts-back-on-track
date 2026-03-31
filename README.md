@@ -14,6 +14,8 @@ Your personal addiction recovery companion. A comprehensive Node.js + React appl
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+**Version:** v1.0.0 | **Container Registry:** [GHCR](https://github.com/nocatix/nocts-back-on-track/pkgs/container)
+
 ---
 
 ## 🌟 Core Features
@@ -218,8 +220,13 @@ nocts-back-on-track/
 │   └── package.json
 │
 ├── .env.example
-├── docker-compose.yml
+├── docker-compose.yml               # Development with local builds
+├── docker-compose-ghcr.yml          # Production with GHCR images
+├── Dockerfile.server
+├── Dockerfile.client
+├── .github/workflows/publish-ghcr.yml
 ├── package.json
+├── version.txt
 ├── README.md
 └── SECURITY.md
 ```
@@ -286,6 +293,53 @@ npm start
 distrobox enter
 docker-compose up
 ```
+
+### Docker with GHCR Images (Production)
+Pull pre-built images from GitHub Container Registry:
+
+```bash
+# Create local docker-compose.yml with GHCR images
+curl -O https://raw.githubusercontent.com/nocatix/nocts-back-on-track/main/docker-compose-ghcr.yml
+
+# Start with published images
+docker compose -f docker-compose-ghcr.yml up
+```
+
+Or use this configuration:
+
+```yaml
+services:
+  backend:
+    image: ghcr.io/nocatix/nocts-back-on-track-backend:v1.0.0
+    ports:
+      - "5000:5000"
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/nocts-back-on-track
+      JWT_SECRET: your_secure_random_key_here
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:-your_encryption_key}
+      NODE_ENV: production
+    depends_on:
+      - mongo
+
+  frontend:
+    image: ghcr.io/nocatix/nocts-back-on-track-frontend:v1.0.0
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo:7.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
+```
+
+**Available Versions:** Check [GHCR Releases](https://github.com/nocatix/nocts-back-on-track/pkgs/container)
 
 ## 📡 API Endpoints
 
