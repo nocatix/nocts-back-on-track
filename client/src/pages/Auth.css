@@ -6,11 +6,16 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 20px;
+  transition: background 0.3s ease;
+}
+
+html.dark .auth-container {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
 }
 
 .disclaimer-banner {
   background: rgba(255, 255, 255, 0.95);
-  color: #333;
+  color: var(--text-primary);
   padding: 15px 20px;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -18,33 +23,46 @@
   width: 100%;
   text-align: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+html.dark .disclaimer-banner {
+  background: rgba(42, 42, 42, 0.95);
+  color: var(--text-primary);
 }
 
 .disclaimer-banner p {
   margin: 0;
   font-size: 13px;
   line-height: 1.5;
-  color: #334;
+  color: inherit;
 }
 
 .disclaimer-banner strong {
-  color: #26de81;
+  color: var(--accent-color);
   font-weight: 700;
+  transition: color 0.3s ease;
 }
 
 .auth-card {
-  background: white;
+  background: var(--card-bg);
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   width: 100%;
   max-width: 400px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+html.dark .auth-card {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 .auth-card h2 {
   margin-bottom: 30px;
   text-align: center;
-  color: #667eea;
+  color: var(--accent-color);
+  transition: color 0.3s ease;
 }
 
 .auth-card form {
@@ -55,20 +73,23 @@
 .auth-card input {
   padding: 12px;
   margin-bottom: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--input-border);
   border-radius: 5px;
   font-size: 14px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
 }
 
 .auth-card input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: var(--accent-color);
   box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
 }
 
 .auth-card button {
   padding: 12px;
-  background-color: #667eea;
+  background-color: var(--accent-color);
   color: white;
   border: none;
   border-radius: 5px;
@@ -80,7 +101,7 @@
 }
 
 .auth-card button:hover {
-  background-color: #5568d3;
+  background-color: var(--accent-dark);
   transform: translateY(-2px);
 }
 
@@ -88,12 +109,14 @@
   text-align: center;
   margin-top: 20px;
   font-size: 14px;
+  color: var(--text-primary);
 }
 
 .auth-card a {
-  color: #667eea;
+  color: var(--accent-color);
   text-decoration: none;
   font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .auth-card a:hover {
@@ -101,9 +124,14 @@
 }
 
 .error {
-  color: #dc3545;
-  background-color: #f8d7da;
+  color: #fff;
+  background-color: #dc3545;
   padding: 12px;
   border-radius: 5px;
   margin-bottom: 15px;
+  transition: background 0.3s ease;
+}
+
+html.dark .error {
+  background-color: #8b1e1e;
 }

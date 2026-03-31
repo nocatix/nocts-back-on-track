@@ -146,10 +146,6 @@ export default function AddictionDetail() {
 
   return (
     <div className="addiction-detail">
-      <button onClick={() => navigate('/')} className="btn btn-secondary">
-        &larr; Back to Menu
-      </button>
-
       <div className="detail-header">
         <h1>{addiction.name}</h1>
         <button onClick={handleDelete} className="btn btn-danger">

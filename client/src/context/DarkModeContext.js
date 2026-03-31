@@ -19,9 +19,9 @@ export function DarkModeProvider({ children }) {
     
     // Update document class
     if (isDarkMode) {
-      document.documentElement.classList.add('dark-mode');
+      document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark-mode');
+      document.documentElement.classList.remove('dark');
     }
   }, [isDarkMode]);
 

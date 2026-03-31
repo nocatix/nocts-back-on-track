@@ -12,7 +12,7 @@
   justify-content: space-between;
 }
 
-:root.dark-mode .addiction-card {
+html.dark .addiction-card {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
@@ -21,7 +21,7 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-:root.dark-mode .addiction-card:hover {
+html.dark .addiction-card:hover {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
 
@@ -64,8 +64,13 @@
 }
 
 .encouragement {
-  color: #764ba2;
+  color: var(--purple-accent);
   font-size: 14px;
   font-weight: 600;
   margin-top: 10px;
+  transition: color 0.3s ease;
+}
+
+html.dark .encouragement {
+  color: #b8a0d4;
 }

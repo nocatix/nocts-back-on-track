@@ -3,9 +3,15 @@
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
-  background: white;
+  background: var(--card-bg);
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+html.dark .add-addiction,
+html.dark .addiction-detail {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .add-addiction .btn-secondary,
@@ -15,8 +21,9 @@
 
 .add-addiction h1,
 .addiction-detail h1 {
-  color: #667eea;
+  color: var(--accent-color);
   margin-bottom: 25px;
+  transition: color 0.3s ease;
 }
 
 .addiction-form {
@@ -31,8 +38,9 @@
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  color: #333;
+  color: var(--text-primary);
   font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .form-group input,
@@ -40,22 +48,25 @@
 .form-group select {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--input-border);
   border-radius: 5px;
   font-family: inherit;
   font-size: 14px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: var(--accent-color);
   box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
 }
 
 .form-group button {
-  background-color: #667eea;
+  background-color: var(--accent-color);
   color: white;
   padding: 12px;
   border: none;
@@ -68,6 +79,6 @@
 }
 
 .form-group button:hover {
-  background-color: #5568d3;
+  background-color: var(--accent-dark);
   transform: translateY(-2px);
 }

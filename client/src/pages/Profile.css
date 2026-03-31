@@ -7,23 +7,30 @@
 
 .profile-page h1 {
   text-align: center;
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 30px;
+  transition: color 0.3s ease;
 }
 
 .profile-card {
-  background: white;
+  background: var(--card-bg);
   border-radius: 10px;
   padding: 25px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+html.dark .profile-card {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .profile-card h2 {
   margin-top: 0;
-  color: #333;
-  border-bottom: 2px solid #f0f0f0;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
   padding-bottom: 10px;
+  transition: all 0.3s ease;
 }
 
 .profile-form {
@@ -39,51 +46,76 @@
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
-  color: #555;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .form-group input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--input-border);
   border-radius: 5px;
   font-size: 16px;
   box-sizing: border-box;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.form-group input:disabled {
+  background: var(--border-color);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
 }
 
 .profile-button {
-  background: #4CAF50;
+  background: var(--accent-color);
   color: white;
   padding: 12px 20px;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
   margin-top: 10px;
 }
 
 .profile-button:hover:not(:disabled) {
-  background: #45a049;
+  background: var(--accent-color);
+  opacity: 0.9;
 }
 
 .profile-button:disabled {
-  background: #cccccc;
+  background: var(--text-muted);
   cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .profile-section {
-  background: white;
+  background: var(--card-bg);
   border-radius: 10px;
   padding: 25px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+html.dark .profile-section {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .profile-section h2 {
   margin-top: 0;
-  color: #333;
-  border-bottom: 2px solid #f0f0f0;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
   padding-bottom: 10px;
+  transition: all 0.3s ease;
 }
 
 .account-actions {
@@ -92,18 +124,19 @@
 }
 
 .delete-account-button {
-  background: #f44336;
+  background: #d32f2f;
   color: white;
   padding: 12px 20px;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
 }
 
 .delete-account-button:hover {
-  background: #da190b;
+  background: #b71c1c;
+  opacity: 0.9;
 }
 
 .profile-message {
@@ -117,12 +150,26 @@
   background: #d4edda;
   color: #155724;
   border: 1px solid #c3e6cb;
+  transition: all 0.3s ease;
+}
+
+html.dark .profile-message.success {
+  background: #1b5e20;
+  color: #c8e6c9;
+  border: 1px solid #2e7d32;
 }
 
 .profile-message.error {
   background: #f8d7da;
   color: #721c24;
   border: 1px solid #f5c6cb;
+  transition: all 0.3s ease;
+}
+
+html.dark .profile-message.error {
+  background: #8b1e1e;
+  color: #ffcdd2;
+  border: 1px solid #d32f2f;
 }
 
 /* Modal Styles */
@@ -140,23 +187,30 @@
 }
 
 .modal-content {
-  background: white;
+  background: var(--card-bg);
   padding: 30px;
   border-radius: 10px;
   max-width: 500px;
   width: 90%;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+html.dark .modal-content {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .modal-content h3 {
   margin-top: 0;
-  color: #333;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .modal-content p {
-  color: #666;
+  color: var(--text-secondary);
   line-height: 1.5;
   margin-bottom: 20px;
+  transition: color 0.3s ease;
 }
 
 .modal-actions {
@@ -172,15 +226,17 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  transition: all 0.3s ease;
 }
 
 .cancel-button {
-  background: #ccc;
-  color: #333;
+  background: var(--input-border);
+  color: var(--text-primary);
 }
 
 .cancel-button:hover {
-  background: #aaa;
+  background: var(--border-color);
+  opacity: 0.8;
 }
 
 .confirm-delete-button {
@@ -190,6 +246,7 @@
 
 .confirm-delete-button:hover {
   background: #da190b;
+  opacity: 0.9;
 }
 
 @media (max-width: 600px) {

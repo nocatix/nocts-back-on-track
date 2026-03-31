@@ -11,7 +11,7 @@
 }
 
 .achievement-notification {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-dark) 100%);
   color: white;
   padding: 20px 25px;
   border-radius: 12px;
@@ -22,6 +22,11 @@
   animation: slideUp 0.4s ease;
   position: relative;
   overflow: hidden;
+  transition: background 0.3s ease;
+}
+
+html.dark .achievement-notification {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 @keyframes slideUp {

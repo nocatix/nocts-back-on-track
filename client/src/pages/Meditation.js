@@ -63,10 +63,6 @@ export default function Meditation() {
 
   return (
     <div className="meditation-page">
-      <button onClick={() => navigate('/')} className="btn btn-secondary">
-        &larr; Back
-      </button>
-      
       {selectedMeditation ? (
         <div className="meditation-detail">
           <button onClick={() => setSelectedMeditation(null)} className="btn btn-secondary">

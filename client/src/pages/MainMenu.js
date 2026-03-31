@@ -10,7 +10,7 @@ export default function MainMenu() {
   const [addictions, setAddictions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const { token } = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
   const [predictions, setPredictions] = useState([]);
 
   useEffect(() => {
@@ -38,28 +38,13 @@ export default function MainMenu() {
 
   return (
     <div className="main-menu">
-      <h1>Dashboard</h1>
-      
-      <div className="action-buttons">
-        <Link to="/add-addiction" className="btn btn-primary large">
-          + Add New Addiction
-        </Link>
-        <Link to="/meditation" className="btn btn-accent">
-          🧘 Meditation
-        </Link>
-        <Link to="/diary" className="btn btn-accent">
-          📔 Diary
-        </Link>
-        <Link to="/craving-game" className="btn btn-accent">
-          🎮 Craving Game
-        </Link>
-      </div>
-
       {error && <p className="error">{error}</p>}
+
+      <h2>Welcome, {user?.fullName}</h2>
 
       {predictions.length > 0 && (
         <div className="daily-predictions">
-          <h2>📊 Today's Predictions & Tips</h2>
+          <h2>📊 Today's Outlook</h2>
           <div className="predictions-grid">
             {predictions.map((pred, idx) => (
               <div key={idx} className="prediction-card">
@@ -90,18 +75,6 @@ export default function MainMenu() {
           </div>
         </div>
       )}
-
-      {addictions.length > 0 && <h2>Your Addictions</h2>}
-
-      <div className="addictions-grid">
-        {addictions.length > 0 ? (
-          addictions.map(addiction => (
-            <AddictionCard key={addiction._id} addiction={addiction} />
-          ))
-        ) : (
-          <p className="no-addictions">No addictions tracked yet. Start your journey!</p>
-        )}
-      </div>
     </div>
   );
 }

@@ -9,20 +9,22 @@
 }
 
 .diary-page h1 {
-  color: #667eea;
+  color: var(--accent-color);
   text-align: center;
   font-size: 32px;
   margin-bottom: 15px;
+  transition: color 0.3s ease;
 }
 
 .intro {
   text-align: center;
-  color: #666;
+  color: var(--text-secondary);
   font-size: 16px;
   margin-bottom: 40px;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  transition: color 0.3s ease;
 }
 
 .diary-header {
@@ -39,15 +41,17 @@
 }
 
 .date-display h2 {
-  color: #667eea;
+  color: var(--accent-color);
   margin: 0;
   font-size: 24px;
+  transition: color 0.3s ease;
 }
 
 .last-saved {
-  color: #999;
+  color: var(--text-muted);
   font-size: 12px;
   margin: 5px 0 0 0;
+  transition: color 0.3s ease;
 }
 
 .today-btn {
@@ -59,31 +63,36 @@
   width: 100%;
   min-height: 400px;
   padding: 20px;
-  border: 2px solid #667eea;
+  border: 2px solid var(--accent-color);
   border-radius: 8px;
   font-family: 'Courier New', monospace;
   font-size: 14px;
   resize: vertical;
   box-sizing: border-box;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
 }
 
 .diary-textarea:focus {
   outline: none;
-  border-color: #5568d3;
+  border-color: var(--accent-dark);
   box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
 }
 
 .editor-info {
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   padding: 15px;
   border-radius: 8px;
   margin: 15px 0;
+  transition: background 0.3s ease;
 }
 
 .markdown-hint {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 14px;
   margin: 0;
+  transition: color 0.3s ease;
 }
 
 .editor-buttons {
@@ -97,7 +106,8 @@
 }
 
 .diary-viewer {
-  background: white;
+  background: var(--card-bg);
+  transition: background 0.3s ease;
   border-radius: 10px;
   padding: 30px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -106,16 +116,18 @@
 
 .diary-content {
   line-height: 1.8;
-  color: #555;
+  color: var(--text-primary);
   margin-bottom: 20px;
   font-size: 16px;
+  transition: color 0.3s ease;
 }
 
 .diary-content h1,
 .diary-content h2,
 .diary-content h3 {
-  color: #667eea;
+  color: var(--accent-color);
   margin: 20px 0 10px 0;
+  transition: color 0.3s ease;
 }
 
 .diary-content h1 {
@@ -131,13 +143,15 @@
 }
 
 .diary-content strong {
-  color: #333;
+  color: var(--text-primary);
   font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .diary-content em {
-  color: #666;
+  color: var(--text-secondary);
   font-style: italic;
+  transition: color 0.3s ease;
 }
 
 .diary-content ul {
@@ -157,16 +171,22 @@
 }
 
 .diary-tips {
-  background: white;
+  background: var(--card-bg);
   border-radius: 10px;
   padding: 30px;
   margin-top: 40px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+html.dark .diary-tips {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .diary-tips h3 {
-  color: #667eea;
+  color: var(--accent-color);
   margin-top: 0;
+  transition: color 0.3s ease;
 }
 
 .diary-tips ul {
@@ -177,8 +197,9 @@
 
 .diary-tips li {
   padding: 12px 0;
-  color: #555;
-  border-bottom: 1px solid #eee;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .diary-tips li:last-child {
@@ -186,7 +207,8 @@
 }
 
 .diary-tips strong {
-  color: #667eea;
+  color: var(--accent-color);
+  transition: color 0.3s ease;
 }
 
 .btn-small {

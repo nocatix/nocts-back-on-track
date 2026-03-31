@@ -98,10 +98,6 @@ export default function Diary() {
 
   return (
     <div className="diary-page">
-      <button onClick={() => navigate('/')} className="btn btn-secondary">
-        &larr; Back
-      </button>
-
       <div className="diary-header">
         <button onClick={handlePreviousDay} className="btn btn-small">&larr; Previous</button>
         <div className="date-display">

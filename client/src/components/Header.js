@@ -16,11 +16,11 @@ export default function Header() {
   };
 
   return (
-    <header className="header">
+    <header className={`header ${isDarkMode ? 'dark' : ''}`}>
       <div className="header-content">
         <div className="logo-section">
           <Logo size={40} />
-          <h1 className="logo-text">Back on Track</h1>
+          <h1 className="logo-text">noct's Back on Track</h1>
         </div>
         <div className="user-section">
           <button
@@ -30,9 +30,8 @@ export default function Header() {
           >
             {isDarkMode ? '☀️' : '🌙'}
           </button>
-          {user && <span className="user-name">Welcome, {user.fullName}</span>}
           <button onClick={handleLogout} className="btn btn-logout">
-            Logout
+            ➜]
           </button>
         </div>
       </div>

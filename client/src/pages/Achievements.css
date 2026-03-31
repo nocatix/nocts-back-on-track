@@ -7,15 +7,17 @@
 
 .achievements-page h1 {
   text-align: center;
-  color: #333;
+  color: var(--accent-color);
   margin-bottom: 10px;
+  transition: color 0.3s ease;
 }
 
 .achievements-description {
   text-align: center;
-  color: #666;
+  color: var(--text-secondary);
   margin-bottom: 30px;
   font-size: 1.1em;
+  transition: color 0.3s ease;
 }
 
 .achievements-loading,
@@ -24,13 +26,21 @@
   text-align: center;
   padding: 20px;
   margin: 20px 0;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .achievements-error {
-  color: #d32f2f;
-  background-color: #ffebee;
-  border: 1px solid #ffcdd2;
+  color: #fff;
+  background-color: #d32f2f;
+  border: 1px solid #b71c1c;
   border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+html.dark .achievements-error {
+  background-color: #8b1e1e;
+  border-color: #5a1515;
 }
 
 .achievements-list {
@@ -40,17 +50,25 @@
 }
 
 .achievement-card {
-  background: white;
+  background: var(--card-bg);
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #eee;
-  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+html.dark .achievement-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .achievement-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+html.dark .achievement-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .achievement-header {
@@ -67,20 +85,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f0f8ff;
+  background: var(--bg-secondary);
   border-radius: 50%;
+  transition: background 0.3s ease;
 }
 
 .achievement-title {
   margin: 0;
-  color: #333;
+  color: var(--text-primary);
   font-size: 1.4em;
+  transition: color 0.3s ease;
 }
 
 .achievement-description {
-  color: #555;
+  color: var(--text-secondary);
   margin: 10px 0;
   line-height: 1.5;
+  transition: color 0.3s ease;
 }
 
 .achievement-details {
@@ -89,9 +110,10 @@
   align-items: center;
   margin-top: 15px;
   font-size: 0.9em;
-  color: #777;
+  color: var(--text-muted);
   flex-wrap: wrap;
   gap: 10px;
+  transition: color 0.3s ease;
 }
 
 .achievement-date,
@@ -104,21 +126,24 @@
 .achievement-progress {
   margin-top: 20px;
   padding-top: 20px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
 }
 
 .progress-label {
   margin-bottom: 8px;
   font-weight: bold;
-  color: #333;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .progress-bar-container {
   width: 100%;
   height: 12px;
-  background-color: #e0e0e0;
+  background-color: var(--input-bg);
   border-radius: 6px;
   overflow: hidden;
+  transition: background-color 0.3s ease;
 }
 
 .progress-bar {
@@ -132,7 +157,8 @@
   margin-top: 5px;
   text-align: right;
   font-size: 0.9em;
-  color: #666;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
 }
 
 @media (max-width: 600px) {

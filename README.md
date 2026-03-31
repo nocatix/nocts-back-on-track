@@ -1,4 +1,4 @@
-# Back on Track
+# noct's Back on Track
 
 Your personal addiction recovery companion. A Node.js application for tracking your recovery journey, providing a personalized experience to monitor progress and stay motivated.
 

@@ -1,5 +1,5 @@
 {
-  "name": "node-tracker-client",
+  "name": "nocts-back-on-track-client",
   "version": "1.0.0",
   "proxy": "http://localhost:5000",
   "private": true,

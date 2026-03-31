@@ -29,7 +29,7 @@ export default function AddNewAddiction() {
     e.preventDefault();
     setError('');
 
-    const addictionName = formData.addictionType === 'other' ? formData.customName : formData.addictionType;
+    const addictionName = formData.addictionType === 'Other' ? formData.customName : formData.addictionType;
 
     if (!addictionName || !formData.stopDate || formData.frequencyPerDay === '' || formData.moneySpentPerDay === '') {
       setError('All required fields must be filled');
@@ -59,10 +59,6 @@ export default function AddNewAddiction() {
 
   return (
     <div className="add-addiction">
-      <button onClick={() => navigate('/')} className="btn btn-secondary">
-        &larr; Back
-      </button>
-
       <h1>Add New Addiction</h1>
       {error && <p className="error">{error}</p>}
 
@@ -76,14 +72,14 @@ export default function AddNewAddiction() {
             required
           >
             <option value="">Select an addiction...</option>
-            <option value="alcohol">Alcohol</option>
-            <option value="cannabis">Cannabis</option>
-            <option value="nicotine">Nicotine</option>
-            <option value="other">Other</option>
+            <option value="Alcohol">Alcohol</option>
+            <option value="Cannabis">Cannabis</option>
+            <option value="Nicotine">Nicotine</option>
+            <option value="Other">Other</option>
           </select>
         </div>
 
-        {formData.addictionType === 'other' && (
+        {formData.addictionType === 'Other' && (
           <div className="form-group">
             <label>Enter Addiction Name *</label>
             <input

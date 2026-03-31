@@ -28,7 +28,7 @@ export default function CravingGame() {
   const MODIFIED_KEYBOARD = [
     'QWERTYUIOP',
     'ASDFGHJKL',
-    'ZXCVBNM'
+    '1ZXCVBNM2'
   ];
 
   const startNewGame = useCallback(() => {
@@ -119,10 +119,6 @@ export default function CravingGame() {
 
   return (
     <div className="craving-game">
-      <button onClick={() => navigate('/')} className="btn btn-secondary">
-        &larr; Back
-      </button>
-
       {message && <p className={`game-message ${gameStatus}`}>{message}</p>}
 
       <div className="game-container">
@@ -166,6 +162,28 @@ export default function CravingGame() {
             <div key={rowIndex} className="keyboard-row">
               {row.split('').map((letter) => {
                 const letterStatus = getLetterKeyStatus(letter);
+                if ( letter === '2' ) {
+                  return (
+                    <button
+                    onClick={handleUndo}
+                    disabled={currentInput.length === 0 || gameStatus !== 'playing'}
+                    className="letter-key special-key big-key"
+                  >
+                    ⌫
+                  </button>
+                  );
+                } 
+                else if ( letter === '1' ) {
+                  return (
+                    <button
+                    onClick={handleSubmitWord}
+                    disabled={currentInput.length !== 5 || gameStatus !== 'playing'}
+                    className="letter-key special-key small-key"
+                  >
+                    Enter
+                  </button>
+                  );
+                }
                 return (
                   <button
                     key={letter}
@@ -180,20 +198,8 @@ export default function CravingGame() {
             </div>
           ))}
           <div className="keyboard-row">
-            <button
-              onClick={handleUndo}
-              disabled={currentInput.length === 0 || gameStatus !== 'playing'}
-              className="letter-key special-key big-key"
-            >
-              ⌫
-            </button>
-            <button
-              onClick={handleSubmitWord}
-              disabled={currentInput.length !== 5 || gameStatus !== 'playing'}
-              className="letter-key special-key big-key"
-            >
-              Enter
-            </button>
+            
+            
           </div>
         </div>
 

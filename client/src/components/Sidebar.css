@@ -1,11 +1,12 @@
 /* Sidebar styling */
 .sidebar {
   width: 250px;
-  background: #f5f5f5;
+  background: var(--bg-primary);
   height: 100vh;
   padding: 20px;
   box-sizing: border-box;
-  transition: width 0.3s ease;
+  transition: width 0.3s ease, background 0.3s ease, color 0.3s ease;
+  color: var(--text-primary);
 }
 
 .sidebar.collapsed {
@@ -15,20 +16,25 @@
 .sidebar-header h2 {
   margin: 0;
   font-size: 1.5rem;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .sidebar-header p {
   margin-top: 5px;
   font-size: 0.9rem;
-  color: #555;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
 }
 
 .collapse-btn {
   background: none;
   border: none;
-  font-size: 1.2rem;
+  font-size: 2.5rem;
   cursor: pointer;
   margin-bottom: 10px;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .sidebar-nav {
@@ -36,48 +42,153 @@
 }
 
 .sidebar-nav .nav-link {
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 10px 0;
-  color: #333;
+  color: var(--text-primary);
   text-decoration: none;
   font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.sidebar-nav .nav-link .emoji {
+  display: inline;
+  margin-right: 10px;
+  min-width: 24px;
+}
+
+.sidebar-nav .nav-link .text {
+  display: inline;
+}
+
+.sidebar.collapsed .nav-link .text {
+  display: none;
+}
+
+.sidebar.collapsed .nav-link .emoji {
+  margin-right: 0;
+}
+
+.sidebar-nav .nav-link:hover {
+  color: var(--accent-color);
 }
 
 .sidebar-nav .nav-link.active {
   font-weight: 700;
-  color: #000;
+  color: var(--accent-color);
 }
 
 .sidebar-section {
   margin-top: 30px;
 }
 
-.sidebar-section h3 {
-  margin: 0 0 10px 0;
-  font-size: 1.2rem;
+.sidebar.collapsed .sidebar-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .add-new-addiction-link {
   display: block;
   margin-bottom: 10px;
-  color: #0066cc;
+  color: var(--accent-color);
   text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
-.additions-list {
+.add-new-addiction-link:hover {
+  opacity: 0.8;
+}
+
+.sidebar.collapsed .add-new-addiction-link {
+  margin-bottom: 0;
+}
+
+/* Dark mode styles */
+.dark .sidebar {
+  background: var(--bg-primary);
+}
+.dark .collapse-btn {
+  color: var(--text-primary);
+}
+.dark .sidebar-header h2 {
+  color: var(--text-primary);
+}
+.dark .sidebar-header p {
+  color: var(--text-secondary);
+}
+.dark .sidebar-nav .nav-link {
+  color: var(--text-primary);
+}
+.dark .sidebar-nav .nav-link:hover {
+  color: var(--accent-color);
+}
+.dark .sidebar-nav .nav-link.active {
+  color: var(--accent-color);
+}
+.dark .addiction-link {
+  color: var(--text-primary);
+}
+.dark .addiction-link:hover {
+  color: var(--accent-color);
+}
+.dark .addiction-link.active {
+  color: var(--accent-color);
+  font-weight: 700;
+}
+.dark .dark-mode-toggle {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.dark .dark-mode-toggle:hover {
+  background: var(--bg-secondary);
+  opacity: 0.8;
+}
+
+.addictions-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
+/* Dark mode toggle button */
+.dark-mode-toggle {
+  margin-top: 20px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+  background: var(--accent-color);
+  color: white;
+  opacity: 0.9;
+}
+
 .addiction-link {
   display: block;
   padding: 5px 0;
-  color: #333;
+  color: var(--text-primary);
   text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.addiction-link:hover {
+  color: var(--accent-color);
 }
 
 .addiction-link.active {
   font-weight: 700;
-  color: #000;
+  color: var(--accent-color);
 }

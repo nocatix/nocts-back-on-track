@@ -17,17 +17,22 @@
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-:root.dark-mode .privacy-content {
+html.dark .privacy-content {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .open-source-banner {
-  background: linear-gradient(135deg, #26de81 0%, #20c997 100%);
+  background: linear-gradient(135deg, var(--success-color) 0%, #20c997 100%);
   color: white;
   padding: 25px;
   border-radius: 10px;
   margin-bottom: 30px;
-  border-left: 5px solid #1db76e;
+  border-left: 5px solid var(--success-dark);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+html.dark .open-source-banner {
+  background: linear-gradient(135deg, var(--success-color) 0%, var(--success-dark) 100%);
 }
 
 .open-source-banner h2 {
@@ -142,19 +147,28 @@
   background: var(--bg-secondary);
   padding: 20px;
   border-radius: 8px;
-  border-left: 4px solid #26de81;
-  transition: background 0.3s ease;
+  border-left: 4px solid var(--success-color);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+html.dark .commitment {
+  border-left-color: var(--success-color);
 }
 
 .commitment h3 {
-  color: #26de81;
+  color: var(--success-color);
   margin-top: 0;
   transition: color 0.3s ease;
 }
 
+html.dark .commitment h3 {
+  color: var(--success-color);
+}
+
 .commitment li:before {
   content: '✓';
-  color: #26de81;
+  color: var(--success-color);
+  transition: color 0.3s ease;
 }
 
 @media (max-width: 600px) {

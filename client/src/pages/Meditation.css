@@ -9,20 +9,22 @@
 }
 
 .meditation-page h1 {
-  color: #667eea;
+  color: var(--accent-color);
   text-align: center;
   font-size: 32px;
   margin-bottom: 15px;
+  transition: color 0.3s ease;
 }
 
 .intro {
   text-align: center;
-  color: #666;
+  color: var(--text-secondary);
   font-size: 16px;
   margin-bottom: 40px;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  transition: color 0.3s ease;
 }
 
 .meditation-grid {
@@ -33,13 +35,17 @@
 }
 
 .meditation-card {
-  background: white;
+  background: var(--card-bg);
   border-radius: 10px;
   padding: 25px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all 0.3s ease;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid var(--accent-color);
+}
+
+html.dark .meditation-card {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .meditation-card:hover {
@@ -47,25 +53,32 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
+html.dark .meditation-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
 .meditation-card h3 {
-  color: #667eea;
+  color: var(--accent-color);
   margin-bottom: 10px;
+  transition: color 0.3s ease;
 }
 
 .meditation-card .duration {
-  color: #999;
+  color: var(--text-muted);
   font-size: 12px;
   margin-bottom: 10px;
+  transition: color 0.3s ease;
 }
 
 .meditation-card .description {
-  color: #555;
+  color: var(--text-secondary);
   margin-bottom: 15px;
   font-size: 14px;
+  transition: color 0.3s ease;
 }
 
 .btn-small {
-  background-color: #667eea;
+  background-color: var(--accent-color);
   color: white;
   padding: 8px 15px;
   border: none;
@@ -76,56 +89,74 @@
 }
 
 .btn-small:hover {
-  background-color: #5568d3;
+  background-color: var(--accent-dark);
+  transform: translateY(-2px);
 }
 
 .meditation-detail {
-  background: white;
+  background: var(--card-bg);
   border-radius: 10px;
   padding: 40px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+html.dark .meditation-detail {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .meditation-detail h2 {
-  color: #667eea;
+  color: var(--accent-color);
   margin: 20px 0;
+  transition: color 0.3s ease;
 }
 
 .meditation-detail .duration {
-  color: #999;
+  color: var(--text-muted);
   margin-bottom: 30px;
+  transition: color 0.3s ease;
 }
 
 .meditation-guide {
-  background: #f8f9fa;
+  background: var(--bg-secondary);
+  transition: background 0.3s ease;
   padding: 25px;
   border-radius: 8px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid var(--accent-color);
   margin: 30px 0;
 }
 
 .meditation-guide h3 {
-  color: #667eea;
+  color: var(--accent-color);
   margin-bottom: 15px;
+  transition: color 0.3s ease;
 }
 
 .meditation-guide p {
   line-height: 1.8;
-  color: #555;
+  color: var(--text-primary);
   white-space: pre-wrap;
+  transition: color 0.3s ease;
 }
 
 .music-player {
-  background: #f8f9fa;
+  background: var(--card-bg);
   padding: 25px;
   border-radius: 8px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid var(--accent-color);
   margin: 30px 0;
+  transition: background 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+html.dark .music-player {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .music-player h3 {
-  color: #667eea;
+  color: var(--accent-color);
   margin-bottom: 20px;
+  transition: color 0.3s ease;
 }
 
 .music-player iframe {
@@ -135,17 +166,24 @@
 
 .music-section,
 .tips-section {
-  background: white;
+  background: var(--card-bg);
   border-radius: 10px;
   padding: 30px;
   margin: 40px 0;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
+}
+
+html.dark .music-section,
+html.dark .tips-section {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .music-section h2,
 .tips-section h2 {
-  color: #667eea;
+  color: var(--accent-color);
   margin-bottom: 20px;
+  transition: color 0.3s ease;
 }
 
 .music-links {
@@ -169,17 +207,19 @@
   padding: 12px 0;
   padding-left: 30px;
   position: relative;
-  color: #555;
+  color: var(--text-primary);
   line-height: 1.6;
+  transition: color 0.3s ease;
 }
 
 .tips-section li:before {
   content: '✓';
   position: absolute;
   left: 0;
-  color: #667eea;
+  color: var(--accent-color);
   font-weight: bold;
   font-size: 16px;
+  transition: color 0.3s ease;
 }
 
 @media (max-width: 600px) {

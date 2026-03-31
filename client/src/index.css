@@ -10,9 +10,15 @@
   --input-bg: #ffffff;
   --input-border: #ddd;
   --card-bg: #ffffff;
+  --success-color: #26de81;
+  --success-dark: #1b9966;
+  --danger-color: #dc3545;
+  --danger-dark: #a02835;
+  --purple-accent: #764ba2;
+  --purple-dark: #5a3a7a;
 }
 
-:root.dark-mode {
+html.dark {
   --bg-primary: #1a1a1a;
   --bg-secondary: #2a2a2a;
   --text-primary: #e0e0e0;
@@ -24,6 +30,12 @@
   --input-bg: #333333;
   --input-border: #505050;
   --card-bg: #252525;
+  --success-color: #1b9966;
+  --success-dark: #0d5a3d;
+  --danger-color: #a02835;
+  --danger-dark: #6b1a23;
+  --purple-accent: #5a3a7a;
+  --purple-dark: #3d2555;
 }
 
 * {
@@ -40,8 +52,17 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-:root.dark-mode body {
+html.dark body {
   background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+}
+
+html.dark .btn-primary {
+  background: linear-gradient(135deg, #5a6edc 0%, #4a5ecc 100%);
+  box-shadow: 0 4px 15px rgba(90, 110, 220, 0.2);
+}
+
+html.dark .btn-primary:hover {
+  box-shadow: 0 6px 20px rgba(90, 110, 220, 0.3);
 }
 
 .App {
@@ -95,20 +116,30 @@ body {
 }
 
 .btn-danger {
-  background-color: #dc3545;
+  background-color: var(--danger-color);
   color: white;
+  transition: background-color 0.3s ease;
 }
 
 .btn-danger:hover {
-  background-color: #c82333;
+  background-color: var(--danger-dark);
   transform: translateY(-2px);
+}
+
+html.dark .btn-danger {
+  background-color: var(--danger-dark);
+}
+
+html.dark .btn-danger:hover {
+  background-color: #8b1f2a;
 }
 
 .btn-logout {
   background-color: #f0ad4e;
   color: white;
   padding: 8px 16px;
-  font-size: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  font-size: 16px;
 }
 
 .btn-logout:hover {
@@ -136,12 +167,18 @@ body {
 }
 
 .error {
-  color: #dc3545;
-  background-color: var(--bg-secondary);
+  color: #fff;
+  background-color: #dc3545;
   padding: 12px;
   border-radius: 5px;
   margin-bottom: 15px;
-  border-left: 4px solid #dc3545;
+  border-left: 4px solid #c82333;
+  transition: all 0.3s ease;
+}
+
+html.dark .error {
+  background-color: #8b1e1e;
+  border-left-color: #c62828;
 }
 
 .loading {
@@ -150,5 +187,6 @@ body {
   align-items: center;
   height: 100vh;
   font-size: 24px;
-  color: white;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }

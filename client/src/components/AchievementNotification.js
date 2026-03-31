@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import './AchievementNotification.css';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
@@ -8,7 +8,7 @@ export default function AchievementNotification() {
   const [achievements, setAchievements] = useState([]);
   const [visible, setVisible] = useState([]);
 
-  const dismissAchievement = async (id) => {
+  const dismissAchievement = useCallback(async (id) => {
     try {
       await axios.put(`/api/achievements/${id}/read`, {}, {
         headers: { Authorization: `Bearer ${token}` }
@@ -18,7 +18,7 @@ export default function AchievementNotification() {
     } catch (error) {
       console.error('Failed to mark achievement as read:', error);
     }
-  };
+  }, [token]);
 
   useEffect(() => {
     const showNotification = (achievement) => {
@@ -34,25 +34,29 @@ export default function AchievementNotification() {
         const response = await axios.get('/api/achievements/unread', {
           headers: { Authorization: `Bearer ${token}` }
         });
-        const newAchievements = response.data.filter(
-          ach => !achievements.some(a => a._id === ach._id)
-        );
-        
-        if (newAchievements.length > 0) {
-          setAchievements(prev => [...newAchievements, ...prev]);
-          newAchievements.forEach(ach => {
-            showNotification(ach);
-          });
-        }
+        setAchievements(prevAchievements => {
+          const newAchievements = response.data.filter(
+            ach => !prevAchievements.some(a => a._id === ach._id)
+          );
+          
+          if (newAchievements.length > 0) {
+            newAchievements.forEach(ach => {
+              showNotification(ach);
+            });
+          }
+          return [...newAchievements, ...prevAchievements];
+        });
       } catch (error) {
         console.error('Failed to fetch achievements:', error);
       }
     };
 
-    fetchUnreadAchievements();
-    const interval = setInterval(fetchUnreadAchievements, 5000);
-    return () => clearInterval(interval);
-  }, [token, achievements, dismissAchievement]);
+    if (token) {
+      fetchUnreadAchievements();
+      const interval = setInterval(fetchUnreadAchievements, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [token, dismissAchievement]);
 
   return (
     <div className="achievement-container">

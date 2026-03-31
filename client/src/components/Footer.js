@@ -1,24 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { DarkModeContext } from '../context/DarkModeContext';
+import { useContext } from 'react';
 import './Footer.css';
 
 export default function Footer() {
+  const { isDarkMode } = useContext(DarkModeContext);
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="footer">
+    <footer className={`footer ${isDarkMode ? 'dark' : ''}`}>
       <div className="disclaimer-section">
         <p className="disclaimer-text">
           💚 <strong>100% Open Source • Completely Free • Zero Ads • No Tracking (Ever)</strong>
         </p>
         <p className="disclaimer-subtext">
-          Back on Track is freely available, open source software with no advertisements or data tracking. Your recovery journey is yours alone.
+          noct's Back on Track is freely available, open source software with no advertisements or data tracking. Your recovery journey is yours alone.
         </p>
       </div>
 
       <div className="footer-content">
         <div className="footer-section">
-          <h4>Back on Track</h4>
+          <h4>noct's Back on Track</h4>
           <p>Your personal addiction recovery companion</p>
         </div>
         

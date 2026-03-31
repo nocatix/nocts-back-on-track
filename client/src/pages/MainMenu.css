@@ -13,11 +13,15 @@
 }
 
 .main-menu h2 {
-  color: white;
+  color: rgb(0, 0, 0);
   margin-top: 40px;
   margin-bottom: 20px;
   font-size: 22px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+html.dark .main-menu h2 {
+  color: rgb(255, 255, 255);
 }
 
 .action-buttons {
@@ -58,11 +62,17 @@
   padding: 30px;
   margin-bottom: 40px;
   backdrop-filter: blur(10px);
+  transition: background 0.3s ease;
+}
+
+html.dark .daily-predictions {
+  background: rgba(61, 51, 51, 0.2);
 }
 
 .daily-predictions h2 {
-  color: white;
+  color: rgb(0, 0, 0);
   text-align: center;
+  margin-top: -5px;
   margin-bottom: 25px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
@@ -74,10 +84,16 @@
 }
 
 .prediction-card {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card-bg);
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+html.dark .prediction-card {
+  background: #333;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .prediction-header {
@@ -88,13 +104,14 @@
 }
 
 .prediction-header h3 {
-  color: #667eea;
+  color: var(--accent-color);
   margin: 0;
   font-size: 18px;
+  transition: color 0.3s ease;
 }
 
 .days-count {
-  background: #667eea;
+  background: var(--accent-color);
   color: white;
   padding: 5px 12px;
   border-radius: 20px;
@@ -103,11 +120,12 @@
 }
 
 .withdrawal-stage {
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 15px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid var(--accent-color);
+  transition: all 0.3s ease;
 }
 
 .difficulty {
@@ -147,15 +165,22 @@
 
 .difficulty.very-low,
 .difficulty.minimal {
-  background-color: #26de81;
+  background-color: var(--success-color);
   color: white;
+  transition: background-color 0.3s ease;
+}
+
+html.dark .difficulty.very-low,
+html.dark .difficulty.minimal {
+  background-color: var(--success-color);
 }
 
 .stage-symptom {
-  color: #555;
+  color: var(--text-secondary);
   font-size: 14px;
   margin: 10px 0 0 0;
   line-height: 1.4;
+  transition: color 0.3s ease;
 }
 
 .daily-tip {
@@ -164,12 +189,23 @@
   border-radius: 8px;
   margin-bottom: 12px;
   border-left: 3px solid #2196F3;
+  transition: all 0.3s ease;
+}
+
+html.dark .daily-tip {
+  background: #060a3a;
+  border-left-color: #42a5f5;
 }
 
 .daily-tip strong {
   color: #2196F3;
   display: block;
   margin-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+html.dark .daily-tip strong {
+  color: #42a5f5;
 }
 
 .daily-tip p {
@@ -177,6 +213,11 @@
   font-size: 13px;
   margin: 0;
   line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+html.dark .daily-tip p {
+  color: #ccc;
 }
 
 .money-saved {
@@ -184,8 +225,14 @@
   padding: 10px;
   border-radius: 8px;
   text-align: center;
-  color: #2e7d32;
+  color: #0e4011;
   font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+html.dark .money-saved {
+  background: #1b5e20;
+  color: #81c784;
 }
 
 .addictions-grid {
@@ -202,6 +249,11 @@
   padding: 40px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+html.dark .no-addictions {
+  background: rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 600px) {

@@ -7,10 +7,6 @@ export default function PrivacyPolicy() {
 
   return (
     <div className="privacy-page">
-      <button onClick={() => navigate('/')} className="btn btn-secondary">
-        &larr; Back
-      </button>
-
       <div className="privacy-content">
         <div className="open-source-banner">
           <h2>💚 Open Source • Free • No Ads • No Tracking</h2>
