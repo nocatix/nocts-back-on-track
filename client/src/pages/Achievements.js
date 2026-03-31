@@ -5,25 +5,66 @@ import './Achievements.css';
 const Achievements = () => {
   const { user, token } = useAuth();
   const [achievements, setAchievements] = useState([]);
+  const [trophies, setTrophies] = useState([]);
+  const [trophyProgress, setTrophyProgress] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchAchievements = async () => {
+    const fetchAchievementsAndTrophies = async () => {
       try {
-        const response = await fetch('/api/achievements', {
+        // Check and award new trophies
+        await fetch('/api/trophies/check', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        // Fetch trophy progress
+        const progressResponse = await fetch('/api/trophies/progress', {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
         });
         
-        if (!response.ok) {
+        if (progressResponse.ok) {
+          const progressData = await progressResponse.json();
+          setTrophyProgress(progressData);
+        }
+
+        // Fetch achievements
+        const achievementsResponse = await fetch('/api/achievements', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (!achievementsResponse.ok) {
           throw new Error('Failed to fetch achievements');
         }
         
-        const data = await response.json();
-        setAchievements(data);
+        const achievementsData = await achievementsResponse.json();
+        setAchievements(achievementsData);
+
+        // Fetch trophies
+        const trophiesResponse = await fetch('/api/trophies', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (!trophiesResponse.ok) {
+          throw new Error('Failed to fetch trophies');
+        }
+        
+        const trophiesData = await trophiesResponse.json();
+        setTrophies(trophiesData);
+
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -32,7 +73,7 @@ const Achievements = () => {
     };
 
     if (token) {
-      fetchAchievements();
+      fetchAchievementsAndTrophies();
     }
   }, [token]);
 
@@ -64,10 +105,154 @@ const Achievements = () => {
 
   return (
     <div className="achievements-page">
-      <h1>Achievements</h1>
+      <h1>Achievements & Trophies</h1>
       <p className="achievements-description">
-        Your milestones and achievements on your journey to sobriety
+        Your milestones, achievements, and trophies on your journey to sobriety
       </p>
+      
+      {/* Trophy Progress Section */}
+      {trophyProgress && (
+        <div className="trophy-progress-section">
+          <h2>🎯 Trophy Progress</h2>
+          
+          {trophyProgress.currentTrophy ? (
+            <div className="trophy-progress-container">
+              <div className="current-trophy">
+                <h3>Current Trophy</h3>
+                <div className="trophy-display">
+                  <span className="trophy-icon-large">{trophyProgress.currentTrophy.name.split(' ')[0]}</span>
+                  <div className="trophy-info">
+                    <h4>{trophyProgress.currentTrophy.name}</h4>
+                    <p>{trophyProgress.currentTrophy.description}</p>
+                  </div>
+                </div>
+              </div>
+              
+              {trophyProgress.nextTrophy && (
+                <>
+                  <div className="progress-bar-wrapper">
+                    <div className="progress-bar">
+                      <div 
+                        className="progress-fill" 
+                        style={{ width: `${trophyProgress.progress}%` }}
+                      />
+                    </div>
+                    <span className="progress-percentage">{Math.round(trophyProgress.progress)}%</span>
+                  </div>
+                  
+                  <div className="next-trophy">
+                    <h3>Next Trophy</h3>
+                    <div className="trophy-display">
+                      <span className="trophy-icon-large">{trophyProgress.nextTrophy.name.split(' ')[0]}</span>
+                      <div className="trophy-info">
+                        <h4>{trophyProgress.nextTrophy.name}</h4>
+                        <p>{trophyProgress.nextTrophy.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <p className="progress-description">{trophyProgress.progressDescription}</p>
+                </>
+              )}
+              
+              {!trophyProgress.nextTrophy && (
+                <p className="ultimate-milestone">{trophyProgress.progressDescription}</p>
+              )}
+            </div>
+          ) : (
+            <div className="no-trophy-progress">
+              <p>{trophyProgress.progressDescription}</p>
+            </div>
+          )}
+        </div>
+      )}
+      
+      {/* Trophies Section */}
+      {trophies.length > 0 && (
+        <div className="trophies-section">
+          <h2>🏆 Trophies</h2>
+          
+          {/* Daily Trophies */}
+          {trophies.filter(t => t.type === 'daily').length > 0 && (
+            <div className="trophy-category">
+              <h3>⭐ Daily Trophies</h3>
+              <div className="trophies-list">
+                {trophies.filter(t => t.type === 'daily').map((trophy) => (
+                  <div key={trophy._id} className="trophy-card">
+                    <div className="trophy-icon">{trophy.icon}</div>
+                    <h4 className="trophy-title">{trophy.name}</h4>
+                    <p className="trophy-description">{trophy.description}</p>
+                    <span className="trophy-date">
+                      Earned on: {formatDate(trophy.createdAt)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {/* Weekly Trophies */}
+          {trophies.filter(t => t.type === 'weekly').length > 0 && (
+            <div className="trophy-category">
+              <h3>🎖️ Weekly Trophies</h3>
+              <div className="trophies-list">
+                {trophies.filter(t => t.type === 'weekly').map((trophy) => (
+                  <div key={trophy._id} className="trophy-card">
+                    <div className="trophy-icon">{trophy.icon}</div>
+                    <h4 className="trophy-title">{trophy.name}</h4>
+                    <p className="trophy-description">{trophy.description}</p>
+                    <span className="trophy-date">
+                      Earned on: {formatDate(trophy.createdAt)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {/* Monthly Trophies */}
+          {trophies.filter(t => t.type === 'monthly').length > 0 && (
+            <div className="trophy-category">
+              <h3>🏅 Monthly Trophies</h3>
+              <div className="trophies-list">
+                {trophies.filter(t => t.type === 'monthly').map((trophy) => (
+                  <div key={trophy._id} className="trophy-card">
+                    <div className="trophy-icon">{trophy.icon}</div>
+                    <h4 className="trophy-title">{trophy.name}</h4>
+                    <p className="trophy-description">{trophy.description}</p>
+                    <span className="trophy-date">
+                      Earned on: {formatDate(trophy.createdAt)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {/* Yearly Trophies */}
+          {trophies.filter(t => t.type === 'yearly').length > 0 && (
+            <div className="trophy-category">
+              <h3>🏆 Yearly Trophies</h3>
+              <div className="trophies-list">
+                {trophies.filter(t => t.type === 'yearly').map((trophy) => (
+                  <div key={trophy._id} className="trophy-card">
+                    <div className="trophy-icon">{trophy.icon}</div>
+                    <h4 className="trophy-title">{trophy.name}</h4>
+                    <p className="trophy-description">{trophy.description}</p>
+                    <span className="trophy-date">
+                      Earned on: {formatDate(trophy.createdAt)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+      
+      {/* Achievements Section */}
+      <div className="achievements-section">
+        <h2>⭐ Achievements</h2>
       
       {achievements.length === 0 ? (
         <div className="achievements-empty">
@@ -114,6 +299,7 @@ const Achievements = () => {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 };

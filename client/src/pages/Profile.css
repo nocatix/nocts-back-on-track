@@ -249,6 +249,58 @@ html.dark .modal-content {
   opacity: 0.9;
 }
 
+.unit-preference-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.unit-preference-section p {
+  color: var(--text-primary);
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.unit-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.unit-button {
+  flex: 1;
+  min-width: 150px;
+  padding: 15px 20px;
+  border: 2px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.unit-button:hover {
+  border-color: var(--accent-color);
+  background: var(--card-bg);
+  transform: translateY(-2px);
+}
+
+.unit-button.active {
+  border-color: var(--accent-color);
+  background: var(--accent-color);
+  color: white;
+  font-weight: bold;
+}
+
+.unit-button span:first-child {
+  font-size: 24px;
+}
+
 @media (max-width: 600px) {
   .profile-page {
     padding: 10px;

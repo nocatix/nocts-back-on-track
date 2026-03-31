@@ -190,3 +190,36 @@ html.dark .error {
   color: var(--text-primary);
   transition: color 0.3s ease;
 }
+
+.btn-hint-toggle {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 0;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.btn-hint-toggle:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--accent-color);
+  transform: translateY(-1px);
+}
+
+html.dark .btn-hint-toggle {
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+html.dark .btn-hint-toggle:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--accent-color);
+  color: var(--text-primary);
+}

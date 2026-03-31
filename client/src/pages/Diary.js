@@ -3,6 +3,7 @@ import './Diary.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { getCookie, setCookie } from '../utils/cookieHelper';
 
 export default function Diary() {
   const navigate = useNavigate();
@@ -12,6 +13,15 @@ export default function Diary() {
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [lastSaved, setLastSaved] = useState(null);
+  const [showMarkdownHint, setShowMarkdownHint] = useState(() => {
+    const saved = getCookie('showMarkdownHint');
+    return saved !== null ? saved : true;
+  });
+  const [showJournalingTips, setShowJournalingTips] = useState(() => {
+    const saved = getCookie('showJournalingTips');
+    return saved !== null ? saved : true;
+  });
+  const [message, setMessage] = useState('');
 
   // Format date for display
   const formatDate = (date) => {
@@ -43,6 +53,16 @@ export default function Diary() {
     fetchEntry();
   }, [currentDate, token]);
 
+  // Save markdown hint state to cookie
+  useEffect(() => {
+    setCookie('showMarkdownHint', showMarkdownHint, 365);
+  }, [showMarkdownHint]);
+
+  // Save journaling tips state to cookie
+  useEffect(() => {
+    setCookie('showJournalingTips', showJournalingTips, 365);
+  }, [showJournalingTips]);
+
   // Save diary entry
   const handleSave = async () => {
     setIsSaving(true);
@@ -57,7 +77,8 @@ export default function Diary() {
       setIsEditing(false);
     } catch (error) {
       console.error('Failed to save diary entry:', error);
-      alert('Failed to save entry. Please try again.');
+      setMessage('Failed to save entry. Please try again.');
+      setTimeout(() => setMessage(''), 4000);
     } finally {
       setIsSaving(false);
     }
@@ -98,6 +119,7 @@ export default function Diary() {
 
   return (
     <div className="diary-page">
+      {message && <div className="message-notification error">{message}</div>}
       <div className="diary-header">
         <button onClick={handlePreviousDay} className="btn btn-small">&larr; Previous</button>
         <div className="date-display">
@@ -125,7 +147,12 @@ export default function Diary() {
           />
           
           <div className="editor-info">
-            <p className="markdown-hint">💡 Tip: Use markdown for formatting - **bold**, *italic*, # headings, - bullets</p>
+            {showMarkdownHint && (
+              <p className="markdown-hint">💡 Tip: Use markdown for formatting - **bold**, *italic*, # headings, - bullets</p>
+            )}
+            <button className="btn-hint-toggle" onClick={() => setShowMarkdownHint(!showMarkdownHint)}>
+              {showMarkdownHint ? '▼ Hide Tip' : '▶ Show Tip'}
+            </button>
           </div>
 
           <div className="editor-buttons">
@@ -164,15 +191,25 @@ export default function Diary() {
       )}
 
       <div className="diary-tips">
-        <h3>💭 Journaling Tips for Recovery</h3>
-        <ul>
-          <li><strong>Gratitude:</strong> Each day, write 3 things you're grateful for</li>
-          <li><strong>Progress:</strong> Track how many days you've stayed strong</li>
-          <li><strong>Triggers:</strong> Note what triggered cravings and how you handled them</li>
-          <li><strong>Emotions:</strong> Write about your feelings to process them</li>
-          <li><strong>Goals:</strong> Remind yourself why you're on this journey</li>
-          <li><strong>Victories:</strong> Celebrate every small win, no matter how small</li>
-        </ul>
+        <div className="diary-tips-header">
+          <h3>💭 Journaling Tips for Recovery</h3>
+          <button 
+            className="btn-hint-toggle-arrow" 
+            onClick={() => setShowJournalingTips(!showJournalingTips)}
+          >
+            {showJournalingTips ? '▼' : '▶'}
+          </button>
+        </div>
+        {showJournalingTips && (
+          <ul>
+            <li><strong>Gratitude:</strong> Each day, write 3 things you're grateful for</li>
+            <li><strong>Progress:</strong> Track how many days you've stayed strong</li>
+            <li><strong>Triggers:</strong> Note what triggered cravings and how you handled them</li>
+            <li><strong>Emotions:</strong> Write about your feelings to process them</li>
+            <li><strong>Goals:</strong> Remind yourself why you're on this journey</li>
+            <li><strong>Victories:</strong> Celebrate every small win, no matter how small</li>
+          </ul>
+        )}
       </div>
     </div>
   );

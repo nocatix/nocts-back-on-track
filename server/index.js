@@ -6,6 +6,10 @@ const authRoutes = require('./routes/auth');
 const addictionRoutes = require('./routes/addictions');
 const achievementRoutes = require('./routes/achievements');
 const diaryRoutes = require('./routes/diary');
+const moodRoutes = require('./routes/moods');
+const weightRoutes = require('./routes/weights');
+const memoryRoutes = require('./routes/memories');
+const trophyRoutes = require('./routes/trophies');
 
 const app = express();
 
@@ -13,7 +17,8 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(cors());
 
 // Routes
@@ -21,6 +26,10 @@ app.use('/api/auth', authRoutes);
 app.use('/api/addictions', addictionRoutes);
 app.use('/api/achievements', achievementRoutes);
 app.use('/api/diary', diaryRoutes);
+app.use('/api/moods', moodRoutes);
+app.use('/api/weights', weightRoutes);
+app.use('/api/memories', memoryRoutes);
+app.use('/api/trophies', trophyRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

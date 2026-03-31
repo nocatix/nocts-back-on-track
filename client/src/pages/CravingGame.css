@@ -171,6 +171,17 @@ html.dark .game-container {
   transition: background 0.3s ease;
 }
 
+.game-tips-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.game-tips-header h3 {
+  margin: 0;
+}
+
 .game-tips h3 {
   color: var(--accent-color);
   margin-top: 0;

@@ -38,13 +38,13 @@ const addictionSchema = new mongoose.Schema({
 
 // Calculate total money saved
 addictionSchema.methods.getTotalMoneySaved = function() {
-  const daysStopped = Math.floor((Date.now() - this.stopDate) / (1000 * 60 * 60 * 24));
+  const daysStopped = Math.floor((Date.now() - this.stopDate) / (1000 * 60 * 60 * 24)) - 1;
   return daysStopped * this.moneySpentPerDay;
 };
 
 // Calculate days since stopping
 addictionSchema.methods.getDaysStopped = function() {
-  return Math.floor((Date.now() - this.stopDate) / (1000 * 60 * 60 * 24));
+  return Math.floor((Date.now() - this.stopDate) / (1000 * 60 * 60 * 24)) - 1;
 };
 
 module.exports = mongoose.model('Addiction', addictionSchema);

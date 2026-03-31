@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import WithdrawalTimeline from '../components/WithdrawalTimeline';
+import { getFrequencyLabel } from '../utils/withdrawalHelper';
 
 const WITHDRAWAL_TIMELINES = {
   'nicotine': [
@@ -79,6 +80,7 @@ export default function AddictionDetail() {
   const [error, setError] = useState('');
   const [timeline, setTimeline] = useState([]);
   const [caved, setCaved] = useState(false);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const fetchAddiction = async () => {
@@ -108,6 +110,18 @@ export default function AddictionDetail() {
     }
   }, [id, token]);
 
+  useEffect(() => {
+    // Scroll to element if there's a URL fragment
+    if (window.location.hash) {
+      const element = document.querySelector(window.location.hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  }, [addiction]);
+
   const handleCaved = async () => {
     if (window.confirm('Are you sure you want to log that you caved? This will reset your streak.')) {
       try {
@@ -120,7 +134,8 @@ export default function AddictionDetail() {
         setCaved(true);
         
         // Show a success message
-        alert('You caved. Your streak has been reset. Remember, every day you stay clean is a victory!');
+        setMessage('You caved. Your streak has been reset. Remember, every day you stay clean is a victory!');
+        setTimeout(() => setMessage(''), 4000);
       } catch (err) {
         setError('Failed to log caving');
       }
@@ -146,6 +161,7 @@ export default function AddictionDetail() {
 
   return (
     <div className="addiction-detail">
+      {message && <div className="message-notification">{message}</div>}
       <div className="detail-header">
         <h1>{addiction.name}</h1>
         <button onClick={handleDelete} className="btn btn-danger">
@@ -165,8 +181,8 @@ export default function AddictionDetail() {
         </div>
 
         <div className="stat-card">
-          <h3>Frequency</h3>
-          <p>{addiction.frequencyPerDay}x per day</p>
+          <h3>{getFrequencyLabel(addiction.name)}</h3>
+          <p>{addiction.frequencyPerDay}</p>
         </div>
 
         <div className="stat-card">

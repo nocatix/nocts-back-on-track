@@ -82,3 +82,42 @@ html.dark .addiction-detail {
   background-color: var(--accent-dark);
   transform: translateY(-2px);
 }
+
+.time-picker-12h {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.time-picker-12h select {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid var(--border-color);
+  border-radius: 5px;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.time-picker-12h select:hover {
+  border-color: var(--accent-color);
+}
+
+.time-picker-12h select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+}
+
+.time-separator {
+  color: var(--text-primary);
+  font-weight: bold;
+  font-size: 18px;
+}
+
+html.dark .time-picker-12h select {
+  background-color: var(--input-bg);
+  border-color: var(--border-color);
+}

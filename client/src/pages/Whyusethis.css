@@ -1,0 +1,292 @@
+.why-use-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.why-use-header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 30px;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-dark, #667eea));
+  border-radius: 15px;
+  color: white;
+}
+
+.why-use-header h1 {
+  font-size: 2.5em;
+  margin: 0 0 10px 0;
+  font-weight: bold;
+}
+
+.why-use-header p {
+  font-size: 1.2em;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.why-use-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.why-use-section {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+html.dark .why-use-section {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.why-use-section:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.15);
+  transform: translateY(-2px);
+}
+
+.why-use-section.full-width {
+  grid-column: 1 / -1;
+}
+
+.section-icon {
+  font-size: 3em;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.why-use-section h2 {
+  font-size: 2em;
+  color: var(--accent-color);
+  margin: 0 0 20px 0;
+  font-weight: bold;
+}
+
+.section-content {
+  font-size: 1.05em;
+  line-height: 1.8;
+}
+
+.section-content p {
+  margin: 15px 0;
+  color: var(--text-primary);
+}
+
+.section-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.section-content li {
+  padding: 12px 0 12px 30px;
+  position: relative;
+  color: var(--text-primary);
+  margin: 10px 0;
+}
+
+.section-content li:before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.research-note {
+  background: var(--input-bg);
+  border-left: 4px solid var(--accent-color);
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 5px;
+  font-style: italic;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.recovery-framework {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.framework-item {
+  background: var(--input-bg);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.framework-item:hover {
+  border-color: var(--accent-color);
+  transform: scale(1.05);
+}
+
+.framework-icon {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.framework-item h3 {
+  margin: 10px 0;
+  color: var(--accent-color);
+  font-size: 1.2em;
+}
+
+.framework-item p {
+  margin: 0;
+  font-size: 0.95em;
+  color: var(--text-secondary);
+}
+
+.stats-section {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-dark, #667eea));
+  color: white;
+  border: none;
+}
+
+.stats-section h2 {
+  color: white;
+  text-align: center;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.stat {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.stat-number {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.stat-label {
+  font-size: 0.95em;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.stats-note {
+  text-align: center;
+  margin-top: 20px;
+  opacity: 0.8;
+  font-size: 0.9em;
+}
+
+.final-message {
+  text-align: center;
+  background: var(--input-bg);
+  border: 2px solid var(--accent-color);
+  font-size: 1.1em;
+  line-height: 1.8;
+}
+
+.final-message h2 {
+  color: var(--accent-color);
+  font-size: 2.2em;
+  margin-bottom: 20px;
+}
+
+.final-message p {
+  margin: 15px 0;
+  color: var(--text-primary);
+}
+
+.final-message strong {
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+/* Dark Mode Adjustments */
+html.dark .why-use-header {
+  background: linear-gradient(135deg, #5566d2, #3d4a99);
+}
+
+html.dark .research-note {
+  background: rgba(102, 126, 234, 0.1);
+  color: var(--text-secondary);
+}
+
+html.dark .framework-item {
+  background: rgba(102, 126, 234, 0.1);
+  border-color: var(--border-color);
+}
+
+html.dark .stats-section {
+  background: linear-gradient(135deg, #5566d2, #3d4a99);
+}
+
+html.dark .stat {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .why-use-container {
+    padding: 20px 15px;
+  }
+
+  .why-use-header {
+    padding: 20px;
+  }
+
+  .why-use-header h1 {
+    font-size: 1.8em;
+  }
+
+  .why-use-header p {
+    font-size: 1em;
+  }
+
+  .why-use-section {
+    padding: 20px;
+  }
+
+  .why-use-section h2 {
+    font-size: 1.5em;
+  }
+
+  .section-icon {
+    font-size: 2em;
+  }
+
+  .recovery-framework {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat-number {
+    font-size: 2em;
+  }
+
+  .section-content li {
+    padding-left: 25px;
+  }
+}

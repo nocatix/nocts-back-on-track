@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { DarkModeContext } from '../context/DarkModeContext';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { getCookie, setCookie } from '../utils/cookieHelper';
 import axios from 'axios';
 import './Sidebar.css';
 
@@ -10,7 +11,10 @@ export default function Sidebar() {
   const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
   const [addictions, setAddictions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(() => {
+    const savedCollapsed = getCookie('sidebarCollapsed');
+    return savedCollapsed !== null ? savedCollapsed : false;
+  });
   const location = useLocation();
 
   useEffect(() => {
@@ -30,6 +34,11 @@ export default function Sidebar() {
 
     fetchAddictions();
   }, [token]);
+
+  useEffect(() => {
+    // Save sidebar collapsed state to cookie
+    setCookie('sidebarCollapsed', collapsed, 365);
+  }, [collapsed]);
 
   const isActive = (path) => {
     return location.pathname === path;
@@ -87,6 +96,42 @@ export default function Sidebar() {
         >
           <span className="emoji">🏆</span>
           <span className="text">Achievements</span>
+        </Link>
+        
+        <Link
+          to="/mood"
+          className={`nav-link ${isActive('/mood') ? 'active' : ''}`}
+          title="Mood Tracker"
+        >
+          <span className="emoji">🎭</span>
+          <span className="text">Mood</span>
+        </Link>
+        
+        <Link
+          to="/weight"
+          className={`nav-link ${isActive('/weight') ? 'active' : ''}`}
+          title="Weight Tracker"
+        >
+          <span className="emoji">⚖️</span>
+          <span className="text">Weight</span>
+        </Link>
+        
+        <Link
+          to="/memories"
+          className={`nav-link ${isActive('/memories') ? 'active' : ''}`}
+          title="Memories"
+        >
+          <span className="emoji">💭</span>
+          <span className="text">Memories</span>
+        </Link>
+        
+        <Link
+          to="/why-use-this"
+          className={`nav-link ${isActive('/why-use-this') ? 'active' : ''}`}
+          title="Why Use This"
+        >
+          <span className="emoji">ℹ️</span>
+          <span className="text">Why Use This</span>
         </Link>
         
         <Link

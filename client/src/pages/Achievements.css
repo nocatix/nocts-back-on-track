@@ -161,6 +161,286 @@ html.dark .achievement-card:hover {
   transition: color 0.3s ease;
 }
 
+/* Trophy Styles */
+.trophies-section {
+  margin-bottom: 40px;
+}
+
+.trophies-section h2 {
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  transition: color 0.3s ease;
+}
+
+.trophy-category {
+  margin-bottom: 30px;
+}
+
+.trophy-category h3 {
+  color: var(--accent-color);
+  margin-bottom: 15px;
+  font-size: 1.2em;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.trophies-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.trophy-card {
+  background: var(--card-bg);
+  border: 2px solid var(--accent-color);
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+html.dark .trophy-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.trophy-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+html.dark .trophy-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.trophy-icon {
+  font-size: 3.5em;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.trophy-title {
+  color: var(--text-primary);
+  margin: 10px 0;
+  font-size: 1.1em;
+  transition: color 0.3s ease;
+}
+
+.trophy-description {
+  color: var(--text-secondary);
+  margin: 10px 0;
+  font-size: 0.95em;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.trophy-date {
+  color: var(--text-muted);
+  font-size: 0.85em;
+  display: block;
+  margin-top: 10px;
+  transition: color 0.3s ease;
+}
+
+.achievements-section h2 {
+  color: var(--accent-color);
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  transition: color 0.3s ease;
+}
+
+.achievements-section {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 2px solid var(--border-color);
+  transition: border-color 0.3s ease;
+}
+
+.achievements-section h2 {
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  transition: color 0.3s ease;
+}
+
+/* Trophy Progress Section */
+.trophy-progress-section {
+  background: var(--card-bg);
+  border: 2px solid var(--accent-color);
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+.trophy-progress-section h2 {
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  font-size: 1.4em;
+  transition: color 0.3s ease;
+}
+
+.trophy-progress-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.current-trophy,
+.next-trophy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.current-trophy h3,
+.next-trophy h3 {
+  color: var(--text-primary);
+  font-size: 1.1em;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.trophy-display {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: var(--input-bg);
+  padding: 15px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.trophy-icon-large {
+  font-size: 3em;
+  flex-shrink: 0;
+}
+
+.trophy-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.trophy-info h4 {
+  color: var(--text-primary);
+  margin: 0;
+  font-size: 1.05em;
+  transition: color 0.3s ease;
+}
+
+.trophy-info p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 0.95em;
+  transition: color 0.3s ease;
+}
+
+.progress-bar-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.progress-bar-wrapper .progress-bar {
+  flex: 1;
+  height: 16px;
+  background-color: var(--input-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+.progress-bar-wrapper .progress-bar .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-color));
+  border-radius: 8px;
+  transition: width 0.5s ease;
+}
+
+.progress-percentage {
+  color: var(--text-primary);
+  font-weight: bold;
+  font-size: 1.1em;
+  min-width: 50px;
+  text-align: right;
+  transition: color 0.3s ease;
+}
+
+.progress-description {
+  color: var(--text-secondary);
+  font-size: 0.95em;
+  text-align: center;
+  margin: 15px 0;
+  transition: color 0.3s ease;
+}
+
+.ultimate-milestone {
+  color: var(--accent-color);
+  font-size: 1.1em;
+  text-align: center;
+  font-weight: bold;
+  margin: 15px 0;
+  transition: color 0.3s ease;
+}
+
+.no-trophy-progress {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .trophies-list {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .trophy-icon {
+    font-size: 2.5em;
+  }
+
+  .trophy-title {
+    font-size: 0.95em;
+  }
+
+  .trophy-description {
+    font-size: 0.85em;
+  }
+
+  .trophy-display {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .trophy-info h4 {
+    font-size: 1em;
+  }
+
+  .trophy-info p {
+    font-size: 0.9em;
+  }
+
+  .progress-bar-wrapper {
+    flex-direction: column;
+  }
+
+  .progress-percentage {
+    width: 100%;
+    text-align: center;
+    min-width: auto;
+  }
+
+  .trophy-progress-section {
+    padding: 15px;
+  }
+}
+
 @media (max-width: 600px) {
   .achievements-page {
     padding: 10px;

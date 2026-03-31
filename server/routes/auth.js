@@ -76,14 +76,14 @@ router.post('/login', async (req, res) => {
 // Get Current User
 router.get('/me', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.userId);
+    const user = await User.findById(req.user.userId);
     
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
     
     res.json({
-      user: { id: user._id, username: user.username, fullName: user.fullName }
+      user: { id: user._id, username: user.username, fullName: user.fullName, unitPreference: user.unitPreference }
     });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
@@ -99,7 +99,7 @@ router.put('/profile', auth, async (req, res) => {
       return res.status(400).json({ message: 'Full name is required' });
     }
     
-    const user = await User.findById(req.userId);
+    const user = await User.findById(req.user.userId);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -109,7 +109,7 @@ router.put('/profile', auth, async (req, res) => {
     
     res.json({
       message: 'Profile updated successfully',
-      user: { id: user._id, username: user.username, fullName: user.fullName }
+      user: { id: user._id, username: user.username, fullName: user.fullName, unitPreference: user.unitPreference }
     });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
@@ -129,7 +129,7 @@ router.put('/change-password', auth, async (req, res) => {
       return res.status(400).json({ message: 'Password must be at least 6 characters' });
     }
     
-    const user = await User.findById(req.userId);
+    const user = await User.findById(req.user.userId);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -148,10 +148,36 @@ router.put('/change-password', auth, async (req, res) => {
   }
 });
 
+// Update Unit Preference
+router.put('/unit-preference', auth, async (req, res) => {
+  try {
+    const { unitPreference } = req.body;
+    
+    if (!unitPreference || !['imperial', 'metric'].includes(unitPreference)) {
+      return res.status(400).json({ message: 'Invalid unit preference' });
+    }
+    
+    const user = await User.findById(req.user.userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    
+    user.unitPreference = unitPreference;
+    await user.save();
+    
+    res.json({
+      message: 'Unit preference updated successfully',
+      unitPreference: user.unitPreference
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
 // Delete Account
 router.delete('/profile', auth, async (req, res) => {
   try {
-    const user = await User.findByIdAndDelete(req.userId);
+    const user = await User.findByIdAndDelete(req.user.userId);
     
     if (!user) {
       return res.status(404).json({ message: 'User not found' });

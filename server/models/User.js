@@ -16,6 +16,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  unitPreference: {
+    type: String,
+    enum: ['imperial', 'metric'],
+    default: 'imperial'
+  },
   createdAt: {
     type: Date,
     default: Date.now

@@ -13,6 +13,10 @@ import CravingGame from './pages/CravingGame';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Profile from './pages/Profile';
 import Achievements from './pages/Achievements';
+import Mood from './pages/Mood';
+import Weight from './pages/Weight';
+import Memories from './pages/Memories';
+import Whyusethis from './pages/Whyusethis';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AchievementNotification from './components/AchievementNotification';
@@ -105,6 +109,38 @@ export default function App() {
                 element={
                   <ProtectedRoute isAuthenticated={!!token}>
                     <Achievements />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/mood"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <Mood />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/weight"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <Weight />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/memories"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <Memories />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/why-use-this"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <Whyusethis />
                   </ProtectedRoute>
                 }
               />

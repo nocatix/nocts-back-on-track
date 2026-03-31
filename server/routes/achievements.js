@@ -21,7 +21,7 @@ const MILESTONES = {
 // Get all achievements for user
 router.get('/', auth, async (req, res) => {
   try {
-    const achievements = await Achievement.find({ userId: req.userId }).sort({ unreadAt: -1 });
+    const achievements = await Achievement.find({ userId: req.user.userId }).sort({ unreadAt: -1 });
     res.json(achievements);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
@@ -31,7 +31,7 @@ router.get('/', auth, async (req, res) => {
 // Get unread achievements
 router.get('/unread', auth, async (req, res) => {
   try {
-    const achievements = await Achievement.find({ userId: req.userId, readAt: null }).sort({ unreadAt: -1 });
+    const achievements = await Achievement.find({ userId: req.user.userId, readAt: null }).sort({ unreadAt: -1 });
     res.json(achievements);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
@@ -42,7 +42,7 @@ router.get('/unread', auth, async (req, res) => {
 router.put('/:id/read', auth, async (req, res) => {
   try {
     const achievement = await Achievement.findOneAndUpdate(
-      { _id: req.params.id, userId: req.userId },
+      { _id: req.params.id, userId: req.user.userId },
       { readAt: Date.now() },
       { new: true }
     );
@@ -57,7 +57,7 @@ router.post('/check/:addictionId', auth, async (req, res) => {
   try {
     const addiction = await Addiction.findOne({
       _id: req.params.addictionId,
-      userId: req.userId
+      userId: req.user.userId
     });
 
     if (!addiction) {
@@ -73,14 +73,14 @@ router.post('/check/:addictionId', auth, async (req, res) => {
       if (daysStopped >= daysNum) {
         // Check if achievement already exists
         const existingAchievement = await Achievement.findOne({
-          userId: req.userId,
+          userId: req.user.userId,
           milestoneDays: daysNum,
           addictionId: req.params.addictionId
         });
 
         if (!existingAchievement) {
           const newAchievement = new Achievement({
-            userId: req.userId,
+            userId: req.user.userId,
             name: milestone.name,
             description: milestone.description,
             icon: milestone.icon,

@@ -1,0 +1,430 @@
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../context/AuthContext';
+import './Weight.css';
+
+const Weight = () => {
+  const { user, loading, token } = useAuth();
+  const [weights, setWeights] = useState([]);
+  const [goalWeight, setGoalWeight] = useState(() => {
+    const saved = localStorage.getItem('weightGoal');
+    return saved ? JSON.parse(saved) : { weight: 0, unit: 'lbs' };
+  });
+  const [currentWeight, setCurrentWeight] = useState('');
+  const [unit, setUnit] = useState(() => {
+    // Use user preference, fall back to localStorage, default to 'lbs'
+    return 'lbs';
+  });
+  const [selectedDate, setSelectedDate] = useState(() => {
+    const now = new Date();
+    return now.toISOString().split('T')[0];
+  });
+  const [selectedTime, setSelectedTime] = useState(() => {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    return `${hours}:${minutes}`;
+  });
+  const [showGoalForm, setShowGoalForm] = useState(false);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [message, setMessage] = useState('');
+
+  // Fetch weights on mount
+  useEffect(() => {
+    if (token && user) {
+      fetchWeights();
+      // Update unit from user preference
+      if (user.unitPreference === 'metric') {
+        setUnit('kg');
+      } else {
+        setUnit('lbs');
+      }
+    }
+  }, [token, user]);
+
+  const fetchWeights = async () => {
+    try {
+      const response = await fetch('/api/weights', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setWeights(data);
+        // Convert all weights to current unit for display
+        if (unit === 'kg' && data.length > 0 && data[0].unit === 'lbs') {
+          convertWeights(data, 'kg');
+        }
+      }
+    } catch (err) {
+      console.error('Error fetching weights:', err);
+    }
+  };
+
+  const convertWeights = (dataWeights, targetUnit) => {
+    const converted = dataWeights.map(w => ({
+      ...w,
+      originalWeight: w.weight,
+      weight: targetUnit === 'kg' && w.unit === 'lbs' ? (w.weight / 2.20462).toFixed(2) : w.weight
+    }));
+    setWeights(converted);
+  };
+
+  const handleLogWeight = async (e) => {
+    e.preventDefault();
+
+    if (!currentWeight || currentWeight <= 0) {
+      setMessage('Please enter a valid weight');
+      setTimeout(() => setMessage(''), 3000);
+      return;
+    }
+
+    try {
+      const dateTime = new Date(`${selectedDate}T${selectedTime}`);
+      const response = await fetch('/api/weights', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          weight: parseFloat(currentWeight),
+          unit,
+          date: dateTime.toISOString()
+        })
+      });
+
+      if (response.ok) {
+        setCurrentWeight('');
+        const now = new Date();
+        setSelectedDate(now.toISOString().split('T')[0]);
+        setSelectedTime(`${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`);
+        fetchWeights();
+      } else {
+        setMessage('Error logging weight');
+        setTimeout(() => setMessage(''), 3000);
+      }
+    } catch (err) {
+      console.error('Error logging weight:', err);
+      setMessage('Error logging weight');
+      setTimeout(() => setMessage(''), 3000);
+    }
+  };
+
+  const handleSetGoal = (e) => {
+    e.preventDefault();
+    const newGoal = { weight: parseFloat(goalWeight.weight), unit: goalWeight.unit };
+    localStorage.setItem('weightGoal', JSON.stringify(newGoal));
+    setGoalWeight(newGoal);
+    setShowGoalForm(false);
+  };
+
+  const handleDeleteWeight = async (id) => {
+    try {
+      const response = await fetch(`/api/weights/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      if (response.ok) {
+        fetchWeights();
+      }
+    } catch (err) {
+      console.error('Error deleting weight:', err);
+    }
+  };
+
+  const getMonthWeights = () => {
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth() + 1;
+    return weights.filter(w => {
+      const date = new Date(w.date);
+      return date.getFullYear() === year && date.getMonth() + 1 === month;
+    });
+  };
+
+  const getDaysInMonth = (date) => {
+    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  };
+
+  const getFirstDayOfMonth = (date) => {
+    return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+  };
+
+  const renderGraph = () => {
+    const sortedWeights = [...weights].sort((a, b) => new Date(a.date) - new Date(b.date));
+    if (sortedWeights.length === 0) return null;
+
+    const minWeight = Math.min(...sortedWeights.map(w => parseFloat(w.weight))) - 5;
+    const maxWeight = Math.max(...sortedWeights.map(w => parseFloat(w.weight))) + 5;
+    const range = maxWeight - minWeight;
+
+    const points = sortedWeights.map((w, index) => {
+      const x = (index / (sortedWeights.length - 1 || 1)) * 300;
+      const y = 150 - ((parseFloat(w.weight) - minWeight) / range) * 150;
+      return { x, y, weight: w.weight, date: new Date(w.date).toLocaleDateString() };
+    });
+
+    const pathData = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+    const goalY = goalWeight.weight > 0 ? 150 - ((goalWeight.weight - minWeight) / range) * 150 : null;
+
+    return (
+      <div className="weight-graph-container">
+        <svg viewBox="0 0 350 200" className="weight-graph">
+          {/* Grid lines */}
+          {[0, 50, 100, 150].map((y) => (
+            <line key={`grid-${y}`} x1="30" y1={y} x2="330" y2={y} className="grid-line" />
+          ))}
+
+          {/* Goal weight line */}
+          {goalY !== null && (
+            <line x1="30" y1={goalY} x2="330" y2={goalY} className="goal-line" />
+          )}
+
+          {/* Weight trend line */}
+          <path d={pathData} className="weight-line" />
+
+          {/* Data points */}
+          {points.map((p, i) => (
+            <circle key={`point-${i}`} cx={p.x} cy={p.y} r="3" className="weight-point" />
+          ))}
+
+          {/* Axes */}
+          <line x1="30" y1="0" x2="30" y2="150" className="axis" />
+          <line x1="30" y1="150" x2="330" y2="150" className="axis" />
+        </svg>
+        <div className="graph-labels">
+          <span className="y-label">{maxWeight.toFixed(0)} {unit}</span>
+          <span className="y-label">{minWeight.toFixed(0)} {unit}</span>
+        </div>
+      </div>
+    );
+  };
+
+  const renderCalendar = () => {
+    const daysInMonth = getDaysInMonth(currentMonth);
+    const firstDay = getFirstDayOfMonth(currentMonth);
+    const monthWeights = getMonthWeights();
+    const monthWeightMap = {};
+
+    monthWeights.forEach(w => {
+      const date = new Date(w.date).toLocaleDateString().split('/');
+      const day = parseInt(date[1]) || parseInt(date[0]);
+      monthWeightMap[day] = w;
+    });
+
+    const days = [];
+    for (let i = 0; i < firstDay; i++) {
+      days.push(null);
+    }
+    for (let i = 1; i <= daysInMonth; i++) {
+      days.push(i);
+    }
+
+    return (
+      <div className="calendar-container">
+        <div className="calendar-header">
+          <button
+            className="calendar-nav-btn"
+            onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1))}
+          >
+            ← {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+          </button>
+          <button
+            className="calendar-nav-btn"
+            onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))}
+          >
+            →
+          </button>
+        </div>
+
+        <div className="calendar-grid">
+          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+            <div key={day} className="calendar-day-header">{day}</div>
+          ))}
+
+          {days.map((day, index) => {
+            const weight = day ? monthWeightMap[day] : null;
+            const bgColor = weight ? weight.originalWeight ? '#e8f5e9' : '#fff9c4' : 'transparent';
+
+            return (
+              <div
+                key={index}
+                className="calendar-day"
+                style={{ backgroundColor: bgColor }}
+              >
+                {day && (
+                  <>
+                    <div className="calendar-day-number">{day}</div>
+                    {weight && (
+                      <div className="calendar-day-weight">
+                        {parseFloat(weight.weight).toFixed(1)} {unit}
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  if (loading) return <div className="loading">Loading...</div>;
+  if (!user) return <div className="loading">Please log in to track weight</div>;
+
+  return (
+    <div className="weight-tracker">
+      <h1>⚖️ Weight Tracker</h1>
+
+      {message && <div className="message">{message}</div>}
+
+      <div className="weight-container">
+        {/* Stats Section */}
+        <div className="weight-stats-section">
+          {weights.length > 0 && (
+            <div className="weight-stats">
+              <div className="stat-item">
+                <label>Latest Weight</label>
+                <span className="stat-value">{parseFloat(weights[0].weight).toFixed(1)} {weights[0].unit}</span>
+              </div>
+              <div className="stat-item">
+                <label>Goal Weight</label>
+                <span className="stat-value">{goalWeight.weight > 0 ? `${goalWeight.weight} ${goalWeight.unit}` : 'Not set'}</span>
+              </div>
+              {goalWeight.weight > 0 && weights.length > 0 && (
+                <div className="stat-item">
+                  <label>Difference</label>
+                  <span className="stat-value">
+                    {(weights[0].weight - goalWeight.weight).toFixed(1)} {unit}
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Log Weight Form */}
+        <div className="weight-form-container">
+          <form onSubmit={handleLogWeight} className="weight-form bento-box">
+            <h2>📊 Log Weight</h2>
+
+            <div className="form-group">
+              <label>Weight ({unit})</label>
+              <input
+                type="number"
+                step="0.1"
+                value={currentWeight}
+                onChange={(e) => setCurrentWeight(e.target.value)}
+                placeholder="Enter weight"
+                required
+              />
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label>Date</label>
+                <input
+                  type="date"
+                  value={selectedDate}
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Time</label>
+                <input
+                  type="time"
+                  value={selectedTime}
+                  onChange={(e) => setSelectedTime(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
+            <button type="submit" className="btn btn-primary">Log Weight</button>
+          </form>
+
+          {/* Goal Weight Section */}
+          <div className="goal-weight-section bento-box">
+            <h2>🎯 Goal Weight</h2>
+            {!showGoalForm ? (
+              <>
+                <div className="goal-display">
+                  <p>{goalWeight.weight > 0 ? `${goalWeight.weight} ${goalWeight.unit}` : 'No goal set'}</p>
+                </div>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => setShowGoalForm(true)}
+                >
+                  {goalWeight.weight > 0 ? 'Update Goal' : 'Set Goal'}
+                </button>
+              </>
+            ) : (
+              <form onSubmit={handleSetGoal}>
+                <div className="form-group">
+                  <label>Goal Weight ({unit === 'lbs' ? 'lbs' : 'kg'})</label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    value={goalWeight.weight}
+                    onChange={(e) => setGoalWeight({ ...goalWeight, weight: e.target.value, unit })}
+                    placeholder="Enter goal weight"
+                  />
+                </div>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                  <button type="submit" className="btn btn-primary">Save Goal</button>
+                  <button type="button" className="btn btn-secondary" onClick={() => setShowGoalForm(false)}>
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+
+        {/* Graph Section */}
+        {weights.length > 0 && (
+          <div className="weight-graph-section bento-box">
+            <h2>📈 Weight Trend</h2>
+            {renderGraph()}
+          </div>
+        )}
+
+        {/* Calendar and History */}
+        <div className="weight-history-section">
+          <div className="weight-calendar bento-box">
+            <h2>📅 Weight Calendar</h2>
+            {renderCalendar()}
+          </div>
+
+          <div className="weight-list bento-box">
+            <h2>📋 Weight History</h2>
+            <div className="weight-list-container">
+              {weights.length === 0 ? (
+                <p className="no-data">No weight entries yet. Start tracking your weight!</p>
+              ) : (
+                weights.map((w, index) => (
+                  <div key={w._id || index} className="weight-entry">
+                    <div className="entry-info">
+                      <span className="entry-weight">{parseFloat(w.weight).toFixed(1)} {w.unit}</span>
+                      <span className="entry-date">{new Date(w.date).toLocaleDateString()} at {new Date(w.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                    </div>
+                    <button
+                      className="btn-delete"
+                      onClick={() => handleDeleteWeight(w._id)}
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Weight;

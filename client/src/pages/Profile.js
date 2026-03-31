@@ -18,6 +18,7 @@ const Profile = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [unitPreference, setUnitPreference] = useState('metric');
 
   useEffect(() => {
     if (user) {
@@ -25,6 +26,7 @@ const Profile = () => {
         username: user.username || '',
         fullName: user.fullName || ''
       });
+      setUnitPreference(user.unitPreference || 'metric');
     }
   }, [user]);
 
@@ -42,6 +44,25 @@ const Profile = () => {
       ...prev,
       [name]: value
     }));
+  };
+
+  const handleUnitPreferenceChange = async (preference) => {
+    try {
+      const response = await axios.put('/api/auth/unit-preference', 
+        { unitPreference: preference },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      setUnitPreference(preference);
+      setUser({ ...user, unitPreference: preference });
+      setMessage('Unit preference updated successfully!');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to update unit preference');
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -211,6 +232,29 @@ const Profile = () => {
             {loading ? 'Updating...' : 'Change Password'}
           </button>
         </form>
+      </div>
+      
+      <div className="profile-card">
+        <h2>Measurement Preference</h2>
+        <div className="unit-preference-section">
+          <p>Choose your preferred unit of measurement:</p>
+          <div className="unit-buttons">
+            <button 
+              className={`unit-button ${unitPreference === 'imperial' ? 'active' : ''}`}
+              onClick={() => handleUnitPreferenceChange('imperial')}
+            >
+              <span>🇺🇸</span>
+              <span>Imperial (lbs)</span>
+            </button>
+            <button 
+              className={`unit-button ${unitPreference === 'metric' ? 'active' : ''}`}
+              onClick={() => handleUnitPreferenceChange('metric')}
+            >
+              <span>🌍</span>
+              <span>Metric (kg)</span>
+            </button>
+          </div>
+        </div>
       </div>
       
       <div className="profile-section">

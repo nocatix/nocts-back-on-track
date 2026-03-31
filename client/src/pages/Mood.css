@@ -1,0 +1,577 @@
+.mood-container {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.message-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--accent-color);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease-out;
+  z-index: 1000;
+  max-width: 400px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+html.dark .message-notification {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.message-notification.error {
+  background: #dc3545;
+}
+
+html.dark .message-notification.error {
+  background: #b71c1c;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.mood-container h1 {
+  text-align: center;
+  color: var(--text-primary);
+  margin-bottom: 30px;
+  font-size: 32px;
+}
+
+.mood-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+/* Calendar Section */
+.mood-calendar-section {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+html.dark .mood-calendar-section {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-header h2 {
+  color: var(--text-primary);
+  margin: 0;
+  font-size: 24px;
+}
+
+.calendar-nav-btn {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.calendar-nav-btn:hover {
+  background: var(--accent-dark);
+  transform: scale(1.05);
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.weekday-header {
+  text-align: center;
+  font-weight: bold;
+  color: var(--text-secondary);
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  background: var(--input-bg);
+}
+
+.calendar-day:hover:not(.empty) {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-day.empty {
+  cursor: default;
+  background: transparent;
+  border: none;
+}
+
+.calendar-day.today {
+  box-shadow: inset 0 0 0 2px var(--accent-color);
+}
+
+.calendar-day.selected {
+  border-color: var(--accent-color) !important;
+  border-width: 3px;
+}
+
+/* Mood Legend */
+.mood-legend {
+  background: var(--input-bg);
+  padding: 15px;
+  border-radius: 10px;
+  border-left: 4px solid var(--accent-color);
+}
+
+.mood-legend {
+  transition: all 0.3s ease;
+}
+
+.legend-title {
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.legend-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+/* Mood Detail Section */
+.mood-detail-section {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+html.dark .mood-detail-section {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.mood-date-display {
+  text-align: center;
+  color: var(--text-secondary);
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.mood-display {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.mood-current {
+  width: 100%;
+}
+
+.current-mood {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.mood-emoji {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.mood-emoji:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.mood-text {
+  text-align: center;
+}
+
+.primary-mood {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--accent-color);
+  margin: 0;
+}
+
+.secondary-mood {
+  font-size: 18px;
+  color: var(--text-primary);
+  margin: 5px 0 0 0;
+}
+
+.intensity {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 5px 0 0 0;
+}
+
+.mood-notes,
+.mood-triggers {
+  background: var(--input-bg);
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-color);
+  color: var(--text-primary);
+  font-size: 14px;
+  margin: 10px 0;
+  transition: all 0.3s ease;
+}
+
+.no-mood {
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 40px 20px;
+}
+
+.mood-edit-btn {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Emotion Wheel Section */
+.mood-wheel-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.emotion-wheel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.wheel-stage {
+  background: var(--input-bg);
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.wheel-label {
+  text-align: center;
+  color: var(--text-primary);
+  font-weight: bold;
+  margin: 0 0 15px 0;
+}
+
+.emotions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.emotion-btn {
+  padding: 12px 16px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #000;
+  transition: all 0.3s ease;
+  font-size: 18px;
+}
+
+.emotion-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.emotion-btn.selected {
+  border: 3px solid var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+html.dark .emotion-btn {
+  color: #fff;
+}
+
+.back-btn {
+  background: var(--border-color);
+  color: var(--text-primary);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.back-btn:hover {
+  background: var(--accent-color);
+  color: white;
+}
+
+/* Mood Details Form */
+.mood-details-form {
+  background: var(--input-bg);
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  color: var(--text-primary);
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.form-group input[type="range"] {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border-color);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-group input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-group input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 8px rgba(102, 126, 234, 0.4);
+}
+
+.form-group input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.form-group input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 8px rgba(102, 126, 234, 0.4);
+}
+
+.intensity-display {
+  text-align: center;
+  color: var(--accent-color);
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.form-buttons button {
+  flex: 1;
+}
+
+.btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background: var(--accent-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-secondary {
+  background: var(--border-color);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--text-secondary);
+  color: var(--bg-primary);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .mood-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .emotions-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .legend-items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .mood-container {
+    padding: 15px;
+  }
+
+  .mood-container h1 {
+    font-size: 24px;
+  }
+
+  .mood-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .calendar-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .calendar-header h2 {
+    font-size: 20px;
+  }
+
+  .emotions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .legend-items {
+    grid-template-columns: 1fr;
+  }
+
+  .mood-detail-section {
+    padding: 15px;
+  }
+
+  .mood-emoji {
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 40px !important;
+  }
+
+  .primary-mood {
+    font-size: 24px;
+  }
+
+  .secondary-mood {
+    font-size: 16px;
+  }
+}

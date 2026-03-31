@@ -1,10 +1,15 @@
 import React from 'react';
 import './Meditation.css';
 import { useNavigate } from 'react-router-dom';
+import { getCookie, setCookie } from '../utils/cookieHelper';
 
 export default function Meditation() {
   const navigate = useNavigate();
   const [selectedMeditation, setSelectedMeditation] = React.useState(null);
+  const [showMeditationTips, setShowMeditationTips] = React.useState(() => {
+    const saved = getCookie('showMeditationTips');
+    return saved !== null ? saved : true;
+  });
 
   const meditations = [
     {
@@ -60,6 +65,11 @@ export default function Meditation() {
     'Your mind will wander - that\'s normal. Gently bring it back.',
     'Track your progress. Notice how cravings become easier to handle.'
   ];
+
+  // Save meditation tips state to cookie
+  React.useEffect(() => {
+    setCookie('showMeditationTips', showMeditationTips, 365);
+  }, [showMeditationTips]);
 
   return (
     <div className="meditation-page">
@@ -122,12 +132,19 @@ export default function Meditation() {
           </div>
 
           <div className="tips-section">
-            <h2>💡 Tips for Successful Meditation</h2>
-            <ul>
-              {tips.map((tip, idx) => (
-                <li key={idx}>{tip}</li>
-              ))}
-            </ul>
+            <div className="tips-header">
+              <h2>💡 Tips for Successful Meditation</h2>
+              <button className="btn-hint-toggle-arrow" onClick={() => setShowMeditationTips(!showMeditationTips)} title={showMeditationTips ? 'Hide tips' : 'Show tips'}>
+                {showMeditationTips ? '▼' : '▶'}
+              </button>
+            </div>
+            {showMeditationTips && (
+              <ul>
+                {tips.map((tip, idx) => (
+                  <li key={idx}>{tip}</li>
+                ))}
+              </ul>
+            )}
           </div>
         </>
       )}

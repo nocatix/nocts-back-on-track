@@ -1,0 +1,582 @@
+.weight-tracker {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.weight-tracker h1 {
+  color: var(--text-primary);
+  margin-bottom: 30px;
+  font-size: 28px;
+  text-align: center;
+}
+
+.weight-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Stats Section */
+.weight-stats-section {
+  width: 100%;
+}
+
+.weight-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-item label {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.stat-value {
+  display: block;
+  color: var(--accent-color);
+  font-size: 24px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+html.dark .stat-item {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Form Container */
+.weight-form-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.weight-form,
+.goal-weight-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+html.dark .weight-form,
+html.dark .goal-weight-section {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.weight-form h2,
+.goal-weight-section h2 {
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+html.dark .form-group input:focus,
+html.dark .form-group select:focus {
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Goal Display */
+.goal-display {
+  background: var(--input-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.goal-display p {
+  margin: 0;
+  color: var(--accent-color);
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.btn-primary {
+  background: var(--accent-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  color: #dc3545;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+  color: #b71c1c;
+}
+
+html.dark .btn-delete:hover {
+  color: #ff5252;
+}
+
+/* Graph Section */
+.weight-graph-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+html.dark .weight-graph-section {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.weight-graph-section h2 {
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.weight-graph-container {
+  position: relative;
+  width: 100%;
+  height: 250px;
+}
+
+.weight-graph {
+  width: 100%;
+  height: 100%;
+}
+
+.grid-line {
+  stroke: var(--border-color);
+  stroke-width: 1;
+  stroke-dasharray: 3,3;
+}
+
+.axis {
+  stroke: var(--text-secondary);
+  stroke-width: 2;
+}
+
+.weight-line {
+  stroke: var(--accent-color);
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.goal-line {
+  stroke: #ffc400;
+  stroke-width: 2;
+  stroke-dasharray: 5,5;
+  opacity: 0.7;
+}
+
+.weight-point {
+  fill: var(--accent-color);
+  stroke: white;
+  stroke-width: 1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.weight-point:hover {
+  r: 5;
+}
+
+.graph-labels {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 5px;
+  pointer-events: none;
+}
+
+.y-label {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+/* History Section */
+.weight-history-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Calendar */
+.weight-calendar {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+html.dark .weight-calendar {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.weight-calendar h2 {
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.calendar-container {
+  width: 100%;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.calendar-nav-btn {
+  background: var(--input-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  flex: 1;
+  text-align: center;
+}
+
+.calendar-nav-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.calendar-day-header {
+  text-align: center;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 12px;
+  padding: 8px 0;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 5px;
+  text-align: center;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+}
+
+.calendar-day:hover {
+  border-color: var(--accent-color);
+}
+
+.calendar-day-number {
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.calendar-day-weight {
+  color: var(--accent-color);
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* Weight List */
+.weight-list {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+html.dark .weight-list {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.weight-list h2 {
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.weight-list-container {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.weight-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.weight-entry:last-child {
+  border-bottom: none;
+}
+
+.weight-entry:hover {
+  background: var(--input-bg);
+}
+
+.entry-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.entry-weight {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.entry-date {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.no-data {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 20px;
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  color: var(--text-primary);
+  padding: 40px 20px;
+}
+
+/* Messages */
+.message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--accent-color);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+html.dark .message {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .weight-form-container {
+    grid-template-columns: 1fr;
+  }
+
+  .weight-history-section {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .weight-tracker {
+    padding: 15px;
+  }
+
+  .weight-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .weight-form,
+  .goal-weight-section,
+  .weight-graph-section,
+  .weight-calendar,
+  .weight-list {
+    padding: 15px;
+  }
+
+  .weight-form h2,
+  .goal-weight-section h2,
+  .weight-graph-section h2,
+  .weight-calendar h2,
+  .weight-list h2 {
+    font-size: 16px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .unit-selector {
+    flex-direction: column;
+  }
+
+  .btn {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+
+  .weight-graph-container {
+    height: 200px;
+  }
+
+  .calendar-grid {
+    gap: 3px;
+  }
+
+  .calendar-day {
+    min-height: 40px;
+    padding: 3px;
+  }
+
+  .calendar-day-number {
+    font-size: 11px;
+  }
+
+  .calendar-day-weight {
+    font-size: 9px;
+  }
+
+  .message {
+    left: 10px;
+    right: 10px;
+    top: auto;
+    bottom: 10px;
+  }
+}
+
+.bento-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+html.dark .bento-box {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}

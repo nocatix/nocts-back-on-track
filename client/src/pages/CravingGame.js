@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './CravingGame.css';
 import { useNavigate } from 'react-router-dom';
+import { getCookie, setCookie } from '../utils/cookieHelper';
 
 // Word list for the game - 5 letter words only
 const WORDS = [
@@ -24,6 +25,10 @@ export default function CravingGame() {
   const [currentInput, setCurrentInput] = useState('');
   const [gameStatus, setGameStatus] = useState('playing'); // 'playing', 'won', 'lost'
   const [message, setMessage] = useState('');
+  const [showGameTips, setShowGameTips] = useState(() => {
+    const saved = getCookie('showGameTips');
+    return saved !== null ? saved : true;
+  });
   // Modified keyboard layout with bigger keys and repositioned backspace/enter
   const MODIFIED_KEYBOARD = [
     'QWERTYUIOP',
@@ -44,6 +49,11 @@ export default function CravingGame() {
   useEffect(() => {
     startNewGame();
   }, [startNewGame]);
+
+  // Save game tips state to cookie
+  useEffect(() => {
+    setCookie('showGameTips', showGameTips, 365);
+  }, [showGameTips]);
 
   const handleSubmitWord = useCallback(() => {
     if (currentInput.length !== 5) {
@@ -211,15 +221,22 @@ export default function CravingGame() {
       </div>
 
       <div className="game-tips">
-        <h3>💪 How to Play</h3>
-        <ul>
-          <li>Type letters to fill each row (or use your keyboard)</li>
-          <li>Press Enter or click the Enter button to submit your guess</li>
-          <li>🟩 Green = correct letter in correct spot</li>
-          <li>🟨 Yellow = correct letter in wrong spot</li>
-          <li>⬜ Gray = letter not in word</li>
-          <li>You have 6 attempts to guess the word</li>
-        </ul>
+        <div className="game-tips-header">
+          <h3>💪 How to Play</h3>
+          <button className="btn-hint-toggle-arrow" onClick={() => setShowGameTips(!showGameTips)} title={showGameTips ? 'Hide tips' : 'Show tips'}>
+            {showGameTips ? '▼' : '▶'}
+          </button>
+        </div>
+        {showGameTips && (
+          <ul>
+            <li>Type letters to fill each row (or use your keyboard)</li>
+            <li>Press Enter or click the Enter button to submit your guess</li>
+            <li>🟩 Green = correct letter in correct spot</li>
+            <li>🟨 Yellow = correct letter in wrong spot</li>
+            <li>⬜ Gray = letter not in word</li>
+            <li>You have 6 attempts to guess the word</li>
+          </ul>
+        )}
       </div>
     </div>
   );

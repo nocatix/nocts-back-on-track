@@ -2,6 +2,45 @@
   max-width: 900px;
 }
 
+.message-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--accent-color);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease-out;
+  z-index: 1000;
+  max-width: 400px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+html.dark .message-notification {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.message-notification.error {
+  background: #dc3545;
+}
+
+html.dark .message-notification.error {
+  background: #b71c1c;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 .detail-header {
   display: flex;
   justify-content: space-between;

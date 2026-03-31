@@ -7,8 +7,14 @@ const router = express.Router();
 // Get all addictions for user
 router.get('/', auth, async (req, res) => {
   try {
-    const addictions = await Addiction.find({ userId: req.userId });
-    res.json(addictions);
+    const addictions = await Addiction.find({ userId: req.user.userId });
+    const addictionsWithDays = addictions.map(addiction => {
+      const addictionData = addiction.toObject();
+      addictionData.daysStopped = addiction.getDaysStopped();
+      addictionData.totalMoneySaved = addiction.getTotalMoneySaved();
+      return addictionData;
+    });
+    res.json(addictionsWithDays);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
@@ -19,7 +25,7 @@ router.get('/:id', auth, async (req, res) => {
   try {
     const addiction = await Addiction.findOne({
       _id: req.params.id,
-      userId: req.userId
+      userId: req.user.userId
     });
     
     if (!addiction) {
@@ -46,7 +52,7 @@ router.post('/', auth, async (req, res) => {
     }
     
     const addiction = new Addiction({
-      userId: req.userId,
+      userId: req.user.userId,
       name,
       stopDate: new Date(stopDate),
       frequencyPerDay,
@@ -65,7 +71,7 @@ router.post('/', auth, async (req, res) => {
 router.put('/:id', auth, async (req, res) => {
   try {
     const addiction = await Addiction.findOneAndUpdate(
-      { _id: req.params.id, userId: req.userId },
+      { _id: req.params.id, userId: req.user.userId },
       { ...req.body, updatedAt: Date.now() },
       { new: true }
     );
@@ -85,7 +91,7 @@ router.delete('/:id', auth, async (req, res) => {
   try {
     const addiction = await Addiction.findOneAndDelete({
       _id: req.params.id,
-      userId: req.userId
+      userId: req.user.userId
     });
     
     if (!addiction) {
