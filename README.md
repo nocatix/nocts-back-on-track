@@ -6,22 +6,26 @@ Your personal addiction recovery companion. A comprehensive Node.js + React appl
 
 ### 📊 Project Status
 
-![Publish to GHCR](https://github.com/nocts/back-on-track/actions/workflows/publish-ghcr.yml/badge.svg)
+[![Publish to GHCR](https://github.com/nocatix/nocts-back-on-track/actions/workflows/publish-ghcr.yml/badge.svg)](https://github.com/nocatix/nocts-back-on-track/actions/workflows/publish-ghcr.yml)
 [![Node.js](https://img.shields.io/badge/Node.js-v18-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)](https://react.dev/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-7.0-13AA52?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Express](https://img.shields.io/badge/Express-4.x-000000?logo=express&logoColor=white)](https://expressjs.com/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![Container Registry](https://img.shields.io/badge/GHCR-Containers-4B0082?logo=github&logoColor=white)](https://github.com/nocatix/nocts-back-on-track/pkgs/container/nocts-back-on-track-backend)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**Version:** v1.0.0 | **Container Registry:** [GHCR](https://github.com/nocatix/nocts-back-on-track/pkgs/container)
+**Version:** v1.0.0
 
 ---
 
 ## 🌟 Core Features
 
 ### **Dashboard & Tracking**
-* 🏠 **Recovery Dashboard** - Overview of all tracked addictions with daily savings and progress predictions
+* 🏠 **Recovery Dashboard** - Overview of all tracked addictions with:
+  - Daily savings and progress predictions
+  - Withdrawal stage with difficulty indicators
+  - Random motivational quotes for daily inspiration
 * ➕ **Add Addiction** - Track any of 15+ addiction types with:
   - Addiction type with emoji indicators
   - Date and time when stopped (format adapts to user's locale preference)
@@ -31,9 +35,11 @@ Your personal addiction recovery companion. A comprehensive Node.js + React appl
 * 📊 **Individual Addiction Pages** - Detailed tracking for each addiction:
   - Days stopped counter (automatically calculated)
   - Total money saved (calculated daily)
-  - Withdrawal timeline with day-by-day milestones
+  - Withdrawal timeline with day-by-day milestones and difficulty ratings:
+    - Color-coded difficulty indicators (Extreme → Very Low)
+    - Specific withdrawal symptoms for each day
   - Personalized recovery tips based on addiction type
-  - "I Caved" button for tracking relapse events
+  - "I Caved" button for tracking relapse events (full-width, dark red)
   - Achievement tracking per addiction
 
 ### **Crisis Support & Motivation**
@@ -106,6 +112,10 @@ Your personal addiction recovery companion. A comprehensive Node.js + React appl
     - Weight tracker units
     - Time format (12h with AM/PM vs 24h)
     - All measurements across the app
+* 🔒 **Privacy Policy** - Transparent data practices documentation:
+  - Open source, no ads, no tracking commitment
+  - Data collection overview
+  - Security practices and encryption details
 * 🎨 **Dark Mode** - Full dark/light mode support with:
   - System preference detection
   - Manual toggle in sidebar
@@ -124,7 +134,13 @@ Your personal addiction recovery companion. A comprehensive Node.js + React appl
   - Recovery statistics
 
 ### **Supported Addiction Types**
-🍺 Alcohol • 🌿 Cannabis • 💉 Hard Drugs • 🚬 Nicotine • 🎰 Gambling • 📱 Social Media • 📰 Doomscrolling • 🎮 Video Games • 🔞 Pornography • 🛍️ Shopping • 🍬 Sugar • ☕ Coffee • 🍽️ Overeating • ❓ Other
+🍺 Alcohol • 🌿 Cannabis • 💉 Hard Drugs • 🚬 Nicotine • 🎰 Gambling • 📱 Social Media • 📰 Doomscrolling • 🎮 Video Games • 🔞 Pornography • 🛍️ Shopping • 🍬 Sugar • ☕ Coffee • 🍽️ Overeating • ❓ Other (15 total)
+
+*Each addiction type includes:*
+- Customized withdrawal timeline (7-180+ days)
+- Daily difficulty ratings (color-coded)
+- Specific withdrawal symptom descriptions
+- Addiction-specific recovery tips
 
 ## 🛠️ Technical Stack
 
@@ -201,12 +217,13 @@ nocts-back-on-track/
 │   │   │   ├── AuthContext.js
 │   │   │   └── DarkModeContext.js
 │   │   ├── data/                          # Static data
-│   │   │   ├── addictions/                # Per-addiction configs
+│   │   │   ├── addictions/                # Per-addiction configs with withdrawal timelines
 │   │   │   │   ├── index.js
 │   │   │   │   ├── alcohol.js
 │   │   │   │   ├── cannabis.js
-│   │   │   │   └── ... (13 more)
-│   │   │   └── cravingGameWords.js        # 550+ 5-letter words
+│   │   │   │   └── ... (15 total)
+│   │   │   ├── cravingGameWords.js        # 550+ 5-letter words
+│   │   │   └── motivationalQuotes.js      # 40+ daily inspirational quotes
 │   │   ├── utils/                         # Utilities
 │   │   │   ├── withdrawalHelper.js        # Addiction-specific helpers
 │   │   │   └── cookieHelper.js            # Cookie persistence
@@ -446,16 +463,14 @@ Contributions welcome! Areas for improvement:
 - Push notifications
 - Multi-language support
 - Mobile app (React Native)
+- Create mobile app version
+- Add support for group challenges
+- Implement AI-powered motivational messages
+- Add community forum functionality
+- Create relapse warning system with support resources
 
-# 
-* Create mobile app version
-* Add support for group challenges
-* Implement AI-powered motivational messages
-* Add community forum functionality
-* Create relapse warning system with support resources
-
-## Contributing
 Feel free to fork this project and submit pull requests for any improvements.
 
-## License
-MIT License
+## 📄 License
+
+MIT License - See [LICENSE](LICENSE) file for details
