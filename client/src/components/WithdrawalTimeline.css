@@ -1,0 +1,106 @@
+.withdrawal-timeline {
+  margin: 30px 0;
+}
+
+.timeline-container {
+  position: relative;
+  padding: 20px 0;
+}
+
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+}
+
+.milestone {
+  display: flex;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.milestone-marker {
+  position: relative;
+  z-index: 1;
+  margin-right: 30px;
+  flex-shrink: 0;
+}
+
+.marker-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #667eea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.milestone.reached .marker-circle {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+}
+
+.milestone.severity-high {
+  opacity: 0.85;
+}
+
+.milestone.severity-medium {
+  opacity: 0.9;
+}
+
+.milestone.severity-low {
+  opacity: 1;
+}
+
+.milestone-content {
+  background: #f8f9fa;
+  padding: 15px 20px;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.milestone.reached .milestone-content {
+  background: #e7f0ff;
+  border-left-color: #667eea;
+}
+
+.milestone-content h4 {
+  margin: 0 0 8px 0;
+  color: #667eea;
+}
+
+.milestone-content p {
+  margin: 0;
+  color: #555;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .timeline-container::before {
+    left: 20px;
+  }
+
+  .marker-circle {
+    width: 50px;
+    height: 50px;
+    font-size: 14px;
+  }
+
+  .milestone {
+    margin-right: 10px;
+  }
+}

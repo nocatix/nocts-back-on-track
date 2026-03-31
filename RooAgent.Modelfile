@@ -1,0 +1,6 @@
+FROM qwen3-coder:30b
+# Set a massive context window (64k is a safe start for your 64GB RAM)
+PARAMETER num_ctx 65536
+# Ensure the model stays creative but logical
+PARAMETER temperature 0.1
+PARAMETER top_p 0.95

@@ -1,0 +1,83 @@
+/* Sidebar styling */
+.sidebar {
+  width: 250px;
+  background: #f5f5f5;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.sidebar-header p {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.collapse-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.sidebar-nav {
+  margin-top: 20px;
+}
+
+.sidebar-nav .nav-link {
+  display: block;
+  padding: 10px 0;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.sidebar-nav .nav-link.active {
+  font-weight: 700;
+  color: #000;
+}
+
+.sidebar-section {
+  margin-top: 30px;
+}
+
+.sidebar-section h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+}
+
+.add-new-addiction-link {
+  display: block;
+  margin-bottom: 10px;
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.additions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.addiction-link {
+  display: block;
+  padding: 5px 0;
+  color: #333;
+  text-decoration: none;
+}
+
+.addiction-link.active {
+  font-weight: 700;
+  color: #000;
+}

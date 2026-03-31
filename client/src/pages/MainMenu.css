@@ -1,0 +1,224 @@
+.main-menu {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.main-menu h1 {
+  color: white;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 36px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.main-menu h2 {
+  color: white;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 22px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.action-buttons .btn {
+  flex: 1;
+  min-width: 180px;
+  max-width: 220px;
+}
+
+.btn-accent {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.btn-accent:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary.large {
+  min-width: 220px;
+}
+
+.daily-predictions {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 40px;
+  backdrop-filter: blur(10px);
+}
+
+.daily-predictions h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.predictions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.prediction-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.prediction-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.prediction-header h3 {
+  color: #667eea;
+  margin: 0;
+  font-size: 18px;
+}
+
+.days-count {
+  background: #667eea;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.withdrawal-stage {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border-left: 4px solid #667eea;
+}
+
+.difficulty {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.difficulty.extreme,
+.difficulty.extreme-warning {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.difficulty.very-high {
+  background-color: #ff9f43;
+  color: white;
+}
+
+.difficulty.high {
+  background-color: #ffa502;
+  color: white;
+}
+
+.difficulty.medium {
+  background-color: #ffd93d;
+  color: #333;
+}
+
+.difficulty.low-medium,
+.difficulty.low {
+  background-color: #6bcf7f;
+  color: white;
+}
+
+.difficulty.very-low,
+.difficulty.minimal {
+  background-color: #26de81;
+  color: white;
+}
+
+.stage-symptom {
+  color: #555;
+  font-size: 14px;
+  margin: 10px 0 0 0;
+  line-height: 1.4;
+}
+
+.daily-tip {
+  background: #e3f2fd;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border-left: 3px solid #2196F3;
+}
+
+.daily-tip strong {
+  color: #2196F3;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.daily-tip p {
+  color: #333;
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.money-saved {
+  background: #e8f5e9;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.addictions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.no-addictions {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+  .main-menu h1 {
+    font-size: 28px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons .btn {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .addictions-grid {
+    grid-template-columns: 1fr;
+  }
+}

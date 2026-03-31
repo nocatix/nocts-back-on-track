@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #333;
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+
+.content-wrapper {
+  display: flex;
+  flex: 1;
+  /* Ensure sidebar and main take full height */
+  min-height: 0;
+}
+
+.content-wrapper main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Remove padding-left from main */
+
+/* Adjust for collapsed sidebar */
+

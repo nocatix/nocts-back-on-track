@@ -1,0 +1,5 @@
+FROM qwen3-coder:30b
+# Dropping to 16k context saves ~4-6GB of VRAM, 
+# allowing the 19GB model to fit better in 16GB VRAM.
+PARAMETER num_ctx 8192
+PARAMETER temperature 0.0
