@@ -113,6 +113,31 @@ jobs:
             git push origin main
           fi
 
+      - name: Generate Changelog
+        if: github.ref == 'refs/heads/main'
+        id: changelog
+        run: |
+          # Get all tags sorted by version
+          TAGS=$(git tag -l 'v*' --sort=-version:refname)
+          
+          # Get the previous tag (if any)
+          PREV_TAG=$(echo "$TAGS" | head -n 2 | tail -n 1)
+          
+          if [ -z "$PREV_TAG" ]; then
+            # First release - get all commits
+            CHANGELOG=$(git log --pretty=format:"- %h: %s (%an)" --reverse)
+            CHANGELOG_SECTION="## 📝 Initial Release Commits"$'\n'"$CHANGELOG"
+          else
+            # Get commits between previous tag and current version
+            CHANGELOG=$(git log ${PREV_TAG}..HEAD --pretty=format:"- %h: %s (%an)")
+            CHANGELOG_SECTION="## 📝 Changelog from $PREV_TAG"$'\n'"$CHANGELOG"
+          fi
+          
+          # Save to output
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG_SECTION" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
       - name: Create Release for Main Branch
         if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v1
@@ -123,6 +148,9 @@ jobs:
             # 🎯 NOCTS - Back On Track v${{ steps.version.outputs.version }}
             
             An addiction recovery companion app that helps users track their journey to sobriety with personalized support, motivation, and science-backed withdrawal timeline tracking.
+            
+            ## 📝 What Changed in This Release
+            ${{ steps.changelog.outputs.changelog }}
             
             ## ✨ Key Features
             
