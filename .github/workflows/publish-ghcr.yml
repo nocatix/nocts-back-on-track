@@ -91,18 +91,113 @@ jobs:
 
       - name: Create Release
         if: startsWith(github.ref, 'refs/tags/')
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          name: Release ${{ steps.version.outputs.version }}
           body: |
-            Docker images published to GHCR:
-            - `${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:${{ steps.version.outputs.version }}`
-            - `${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:${{ steps.version.outputs.version }}`
+            # 🎯 NOCTS - Back On Track ${{ steps.version.outputs.version }}
+            
+            An addiction recovery companion app that helps users track their journey to sobriety with personalized support, motivation, and science-backed withdrawal timeline tracking.
+            
+            ## ✨ Key Features
+            
+            ### 📊 Addiction Tracking
+            - Track 15 different addiction types (alcohol, nicotine, cannabis, hard drugs, gambling, shopping, social media, gaming, coffee, sugar, doomscrolling, overeating, pornography, and more)
+            - Log daily cravings and moments of weakness
+            - Monitor financial impact of addictions
+            - Set personalized frequency tracking
+            
+            ### 📅 Withdrawal Timeline & Predictions
+            - Science-backed withdrawal symptom timelines for each addiction
+            - Real-time difficulty ratings based on recovery day
+            - Color-coded difficulty indicators (Very Low to Extreme)
+            - Day-by-day symptom predictions
+            - Personalized recovery roadmap
+            
+            ### 💪 Recovery Tools
+            - **Craving Game**: Distraction game to help overcome urges
+            - **Meditation Guide**: Guided relaxation and mindfulness sessions
+            - **Mood Tracker**: Daily emotional check-ins
+            - **Weight Tracker**: Monitor health recovery progress
+            - **Diary**: Private journal for reflection and thoughts
+            - **Memories**: Save milestones and achievements
+            
+            ### 🏆 Gamification & Motivation
+            - Achievement system with unlockable badges
+            - Trophy collection for major milestones
+            - Daily motivational quotes for encouragement
+            - Progress visualization
+            
+            ### 🔐 Privacy & Security
+            - Secure authentication system
+            - Encrypted data storage
+            - Privacy-first design
+            - Comprehensive privacy policy
+            
+            ### 🎨 User Experience
+            - Responsive mobile-friendly interface
+            - Dark mode support
+            - Intuitive navigation
+            - Real-time synchronization
+            
+            ## 🚀 Getting Started
+            
+            ### Using Docker (Recommended)
+            ```bash
+            docker compose -f docker-compose-ghcr.yml up
+            ```
+            
+            ### Docker Images
+            - **Backend**: `${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:${{ steps.version.outputs.version }}`
+            - **Frontend**: `${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:${{ steps.version.outputs.version }}`
+            
+            ### Manual Setup
+            ```bash
+            # Install backend dependencies
+            npm install
+            
+            # Install frontend dependencies
+            cd client && npm install
+            
+            # Start backend
+            npm run dev
+            
+            # In another terminal, start frontend
+            cd client && npm start
+            ```
+            
+            ## 📋 System Requirements
+            - **Backend**: Node.js 18+, MongoDB
+            - **Frontend**: Modern web browser (Chrome, Firefox, Safari, Edge)
+            - **Memory**: 2GB minimum
+            - **Storage**: 1GB for database
+            
+            ## 🏗️ Technology Stack
+            - **Frontend**: React.js with Bootstrap
+            - **Backend**: Express.js
+            - **Database**: MongoDB
+            - **Authentication**: JWT-based
+            - **Deployment**: Docker & GHCR
+            
+            ## 📝 Version Info
+            - **Release Date**: ${{ github.event.head_commit.timestamp || 'N/A' }}
+            - **Commit**: `${{ github.sha }}`
+            - **Images**: Available on GitHub Container Registry
+            
+            ## 🔗 Links
+            - [GitHub Repository](https://github.com/${{ github.repository }})
+            - [Container Registry](https://github.com/${{ github.repository }}/pkgs/container)
+            - [Issues & Support](https://github.com/${{ github.repository }}/issues)
+            
+            ## 📖 Documentation
+            For detailed setup instructions, features, and troubleshooting, see the [README](https://github.com/${{ github.repository }}/blob/main/README.md)
+            
+            ---
+            **Thank you for choosing NOCTS - Back On Track!** 🌟
           draft: false
           prerelease: false
+          generate_release_notes: false
 
       - name: Publish Summary
         run: |
