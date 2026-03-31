@@ -1,18 +1,19 @@
 #!/bin/bash
 
 # Version Bump Script
-# Usage: ./bump-version.sh [major|minor|patch]
-# Example: ./bump-version.sh minor
+# Versioning: MAJOR.MINOR.REVISION
+# Usage: ./bump-version.sh [major|minor|revision]
+# Example: ./bump-version.sh revision
 
 set -e
 
 if [ $# -eq 0 ]; then
-  echo "Usage: ./bump-version.sh [major|minor|patch]"
+  echo "Usage: ./bump-version.sh [major|minor|revision]"
   echo ""
   echo "Examples:"
-  echo "  ./bump-version.sh major  # 1.0.0 -> 2.0.0"
-  echo "  ./bump-version.sh minor  # 1.0.0 -> 1.1.0"
-  echo "  ./bump-version.sh patch  # 1.0.0 -> 1.0.1"
+  echo "  ./bump-version.sh major     # 1.0.0 -> 2.0.0"
+  echo "  ./bump-version.sh minor     # 1.0.0 -> 1.1.0"
+  echo "  ./bump-version.sh revision  # 1.0.0 -> 1.0.1"
   exit 1
 fi
 
@@ -23,29 +24,29 @@ CURRENT_VERSION=$(grep '"version"' package.json | head -1 | sed 's/.*"version": 
 echo "Current version: $CURRENT_VERSION"
 
 # Parse version
-IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
+IFS='.' read -r MAJOR MINOR REVISION <<< "$CURRENT_VERSION"
 
 # Calculate new version
 case "$TYPE" in
   major)
     MAJOR=$((MAJOR + 1))
     MINOR=0
-    PATCH=0
+    REVISION=0
     ;;
   minor)
     MINOR=$((MINOR + 1))
-    PATCH=0
+    REVISION=0
     ;;
-  patch)
-    PATCH=$((PATCH + 1))
+  revision)
+    REVISION=$((REVISION + 1))
     ;;
   *)
-    echo "Invalid version type: $TYPE (use major, minor, or patch)"
+    echo "Invalid version type: $TYPE (use major, minor, or revision)"
     exit 1
     ;;
 esac
 
-NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+NEW_VERSION="$MAJOR.$MINOR.$REVISION"
 echo "New version: $NEW_VERSION"
 echo ""
 
