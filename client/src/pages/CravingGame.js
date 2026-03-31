@@ -2,14 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './CravingGame.css';
 import { useNavigate } from 'react-router-dom';
 import { getCookie, setCookie } from '../utils/cookieHelper';
+import cravingGameWords from '../data/cravingGameWords';
 
-// Word list for the game - 5 letter words only
-const WORDS = [
-  'SOBER', 'CLEAR', 'PEACE', 'HABIT', 'BRAVE', 'FOCUS', 'FIGHT', 'CLIMB',
-  'DREAM', 'FAITH', 'GUARD', 'HEART', 'LIGHT', 'QUEST', 'SMILE', 'STAND',
-  'STONE', 'SWIFT', 'TRACK', 'TRUST', 'UNITY', 'VIGOR', 'WATER', 'WAVES',
-  'WHOLE', 'WORLD', 'WORTH', 'YIELD', 'POWER', 'GRACE', 'HOPE', 'TRUTH'
-];
+// Word list for the game - 5 letter words only (imported from data file)
+const WORDS = cravingGameWords;
 
 const getLetterStatus = (letter, position, word) => {
   if (word[position] === letter) return 'correct'; // Green - right place

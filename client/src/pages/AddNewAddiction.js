@@ -122,17 +122,17 @@ export default function AddNewAddiction() {
             <option value="">Select an addiction...</option>
             <option value="🍺 Alcohol">🍺 Alcohol</option>
             <option value="🌿 Cannabis">🌿 Cannabis</option>
+            <option value="☕ Coffee">☕ Coffee</option>
+            <option value="📰 Doomscrolling">📰 Doomscrolling</option>
+            <option value="🍽️ Overeating">🍽️ Overeating</option>
+            <option value="🎰 Gambling">🎰 Gambling</option>
             <option value="💉 Hard Drugs">💉 Hard Drugs</option>
             <option value="🚬 Nicotine">🚬 Nicotine</option>
-            <option value="🎰 Gambling">🎰 Gambling</option>
-            <option value="📱 Social Media">📱 Social Media</option>
-            <option value="📰 Doomscrolling">📰 Doomscrolling</option>
-            <option value="🎮 Video Games">🎮 Video Games</option>
             <option value="🔞 Pornography">🔞 Pornography</option>
+            <option value="📱 Social Media">📱 Social Media</option>
             <option value="🛍️ Shopping">🛍️ Shopping</option>
             <option value="🍬 Sugar">🍬 Sugar</option>
-            <option value="☕ Coffee">☕ Coffee</option>
-            <option value="🍽️ Overeating">🍽️ Overeating</option>
+            <option value="🎮 Video Games">🎮 Video Games</option>
             <option value="❓ Other">❓ Other</option>
           </select>
         </div>

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { encrypt, decrypt } = require('../utils/encryption');
 
 const addictionSchema = new mongoose.Schema({
   userId: {
@@ -23,8 +24,9 @@ const addictionSchema = new mongoose.Schema({
     required: true
   },
   notes: {
-    type: String,
-    default: ''
+    encrypted: String,
+    iv: String,
+    authTag: String
   },
   createdAt: {
     type: Date,
@@ -34,6 +36,30 @@ const addictionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
+});
+
+// Encrypt notes before saving
+addictionSchema.pre('save', function(next) {
+  if (this.isModified('notes') && typeof this.notes === 'string' && this.notes) {
+    const encrypted = encrypt(this.notes);
+    this.notes = encrypted;
+  }
+  next();
+});
+
+// Decrypt notes after retrieving
+addictionSchema.post('findOne', function(doc) {
+  if (doc && doc.notes && doc.notes.encrypted) {
+    doc.notes = decrypt(doc.notes);
+  }
+});
+
+addictionSchema.post('find', function(docs) {
+  docs.forEach(doc => {
+    if (doc.notes && doc.notes.encrypted) {
+      doc.notes = decrypt(doc.notes);
+    }
+  });
 });
 
 // Calculate total money saved
