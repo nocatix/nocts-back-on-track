@@ -171,10 +171,16 @@ export default function AddictionDetail() {
       console.error('Error parsing stop date:', err);
     }
     
+    // Ensure numeric values are properly converted
+    const frequencyValue = addiction.frequencyPerDay ? Number(addiction.frequencyPerDay) : 0;
+    const costValue = addiction.moneySpentPerDay ? Number(addiction.moneySpentPerDay) : 0;
+    
+    console.log('Edit form values - Frequency:', frequencyValue, 'Cost:', costValue);
+    
     setEditData({
-      name: addiction.name,
-      frequencyPerDay: addiction.frequencyPerDay || 0,
-      moneySpentPerDay: addiction.moneySpentPerDay || 0,
+      name: addiction.name || '',
+      frequencyPerDay: frequencyValue,
+      moneySpentPerDay: costValue,
       notes: addiction.notes || '',
       stopDate: isoString
     });
@@ -213,9 +219,18 @@ export default function AddictionDetail() {
   };
 
   const handleEditChange = (field, value) => {
+    let processedValue = value;
+    
+    // Convert to appropriate type
+    if (field === 'frequencyPerDay') {
+      processedValue = value === '' ? 0 : parseInt(value) || 0;
+    } else if (field === 'moneySpentPerDay') {
+      processedValue = value === '' ? 0 : parseFloat(value) || 0;
+    }
+    
     setEditData(prev => ({
       ...prev,
-      [field]: value
+      [field]: processedValue
     }));
   };
 
@@ -312,8 +327,8 @@ export default function AddictionDetail() {
               <label>{getFrequencyLabel(addiction.addictionType)}</label>
               <input
                 type="number"
-                value={editData.frequencyPerDay}
-                onChange={(e) => handleEditChange('frequencyPerDay', parseInt(e.target.value) || 0)}
+                value={editData.frequencyPerDay || ''}
+                onChange={(e) => handleEditChange('frequencyPerDay', e.target.value)}
                 placeholder="0"
                 min="0"
               />
@@ -323,8 +338,8 @@ export default function AddictionDetail() {
               <label>{getCostLabel(addiction.addictionType)}</label>
               <input
                 type="number"
-                value={editData.moneySpentPerDay}
-                onChange={(e) => handleEditChange('moneySpentPerDay', parseFloat(e.target.value) || 0)}
+                value={editData.moneySpentPerDay || ''}
+                onChange={(e) => handleEditChange('moneySpentPerDay', e.target.value)}
                 placeholder="0.00"
                 min="0"
                 step="0.01"

@@ -154,6 +154,10 @@ html.dark .form-group textarea {
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 0.95em;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-success {
