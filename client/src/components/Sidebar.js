@@ -97,6 +97,15 @@ export default function Sidebar() {
         </Link>
         
         <Link
+          to="/withdrawal-symptoms"
+          className={`nav-link ${isActive('/withdrawal-symptoms') ? 'active' : ''}`}
+          title="Withdrawal Symptoms"
+        >
+          <span className="emoji">🌡️</span>
+          <span className="text">Withdrawal Symptoms</span>
+        </Link>
+        
+        <Link
           to="/achievements"
           className={`nav-link ${isActive('/achievements') ? 'active' : ''}`}
           title="Achievements"

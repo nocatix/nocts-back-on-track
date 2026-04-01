@@ -20,6 +20,7 @@ import Memories from './pages/Memories';
 import Whyusethis from './pages/Whyusethis';
 import HowToSucceed from './pages/HowToSucceed';
 import Crisis from './pages/Crisis';
+import WithdrawalSymptoms from './pages/WithdrawalSymptoms';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AchievementNotification from './components/AchievementNotification';
@@ -164,6 +165,14 @@ export default function App() {
                 element={
                   <ProtectedRoute isAuthenticated={!!token}>
                     <Crisis />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/withdrawal-symptoms"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <WithdrawalSymptoms />
                   </ProtectedRoute>
                 }
               />
