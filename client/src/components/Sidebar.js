@@ -115,6 +115,15 @@ export default function Sidebar() {
         </Link>
         
         <Link
+          to="/hobbies"
+          className={`nav-link ${isActive('/hobbies') ? 'active' : ''}`}
+          title="Hobbies"
+        >
+          <span className="emoji">🎯</span>
+          <span className="text">Hobbies</span>
+        </Link>
+        
+        <Link
           to="/achievements"
           className={`nav-link ${isActive('/achievements') ? 'active' : ''}`}
           title="Achievements"

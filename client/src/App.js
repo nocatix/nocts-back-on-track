@@ -22,6 +22,7 @@ import HowToSucceed from './pages/HowToSucceed';
 import Crisis from './pages/Crisis';
 import WithdrawalSymptoms from './pages/WithdrawalSymptoms';
 import PreparationPlan from './pages/PreparationPlan';
+import Hobbies from './pages/Hobbies';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AchievementNotification from './components/AchievementNotification';
@@ -182,6 +183,14 @@ export default function App() {
                 element={
                   <ProtectedRoute isAuthenticated={!!token}>
                     <PreparationPlan />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/hobbies"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <Hobbies />
                   </ProtectedRoute>
                 }
               />
