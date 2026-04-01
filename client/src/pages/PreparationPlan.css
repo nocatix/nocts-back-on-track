@@ -60,11 +60,11 @@ html.dark .preparation-section:hover {
 
 .preparation-section.featured {
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.03), rgba(102, 126, 234, 0.01));
-  border: 2px solid var(--accent-color);
+  border: 1px solid var(--border-color);
 }
 
 .preparation-section.featured:hover {
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.15);
 }
 
 .preparation-section.final-message {
