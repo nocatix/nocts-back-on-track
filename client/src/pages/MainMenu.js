@@ -28,8 +28,10 @@ export default function MainMenu() {
     const fetchAddictions = async () => {
       try {
         const response = await apiClient.get('/api/addictions');
+        console.log('Fetched addictions:', response.data);
         setAddictions(response.data);
         const dailyPredictions = calculateDailyPredictions(response.data);
+        console.log('Daily predictions:', dailyPredictions);
         setPredictions(dailyPredictions);
       } catch (err) {
         setError('Failed to load addictions');
@@ -192,8 +194,8 @@ export default function MainMenu() {
                 {pred.moneySpent > 0 && (
                   <div className="savings-summary">
                     <div className="saving-item">
-                      <span className="saving-label">Daily Savings:</span>
-                      <span className="saving-amount">${pred.moneySpent.toFixed(2)}</span>
+                      <span className="saving-label">Today's Savings:</span>
+                      <span className="saving-amount">${(pred.dailySavingsSinceMidnight || 0).toFixed(2)}</span>
                     </div>
                     <div className="saving-item">
                       <span className="saving-label">Total Saved:</span>

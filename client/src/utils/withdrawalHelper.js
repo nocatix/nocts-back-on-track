@@ -193,6 +193,10 @@ export const calculateDailyPredictions = (addictions) => {
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+  
+  const now = new Date();
+  const midnight = new Date();
+  midnight.setHours(0, 0, 0, 0);
 
   return addictions.map(addiction => {
     const stopDate = new Date(addiction.stopDate);
@@ -202,6 +206,11 @@ export const calculateDailyPredictions = (addictions) => {
     const diffMs = today - stopDate;
     const totalDaysElapsed = diffMs / (1000 * 60 * 60 * 24);
     const daysSoFar = Math.max(1, Math.floor(totalDaysElapsed));
+    
+    // Calculate daily savings since midnight (time from midnight to now)
+    const msSinceMidnight = now - midnight;
+    const daysSinceMidnight = msSinceMidnight / (1000 * 60 * 60 * 24);
+    const dailySavingsSinceMidnight = daysSinceMidnight * (addiction.moneySpentPerDay || 0);
     
     const addictionType = addiction.name.toLowerCase();
     
@@ -228,6 +237,8 @@ export const calculateDailyPredictions = (addictions) => {
 
     // Calculate money saved: (elapsed days) × (money spent per day)
     const totalMoneySaved = totalDaysElapsed * (addiction.moneySpentPerDay || 0);
+    
+    console.log(`${addiction.name}: elapsed=${totalDaysElapsed.toFixed(4)} days, moneyPerDay=${addiction.moneySpentPerDay}, totalSaved=${totalMoneySaved.toFixed(2)}, dailySinceMidnight=${dailySavingsSinceMidnight.toFixed(2)}`);
 
     return {
       _id: addiction._id,
@@ -241,7 +252,8 @@ export const calculateDailyPredictions = (addictions) => {
       tip: tip,
       moneySpent: addiction.moneySpentPerDay,
       frequencyPerDay: addiction.frequencyPerDay,
-      totalMoneySaved: totalMoneySaved
+      totalMoneySaved: totalMoneySaved,
+      dailySavingsSinceMidnight: dailySavingsSinceMidnight
     };
   });
 };
