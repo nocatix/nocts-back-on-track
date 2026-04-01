@@ -228,5 +228,6 @@ export const formatDayCount = (days) => {
   if (days < 30) return `${Math.floor(days / 7)} weeks`;
   if (days === 30) return '1 month';
   if (days < 365) return `${Math.floor(days / 30)} months`;
-  return `${Math.floor(days / 365)} years`;
+  const years = Math.floor(days / 365);
+  return years === 1 ? '1 year' : `${years} years`;
 };

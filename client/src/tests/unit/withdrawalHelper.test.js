@@ -113,7 +113,7 @@ describe('formatDayCount', () => {
   });
 
   it('returns "N years" for 365+ days', () => {
-    expect(formatDayCount(365)).toBe('1 years');
+    expect(formatDayCount(365)).toBe('1 year');
     expect(formatDayCount(730)).toBe('2 years');
   });
 });

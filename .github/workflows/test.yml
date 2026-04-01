@@ -64,3 +64,99 @@ jobs:
           JWT_SECRET: test-secret-for-ci
           IP_WHITELIST: 127.0.0.0/8
         run: npx jest server/tests/integration --forceExit --ci
+
+  client-unit-tests:
+    name: Client Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install dependencies
+        working-directory: client
+        run: npm ci
+
+      - name: Run client unit tests
+        working-directory: client
+        env:
+          CI: true
+        run: npm test -- --watchAll=false --testPathPattern="tests/unit"
+
+  client-integration-tests:
+    name: Client Integration Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install dependencies
+        working-directory: client
+        run: npm ci
+
+      - name: Run client integration tests
+        working-directory: client
+        env:
+          CI: true
+        run: npm test -- --watchAll=false --testPathPattern="tests/integration"
+
+  mobile-unit-tests:
+    name: Mobile Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: mobile/package-lock.json
+
+      - name: Install dependencies
+        working-directory: mobile
+        run: npm ci
+
+      - name: Run mobile unit tests
+        working-directory: mobile
+        run: npm test -- --testPathPattern="tests/unit" --forceExit --ci
+
+  mobile-integration-tests:
+    name: Mobile Integration Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: mobile/package-lock.json
+
+      - name: Install dependencies
+        working-directory: mobile
+        run: npm ci
+
+      - name: Run mobile integration tests
+        working-directory: mobile
+        run: npm test -- --testPathPattern="tests/integration" --forceExit --ci
