@@ -263,10 +263,8 @@ export default function AddictionDetail() {
       elapsedText += `, ${minutes} minute${minutes !== 1 ? 's' : ''}`;
     }
 
-    // Calculate money saved
-    const frequencyPerDay = addiction.frequencyPerDay || 0;
-    const costPerUnit = addiction.moneySpentPerDay ? addiction.moneySpentPerDay / frequencyPerDay : 0;
-    const totalMoneySaved = frequencyPerDay > 0 ? totalDaysElapsed * frequencyPerDay * costPerUnit : 0;
+    // Calculate money saved: (elapsed days) × (money spent per day)
+    const totalMoneySaved = totalDaysElapsed * (addiction.moneySpentPerDay || 0);
 
     const formattedDate = stopDate.toLocaleDateString('en-US', {
       year: 'numeric',

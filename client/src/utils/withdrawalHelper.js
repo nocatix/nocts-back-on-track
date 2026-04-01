@@ -226,10 +226,8 @@ export const calculateDailyPredictions = (addictions) => {
       }
     }
 
-    // Calculate money saved based on elapsed time
-    const frequencyPerDay = addiction.frequencyPerDay || 0;
-    const costPerUnit = frequencyPerDay > 0 ? (addiction.moneySpentPerDay || 0) / frequencyPerDay : 0;
-    const totalMoneySaved = frequencyPerDay > 0 ? totalDaysElapsed * frequencyPerDay * costPerUnit : 0;
+    // Calculate money saved: (elapsed days) × (money spent per day)
+    const totalMoneySaved = totalDaysElapsed * (addiction.moneySpentPerDay || 0);
 
     return {
       _id: addiction._id,
