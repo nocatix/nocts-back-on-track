@@ -1,5 +1,5 @@
 import { getDatabase } from '../db/database';
-import { encrypt, decrypt } from './encryption';
+import { encrypt, decrypt } from '../utils/encryption';
 
 export const localAddictionService = {
   async createAddiction(userId, name, stopDate, frequencyPerDay, moneySpentPerDay, notes) {
