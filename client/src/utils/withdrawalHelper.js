@@ -198,8 +198,11 @@ export const calculateDailyPredictions = (addictions) => {
     const stopDate = new Date(addiction.stopDate);
     stopDate.setHours(0, 0, 0, 0);
     
-    // Calculate days since addiction was started (at least 1 to show day1 withdrawal info)
-    const daysSoFar = Math.max(1, Math.floor((today - stopDate) / (1000 * 60 * 60 * 24)));
+    // Calculate days since addiction was stopped (at least 1 to show day1 withdrawal info)
+    const diffMs = today - stopDate;
+    const totalDaysElapsed = diffMs / (1000 * 60 * 60 * 24);
+    const daysSoFar = Math.max(1, Math.floor(totalDaysElapsed));
+    
     const addictionType = addiction.name.toLowerCase();
     
     // Get the withdrawal timeline for this addiction
@@ -223,6 +226,11 @@ export const calculateDailyPredictions = (addictions) => {
       }
     }
 
+    // Calculate money saved based on elapsed time
+    const frequencyPerDay = addiction.frequencyPerDay || 0;
+    const costPerUnit = frequencyPerDay > 0 ? (addiction.moneySpentPerDay || 0) / frequencyPerDay : 0;
+    const totalMoneySaved = frequencyPerDay > 0 ? totalDaysElapsed * frequencyPerDay * costPerUnit : 0;
+
     return {
       _id: addiction._id,
       name: addiction.name,
@@ -235,7 +243,7 @@ export const calculateDailyPredictions = (addictions) => {
       tip: tip,
       moneySpent: addiction.moneySpentPerDay,
       frequencyPerDay: addiction.frequencyPerDay,
-      totalMoneySaved: addiction.totalMoneySaved
+      totalMoneySaved: totalMoneySaved
     };
   });
 };
