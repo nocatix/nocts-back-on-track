@@ -13,7 +13,6 @@ Your personal addiction recovery companion. A comprehensive Node.js + React appl
 [![Express](https://img.shields.io/badge/Express-4.x-000000?logo=express&logoColor=white)](https://expressjs.com/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![Container Registry Backend](https://img.shields.io/badge/GHCR-Containers-4B0082?logo=github&logoColor=white)](https://github.com/nocatix/nocts-back-on-track/pkgs/container/nocts-back-on-track-backend)
-[![Container Registry Frontend](https://img.shields.io/badge/GHCR-Containers-4B0082?logo=github&logoColor=white)](https://github.com/nocatix/nocts-back-on-track/pkgs/container/nocts-back-on-track-frontend)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
@@ -186,102 +185,12 @@ Your personal addiction recovery companion. A comprehensive Node.js + React appl
 - **State Management**: React Context API for auth, dark mode, and user preferences
 - **Charts/Graphs**: SVG-based data visualization for weight and mood tracking
 
-## 📁 Project Structure
-
-```
-nocts-back-on-track/
-├── server/
-│   ├── config/
-│   │   └── database.js                    # MongoDB connection
-│   ├── middleware/
-│   │   └── auth.js                        # JWT authentication middleware
-│   ├── models/                            # Database schemas
-│   │   ├── User.js
-│   │   ├── Addiction.js
-│   │   ├── Diary.js
-│   │   ├── Mood.js
-│   │   ├── Weight.js
-│   │   ├── Memory.js
-│   │   ├── Achievement.js
-│   │   └── Trophy.js
-│   ├── routes/                            # API endpoints
-│   │   ├── auth.js
-│   │   ├── addictions.js
-│   │   ├── diary.js
-│   │   ├── moods.js
-│   │   ├── weights.js
-│   │   ├── memories.js
-│   │   ├── achievements.js
-│   │   └── trophies.js
-│   ├── utils/
-│   │   └── encryption.js                  # Data encryption/decryption
-│   └── index.js                           # Express server setup
-│
-├── client/
-│   ├── src/
-│   │   ├── pages/                         # React page components
-│   │   │   ├── Auth.js
-│   │   │   ├── MainMenu.js
-│   │   │   ├── AddNewAddiction.js
-│   │   │   ├── AddictionDetail.js
-│   │   │   ├── Diary.js
-│   │   │   ├── Meditation.js
-│   │   │   ├── CravingGame.js
-│   │   │   ├── Mood.js
-│   │   │   ├── Weight.js
-│   │   │   ├── Memories.js
-│   │   │   ├── Achievements.js
-│   │   │   ├── Profile.js
-│   │   │   └── Whyusethis.js
-│   │   ├── components/                    # Reusable components
-│   │   │   ├── Header.js
-│   │   │   ├── Sidebar.js
-│   │   │   ├── Footer.js
-│   │   │   ├── AddictionCard.js
-│   │   │   ├── WithdrawalTimeline.js
-│   │   │   └── AchievementNotification.js
-│   │   ├── context/                       # React Context providers
-│   │   │   ├── AuthContext.js
-│   │   │   └── DarkModeContext.js
-│   │   ├── data/                          # Static data
-│   │   │   ├── addictions/                # Per-addiction configs with withdrawal timelines
-│   │   │   │   ├── index.js
-│   │   │   │   ├── alcohol.js
-│   │   │   │   ├── cannabis.js
-│   │   │   │   └── ... (15 total)
-│   │   │   ├── cravingGameWords.js        # 550+ 5-letter words
-│   │   │   └── motivationalQuotes.js      # 40+ daily inspirational quotes
-│   │   ├── utils/                         # Utilities
-│   │   │   ├── withdrawalHelper.js        # Addiction-specific helpers
-│   │   │   └── cookieHelper.js            # Cookie persistence
-│   │   ├── App.js                         # Main app component
-│   │   ├── App.css
-│   │   └── index.js
-│   ├── public/
-│   │   ├── index.html
-│   │   ├── logo.png                       # App logo
-│   │   └── cravingWords.txt
-│   └── package.json
-│
-├── .env.example
-├── docker-compose.yml               # Development with local builds
-├── docker-compose-ghcr.yml          # Production with GHCR images
-├── Dockerfile.server
-├── Dockerfile.client
-├── .github/workflows/publish-ghcr.yml
-├── package.json
-├── version.txt
-├── README.md
-└── SECURITY.md
-```
-
 ## 🚀 Getting Started
 
 ### Prerequisites
 - **Node.js** v14+ ([Download](https://nodejs.org))
 - **npm** (comes with Node.js)
 - **MongoDB** v4.4+ (local or [Atlas](https://www.mongodb.com/cloud/atlas))
-- **distrobox** (on Fedora systems) for Node.js environment
 
 ### Installation Steps
 
@@ -310,9 +219,6 @@ CLIENT_URL=http://127.0.0.1:3000
 
 #### 3. Install Dependencies
 ```bash
-# Enter distrobox on Fedora
-distrobox enter
-
 # Install all dependencies
 npm install
 ```
@@ -385,56 +291,6 @@ volumes:
 
 **Available Versions:** Check [GHCR Backend](https://github.com/nocatix/nocts-back-on-track/pkgs/container/nocts-back-on-track-backend) and [GHCR Frontend](https://github.com/nocatix/nocts-back-on-track/pkgs/container/nocts-back-on-track-frontend)
 
-## 📡 API Endpoints
-
-### Authentication
-- `POST /api/auth/register` - Create new account
-- `POST /api/auth/login` - Login with credentials
-- `GET /api/auth/me` - Get current user profile
-- `PUT /api/auth/profile` - Update user name
-- `PUT /api/auth/unit-preference` - Set measurement units
-- `PUT /api/auth/change-password` - Change password
-- `DELETE /api/auth/profile` - Delete account
-
-### Addictions
-- `GET /api/addictions` - List all addictions
-- `GET /api/addictions/:id` - Get addiction details
-- `POST /api/addictions` - Create new addiction
-- `PUT /api/addictions/:id` - Update addiction
-- `DELETE /api/addictions/:id` - Delete addiction
-
-### Diary
-- `POST /api/diary` - Create diary entry
-- `GET /api/diary` - Get all entries
-- `GET /api/diary/:date` - Get entry by date
-- `PUT /api/diary/:id` - Update entry
-- `DELETE /api/diary/:id` - Delete entry
-
-### Mood Tracking
-- `POST /api/moods` - Log mood
-- `GET /api/moods` - Get all moods
-- `GET /api/moods/month/:year/:month` - Get monthly moods
-- `DELETE /api/moods/:id` - Delete mood entry
-
-### Weight Tracking
-- `POST /api/weights` - Log weight
-- `GET /api/weights` - Get all weights
-- `GET /api/weights/month/:year/:month` - Get monthly weights
-- `DELETE /api/weights/:id` - Delete weight entry
-
-### Memories
-- `POST /api/memories` - Save memory (photo/message/both)
-- `GET /api/memories` - Get all memories
-- `GET /api/memories/random` - Get random memory (for craving support)
-- `DELETE /api/memories/:id` - Delete memory
-
-### Achievements & Trophies
-- `GET /api/achievements` - Get all achievements
-- `POST /api/achievements/check` - Check for new achievements
-- `GET /api/trophies` - Get all trophies
-- `POST /api/trophies/check` - Check for new trophies
-- `GET /api/trophies/progress` - Get trophy progress
-
 ## 🔐 Security Features
 
 - ✅ **AES-256-GCM Encryption** for sensitive data at rest
@@ -483,20 +339,7 @@ Visual + emotional anchors provide immediate motivation when willpower is lowest
 
 ## 🤝 Contributing
 
-Contributions welcome! Areas for improvement:
-- Additional addiction types and timelines
-- Social features for peer support
-- Wearable device integration
-- Push notifications
-- Multi-language support
-- Mobile app (React Native)
-- Create mobile app version
-- Add support for group challenges
-- Implement AI-powered motivational messages
-- Add community forum functionality
-- Create relapse warning system with support resources
-
-Feel free to fork this project and submit pull requests for any improvements.
+Contributions welcome! Feel free to fork this project and submit pull requests for any improvements.
 
 ## 📄 License
 
