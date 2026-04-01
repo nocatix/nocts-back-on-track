@@ -191,19 +191,15 @@ export const calculateDailyPredictions = (addictions) => {
     return [];
   }
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  
   const now = new Date();
   const midnight = new Date();
   midnight.setHours(0, 0, 0, 0);
 
   return addictions.map(addiction => {
     const stopDate = new Date(addiction.stopDate);
-    stopDate.setHours(0, 0, 0, 0);
     
-    // Calculate days since addiction was stopped (at least 1 to show day1 withdrawal info)
-    const diffMs = today - stopDate;
+    // Calculate days since addiction was stopped with exact time precision
+    const diffMs = now - stopDate;
     const totalDaysElapsed = diffMs / (1000 * 60 * 60 * 24);
     const daysSoFar = Math.max(1, Math.floor(totalDaysElapsed));
     
