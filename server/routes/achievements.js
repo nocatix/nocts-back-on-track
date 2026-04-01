@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const auth = require('../middleware/auth');
 const Achievement = require('../models/Achievement');
 const Addiction = require('../models/Addiction');
@@ -38,7 +39,7 @@ router.get('/', auth, asyncHandler(async (req, res) => {
   
   console.log(`[Get Achievements] Found ${achievements.length} achievements:`);
   achievements.forEach(a => {
-    console.log(`  - ${a.milestoneDays}d: ${a.name} (addictionId: ${a.addictionId})`);
+    console.log(`  - ${a.milestoneDays}d: ${a.name} (addictionId: ${a.addictionId?._id} type: ${typeof a.addictionId?._id}) (raw: ${JSON.stringify(a.addictionId)})`);
   });
   
   // Deduplicate achievements (in case of duplicates from before unique index was added)
@@ -117,13 +118,14 @@ router.post('/check/:addictionId', auth, asyncHandler(async (req, res) => {
   if (invalidMilestones.length > 0) {
     const deleteResult = await Achievement.deleteMany({
       userId: req.user.userId,
-      addictionId: req.params.addictionId,
+      addictionId: new mongoose.Types.ObjectId(req.params.addictionId),
       milestoneDays: { $in: invalidMilestones }
     });
     console.log(`[Achievement Check] Deleted ${deleteResult.deletedCount} invalid achievements`);
   }
 
   const newAchievements = [];
+  const addictionObjectId = new mongoose.Types.ObjectId(req.params.addictionId);
 
   // Check each milestone and create/update atomically
   for (const [days, milestone] of Object.entries(MILESTONES)) {
@@ -134,7 +136,7 @@ router.post('/check/:addictionId', auth, asyncHandler(async (req, res) => {
         {
           userId: req.user.userId,
           milestoneDays: daysNum,
-          addictionId: req.params.addictionId
+          addictionId: addictionObjectId
         },
         {
           userId: req.user.userId,
@@ -142,7 +144,7 @@ router.post('/check/:addictionId', auth, asyncHandler(async (req, res) => {
           description: milestone.description,
           icon: milestone.icon,
           milestoneDays: daysNum,
-          addictionId: req.params.addictionId,
+          addictionId: addictionObjectId,
           unreadAt: new Date()
         },
         { upsert: true, new: true }

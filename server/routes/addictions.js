@@ -5,6 +5,7 @@
  */
 
 const express = require('express');
+const mongoose = require('mongoose');
 const auth = require('../middleware/auth');
 const Addiction = require('../models/Addiction');
 const Achievement = require('../models/Achievement');
@@ -163,13 +164,14 @@ router.put('/:id', auth, async (req, res) => {
     if (invalidMilestones.length > 0) {
       const deleteResult = await Achievement.deleteMany({
         userId: req.user.userId,
-        addictionId: req.params.id,
+        addictionId: new mongoose.Types.ObjectId(req.params.id),
         milestoneDays: { $in: invalidMilestones }
       });
       console.log(`[Edit Addiction] Deleted ${deleteResult.deletedCount} invalid achievements`);
     }
     
     // Check each milestone and update achievements
+    const addictionObjectId = new mongoose.Types.ObjectId(req.params.id);
     for (const [days, milestone] of Object.entries(MILESTONES)) {
       const daysNum = parseInt(days);
       if (daysStopped >= daysNum) {
@@ -178,7 +180,7 @@ router.put('/:id', auth, async (req, res) => {
           {
             userId: req.user.userId,
             milestoneDays: daysNum,
-            addictionId: req.params.id
+            addictionId: addictionObjectId
           },
           {
             userId: req.user.userId,
@@ -186,7 +188,7 @@ router.put('/:id', auth, async (req, res) => {
             description: milestone.description,
             icon: milestone.icon,
             milestoneDays: daysNum,
-            addictionId: req.params.id,
+            addictionId: addictionObjectId,
             unreadAt: new Date()
           },
           { upsert: true, new: true }
