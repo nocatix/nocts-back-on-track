@@ -234,7 +234,10 @@ export const calculateDailyPredictions = (addictions) => {
     // Calculate money saved: (elapsed days) × (money spent per day)
     const totalMoneySaved = totalDaysElapsed * (addiction.moneySpentPerDay || 0);
     
-    console.log(`${addiction.name}: elapsed=${totalDaysElapsed.toFixed(4)} days, moneyPerDay=${addiction.moneySpentPerDay}, totalSaved=${totalMoneySaved.toFixed(2)}, dailySinceMidnight=${dailySavingsSinceMidnight.toFixed(2)}`);
+    // Cap today's savings to not exceed total saved (can happen on first day if stopped recently)
+    const cappedDailySavings = Math.min(dailySavingsSinceMidnight, totalMoneySaved);
+    
+    console.log(`${addiction.name}: elapsed=${totalDaysElapsed.toFixed(4)} days, moneyPerDay=${addiction.moneySpentPerDay}, totalSaved=${totalMoneySaved.toFixed(2)}, dailySinceMidnight=${dailySavingsSinceMidnight.toFixed(2)}, cappedDaily=${cappedDailySavings.toFixed(2)}`);
 
     return {
       _id: addiction._id,
@@ -249,7 +252,7 @@ export const calculateDailyPredictions = (addictions) => {
       moneySpent: addiction.moneySpentPerDay,
       frequencyPerDay: addiction.frequencyPerDay,
       totalMoneySaved: totalMoneySaved,
-      dailySavingsSinceMidnight: dailySavingsSinceMidnight
+      dailySavingsSinceMidnight: cappedDailySavings
     };
   });
 };
