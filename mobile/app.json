@@ -25,6 +25,12 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.noctstracker.app"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b52c30a2-5cee-48b9-80f5-f01f0507450f"
+      }
+    },
+    "owner": "nocatix"
   }
 }
