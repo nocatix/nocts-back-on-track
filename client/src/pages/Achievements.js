@@ -189,8 +189,7 @@ const Achievements = () => {
       {trophies.length > 0 && (
         <div className="trophies-section">
           <h2>🏆 Trophies</h2>
-          <p className="section-description">Your account-wide milestones across all addictions</p>
-          
+         
           {/* Daily Trophies */}
           {trophies.filter(t => t.type === 'daily').length > 0 && (
             <div className="trophy-category">
