@@ -32,7 +32,9 @@ router.get('/', auth, asyncHandler(async (req, res) => {
     return res.json([]);
   }
 
-  const achievements = await Achievement.find({ userId: req.user.userId }).sort({ unreadAt: -1 });
+  const achievements = await Achievement.find({ userId: req.user.userId })
+    .populate('addictionId', 'name')
+    .sort({ unreadAt: -1 });
   res.json(achievements);
 }));
 
@@ -44,7 +46,9 @@ router.get('/unread', auth, asyncHandler(async (req, res) => {
     return res.json([]);
   }
 
-  const achievements = await Achievement.find({ userId: req.user.userId, readAt: null }).sort({ unreadAt: -1 });
+  const achievements = await Achievement.find({ userId: req.user.userId, readAt: null })
+    .populate('addictionId', 'name')
+    .sort({ unreadAt: -1 });
   res.json(achievements);
 }));
 

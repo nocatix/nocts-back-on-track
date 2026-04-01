@@ -203,6 +203,7 @@ const Achievements = () => {
       {trophies.length > 0 && (
         <div className="trophies-section">
           <h2>🏆 Trophies</h2>
+          <p className="section-description">Your account-wide milestones across all addictions</p>
           
           {/* Daily Trophies */}
           {trophies.filter(t => t.type === 'daily').length > 0 && (
@@ -285,6 +286,7 @@ const Achievements = () => {
       {/* Achievements Section */}
       <div className="achievements-section">
         <h2>⭐ Achievements</h2>
+        <p className="section-description">Your milestone achievements for each addiction</p>
         
         {achievements.length === 0 ? (
           <div className="achievements-empty">
