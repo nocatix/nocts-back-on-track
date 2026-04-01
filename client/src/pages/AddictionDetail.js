@@ -211,6 +211,15 @@ export default function AddictionDetail() {
       
       setAddiction(response.data);
       setIsEditing(false);
+      
+      // Force refetch of achievements/trophies after edit
+      try {
+        await apiClient.post(`/api/achievements/check/${id}`, {});
+        console.log('Achievements rechecked after addiction edit');
+      } catch (checkErr) {
+        console.error('Error rechecking achievements:', checkErr);
+      }
+      
       setMessage('Addiction updated successfully');
       setTimeout(() => setMessage(''), 3000);
     } catch (err) {

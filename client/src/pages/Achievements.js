@@ -110,6 +110,60 @@ const Achievements = () => {
     }
   }, [token]);
 
+  // Refetch achievements every 5 seconds to stay in sync with backend
+  useEffect(() => {
+    if (!token) return;
+
+    const interval = setInterval(async () => {
+      try {
+        const API_BASE_URL = 'http://localhost:5000';
+        
+        // Fetch achievements
+        const achievementsResponse = await fetch(`${API_BASE_URL}/api/achievements`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (achievementsResponse.ok) {
+          const achievementsData = await achievementsResponse.json();
+          setAchievements(achievementsData);
+        }
+
+        // Fetch trophies
+        const trophiesResponse = await fetch(`${API_BASE_URL}/api/trophies`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (trophiesResponse.ok) {
+          const trophiesData = await trophiesResponse.json();
+          setTrophies(trophiesData);
+        }
+
+        // Fetch trophy progress
+        const progressResponse = await fetch(`${API_BASE_URL}/api/trophies/progress`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (progressResponse.ok) {
+          const progressData = await progressResponse.json();
+          setTrophyProgress(progressData);
+        }
+      } catch (err) {
+        console.error('Error refetching achievements:', err);
+      }
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [token]);
+
   if (loading) {
     return <div className="achievements-loading">Loading achievements...</div>;
   }
