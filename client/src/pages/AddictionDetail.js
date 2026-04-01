@@ -389,9 +389,6 @@ export default function AddictionDetail() {
               <p className="elapsed-time">
                 <strong>{elapsedTime.elapsed}</strong> since you stopped
               </p>
-              <p className="money-saved-highlight">
-                💰 You've saved: <strong>${elapsedTime.totalMoneySaved.toFixed(2)}</strong>
-              </p>
             </div>
           </div>
         </div>

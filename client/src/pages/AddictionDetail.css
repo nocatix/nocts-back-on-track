@@ -218,20 +218,6 @@ html.dark .stop-date-card {
   word-break: break-word;
 }
 
-.money-saved-highlight {
-  margin: 12px 0 0 0;
-  font-size: 16px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
-  font-weight: 600;
-}
-
-.money-saved-highlight strong {
-  font-size: 20px;
-  color: #FFD700;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
 .stats-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
