@@ -32,9 +32,21 @@ router.get('/', auth, asyncHandler(async (req, res) => {
     return res.json([]);
   }
 
-  const achievements = await Achievement.find({ userId: req.user.userId })
+  let achievements = await Achievement.find({ userId: req.user.userId })
     .populate('addictionId', 'name')
     .sort({ unreadAt: -1 });
+  
+  // Deduplicate achievements (in case of duplicates from before unique index was added)
+  const seen = new Set();
+  achievements = achievements.filter(achievement => {
+    const key = `${achievement.milestoneDays}-${achievement.addictionId?._id || 'null'}`;
+    if (seen.has(key)) {
+      return false; // Filter out duplicate
+    }
+    seen.add(key);
+    return true;
+  });
+  
   res.json(achievements);
 }));
 
@@ -46,9 +58,21 @@ router.get('/unread', auth, asyncHandler(async (req, res) => {
     return res.json([]);
   }
 
-  const achievements = await Achievement.find({ userId: req.user.userId, readAt: null })
+  let achievements = await Achievement.find({ userId: req.user.userId, readAt: null })
     .populate('addictionId', 'name')
     .sort({ unreadAt: -1 });
+  
+  // Deduplicate achievements (in case of duplicates from before unique index was added)
+  const seen = new Set();
+  achievements = achievements.filter(achievement => {
+    const key = `${achievement.milestoneDays}-${achievement.addictionId?._id || 'null'}`;
+    if (seen.has(key)) {
+      return false; // Filter out duplicate
+    }
+    seen.add(key);
+    return true;
+  });
+  
   res.json(achievements);
 }));
 
@@ -79,28 +103,33 @@ router.post('/check/:addictionId', auth, asyncHandler(async (req, res) => {
   const daysStopped = addiction.getDaysStopped();
   const newAchievements = [];
 
-  // Check each milestone
+  // Check each milestone and create/update atomically
   for (const [days, milestone] of Object.entries(MILESTONES)) {
     const daysNum = parseInt(days);
     if (daysStopped >= daysNum) {
-      // Check if achievement already exists
-      const existingAchievement = await Achievement.findOne({
-        userId: req.user.userId,
-        milestoneDays: daysNum,
-        addictionId: req.params.addictionId
-      });
-
-      if (!existingAchievement) {
-        const newAchievement = new Achievement({
+      // Use findOneAndUpdate with upsert to prevent duplicates
+      const achievement = await Achievement.findOneAndUpdate(
+        {
+          userId: req.user.userId,
+          milestoneDays: daysNum,
+          addictionId: req.params.addictionId
+        },
+        {
           userId: req.user.userId,
           name: milestone.name,
           description: milestone.description,
           icon: milestone.icon,
           milestoneDays: daysNum,
-          addictionId: req.params.addictionId
-        });
-        await newAchievement.save();
-        newAchievements.push(newAchievement);
+          addictionId: req.params.addictionId,
+          unreadAt: new Date()
+        },
+        { upsert: true, new: true }
+      );
+      
+      // Only add to newAchievements if it was just created (createdAt is very recent)
+      const isNewlyCreated = Date.now() - new Date(achievement.createdAt).getTime() < 1000;
+      if (isNewlyCreated) {
+        newAchievements.push(achievement);
       }
     }
   }

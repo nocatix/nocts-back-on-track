@@ -40,4 +40,7 @@ const achievementSchema = new mongoose.Schema({
   }
 });
 
+// Prevent duplicate achievements for the same milestone and addiction
+achievementSchema.index({ userId: 1, milestoneDays: 1, addictionId: 1 }, { unique: true });
+
 module.exports = mongoose.model('Achievement', achievementSchema);
