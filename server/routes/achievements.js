@@ -101,6 +101,19 @@ router.post('/check/:addictionId', auth, asyncHandler(async (req, res) => {
   }
 
   const daysStopped = addiction.getDaysStopped();
+  
+  // First, remove any achievements for milestones not yet reached
+  const allMilestoneDays = Object.keys(MILESTONES).map(Number);
+  const invalidMilestones = allMilestoneDays.filter(days => days > daysStopped);
+  
+  if (invalidMilestones.length > 0) {
+    await Achievement.deleteMany({
+      userId: req.user.userId,
+      addictionId: req.params.addictionId,
+      milestoneDays: { $in: invalidMilestones }
+    });
+  }
+
   const newAchievements = [];
 
   // Check each milestone and create/update atomically

@@ -64,13 +64,13 @@ addictionSchema.post('find', function(docs) {
 
 // Calculate total money saved
 addictionSchema.methods.getTotalMoneySaved = function() {
-  const daysStopped = Math.floor((Date.now() - this.stopDate) / (1000 * 60 * 60 * 24)) - 1;
+  const daysStopped = Math.floor((Date.now() - this.stopDate) / (1000 * 60 * 60 * 24));
   return daysStopped * this.moneySpentPerDay;
 };
 
 // Calculate days since stopping
 addictionSchema.methods.getDaysStopped = function() {
-  return Math.floor((Date.now() - this.stopDate) / (1000 * 60 * 60 * 24)) - 1;
+  return Math.floor((Date.now() - this.stopDate) / (1000 * 60 * 60 * 24));
 };
 
 module.exports = mongoose.model('Addiction', addictionSchema);
