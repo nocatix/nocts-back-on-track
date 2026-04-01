@@ -201,7 +201,7 @@ export const calculateDailyPredictions = (addictions) => {
     // Calculate days since addiction was stopped with exact time precision
     const diffMs = now - stopDate;
     const totalDaysElapsed = diffMs / (1000 * 60 * 60 * 24);
-    const daysSoFar = Math.max(1, Math.floor(totalDaysElapsed));
+    const daysSoFar = Math.floor(totalDaysElapsed);
     
     // Calculate daily savings since midnight (time from midnight to now)
     const msSinceMidnight = now - midnight;
