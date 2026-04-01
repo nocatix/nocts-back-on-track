@@ -285,52 +285,52 @@ const Achievements = () => {
       {/* Achievements Section */}
       <div className="achievements-section">
         <h2>⭐ Achievements</h2>
-      
-      {achievements.length === 0 ? (
-        <div className="achievements-empty">
-          <p>No achievements yet. Keep going and you'll unlock milestones!</p>
-        </div>
-      ) : (
-        <div className="achievements-list">
-          {achievements.map((achievement) => (
-            <div key={achievement._id} className="achievement-card">
-              <div className="achievement-header">
-                <span className="achievement-icon">{achievement.icon}</span>
-                <h3 className="achievement-title">{achievement.name}</h3>
-              </div>
-              <p className="achievement-description">{achievement.description}</p>
-              <div className="achievement-details">
-                <span className="achievement-date">
-                  Unlocked on: {formatDate(achievement.createdAt)}
-                </span>
-                {achievement.addictionId && (
-                  <span className="achievement-addiction">
-                    For: {achievement.addictionId.name}
+        
+        {achievements.length === 0 ? (
+          <div className="achievements-empty">
+            <p>No achievements yet. Keep going and you'll unlock milestones!</p>
+          </div>
+        ) : (
+          <div className="achievements-list">
+            {achievements.map((achievement) => (
+              <div key={achievement._id} className="achievement-card">
+                <div className="achievement-header">
+                  <span className="achievement-icon">{achievement.icon}</span>
+                  <h3 className="achievement-title">{achievement.name}</h3>
+                </div>
+                <p className="achievement-description">{achievement.description}</p>
+                <div className="achievement-details">
+                  <span className="achievement-date">
+                    Unlocked on: {formatDate(achievement.createdAt)}
                   </span>
+                  {achievement.addictionId && (
+                    <span className="achievement-addiction">
+                      For: {achievement.addictionId.name}
+                    </span>
+                  )}
+                </div>
+                
+                {/* Progress bar for milestone achievements */}
+                {achievement.milestoneDays && (
+                  <div className="achievement-progress">
+                    <div className="progress-label">
+                      Progress to next milestone
+                    </div>
+                    <div className="progress-bar-container">
+                      <div 
+                        className="progress-bar"
+                        style={{ width: `${getProgressPercentage(achievement.milestoneDays)}%` }}
+                      ></div>
+                    </div>
+                    <div className="progress-text">
+                      {achievement.milestoneDays} days
+                    </div>
+                  </div>
                 )}
               </div>
-              
-              {/* Progress bar for milestone achievements */}
-              {achievement.milestoneDays && (
-                <div className="achievement-progress">
-                  <div className="progress-label">
-                    Progress to next milestone
-                  </div>
-                  <div className="progress-bar-container">
-                    <div 
-                      className="progress-bar"
-                      style={{ width: `${getProgressPercentage(achievement.milestoneDays)}%` }}
-                    ></div>
-                  </div>
-                  <div className="progress-text">
-                    {achievement.milestoneDays} days
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
