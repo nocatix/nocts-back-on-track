@@ -70,7 +70,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: client
-        run: npm ci
+        run: npm install
 
       - name: Run client unit tests
         working-directory: client
@@ -95,7 +95,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: client
-        run: npm ci
+        run: npm install
 
       - name: Run client integration tests
         working-directory: client

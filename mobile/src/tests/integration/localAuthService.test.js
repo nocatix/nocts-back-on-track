@@ -11,6 +11,19 @@ jest.mock('../../db/database', () => ({
   getDatabase: jest.fn(() => mockDb),
 }));
 
+// Mock native modules that expo-secure-store and async-storage depend on so that
+// expo-modules-core (which uses ESM syntax) is never loaded in the Jest environment.
+jest.mock('expo-secure-store', () => ({
+  setItemAsync: jest.fn().mockResolvedValue(undefined),
+  getItemAsync: jest.fn().mockResolvedValue(null),
+  deleteItemAsync: jest.fn().mockResolvedValue(undefined),
+}));
+jest.mock('@react-native-async-storage/async-storage', () => ({
+  setItem: jest.fn().mockResolvedValue(undefined),
+  getItem: jest.fn().mockResolvedValue(null),
+  removeItem: jest.fn().mockResolvedValue(undefined),
+}));
+
 // Mock jwtHelper (imported as './jwtHelper' relative to localAuthService).
 jest.mock('../../services/jwtHelper', () => ({
   createToken: jest.fn(() => 'mock-jwt-token'),
