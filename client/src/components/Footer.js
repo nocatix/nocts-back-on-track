@@ -7,6 +7,7 @@ import './Footer.css';
 export default function Footer() {
   const { isDarkMode } = useContext(DarkModeContext);
   const currentYear = new Date().getFullYear();
+  const VERSION = '1.1.25';
 
   return (
     <footer className={`footer ${isDarkMode ? 'dark' : ''}`}>
@@ -21,7 +22,7 @@ export default function Footer() {
 
       <div className="footer-content">
         <div className="footer-section">
-          <h4>noct's Back on Track</h4>
+          <h4>noct's Back on Track <span className="version-badge">v{VERSION}</span></h4>
           <p>Your personal addiction recovery companion</p>
         </div>
         

@@ -10,6 +10,18 @@ export default function Meditation() {
     const saved = getCookie('showMeditationTips');
     return saved !== null ? saved : true;
   });
+  const [showBreathingGuide, setShowBreathingGuide] = React.useState(false);
+  const [breathingPhase, setBreathingPhase] = React.useState('inhale');
+  const [breathDuration, setBreathDuration] = React.useState(4);
+  const [isBreathing, setIsBreathing] = React.useState(false);
+  const [sessionMinutes, setSessionMinutes] = React.useState(5);
+  const [timerActive, setTimerActive] = React.useState(false);
+  const [timeLeft, setTimeLeft] = React.useState(300);
+  const [sessions, setSessions] = React.useState(() => {
+    const saved = getCookie('meditationSessions');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [selectedTool, setSelectedTool] = React.useState(null);
 
   const meditations = [
     {
@@ -66,6 +78,82 @@ export default function Meditation() {
     'Track your progress. Notice how cravings become easier to handle.'
   ];
 
+  // Breathing guide animation
+  React.useEffect(() => {
+    if (!isBreathing) return;
+
+    let phase = 'inhale';
+    let duration = breathDuration;
+    let elapsed = 0;
+
+    const interval = setInterval(() => {
+      elapsed += 0.1;
+
+      if (phase === 'inhale' && elapsed >= duration) {
+        phase = 'hold';
+        duration = 4;
+        elapsed = 0;
+        setBreathingPhase('hold');
+      } else if (phase === 'hold' && elapsed >= duration) {
+        phase = 'exhale';
+        duration = breathDuration;
+        elapsed = 0;
+        setBreathingPhase('exhale');
+      } else if (phase === 'exhale' && elapsed >= duration) {
+        phase = 'inhale';
+        duration = breathDuration;
+        elapsed = 0;
+        setBreathingPhase('inhale');
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [isBreathing, breathDuration]);
+
+  // Timer logic
+  React.useEffect(() => {
+    if (!timerActive) return;
+
+    const interval = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev <= 1) {
+          setTimerActive(false);
+          completeSession();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timerActive]);
+
+  const completeSession = () => {
+    const newSession = {
+      date: new Date().toLocaleDateString(),
+      duration: sessionMinutes,
+      type: selectedMeditation?.title || 'Quick Session'
+    };
+    setSessions([...sessions, newSession]);
+    setCookie('meditationSessions', JSON.stringify([...sessions, newSession]), 365);
+  };
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const startTimer = () => {
+    setTimeLeft(sessionMinutes * 60);
+    setTimerActive(true);
+  };
+
+  const resetTimer = () => {
+    setTimerActive(false);
+    setTimeLeft(sessionMinutes * 60);
+  };
+
   // Save meditation tips state to cookie
   React.useEffect(() => {
     setCookie('showMeditationTips', showMeditationTips, 365);
@@ -80,6 +168,60 @@ export default function Meditation() {
           </button>
           <h2>{selectedMeditation.title}</h2>
           <p className="duration">Duration: {selectedMeditation.duration}</p>
+
+          <div className="meditation-tools">
+            <div className="timer-section">
+              <h3>⏱️ Session Timer</h3>
+              <div className="timer-display">{formatTime(timeLeft)}</div>
+              <div className="timer-controls">
+                <input
+                  type="range"
+                  min="1"
+                  max="30"
+                  value={sessionMinutes}
+                  onChange={(e) => {
+                    setSessionMinutes(parseInt(e.target.value));
+                    setTimeLeft(parseInt(e.target.value) * 60);
+                  }}
+                  disabled={timerActive}
+                  className="timer-slider"
+                />
+                <div className="timer-buttons">
+                  <button onClick={startTimer} disabled={timerActive} className="btn btn-primary">Start</button>
+                  <button onClick={() => setTimerActive(!timerActive)} className="btn btn-secondary">
+                    {timerActive ? 'Pause' : 'Resume'}
+                  </button>
+                  <button onClick={resetTimer} className="btn btn-outline">Reset</button>
+                </div>
+                <p className="timer-label">{sessionMinutes} minutes</p>
+              </div>
+            </div>
+
+            <div className="breathing-section">
+              <h3>🫁 Guided Breathing</h3>
+              <div className={`breathing-circle ${isBreathing ? 'active' : ''} ${breathingPhase}`}></div>
+              <p className="breathing-instruction">{breathingPhase.toUpperCase()}</p>
+              <div className="breathing-controls">
+                <label>Breathing pace: {breathDuration}s</label>
+                <input
+                  type="range"
+                  min="3"
+                  max="6"
+                  value={breathDuration}
+                  onChange={(e) => setBreathDuration(parseInt(e.target.value))}
+                  disabled={isBreathing}
+                  className="breathing-slider"
+                />
+                <button
+                  type="button"
+                  onClick={() => setIsBreathing(!isBreathing)}
+                  className={isBreathing ? 'btn-breathing-stop' : 'btn btn-primary'}
+                >
+                  {isBreathing ? '⏹ Stop Breathing Guide' : '▶ Start Breathing Guide'}
+                </button>
+              </div>
+            </div>
+          </div>
           
           <div className="music-player">
             <h3>🎵 Meditation Music</h3>
@@ -97,9 +239,81 @@ export default function Meditation() {
             <h3>Guide:</h3>
             <p>{selectedMeditation.guide}</p>
           </div>
+
+          <div className="posture-tips">
+            <h3>🧘 Posture Tips</h3>
+            <ul>
+              <li><strong>Spine:</strong> Keep it straight but not rigid - imagine a string from your tail to the top of your head</li>
+              <li><strong>Shoulders:</strong> Relax down and back, away from your ears</li>
+              <li><strong>Hands:</strong> Rest on your knees or lap, palms up or down as comfortable</li>
+              <li><strong>Chin:</strong> Tuck slightly, eyes looking down naturally (open or closed both fine)</li>
+              <li><strong>Feet:</strong> If sitting, plant firmly on ground. If lying down, let them naturally fall outward</li>
+            </ul>
+          </div>
         </div>
       ) : (
         <>
+          <div className="quick-tools">
+            <div className="quick-tool-card urgent">
+              <h3>🆘 Emergency Calm</h3>
+              <p>Instant relief for intense cravings</p>
+              <button type="button" className="btn-emergency-calm" onClick={() => {
+                setSessionMinutes(3);
+                setTimeLeft(180);
+                setTimerActive(true);
+                setIsBreathing(true);
+                setShowBreathingGuide(true);
+              }}>3-Min Emergency Calm</button>
+            </div>
+
+            <div className="quick-tool-card breathing">
+              <h3>🫁 Quick Breathing</h3>
+              <p>Reset your nervous system</p>
+              <button className="btn btn-primary" onClick={() => setShowBreathingGuide(!showBreathingGuide)}>
+                {showBreathingGuide ? 'Hide Breathing Guide' : 'Show Breathing Guide'}
+              </button>
+            </div>
+
+            <div className="quick-tool-card stats">
+              <h3>📈 Your Progress</h3>
+              <div className="stats-display">
+                <p><strong>{sessions.length}</strong> sessions completed</p>
+                <p><strong>{sessions.reduce((sum, s) => sum + s.duration, 0)}</strong> mins total</p>
+              </div>
+            </div>
+          </div>
+
+          {showBreathingGuide && (
+            <div className="breathing-guide-full">
+              <h2>Guided Breathing Exercise</h2>
+              <div className={`breathing-circle large ${isBreathing ? 'active' : ''} ${breathingPhase}`}></div>
+              <p className="breathing-instruction large">{breathingPhase.toUpperCase()}</p>
+              <div className="breathing-fullpage-controls">
+                <label>Breathing pace: {breathDuration}s</label>
+                <input
+                  type="range"
+                  min="3"
+                  max="6"
+                  value={breathDuration}
+                  onChange={(e) => setBreathDuration(parseInt(e.target.value))}
+                  disabled={isBreathing}
+                  className="breathing-slider"
+                />
+                <button
+                  type="button"
+                  onClick={() => setIsBreathing(!isBreathing)}
+                  className={isBreathing ? 'btn-breathing-stop-large' : 'btn btn-large btn-primary'}
+                >
+                  {isBreathing ? '⏹ Stop' : '▶ Start'} Breathing Guide
+                </button>
+              </div>
+              <div className="breathing-tips">
+                <p>👉 Breathe in slowly through your nose, hold gently, then exhale through your mouth</p>
+                <p>💡 This calms your nervous system and reduces cravings naturally</p>
+              </div>
+            </div>
+          )}
+
           <div className="meditation-grid">
             {meditations.map(med => (
               <div
@@ -130,6 +344,21 @@ export default function Meditation() {
               </a>
             </div>
           </div>
+
+          {sessions.length > 0 && (
+            <div className="sessions-history">
+              <h2>📝 Recent Sessions</h2>
+              <div className="sessions-list">
+                {sessions.slice(-5).reverse().map((session, idx) => (
+                  <div key={idx} className="session-item">
+                    <span className="session-date">{session.date}</span>
+                    <span className="session-type">{session.type}</span>
+                    <span className="session-duration">{session.duration} min</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="tips-section">
             <div className="tips-header">
