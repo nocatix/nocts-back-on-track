@@ -192,12 +192,12 @@ export default function MainMenu() {
                 {pred.moneySpent > 0 && (
                   <div className="savings-summary">
                     <div className="saving-item">
-                      <span className="saving-label">Today's Savings:</span>
+                      <span className="saving-label">Daily Savings:</span>
                       <span className="saving-amount">${pred.moneySpent.toFixed(2)}</span>
                     </div>
                     <div className="saving-item">
                       <span className="saving-label">Total Saved:</span>
-                      <span className="saving-amount">${(pred.moneySpent * pred.daysSoFar).toFixed(2)}</span>
+                      <span className="saving-amount">${(pred.totalMoneySaved || 0).toFixed(2)}</span>
                     </div>
                   </div>
                 )}
