@@ -2,7 +2,6 @@
   "build": {
     "production": {
       "node": "18.18.0",
-      "npm": "9.6.7",
       "env": {
         "EXPO_DEBUG": "0"
       },
@@ -13,7 +12,6 @@
     },
     "development": {
       "node": "18.18.0",
-      "npm": "9.6.7",
       "android": {
         "image": "latest",
         "buildType": "apk"
@@ -23,7 +21,7 @@
   "submit": {
     "production": {
       "android": {
-        "serviceAccount": "**REQUIRED**",
+        "serviceAccountKeyPath": "**REQUIRED**",
         "track": "internal"
       }
     }
