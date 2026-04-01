@@ -12,7 +12,8 @@ Your personal addiction recovery companion. A comprehensive Node.js + React appl
 [![MongoDB](https://img.shields.io/badge/MongoDB-7.0-13AA52?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Express](https://img.shields.io/badge/Express-4.x-000000?logo=express&logoColor=white)](https://expressjs.com/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
-[![Container Registry](https://img.shields.io/badge/GHCR-Containers-4B0082?logo=github&logoColor=white)](https://github.com/nocatix/nocts-back-on-track/pkgs/container/nocts-back-on-track-backend)
+[![Container Registry Backend](https://img.shields.io/badge/GHCR-Containers-4B0082?logo=github&logoColor=white)](https://github.com/nocatix/nocts-back-on-track/pkgs/container/nocts-back-on-track-backend)
+[![Container Registry Frontend](https://img.shields.io/badge/GHCR-Containers-4B0082?logo=github&logoColor=white)](https://github.com/nocatix/nocts-back-on-track/pkgs/container/nocts-back-on-track-frontend)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
