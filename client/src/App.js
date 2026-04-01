@@ -21,6 +21,7 @@ import Whyusethis from './pages/Whyusethis';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AchievementNotification from './components/AchievementNotification';
+import ScrollToTopButton from './components/ScrollToTopButton';
 import Sidebar from './components/Sidebar.js';
 
 // Configure API URL (already configured in apiClient)
@@ -152,6 +153,7 @@ export default function App() {
           </main>
         </div>
         {token && <Footer />}
+        <ScrollToTopButton />
       </div>
     </Router>
   );

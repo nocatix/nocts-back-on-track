@@ -7,6 +7,13 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
+const Addiction = require('../models/Addiction');
+const Achievement = require('../models/Achievement');
+const Trophy = require('../models/Trophy');
+const Diary = require('../models/Diary');
+const Memory = require('../models/Memory');
+const Mood = require('../models/Mood');
+const Weight = require('../models/Weight');
 
 const router = express.Router();
 
@@ -198,6 +205,34 @@ router.put('/unit-preference', auth, async (req, res) => {
       message: 'Unit preference updated successfully',
       unitPreference: user.unitPreference
     });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Reset all user progress data but keep account
+router.post('/reset-progress', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    await Promise.all([
+      Addiction.deleteMany({ userId: req.user.userId }),
+      Achievement.deleteMany({ userId: req.user.userId }),
+      Trophy.deleteMany({ userId: req.user.userId }),
+      Diary.deleteMany({ userId: req.user.userId }),
+      Memory.deleteMany({ userId: req.user.userId }),
+      Mood.deleteMany({ userId: req.user.userId }),
+      Weight.deleteMany({ userId: req.user.userId })
+    ]);
+
+    // Restart account-age based progress systems (e.g. trophies)
+    user.createdAt = new Date();
+    await user.save();
+
+    res.json({ message: 'All progress has been reset. You can start fresh now.' });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }

@@ -15,7 +15,7 @@
 .profile-card {
   background: var(--card-bg);
   border-radius: 10px;
-  padding: 25px;
+  padding: 35px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
   transition: all 0.3s ease;
@@ -27,9 +27,10 @@ html.dark .profile-card {
 
 .profile-card h2 {
   margin-top: 0;
+  margin-bottom: 20px;
   color: var(--text-primary);
   border-bottom: 2px solid var(--border-color);
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   transition: all 0.3s ease;
 }
 
@@ -39,7 +40,7 @@ html.dark .profile-card {
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .form-group label {
@@ -121,6 +122,25 @@ html.dark .profile-section {
 .account-actions {
   display: flex;
   justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.reset-account-button {
+  background: #ed8936;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reset-account-button:hover {
+  background: #dd6b20;
+  opacity: 0.95;
 }
 
 .delete-account-button {
@@ -220,7 +240,8 @@ html.dark .modal-content {
 }
 
 .cancel-button,
-.confirm-delete-button {
+.confirm-delete-button,
+.confirm-reset-button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -249,10 +270,20 @@ html.dark .modal-content {
   opacity: 0.9;
 }
 
+.confirm-reset-button {
+  background: #ed8936;
+  color: white;
+}
+
+.confirm-reset-button:hover {
+  background: #dd6b20;
+  opacity: 0.95;
+}
+
 .unit-preference-section {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
 .unit-preference-section p {
@@ -263,7 +294,7 @@ html.dark .modal-content {
 
 .unit-buttons {
   display: flex;
-  gap: 15px;
+  gap: 20px;
   flex-wrap: wrap;
 }
 
@@ -298,6 +329,46 @@ html.dark .modal-content {
 }
 
 .unit-button span:first-child {
+  font-size: 24px;
+}
+
+.theme-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.theme-button {
+  flex: 1;
+  min-width: 150px;
+  padding: 15px 20px;
+  border: 2px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.theme-button:hover {
+  border-color: var(--accent-color);
+  background: var(--card-bg);
+  transform: translateY(-2px);
+}
+
+.theme-button.active {
+  border-color: var(--accent-color);
+  background: var(--accent-color);
+  color: white;
+  font-weight: bold;
+}
+
+.theme-button span:first-child {
   font-size: 24px;
 }
 

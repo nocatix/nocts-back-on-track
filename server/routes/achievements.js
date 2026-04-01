@@ -25,12 +25,25 @@ const MILESTONES = {
 
 // Get all achievements for user
 router.get('/', auth, asyncHandler(async (req, res) => {
+  // Keep achievements in sync with addiction data.
+  const addictions = await Addiction.find({ userId: req.user.userId });
+  if (addictions.length === 0) {
+    await Achievement.deleteMany({ userId: req.user.userId });
+    return res.json([]);
+  }
+
   const achievements = await Achievement.find({ userId: req.user.userId }).sort({ unreadAt: -1 });
   res.json(achievements);
 }));
 
 // Get unread achievements
 router.get('/unread', auth, asyncHandler(async (req, res) => {
+  const addictions = await Addiction.find({ userId: req.user.userId });
+  if (addictions.length === 0) {
+    await Achievement.deleteMany({ userId: req.user.userId });
+    return res.json([]);
+  }
+
   const achievements = await Achievement.find({ userId: req.user.userId, readAt: null }).sort({ unreadAt: -1 });
   res.json(achievements);
 }));

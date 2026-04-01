@@ -7,6 +7,8 @@
 const express = require('express');
 const auth = require('../middleware/auth');
 const Addiction = require('../models/Addiction');
+const Achievement = require('../models/Achievement');
+const Trophy = require('../models/Trophy');
 
 const router = express.Router();
 
@@ -153,6 +155,15 @@ router.delete('/:id', auth, async (req, res) => {
     if (!addiction) {
       return res.status(404).json({ message: 'Addiction not found' });
     }
+
+    // Remove records that should not remain after this addiction is deleted.
+    await Promise.all([
+      Achievement.deleteMany({
+        userId: req.user.userId,
+          addictionId: addiction._id
+      }),
+      Trophy.deleteMany({ userId: req.user.userId })
+    ]);
     
     res.json({ message: 'Addiction deleted successfully' });
   } catch (error) {

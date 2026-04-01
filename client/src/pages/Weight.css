@@ -182,20 +182,33 @@ html.dark .form-group select:focus {
 
 .btn-delete {
   background: none;
-  border: none;
+  border: 1px solid transparent;
   color: #dc3545;
   cursor: pointer;
-  font-size: 18px;
-  padding: 5px;
+  font-size: 16px;
+  padding: 4px 6px;
+  flex-shrink: 0;
+  border-radius: 3px;
   transition: all 0.3s ease;
+  grid-column: 2;
+  align-self: center;
+  line-height: 1;
 }
 
 .btn-delete:hover {
   color: #b71c1c;
+  background: rgba(220, 53, 69, 0.1);
+  border-color: #dc3545;
+}
+
+html.dark .btn-delete {
+  color: #ff5252;
 }
 
 html.dark .btn-delete:hover {
-  color: #ff5252;
+  color: #ff1744;
+  background: rgba(255, 82, 82, 0.15);
+  border-color: #ff5252;
 }
 
 /* Graph Section */
@@ -284,6 +297,27 @@ html.dark .weight-graph-section {
   font-size: 12px;
 }
 
+.axis-label {
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--text-primary);
+}
+
+.y-axis-label {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}
+
+.x-axis-label {
+  fill: var(--text-primary);
+}
+
+.tick-label {
+  font-size: 11px;
+  fill: var(--text-secondary);
+}
+
 /* History Section */
 .weight-history-section {
   display: grid;
@@ -316,10 +350,10 @@ html.dark .weight-calendar {
 
 .calendar-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 15px;
-  gap: 10px;
+  gap: 15px;
 }
 
 .calendar-nav-btn {
@@ -329,16 +363,24 @@ html.dark .weight-calendar {
   padding: 8px 12px;
   color: var(--text-primary);
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   transition: all 0.3s ease;
-  flex: 1;
+  min-width: 40px;
   text-align: center;
 }
 
 .calendar-nav-btn:hover {
   border-color: var(--accent-color);
   color: var(--accent-color);
+}
+
+.calendar-month-display {
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  min-width: 150px;
+  text-align: center;
 }
 
 .calendar-grid {
@@ -392,6 +434,7 @@ html.dark .weight-calendar {
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 20px;
+  padding-right: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -408,13 +451,15 @@ html.dark .weight-list {
 .weight-list-container {
   max-height: 400px;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .weight-entry {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
   align-items: center;
-  padding: 12px;
+  padding: 12px 8px;
   border-bottom: 1px solid var(--border-color);
   transition: all 0.3s ease;
 }
@@ -431,17 +476,26 @@ html.dark .weight-list {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
+  overflow: hidden;
+  grid-column: 1;
 }
 
 .entry-weight {
   color: var(--text-primary);
   font-weight: 600;
   font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .entry-date {
   color: var(--text-secondary);
   font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .no-data {
@@ -579,4 +633,83 @@ html.dark .message {
 
 html.dark .bento-box {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+html.dark .modal-content {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.modal-content p {
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cancel-button,
+.confirm-delete-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.cancel-button {
+  background: var(--input-border);
+  color: var(--text-primary);
+}
+
+.cancel-button:hover {
+  background: var(--border-color);
+  opacity: 0.8;
+}
+
+.confirm-delete-button {
+  background: #d32f2f;
+  color: white;
+}
+
+.confirm-delete-button:hover {
+  background: #b71c1c;
+  opacity: 0.9;
 }

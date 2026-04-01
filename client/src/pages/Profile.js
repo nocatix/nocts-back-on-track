@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { DarkModeContext } from '../context/DarkModeContext';
 import './Profile.css';
 import apiClient from '../api/axiosConfig';
 
 const Profile = () => {
   const { user, token, setUser, loading } = useAuth();
+  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
   const [formData, setFormData] = useState({
     username: '',
     fullName: ''
@@ -17,6 +19,7 @@ const Profile = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [showResetModal, setShowResetModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [unitPreference, setUnitPreference] = useState('metric');
 
@@ -110,10 +113,6 @@ const Profile = () => {
   };
 
   const handleDeleteAccount = async () => {
-    if (!window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-      return;
-    }
-
     try {
       await apiClient.delete('/api/auth/profile');
 
@@ -121,6 +120,23 @@ const Profile = () => {
       window.location.href = '/login';
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to delete account');
+    }
+  };
+
+  const handleResetProgress = async () => {
+    setIsSubmitting(true);
+    setError('');
+    setMessage('');
+
+    try {
+      await apiClient.post('/api/auth/reset-progress');
+      setShowResetModal(false);
+      setMessage('All progress has been reset. You are starting fresh.');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to reset progress');
+      setShowResetModal(false);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -237,9 +253,38 @@ const Profile = () => {
         </div>
       </div>
       
+      <div className="profile-card">
+        <h2>Appearance</h2>
+        <div className="theme-section">
+          <p>Choose your preferred theme:</p>
+          <div className="theme-buttons">
+            <button 
+              className={`theme-button ${!isDarkMode ? 'active' : ''}`}
+              onClick={() => isDarkMode && toggleDarkMode()}
+            >
+              <span>🌙</span>
+              <span>Light Mode</span>
+            </button>
+            <button 
+              className={`theme-button ${isDarkMode ? 'active' : ''}`}
+              onClick={() => !isDarkMode && toggleDarkMode()}
+            >
+              <span>☀️</span>
+              <span>Dark Mode</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      
       <div className="profile-section">
         <h2>Account Management</h2>
         <div className="account-actions">
+          <button
+            onClick={() => setShowResetModal(true)}
+            className="reset-account-button"
+          >
+            Reset Everything
+          </button>
           <button 
             onClick={() => setShowDeleteModal(true)}
             className="delete-account-button"
@@ -267,6 +312,32 @@ const Profile = () => {
                 className="confirm-delete-button"
               >
                 Delete Account
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Reset Progress Modal */}
+      {showResetModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Reset Everything</h3>
+            <p>This will permanently delete your addictions, achievements, trophies, moods, diary, memories, and weight logs. Your account will stay active so you can start fresh.</p>
+            <div className="modal-actions">
+              <button
+                onClick={() => setShowResetModal(false)}
+                className="cancel-button"
+                disabled={isSubmitting}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleResetProgress}
+                className="confirm-reset-button"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Resetting...' : 'Yes, Reset Everything'}
               </button>
             </div>
           </div>

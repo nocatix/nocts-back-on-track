@@ -27,21 +27,50 @@ const Weight = () => {
   const [showGoalForm, setShowGoalForm] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [message, setMessage] = useState('');
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedWeightId, setSelectedWeightId] = useState(null);
+  const [selectedWeightValue, setSelectedWeightValue] = useState(null);
 
   // Fetch weights on mount
   useEffect(() => {
     if (token && user) {
-      fetchWeights();
-      // Update unit from user preference
-      if (user.unitPreference === 'metric') {
-        setUnit('kg');
-      } else {
-        setUnit('lbs');
-      }
+      // Determine correct unit first
+      const targetUnit = user.unitPreference === 'metric' ? 'kg' : 'lbs';
+      setUnit(targetUnit);
+      
+      // Then fetch weights with the correct unit
+      fetchWeightsWithUnit(targetUnit);
     }
   }, [token, user]);
 
+  // Update goal weight display when unit changes
+  useEffect(() => {
+    const saved = localStorage.getItem('weightGoal');
+    if (saved) {
+      try {
+        const goal = JSON.parse(saved);
+        // Goal is stored in kg, convert for display
+        let displayGoalWeight = parseFloat(goal.weight);
+        if (unit === 'lbs') {
+          displayGoalWeight = (displayGoalWeight * 2.20462).toFixed(2);
+        }
+        setGoalWeight({ weight: displayGoalWeight, unit });
+      } catch (err) {
+        console.error('Error loading goal weight:', err);
+      }
+    }
+    
+    // Refetch weights when unit changes to ensure correct conversion
+    if (token) {
+      fetchWeightsWithUnit(unit);
+    }
+  }, [unit, token]);
+
   const fetchWeights = async () => {
+    fetchWeightsWithUnit(unit);
+  };
+
+  const fetchWeightsWithUnit = async (targetUnit) => {
     try {
       const API_BASE_URL = 'http://localhost:5000';
       const response = await fetch(`${API_BASE_URL}/api/weights`, {
@@ -55,11 +84,8 @@ const Weight = () => {
 
       try {
         const data = await response.json();
-        setWeights(data);
-        // Convert all weights to current unit for display
-        if (unit === 'kg' && data.length > 0 && data[0].unit === 'lbs') {
-          convertWeights(data, 'kg');
-        }
+        // Convert weights from kg (storage unit) to display unit
+        convertWeights(data, targetUnit);
       } catch (parseError) {
         console.error('Failed to parse weights response:', parseError);
         console.error('Response status:', response.status);
@@ -70,11 +96,19 @@ const Weight = () => {
   };
 
   const convertWeights = (dataWeights, targetUnit) => {
-    const converted = dataWeights.map(w => ({
-      ...w,
-      originalWeight: w.weight,
-      weight: targetUnit === 'kg' && w.unit === 'lbs' ? (w.weight / 2.20462).toFixed(2) : w.weight
-    }));
+    const converted = dataWeights.map(w => {
+      let displayWeight = parseFloat(w.weight);
+      // All weights in DB are in kg, convert to lbs if needed for display
+      if (targetUnit === 'lbs') {
+        displayWeight = (displayWeight * 2.20462).toFixed(2);
+      }
+      return {
+        ...w,
+        weight: displayWeight,
+        originalWeight: w.weight,
+        unit: targetUnit
+      };
+    });
     setWeights(converted);
   };
 
@@ -90,6 +124,13 @@ const Weight = () => {
     try {
       const API_BASE_URL = 'http://localhost:5000';
       const dateTime = new Date(`${selectedDate}T${selectedTime}`);
+      
+      // Convert weight to kg for storage
+      let weightInKg = parseFloat(currentWeight);
+      if (unit === 'lbs') {
+        weightInKg = (weightInKg / 2.20462).toFixed(2);
+      }
+      
       const response = await fetch(`${API_BASE_URL}/api/weights`, {
         method: 'POST',
         headers: {
@@ -97,8 +138,8 @@ const Weight = () => {
           Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({
-          weight: parseFloat(currentWeight),
-          unit,
+          weight: weightInKg,
+          unit: 'kg',
           date: dateTime.toISOString()
         })
       });
@@ -122,25 +163,50 @@ const Weight = () => {
 
   const handleSetGoal = (e) => {
     e.preventDefault();
-    const newGoal = { weight: parseFloat(goalWeight.weight), unit: goalWeight.unit };
+    // Convert goal weight to kg for storage
+    let goalWeightInKg = parseFloat(goalWeight.weight);
+    if (unit === 'lbs') {
+      goalWeightInKg = (goalWeightInKg / 2.20462).toFixed(2);
+    }
+    
+    const newGoal = { weight: goalWeightInKg, unit: 'kg' };
     localStorage.setItem('weightGoal', JSON.stringify(newGoal));
-    setGoalWeight(newGoal);
+    
+    // Convert back to display unit for UI
+    let displayGoalWeight = goalWeightInKg;
+    if (unit === 'lbs') {
+      displayGoalWeight = (goalWeightInKg * 2.20462).toFixed(2);
+    }
+    setGoalWeight({ weight: displayGoalWeight, unit });
     setShowGoalForm(false);
   };
 
-  const handleDeleteWeight = async (id) => {
+  const handleDeleteWeight = (id, weight) => {
+    setSelectedWeightId(id);
+    setSelectedWeightValue(weight);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeleteWeight = async () => {
     try {
       const API_BASE_URL = 'http://localhost:5000';
-      const response = await fetch(`${API_BASE_URL}/api/weights/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/weights/${selectedWeightId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });
 
       if (response.ok) {
+        setMessage('Weight entry deleted successfully!');
+        setTimeout(() => setMessage(''), 3000);
         fetchWeights();
+        setShowDeleteModal(false);
+        setSelectedWeightId(null);
+        setSelectedWeightValue(null);
       }
     } catch (err) {
       console.error('Error deleting weight:', err);
+      setMessage('Failed to delete weight entry');
+      setTimeout(() => setMessage(''), 3000);
     }
   };
 
@@ -202,11 +268,21 @@ const Weight = () => {
           {/* Axes */}
           <line x1="30" y1="0" x2="30" y2="150" className="axis" />
           <line x1="30" y1="150" x2="330" y2="150" className="axis" />
+          
+          {/* Y-axis label */}
+          <text x="10" y="75" className="axis-label y-axis-label" textAnchor="middle">
+            {`Weight (${unit})`}
+          </text>
+          
+          {/* X-axis label */}
+          <text x="180" y="185" className="axis-label x-axis-label" textAnchor="middle">
+            Time
+          </text>
+          
+          {/* Y-axis tick labels */}
+          <text x="25" y="10" className="tick-label" textAnchor="end">{maxWeight.toFixed(0)}</text>
+          <text x="25" y="155" className="tick-label" textAnchor="end">{minWeight.toFixed(0)}</text>
         </svg>
-        <div className="graph-labels">
-          <span className="y-label">{maxWeight.toFixed(0)} {unit}</span>
-          <span className="y-label">{minWeight.toFixed(0)} {unit}</span>
-        </div>
       </div>
     );
   };
@@ -218,8 +294,8 @@ const Weight = () => {
     const monthWeightMap = {};
 
     monthWeights.forEach(w => {
-      const date = new Date(w.date).toLocaleDateString().split('/');
-      const day = parseInt(date[1]) || parseInt(date[0]);
+      const date = new Date(w.date);
+      const day = date.getDate();
       monthWeightMap[day] = w;
     });
 
@@ -235,16 +311,19 @@ const Weight = () => {
       <div className="calendar-container">
         <div className="calendar-header">
           <button
-            className="calendar-nav-btn"
+            className="calendar-nav-btn prev-btn"
             onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1))}
           >
-            ← {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+            ◀
           </button>
+          <span className="calendar-month-display">
+            {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+          </span>
           <button
-            className="calendar-nav-btn"
+            className="calendar-nav-btn next-btn"
             onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))}
           >
-            →
+            ▶
           </button>
         </div>
 
@@ -424,7 +503,7 @@ const Weight = () => {
                     </div>
                     <button
                       className="btn-delete"
-                      onClick={() => handleDeleteWeight(w._id)}
+                      onClick={() => handleDeleteWeight(w._id, w)}
                     >
                       ✕
                     </button>
@@ -435,6 +514,36 @@ const Weight = () => {
           </div>
         </div>
       </div>
+
+      {/* Delete Weight Modal */}
+      {showDeleteModal && selectedWeightValue && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Delete Weight Entry</h3>
+            <p>Are you sure you want to delete this weight entry?</p>
+            <p style={{ fontWeight: 'bold', marginBottom: '10px' }}>
+              {parseFloat(selectedWeightValue.weight).toFixed(1)} {selectedWeightValue.unit} on {new Date(selectedWeightValue.date).toLocaleDateString()}
+            </p>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>
+              This action cannot be undone.
+            </p>
+            <div className="modal-actions">
+              <button 
+                onClick={() => setShowDeleteModal(false)}
+                className="cancel-button"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={confirmDeleteWeight}
+                className="confirm-delete-button"
+              >
+                Delete Entry
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

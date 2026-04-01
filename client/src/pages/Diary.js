@@ -118,7 +118,7 @@ export default function Diary() {
     <div className="diary-page">
       {message && <div className="message-notification error">{message}</div>}
       <div className="diary-header">
-        <button onClick={handlePreviousDay} className="btn btn-small">&larr; Previous</button>
+        <button onClick={handlePreviousDay} className="btn btn-small">◀ Previous</button>
         <div className="date-display">
           <h2>{formatDate(currentDate)}</h2>
           {lastSaved && (
@@ -127,7 +127,7 @@ export default function Diary() {
             </p>
           )}
         </div>
-        <button onClick={handleNextDay} className="btn btn-small">Next &rarr;</button>
+        <button onClick={handleNextDay} className="btn btn-small">Next ▶</button>
       </div>
 
       <button onClick={handleToday} className="btn btn-accent today-btn">

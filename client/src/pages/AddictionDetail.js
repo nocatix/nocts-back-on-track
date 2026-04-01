@@ -17,6 +17,7 @@ export default function AddictionDetail() {
   const [timeline, setTimeline] = useState([]);
   const [caved, setCaved] = useState(false);
   const [message, setMessage] = useState('');
+  const [showCavedConfirm, setShowCavedConfirm] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   useEffect(() => {
@@ -98,21 +99,25 @@ export default function AddictionDetail() {
     }
   }, [addiction]);
 
-  const handleCaved = async () => {
-    if (window.confirm('Are you sure you want to log that you caved? This will reset your streak.')) {
-      try {
-        // Update the addiction to mark it as caved
-        await apiClient.put(`/api/addictions/${id}/caved`, {});
-        
-        // Update the UI to show that we've caved
-        setCaved(true);
-        
-        // Show a success message
-        setMessage('You caved. Your streak has been reset. Remember, every day you stay clean is a victory!');
-        setTimeout(() => setMessage(''), 4000);
-      } catch (err) {
-        setError('Failed to log caving');
-      }
+  const handleCaved = () => {
+    setShowCavedConfirm(true);
+  };
+
+  const confirmCaved = async () => {
+    try {
+      // Update the addiction to mark it as caved
+      await apiClient.put(`/api/addictions/${id}/caved`, {});
+
+      // Update the UI to show that we've caved
+      setCaved(true);
+      setShowCavedConfirm(false);
+
+      // Show a success message
+      setMessage('You caved. Your streak has been reset. Remember, every day you stay clean is a victory!');
+      setTimeout(() => setMessage(''), 4000);
+    } catch (err) {
+      setError('Failed to log caving');
+      setShowCavedConfirm(false);
     }
   };
 
@@ -200,6 +205,23 @@ export default function AddictionDetail() {
           <p className="caved-message">
             You've marked this addiction as caved. Your streak has been reset.
           </p>
+        </div>
+      )}
+
+      {showCavedConfirm && (
+        <div className="delete-confirm-overlay">
+          <div className="delete-confirm-modal">
+            <h3>Are you sure?</h3>
+            <p>This will reset your streak and mark today as a cave.</p>
+            <div className="confirm-buttons">
+              <button onClick={confirmCaved} className="btn btn-danger">
+                Yes, I Caved
+              </button>
+              <button onClick={() => setShowCavedConfirm(false)} className="btn btn-secondary">
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
