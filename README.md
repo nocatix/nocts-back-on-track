@@ -502,6 +502,10 @@ Feel free to fork this project and submit pull requests for any improvements.
 
 MIT License - See [LICENSE](LICENSE) file for details
 
+## Note from the Developer
+
+Hey. So I made this project because I was fed up with all the available addiction tracking tools. They all contain ads, promotions, or tracking or some other form of shenanigans. I wanted something that is free, strong, and secure. You know I am going through addiction recovery myself. I was heavily abused as a child, both at home and at school. It was not until a little over 2 years ago that it all became too much and I crashed. All of the unsolved trauma suddenly came flooding back. I have C-PTSD and AuDHD. I know that now. Before the crash I already noticed an increase in my addictive habits. During the crash and post crash these addictions became stronger. Luckily I found a good psychologist right before the crash. They were able to help me. It was a long and painful journey that was ahead of me back then. Things are now still not great, but they are a lot better than they probably ever were, even with the addictions. This recovery tracker helps me to get back on track. And maybe it can help you, too!
+
 ## 💝 Support
 
 If you find this project helpful in your recovery journey, consider supporting the developer:
