@@ -118,19 +118,6 @@ const Achievements = () => {
     return <div className="achievements-error">Error: {error}</div>;
   }
 
-  const getProgressPercentage = (milestoneDays) => {
-    const milestones = [1, 3, 7, 14, 30, 60, 90, 180, 365];
-    const currentIndex = milestones.indexOf(milestoneDays);
-    
-    if (currentIndex === -1) return 0;
-    
-    // For the first milestone, return 100% since it's already achieved
-    if (currentIndex === 0) return 100;
-    
-    // For other milestones, calculate progress based on the previous milestone
-    return Math.min(100, Math.round((milestoneDays / milestones[milestones.length - 1]) * 100));
-  };
-
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString();
   };
@@ -147,8 +134,8 @@ const Achievements = () => {
         <div className="trophy-progress-section">
           <h2>🎯 Trophy Progress</h2>
           
-          {trophyProgress.currentTrophy ? (
-            <div className="trophy-progress-container">
+          <div className="trophy-progress-container">
+            {trophyProgress.currentTrophy && (
               <div className="current-trophy">
                 <h3>Current Trophy</h3>
                 <div className="trophy-display">
@@ -159,43 +146,42 @@ const Achievements = () => {
                   </div>
                 </div>
               </div>
-              
-              {trophyProgress.nextTrophy && (
-                <>
-                  <div className="progress-bar-wrapper">
-                    <div className="progress-bar">
-                      <div 
-                        className="progress-fill" 
-                        style={{ width: `${trophyProgress.progress}%` }}
-                      />
-                    </div>
-                    <span className="progress-percentage">{Math.round(trophyProgress.progress)}%</span>
+            )}
+            
+            {trophyProgress.nextTrophy && (
+              <>
+                <div className="progress-bar-wrapper">
+                  <div className="progress-bar-container">
+                    <div 
+                      className="progress-fill" 
+                      style={{ width: `${trophyProgress.progress}%` }}
+                    />
+                    <span className="progress-text">
+                      {Math.round(trophyProgress.progress)}% towards {trophyProgress.nextTrophy.name}
+                      {trophyProgress.timeRemainingFormatted && (
+                        <span className="time-remaining"> (~{trophyProgress.timeRemainingFormatted})</span>
+                      )}
+                    </span>
                   </div>
-                  
-                  <div className="next-trophy">
-                    <h3>Next Trophy</h3>
-                    <div className="trophy-display">
-                      <span className="trophy-icon-large">{trophyProgress.nextTrophy.name.split(' ')[0]}</span>
-                      <div className="trophy-info">
-                        <h4>{trophyProgress.nextTrophy.name}</h4>
-                        <p>{trophyProgress.nextTrophy.description}</p>
-                      </div>
+                </div>
+                
+                <div className="next-trophy greyed-out">
+                  <h3>Next Trophy</h3>
+                  <div className="trophy-display">
+                    <span className="trophy-icon-large">{trophyProgress.nextTrophy.name.split(' ')[0]}</span>
+                    <div className="trophy-info">
+                      <h4>{trophyProgress.nextTrophy.name}</h4>
+                      <p>{trophyProgress.nextTrophy.description}</p>
                     </div>
                   </div>
-                  
-                  <p className="progress-description">{trophyProgress.progressDescription}</p>
-                </>
-              )}
-              
-              {!trophyProgress.nextTrophy && (
-                <p className="ultimate-milestone">{trophyProgress.progressDescription}</p>
-              )}
-            </div>
-          ) : (
-            <div className="no-trophy-progress">
-              <p>{trophyProgress.progressDescription}</p>
-            </div>
-          )}
+                </div>
+              </>
+            )}
+            
+            {!trophyProgress.nextTrophy && (
+              <p className="ultimate-milestone">{trophyProgress.progressDescription}</p>
+            )}
+          </div>
         </div>
       )}
       
@@ -311,24 +297,6 @@ const Achievements = () => {
                     </span>
                   )}
                 </div>
-                
-                {/* Progress bar for milestone achievements */}
-                {achievement.milestoneDays && (
-                  <div className="achievement-progress">
-                    <div className="progress-label">
-                      Progress to next milestone
-                    </div>
-                    <div className="progress-bar-container">
-                      <div 
-                        className="progress-bar"
-                        style={{ width: `${getProgressPercentage(achievement.milestoneDays)}%` }}
-                      ></div>
-                    </div>
-                    <div className="progress-text">
-                      {achievement.milestoneDays} days
-                    </div>
-                  </div>
-                )}
               </div>
             ))}
           </div>

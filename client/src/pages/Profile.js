@@ -236,18 +236,18 @@ const Profile = () => {
           <p>Choose your preferred unit of measurement:</p>
           <div className="unit-buttons">
             <button 
-              className={`unit-button ${unitPreference === 'imperial' ? 'active' : ''}`}
-              onClick={() => handleUnitPreferenceChange('imperial')}
-            >
-              <span>🇺🇸</span>
-              <span>Imperial (lbs)</span>
-            </button>
-            <button 
               className={`unit-button ${unitPreference === 'metric' ? 'active' : ''}`}
               onClick={() => handleUnitPreferenceChange('metric')}
             >
               <span>🌍</span>
               <span>Metric (kg)</span>
+            </button>
+            <button 
+              className={`unit-button ${unitPreference === 'imperial' ? 'active' : ''}`}
+              onClick={() => handleUnitPreferenceChange('imperial')}
+            >
+              <span>🇺🇸</span>
+              <span>Imperial (lbs)</span>
             </button>
           </div>
         </div>

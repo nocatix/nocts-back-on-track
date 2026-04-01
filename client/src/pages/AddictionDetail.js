@@ -19,6 +19,14 @@ export default function AddictionDetail() {
   const [message, setMessage] = useState('');
   const [showCavedConfirm, setShowCavedConfirm] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editData, setEditData] = useState({
+    name: '',
+    frequencyPerDay: 0,
+    moneySpentPerDay: 0,
+    notes: '',
+    stopDate: ''
+  });
 
   useEffect(() => {
     const fetchAddiction = async () => {
@@ -27,10 +35,10 @@ export default function AddictionDetail() {
         const addictionData = response.data;
         
         // Calculate daysStopped if not provided by backend
-        if (!addictionData.daysStopped && addictionData.startDate) {
-          const startDate = new Date(addictionData.startDate);
+        if (!addictionData.daysStopped && addictionData.stopDate) {
+          const stopDate = new Date(addictionData.stopDate);
           const today = new Date();
-          const daysStopped = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+          const daysStopped = Math.floor((today - stopDate) / (1000 * 60 * 60 * 24));
           addictionData.daysStopped = daysStopped;
         }
         
@@ -136,6 +144,128 @@ export default function AddictionDetail() {
     }
   };
 
+  const handleEditStart = () => {
+    let isoString = '';
+    
+    try {
+      if (addiction.stopDate) {
+        const stopDate = new Date(addiction.stopDate);
+        
+        if (!isNaN(stopDate.getTime())) {
+          // Get local date/time components
+          const year = stopDate.getFullYear();
+          const month = String(stopDate.getMonth() + 1).padStart(2, '0');
+          const day = String(stopDate.getDate()).padStart(2, '0');
+          const hours = String(stopDate.getHours()).padStart(2, '0');
+          const minutes = String(stopDate.getMinutes()).padStart(2, '0');
+          
+          isoString = `${year}-${month}-${day}T${hours}:${minutes}`;
+          console.log('Formatted datetime:', isoString);
+        } else {
+          console.warn('Invalid date:', addiction.stopDate);
+        }
+      } else {
+        console.warn('No stopDate found');
+      }
+    } catch (err) {
+      console.error('Error parsing stop date:', err);
+    }
+    
+    setEditData({
+      name: addiction.name,
+      frequencyPerDay: addiction.frequencyPerDay || 0,
+      moneySpentPerDay: addiction.moneySpentPerDay || 0,
+      notes: addiction.notes || '',
+      stopDate: isoString
+    });
+    
+    setIsEditing(true);
+  };
+
+  const handleEditCancel = () => {
+    setIsEditing(false);
+    setEditData({
+      name: '',
+      frequencyPerDay: 0,
+      moneySpentPerDay: 0,
+      notes: '',
+      stopDate: ''
+    });
+  };
+
+  const handleEditSave = async () => {
+    try {
+      const response = await apiClient.put(`/api/addictions/${id}`, {
+        name: editData.name,
+        frequencyPerDay: editData.frequencyPerDay,
+        moneySpentPerDay: editData.moneySpentPerDay,
+        notes: editData.notes,
+        stopDate: editData.stopDate ? new Date(editData.stopDate).toISOString() : addiction.stopDate
+      });
+      
+      setAddiction(response.data);
+      setIsEditing(false);
+      setMessage('Addiction updated successfully');
+      setTimeout(() => setMessage(''), 3000);
+    } catch (err) {
+      setError('Failed to update addiction');
+    }
+  };
+
+  const handleEditChange = (field, value) => {
+    setEditData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const calculateElapsedTime = () => {
+    if (!addiction.stopDate) return null;
+    
+    const stopDate = new Date(addiction.stopDate);
+    const now = new Date();
+    let diff = now - stopDate;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -= days * (1000 * 60 * 60 * 24);
+
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    diff -= hours * (1000 * 60 * 60);
+
+    const minutes = Math.floor(diff / (1000 * 60));
+
+    let elapsedText = '';
+    if (days > 0) {
+      elapsedText += `${days} day${days !== 1 ? 's' : ''}`;
+    }
+    if (hours > 0) {
+      elapsedText += (elapsedText ? ', ' : '') + `${hours} hour${hours !== 1 ? 's' : ''}`;
+    }
+    if (minutes > 0 || elapsedText === '') {
+      elapsedText += (elapsedText ? ', ' : '') + `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+    }
+
+    const formattedDate = stopDate.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    const formattedTime = stopDate.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    });
+
+    return {
+      date: formattedDate,
+      time: formattedTime,
+      elapsed: elapsedText
+    };
+  };
+
+  const elapsedTime = addiction ? calculateElapsedTime() : null;
+
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
   if (!addiction) return <div>Addiction not found</div>;
@@ -145,10 +275,99 @@ export default function AddictionDetail() {
       {message && <div className="message-notification">{message}</div>}
       <div className="detail-header">
         <h1>{addiction.name}</h1>
-        <button onClick={handleDelete} className="btn btn-danger">
-          🗑️
-        </button>
+        <div className="detail-header-buttons">
+          <button onClick={handleEditStart} className="btn btn-primary">
+            ✏️
+          </button>
+          <button onClick={handleDelete} className="btn btn-danger">
+            🗑️
+          </button>
+        </div>
       </div>
+
+      {isEditing && (
+        <div className="edit-section">
+          <h2>Edit Addiction Details</h2>
+          <div className="edit-form">
+            <div className="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                value={editData.name}
+                onChange={(e) => handleEditChange('name', e.target.value)}
+                placeholder="Addiction name"
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Date & Time Stopped</label>
+              <input
+                type="datetime-local"
+                value={editData.stopDate}
+                onChange={(e) => handleEditChange('stopDate', e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>{getFrequencyLabel(addiction.addictionType)}</label>
+              <input
+                type="number"
+                value={editData.frequencyPerDay}
+                onChange={(e) => handleEditChange('frequencyPerDay', parseInt(e.target.value) || 0)}
+                placeholder="0"
+                min="0"
+              />
+            </div>
+
+            <div className="form-group">
+              <label>{getCostLabel(addiction.addictionType)}</label>
+              <input
+                type="number"
+                value={editData.moneySpentPerDay}
+                onChange={(e) => handleEditChange('moneySpentPerDay', parseFloat(e.target.value) || 0)}
+                placeholder="0.00"
+                min="0"
+                step="0.01"
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Notes</label>
+              <textarea
+                value={editData.notes}
+                onChange={(e) => handleEditChange('notes', e.target.value)}
+                placeholder="Add notes..."
+                rows="4"
+              />
+            </div>
+
+            <div className="form-buttons">
+              <button onClick={handleEditSave} className="btn btn-success">
+                ✓ Save
+              </button>
+              <button onClick={handleEditCancel} className="btn btn-secondary">
+                ✕ Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {elapsedTime && (
+        <div className="stop-date-section">
+          <div className="stop-date-card">
+            <div className="stop-date-info">
+              <h3>🕐 Started Recovery</h3>
+              <p className="stop-date-datetime">
+                {elapsedTime.date} at {elapsedTime.time}
+              </p>
+              <p className="elapsed-time">
+                <strong>{elapsedTime.elapsed}</strong> since you stopped
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="stats-container">
         <div className="stat-card">

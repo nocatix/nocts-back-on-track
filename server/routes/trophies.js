@@ -69,8 +69,9 @@ router.get('/progress', auth, asyncHandler(async (req, res) => {
   const accountCreatedDate = new Date(user.createdAt);
   const currentDate = new Date();
   
-  // Calculate time differences
-  const daysDifference = Math.floor((currentDate - accountCreatedDate) / (1000 * 60 * 60 * 24));
+  // Calculate time differences (with decimal values for progress)
+  const totalDaysDifference = (currentDate - accountCreatedDate) / (1000 * 60 * 60 * 24);
+  const daysDifference = Math.floor(totalDaysDifference);
   const weeksDifference = Math.floor(daysDifference / 7);
   
   let monthsDifference = 0;
@@ -85,27 +86,72 @@ router.get('/progress', auth, asyncHandler(async (req, res) => {
   let nextTrophy = null;
   let progress = 0;
   let progressDescription = '';
+  let timeRemaining = 0; // in milliseconds
 
-  // Daily trophies
+  // Helper function to format time remaining
+  const formatTimeRemaining = (days) => {
+    if (days < 1) {
+      const hours = Math.ceil(days * 24);
+      return `${hours}h remaining`;
+    } else if (days < 7) {
+      const wholeHours = Math.floor(days * 24);
+      return `${Math.floor(days)}d ${wholeHours % 24}h remaining`;
+    } else if (days < 30) {
+      const weeks = Math.floor(days / 7);
+      return `${weeks}w ${Math.floor(days % 7)}d remaining`;
+    } else {
+      const months = Math.floor(days / 30);
+      return `${months}mo remaining`;
+    }
+  };
+
+  // Daily trophies (days 1-6, daysDifference 0-5)
   if (daysDifference < 6) {
-    currentTrophy = DAILY_TROPHIES[Math.max(0, daysDifference - 1)];
-    nextTrophy = daysDifference < 6 ? DAILY_TROPHIES[daysDifference] : WEEKLY_TROPHIES[0];
-    progress = ((daysDifference % 1) * 100);
-    progressDescription = `Day ${daysDifference + 1}/6 until Week 1 trophy`;
+    if (daysDifference === 0) {
+      // Day 1: haven't earned any trophy yet
+      currentTrophy = null;
+      nextTrophy = DAILY_TROPHIES[0];
+      progress = (totalDaysDifference * 100);
+      progressDescription = `${Math.round(progress)}% towards Day 1 trophy`;
+      timeRemaining = (1 - totalDaysDifference) * 24 * 60 * 60 * 1000; // ms until 1 day
+    } else {
+      // Days 2-6: show the earned trophy and next one
+      currentTrophy = DAILY_TROPHIES[daysDifference - 1];
+      nextTrophy = DAILY_TROPHIES[daysDifference];
+      progress = (totalDaysDifference % 1) * 100;
+      const nextDay = daysDifference + 1;
+      progressDescription = `Day ${daysDifference + 1}/6 - ${Math.round(progress)}% towards ${nextTrophy.name}`;
+      timeRemaining = (nextDay - totalDaysDifference) * 24 * 60 * 60 * 1000;
+    }
   }
-  // Weekly trophies
-  else if (weeksDifference < 3) {
-    const weekIndex = weeksDifference - 1;
-    currentTrophy = WEEKLY_TROPHIES[Math.max(0, weekIndex)];
-    nextTrophy = weeksDifference < 3 ? WEEKLY_TROPHIES[weeksDifference] : MONTHLY_TROPHIES[0];
+  // Transition from Day 6 to Week 1 (day 7, daysDifference 6)
+  else if (daysDifference === 6) {
+    currentTrophy = DAILY_TROPHIES[5]; // Day 6
+    nextTrophy = WEEKLY_TROPHIES[0]; // Week 1
+    progress = ((daysDifference - 6 + (totalDaysDifference % 1)) / 7) * 100;
+    progressDescription = `Day 7 - ${Math.round(progress)}% towards ${nextTrophy.name}`;
+    timeRemaining = (7 - totalDaysDifference) * 24 * 60 * 60 * 1000;
+  }
+  // Weekly trophies (weeks 1-3)
+  else if (weeksDifference >= 1 && weeksDifference <= 3) {
+    if (weeksDifference === 1) {
+      // Week 1: current is Week 1, next is Week 2
+      currentTrophy = WEEKLY_TROPHIES[0];
+      nextTrophy = weeksDifference < 3 ? WEEKLY_TROPHIES[1] : MONTHLY_TROPHIES[0];
+    } else {
+      // Weeks 2-3
+      currentTrophy = WEEKLY_TROPHIES[weeksDifference - 1];
+      nextTrophy = weeksDifference < 3 ? WEEKLY_TROPHIES[weeksDifference] : MONTHLY_TROPHIES[0];
+    }
     const daysInWeek = daysDifference % 7;
     progress = (daysInWeek / 7) * 100;
-    progressDescription = `Week ${weeksDifference}/3, Day ${daysInWeek}/7 until next trophy`;
+    progressDescription = `Week ${weeksDifference}, Day ${daysInWeek + 1}/7 - ${Math.round(progress)}% towards ${nextTrophy.name}`;
+    const daysUntilNextWeek = 7 - daysInWeek;
+    timeRemaining = daysUntilNextWeek * 24 * 60 * 60 * 1000;
   }
-  // Monthly trophies
-  else if (monthsDifference < 12) {
-    const monthIndex = monthsDifference - 1;
-    currentTrophy = MONTHLY_TROPHIES[Math.max(0, monthIndex)];
+  // Monthly trophies (months 1-11)
+  else if (monthsDifference >= 1 && monthsDifference <= 11) {
+    currentTrophy = MONTHLY_TROPHIES[monthsDifference - 1];
     nextTrophy = monthsDifference < 11 ? MONTHLY_TROPHIES[monthsDifference] : YEARLY_TROPHIES[1];
     
     // Calculate progress in current month
@@ -114,7 +160,9 @@ router.get('/progress', auth, asyncHandler(async (req, res) => {
     const daysIntoMonth = Math.floor((currentDate - tempDate) / (1000 * 60 * 60 * 24));
     const daysInMonth = Math.ceil((nextMonthDate - tempDate) / (1000 * 60 * 60 * 24));
     progress = (daysIntoMonth / daysInMonth) * 100;
-    progressDescription = `Month ${monthsDifference}/11 - ${Math.floor(progress)}% complete`;
+    progressDescription = `Month ${monthsDifference}/11 - ${Math.round(progress)}% towards ${nextTrophy.name}`;
+    const daysRemaining = daysInMonth - daysIntoMonth;
+    timeRemaining = daysRemaining * 24 * 60 * 60 * 1000;
   }
   // Yearly trophies
   else {
@@ -123,20 +171,29 @@ router.get('/progress', auth, asyncHandler(async (req, res) => {
     nextTrophy = nextYearMilestone ? YEARLY_TROPHIES[nextYearMilestone] : null;
     
     if (nextTrophy) {
-      const yearsToNext = nextYearMilestone - yearsDifference;
-      progress = ((yearsDifference % 1) * 100);
-      progressDescription = `Year ${yearsDifference}/${nextYearMilestone} - ${Math.floor(progress)}% complete`;
+      // Calculate progress towards next milestone
+      const monthsInPeriod = nextYearMilestone * 12 - (yearsDifference * 12);
+      const currentMonthInPeriod = monthsDifference - (yearsDifference * 12);
+      progress = (currentMonthInPeriod / monthsInPeriod) * 100;
+      progressDescription = `Year ${yearsDifference}/${nextYearMilestone} - ${Math.round(progress)}% towards ${nextTrophy.name}`;
+      const monthsRemaining = monthsInPeriod - currentMonthInPeriod;
+      timeRemaining = monthsRemaining * 30 * 24 * 60 * 60 * 1000; // approximate
     } else {
       progress = 100;
-      progressDescription = `You've reached the ultimate milestone! 🎉`;
+      progressDescription = `🎉 You've reached the ultimate milestone!`;
+      timeRemaining = 0;
     }
   }
+
+  const timeRemainingFormatted = timeRemaining > 0 ? formatTimeRemaining(timeRemaining / (1000 * 60 * 60 * 24)) : '';
 
   res.json({
     currentTrophy,
     nextTrophy,
     progress: Math.min(progress, 100),
     progressDescription,
+    timeRemaining,
+    timeRemainingFormatted,
     daysDifference,
     weeksDifference,
     monthsDifference,

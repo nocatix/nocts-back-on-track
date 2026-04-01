@@ -20,6 +20,14 @@
   transition: color 0.3s ease;
 }
 
+.section-description {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 50px;
+  font-size: 1em;
+  transition: color 0.3s ease;
+}
+
 .achievements-loading,
 .achievements-error,
 .achievements-empty {
@@ -137,30 +145,6 @@ html.dark .achievement-card:hover {
   transition: color 0.3s ease;
 }
 
-.progress-bar-container {
-  width: 100%;
-  height: 12px;
-  background-color: var(--input-bg);
-  border-radius: 6px;
-  overflow: hidden;
-  transition: background-color 0.3s ease;
-}
-
-.progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #4CAF50, #8BC34A);
-  border-radius: 6px;
-  transition: width 0.5s ease;
-}
-
-.progress-text {
-  margin-top: 5px;
-  text-align: right;
-  font-size: 0.9em;
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
-}
-
 /* Trophy Styles */
 .trophies-section {
   margin-bottom: 40px;
@@ -261,6 +245,7 @@ html.dark .trophy-card:hover {
 
 .achievements-section h2 {
   color: var(--accent-color);
+  text-align: center;
   margin-bottom: 20px;
   font-size: 1.5em;
   transition: color 0.3s ease;
@@ -343,32 +328,52 @@ html.dark .trophy-card:hover {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin: 15px 0;
+  margin: 20px 0;
 }
 
-.progress-bar-wrapper .progress-bar {
+.progress-bar-container {
   flex: 1;
-  height: 16px;
+  height: 50px;
   background-color: var(--input-bg);
   border-radius: 8px;
   overflow: hidden;
-  transition: background-color 0.3s ease;
+  position: relative;
+  border: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.progress-bar-wrapper .progress-bar .progress-fill {
+.progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
   height: 100%;
-  background: linear-gradient(90deg, var(--accent-color), var(--accent-color));
-  border-radius: 8px;
-  transition: width 0.5s ease;
+  background: linear-gradient(90deg, var(--accent-color), #4CAF50);
+  border-radius: 6px;
+  transition: width 1s ease-out;
+  z-index: 1;
 }
 
-.progress-percentage {
+.progress-text {
+  position: relative;
+  z-index: 2;
   color: var(--text-primary);
   font-weight: bold;
-  font-size: 1.1em;
-  min-width: 50px;
-  text-align: right;
-  transition: color 0.3s ease;
+  font-size: 0.95em;
+  text-align: center;
+  text-shadow: 0 0 6px rgba(0,0,0,0.3);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.time-remaining {
+  font-size: 0.85em;
+  font-weight: normal;
+  color: var(--text-primary);
+  text-shadow: 0 0 6px rgba(0,0,0,0.3);
 }
 
 .progress-description {
@@ -386,6 +391,25 @@ html.dark .trophy-card:hover {
   font-weight: bold;
   margin: 15px 0;
   transition: color 0.3s ease;
+}
+
+.next-trophy.greyed-out {
+  opacity: 0.5;
+}
+
+.next-trophy.greyed-out .trophy-display {
+  background: var(--bg-secondary);
+  filter: grayscale(60%);
+}
+
+.next-trophy.greyed-out .trophy-icon-large {
+  opacity: 0.5;
+}
+
+.next-trophy.greyed-out h3,
+.next-trophy.greyed-out h4,
+.next-trophy.greyed-out p {
+  color: var(--text-muted);
 }
 
 .no-trophy-progress {
