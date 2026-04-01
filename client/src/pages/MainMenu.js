@@ -40,8 +40,17 @@ export default function MainMenu() {
       }
     };
 
+    const checkTrophies = async () => {
+      try {
+        await apiClient.post('/api/trophies/check', {});
+      } catch (err) {
+        console.error('Failed to check trophies:', err);
+      }
+    };
+
     if (token) {
       fetchAddictions();
+      checkTrophies();
     }
   }, [token]);
 

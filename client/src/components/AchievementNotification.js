@@ -5,71 +5,87 @@ import { AuthContext } from '../context/AuthContext';
 
 export default function AchievementNotification() {
   const { token } = useContext(AuthContext);
-  const [achievements, setAchievements] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const [visible, setVisible] = useState([]);
 
-  const dismissAchievement = useCallback(async (id) => {
+  const dismissNotification = useCallback(async (id, type) => {
     try {
-      await apiClient.put(`/api/achievements/${id}/read`, {});
+      const endpoint = type === 'achievement' ? `/api/achievements/${id}/read` : `/api/trophies/${id}/read`;
+      await apiClient.put(endpoint, {});
       setVisible(prev => prev.filter(v => v !== id));
-      setAchievements(prev => prev.filter(a => a._id !== id));
+      setNotifications(prev => prev.filter(n => n._id !== id));
     } catch (error) {
-      console.error('Failed to mark achievement as read:', error);
+      console.error(`Failed to mark ${type} as read:`, error);
     }
   }, [token]);
 
   useEffect(() => {
-    const showNotification = (achievement) => {
-      const id = achievement._id;
+    const showNotification = (notification) => {
+      const id = notification._id;
       setVisible(prev => [...prev, id]);
       setTimeout(() => {
-        dismissAchievement(id);
+        dismissNotification(id, notification.type === 'achievement' ? 'achievement' : 'trophy');
       }, 5000);
     };
 
-    const fetchUnreadAchievements = async () => {
+    const fetchUnreadNotifications = async () => {
       try {
-        const response = await apiClient.get('/api/achievements/unread');
-        setAchievements(prevAchievements => {
-          const newAchievements = response.data.filter(
-            ach => !prevAchievements.some(a => a._id === ach._id)
+        // Fetch both achievements and trophies in parallel
+        const [achievementsRes, trophiesRes] = await Promise.all([
+          apiClient.get('/api/achievements/unread').catch(() => ({ data: [] })),
+          apiClient.get('/api/trophies/unread').catch(() => ({ data: [] }))
+        ]);
+
+        const achievements = (achievementsRes.data || []).map(a => ({ ...a, type: 'achievement' }));
+        const trophies = (trophiesRes.data || []).map(t => ({ ...t, type: 'trophy' }));
+        const allNotifications = [...achievements, ...trophies];
+
+        setNotifications(prevNotifications => {
+          const newNotifications = allNotifications.filter(
+            notif => !prevNotifications.some(p => p._id === notif._id)
           );
           
-          if (newAchievements.length > 0) {
-            newAchievements.forEach(ach => {
-              showNotification(ach);
+          if (newNotifications.length > 0) {
+            newNotifications.forEach(notif => {
+              showNotification(notif);
             });
           }
-          return [...newAchievements, ...prevAchievements];
+          return [...newNotifications, ...prevNotifications];
         });
       } catch (error) {
-        console.error('Failed to fetch achievements:', error);
+        console.error('Failed to fetch notifications:', error);
       }
     };
 
     if (token) {
-      fetchUnreadAchievements();
-      const interval = setInterval(fetchUnreadAchievements, 5000);
+      fetchUnreadNotifications();
+      const interval = setInterval(fetchUnreadNotifications, 5000);
       return () => clearInterval(interval);
     }
-  }, [token, dismissAchievement]);
+  }, [token, dismissNotification]);
 
   return (
     <div className="achievement-container">
       {visible.map(id => {
-        const achievement = achievements.find(a => a._id === id);
-        if (!achievement) return null;
+        const notification = notifications.find(n => n._id === id);
+        if (!notification) return null;
+
+        const icon = notification.type === 'achievement' ? notification.icon : '🏆';
+        const title = notification.type === 'achievement' ? 'Achievement Unlocked!' : 'Trophy Earned!';
 
         return (
-          <div key={id} className="achievement-notification">
-            <div className="achievement-icon">{achievement.icon}</div>
+          <div key={id} className={`achievement-notification ${notification.type}`}>
+            <div className="achievement-header">
+              <div className="achievement-icon">{icon}</div>
+              <div className="achievement-type">{title}</div>
+            </div>
             <div className="achievement-content">
-              <h4>{achievement.name}</h4>
-              <p>{achievement.description}</p>
+              <h4>{notification.name}</h4>
+              <p>{notification.description}</p>
             </div>
             <button
               className="achievement-close"
-              onClick={() => dismissAchievement(id)}
+              onClick={() => dismissNotification(id, notification.type === 'achievement' ? 'achievement' : 'trophy')}
             >
               ✕
             </button>
