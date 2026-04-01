@@ -117,9 +117,6 @@ router.get('/unread', auth, asyncHandler(async (req, res) => {
   
   res.json(achievements);
 }));
-  
-  res.json(achievements);
-}));
 
 // Mark achievement as read
 router.put('/:id/read', auth, asyncHandler(async (req, res) => {
