@@ -239,9 +239,14 @@ export default function AddictionDetail() {
     
     const stopDate = new Date(addiction.stopDate);
     const now = new Date();
-    let diff = now - stopDate;
+    const diffMs = now - stopDate;
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    // Calculate total days in decimal format for money calculation
+    const totalDaysElapsed = diffMs / (1000 * 60 * 60 * 24);
+
+    // Calculate breakdown for display
+    let diff = diffMs;
+    const days = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
     diff -= days * (1000 * 60 * 60 * 24);
 
     const hours = Math.floor(diff / (1000 * 60 * 60));
@@ -249,16 +254,19 @@ export default function AddictionDetail() {
 
     const minutes = Math.floor(diff / (1000 * 60));
 
-    let elapsedText = '';
-    if (days > 0) {
-      elapsedText += `${days} day${days !== 1 ? 's' : ''}`;
-    }
+    // Build elapsed text - always include days
+    let elapsedText = `${days} day${days !== 1 ? 's' : ''}`;
     if (hours > 0) {
-      elapsedText += (elapsedText ? ', ' : '') + `${hours} hour${hours !== 1 ? 's' : ''}`;
+      elapsedText += `, ${hours} hour${hours !== 1 ? 's' : ''}`;
     }
-    if (minutes > 0 || elapsedText === '') {
-      elapsedText += (elapsedText ? ', ' : '') + `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+    if (minutes > 0) {
+      elapsedText += `, ${minutes} minute${minutes !== 1 ? 's' : ''}`;
     }
+
+    // Calculate money saved
+    const frequencyPerDay = addiction.frequencyPerDay || 0;
+    const costPerUnit = addiction.moneySpentPerDay ? addiction.moneySpentPerDay / frequencyPerDay : 0;
+    const totalMoneySaved = frequencyPerDay > 0 ? totalDaysElapsed * frequencyPerDay * costPerUnit : 0;
 
     const formattedDate = stopDate.toLocaleDateString('en-US', {
       year: 'numeric',
@@ -275,7 +283,9 @@ export default function AddictionDetail() {
     return {
       date: formattedDate,
       time: formattedTime,
-      elapsed: elapsedText
+      elapsed: elapsedText,
+      days: days,
+      totalMoneySaved: totalMoneySaved
     };
   };
 
@@ -379,6 +389,9 @@ export default function AddictionDetail() {
               <p className="elapsed-time">
                 <strong>{elapsedTime.elapsed}</strong> since you stopped
               </p>
+              <p className="money-saved-highlight">
+                💰 You've saved: <strong>${elapsedTime.totalMoneySaved.toFixed(2)}</strong>
+              </p>
             </div>
           </div>
         </div>
@@ -387,28 +400,28 @@ export default function AddictionDetail() {
       <div className="stats-container">
         <div className="stat-card">
           <h3>Days Since Stopping</h3>
-          <p className="stat-value">{addiction.daysStopped}</p>
+          <p className="stat-value">{elapsedTime?.days || 0}</p>
         </div>
 
         <div className="stat-card">
           <h3>Total Money Saved</h3>
-          <p className="stat-value">${(addiction.totalMoneySaved || 0).toFixed(2)}</p>
+          <p className="stat-value">${(elapsedTime?.totalMoneySaved || 0).toFixed(2)}</p>
         </div>
 
         <div className="stat-card">
           <h3>{getFrequencyLabel(addiction.addictionType)}</h3>
-          <p className="stat-value">{addiction.frequency || 0}</p>
+          <p className="stat-value">{addiction.frequencyPerDay || 0}</p>
         </div>
 
         <div className="stat-card">
           <h3>{getCostLabel(addiction.addictionType)}</h3>
-          <p className="stat-value">${(addiction.cost || 0).toFixed(2)}</p>
+          <p className="stat-value">${(addiction.moneySpentPerDay || 0).toFixed(2)}</p>
         </div>
       </div>
 
       <div className="details-section">
         <h2>Withdrawal Timeline & Milestones</h2>
-        <WithdrawalTimeline daysStopped={addiction.daysStopped} timeline={timeline} />
+        <WithdrawalTimeline daysStopped={elapsedTime?.days || addiction.daysStopped || 0} timeline={timeline} />
       </div>
 
       {addiction.notes && (
