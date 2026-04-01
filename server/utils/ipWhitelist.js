@@ -23,14 +23,26 @@ function parseCIDR(cidr) {
 /**
  * Check if an IP address is within a CIDR range
  * @param {string} ip - IP address to check
- * @param {string} cidr - CIDR range
+ * @param {string} cidr - CIDR range (e.g., "192.168.0.0/16")
  * @returns {boolean} True if IP is in range
  */
 function isIPInRange(ip, cidr) {
   try {
+    // Parse the IP address
     const addr = ipaddr.process(ip);
-    const range = ipaddr.process(cidr);
-    return addr.match(range);
+    
+    // Parse CIDR notation
+    const parts = cidr.split('/');
+    if (parts.length !== 2) {
+      console.error(`Invalid CIDR format: ${cidr}`);
+      return false;
+    }
+    
+    const rangeAddr = ipaddr.process(parts[0]);
+    const prefixLength = parseInt(parts[1], 10);
+    
+    // Check if the address is in the CIDR range
+    return addr.kind() === rangeAddr.kind() && addr.match(rangeAddr, prefixLength);
   } catch (err) {
     console.error(`Error checking IP ${ip} against CIDR ${cidr}:`, err.message);
     return false;
@@ -56,25 +68,32 @@ function createIPWhitelistMiddleware(whitelistString) {
   console.log(`IP Whitelist configured with ranges:`, whitelist);
 
   return (req, res, next) => {
-    const clientIP = req.ip || req.connection.remoteAddress || req.socket.remoteAddress;
+    let clientIP = req.ip || req.connection.remoteAddress || req.socket.remoteAddress || '';
     
+    // Clean up the IP address
+    // Remove brackets if present (IPv6)
+    clientIP = clientIP.replace(/[\[\]]/g, '');
     // Remove IPv6 prefix if present
-    const cleanIP = clientIP.replace(/^::ffff:/, '');
+    clientIP = clientIP.replace(/^::ffff:/, '');
+    // Map IPv6 loopback to IPv4
+    if (clientIP === '::1') {
+      clientIP = '127.0.0.1';
+    }
 
-    console.log(`Incoming request from IP: ${cleanIP}`);
+    console.log(`Incoming request from IP: ${clientIP}`);
 
     // Check if IP is in any of the whitelisted ranges
-    const isAllowed = whitelist.some(cidr => isIPInRange(cleanIP, cidr));
+    const isAllowed = whitelist.some(cidr => isIPInRange(clientIP, cidr));
 
     if (!isAllowed) {
-      console.warn(`Access denied for IP: ${cleanIP}. Not in whitelist.`);
+      console.warn(`Access denied for IP: ${clientIP}. Not in whitelist.`);
       return res.status(403).json({
         error: 'Access Denied',
         message: 'Your IP address is not whitelisted.',
       });
     }
 
-    console.log(`Access granted for IP: ${cleanIP}`);
+    console.log(`Access granted for IP: ${clientIP}`);
     next();
   };
 }

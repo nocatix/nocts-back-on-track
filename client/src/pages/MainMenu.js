@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './MainMenu.css';
-import axios from 'axios';
+import apiClient from '../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { calculateDailyPredictions, formatDayCount, getWithdrawalStage } from '../utils/withdrawalHelper';
@@ -27,9 +27,7 @@ export default function MainMenu() {
   useEffect(() => {
     const fetchAddictions = async () => {
       try {
-        const response = await axios.get('/api/addictions', {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const response = await apiClient.get('/api/addictions');
         setAddictions(response.data);
         const dailyPredictions = calculateDailyPredictions(response.data);
         setPredictions(dailyPredictions);
@@ -64,9 +62,7 @@ export default function MainMenu() {
 
   const fetchRandomMemory = async () => {
     try {
-      const response = await axios.get('/api/memories/random', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await apiClient.get('/api/memories/random');
       setRandomMemory(response.data);
     } catch (err) {
       setRandomMemory(null);

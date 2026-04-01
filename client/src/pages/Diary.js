@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './Diary.css';
-import axios from 'axios';
+import apiClient from '../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { getCookie, setCookie } from '../utils/cookieHelper';
@@ -38,9 +38,7 @@ export default function Diary() {
     const fetchEntry = async () => {
       try {
         const formattedDate = currentDate.toISOString().split('T')[0];
-        const response = await axios.get(`/api/diary/${formattedDate}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const response = await apiClient.get(`/api/diary/${formattedDate}`);
         setContent(response.data.content || '');
         setLastSaved(response.data.updatedAt);
         setIsEditing(false);
@@ -68,10 +66,9 @@ export default function Diary() {
     setIsSaving(true);
     try {
       const formattedDate = currentDate.toISOString().split('T')[0];
-      const response = await axios.post(
+      const response = await apiClient.post(
         `/api/diary/${formattedDate}`,
-        { content },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { content }
       );
       setLastSaved(response.data.updatedAt);
       setIsEditing(false);

@@ -55,7 +55,7 @@ const getAllowedOrigins = () => {
 app.use(cors(getAllowedOrigins()));
 
 // IP Whitelist Middleware
-const ipWhitelist = process.env.IP_WHITELIST || '192.168.2.0/24';
+const ipWhitelist = process.env.IP_WHITELIST || '127.0.0.0/8,192.168.2.0/24,10.0.0.0/8';
 app.use(createIPWhitelistMiddleware(ipWhitelist));
 
 // Force HTTPS redirect (with exceptions for local network)
@@ -84,7 +84,10 @@ app.use((req, res, next) => {
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('X-XSS-Protection', '1; mode=block');
   res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-  res.setHeader('Content-Security-Policy', "default-src 'self'");
+  // Only apply restrictive CSP to HTML responses, not API responses
+  if (req.path.startsWith('/api')) {
+    res.setHeader('Content-Type', 'application/json');
+  }
   next();
 });
 
@@ -101,6 +104,27 @@ app.use('/api/trophies', trophyRoutes);
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ message: 'Server is running', timestamp: new Date().toISOString() });
+});
+
+// 404 handler for API routes
+app.use('/api', (req, res) => {
+  res.status(404).json({ message: 'API endpoint not found' });
+});
+
+// Global error handler middleware
+app.use((err, req, res, next) => {
+  console.error('Error:', err.message);
+  
+  // Ensure JSON response
+  res.setHeader('Content-Type', 'application/json');
+  
+  const status = err.status || res.statusCode || 500;
+  const message = err.message || 'Internal server error';
+  
+  res.status(status).json({ 
+    message,
+    error: process.env.NODE_ENV === 'production' ? {} : { stack: err.stack }
+  });
 });
 
 const PORT = process.env.PORT || 5000;

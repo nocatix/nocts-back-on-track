@@ -5,6 +5,11 @@ const Addiction = require('../models/Addiction');
 
 const router = express.Router();
 
+// Async error handling wrapper
+const asyncHandler = (fn) => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next);
+};
+
 // Define milestone achievements
 const MILESTONES = {
   1: { name: '24 Hours', icon: '⏰', description: 'Made it through your first day!' },
@@ -19,84 +24,71 @@ const MILESTONES = {
 };
 
 // Get all achievements for user
-router.get('/', auth, async (req, res) => {
-  try {
-    const achievements = await Achievement.find({ userId: req.user.userId }).sort({ unreadAt: -1 });
-    res.json(achievements);
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-});
+router.get('/', auth, asyncHandler(async (req, res) => {
+  const achievements = await Achievement.find({ userId: req.user.userId }).sort({ unreadAt: -1 });
+  res.json(achievements);
+}));
 
 // Get unread achievements
-router.get('/unread', auth, async (req, res) => {
-  try {
-    const achievements = await Achievement.find({ userId: req.user.userId, readAt: null }).sort({ unreadAt: -1 });
-    res.json(achievements);
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-});
+router.get('/unread', auth, asyncHandler(async (req, res) => {
+  const achievements = await Achievement.find({ userId: req.user.userId, readAt: null }).sort({ unreadAt: -1 });
+  res.json(achievements);
+}));
 
 // Mark achievement as read
-router.put('/:id/read', auth, async (req, res) => {
-  try {
-    const achievement = await Achievement.findOneAndUpdate(
-      { _id: req.params.id, userId: req.user.userId },
-      { readAt: Date.now() },
-      { new: true }
-    );
-    res.json(achievement);
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
+router.put('/:id/read', auth, asyncHandler(async (req, res) => {
+  const achievement = await Achievement.findOneAndUpdate(
+    { _id: req.params.id, userId: req.user.userId },
+    { readAt: Date.now() },
+    { new: true }
+  );
+  if (!achievement) {
+    return res.status(404).json({ message: 'Achievement not found' });
   }
-});
+  res.json(achievement);
+}));
 
 // Check and create achievements for an addiction
-router.post('/check/:addictionId', auth, async (req, res) => {
-  try {
-    const addiction = await Addiction.findOne({
-      _id: req.params.addictionId,
-      userId: req.user.userId
-    });
+router.post('/check/:addictionId', auth, asyncHandler(async (req, res) => {
+  const addiction = await Addiction.findOne({
+    _id: req.params.addictionId,
+    userId: req.user.userId
+  });
 
-    if (!addiction) {
-      return res.status(404).json({ message: 'Addiction not found' });
-    }
+  if (!addiction) {
+    return res.status(404).json({ message: 'Addiction not found' });
+  }
 
-    const daysStopped = addiction.getDaysStopped();
-    const newAchievements = [];
+  const daysStopped = addiction.getDaysStopped();
+  const newAchievements = [];
 
-    // Check each milestone
-    for (const [days, milestone] of Object.entries(MILESTONES)) {
-      const daysNum = parseInt(days);
-      if (daysStopped >= daysNum) {
-        // Check if achievement already exists
-        const existingAchievement = await Achievement.findOne({
+  // Check each milestone
+  for (const [days, milestone] of Object.entries(MILESTONES)) {
+    const daysNum = parseInt(days);
+    if (daysStopped >= daysNum) {
+      // Check if achievement already exists
+      const existingAchievement = await Achievement.findOne({
+        userId: req.user.userId,
+        milestoneDays: daysNum,
+        addictionId: req.params.addictionId
+      });
+
+      if (!existingAchievement) {
+        const newAchievement = new Achievement({
           userId: req.user.userId,
+          name: milestone.name,
+          description: milestone.description,
+          icon: milestone.icon,
           milestoneDays: daysNum,
           addictionId: req.params.addictionId
         });
-
-        if (!existingAchievement) {
-          const newAchievement = new Achievement({
-            userId: req.user.userId,
-            name: milestone.name,
-            description: milestone.description,
-            icon: milestone.icon,
-            milestoneDays: daysNum,
-            addictionId: req.params.addictionId
-          });
-          await newAchievement.save();
-          newAchievements.push(newAchievement);
-        }
+        await newAchievement.save();
+        newAchievements.push(newAchievement);
       }
     }
-
-    res.json(newAchievements);
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
   }
-});
+
+  res.json(newAchievements);
+}));
 
 module.exports = router;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import './AchievementNotification.css';
-import axios from 'axios';
+import apiClient from '../api/axiosConfig';
 import { AuthContext } from '../context/AuthContext';
 
 export default function AchievementNotification() {
@@ -10,9 +10,7 @@ export default function AchievementNotification() {
 
   const dismissAchievement = useCallback(async (id) => {
     try {
-      await axios.put(`/api/achievements/${id}/read`, {}, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await apiClient.put(`/api/achievements/${id}/read`, {});
       setVisible(prev => prev.filter(v => v !== id));
       setAchievements(prev => prev.filter(a => a._id !== id));
     } catch (error) {
@@ -31,9 +29,7 @@ export default function AchievementNotification() {
 
     const fetchUnreadAchievements = async () => {
       try {
-        const response = await axios.get('/api/achievements/unread', {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const response = await apiClient.get('/api/achievements/unread');
         setAchievements(prevAchievements => {
           const newAchievements = response.data.filter(
             ach => !prevAchievements.some(a => a._id === ach._id)

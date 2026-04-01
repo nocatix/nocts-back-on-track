@@ -84,17 +84,29 @@ const Mood = () => {
 
     const fetchMoods = async () => {
       try {
-        const response = await fetch(`/api/moods/month/${year}/${month + 1}`, {
+        const API_BASE_URL = 'http://localhost:5000';
+        const response = await fetch(`${API_BASE_URL}/api/moods/month/${year}/${month + 1}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
-        const data = await response.json();
 
-        const moodMap = {};
-        data.forEach(mood => {
-          const dateKey = new Date(mood.date).toISOString().split('T')[0];
-          moodMap[dateKey] = mood;
-        });
-        setMoods(moodMap);
+        if (!response.ok) {
+          console.error(`Error fetching moods: ${response.status} ${response.statusText}`);
+          return;
+        }
+
+        try {
+          const data = await response.json();
+
+          const moodMap = {};
+          data.forEach(mood => {
+            const dateKey = new Date(mood.date).toISOString().split('T')[0];
+            moodMap[dateKey] = mood;
+          });
+          setMoods(moodMap);
+        } catch (parseError) {
+          console.error('Failed to parse moods response:', parseError);
+          console.error('Response status:', response.status);
+        }
       } catch (error) {
         console.error('Error fetching moods:', error);
       }
@@ -140,8 +152,9 @@ const Mood = () => {
     }
 
     try {
+      const API_BASE_URL = 'http://localhost:5000';
       const dateString = selectedDate.toISOString().split('T')[0];
-      const response = await fetch('/api/moods', {
+      const response = await fetch(`${API_BASE_URL}/api/moods`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

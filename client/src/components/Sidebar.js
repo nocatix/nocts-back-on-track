@@ -3,7 +3,7 @@ import { DarkModeContext } from '../context/DarkModeContext';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { getCookie, setCookie } from '../utils/cookieHelper';
-import axios from 'axios';
+import apiClient from '../api/axiosConfig';
 import './Sidebar.css';
 
 export default function Sidebar() {
@@ -22,9 +22,7 @@ export default function Sidebar() {
       if (!token) return;
       
       try {
-        const response = await axios.get('/api/addictions', {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const response = await apiClient.get('/api/addictions');
         setAddictions(response.data);
         setLoading(false);
       } catch (err) {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useAuth } from '../context/AuthContext';
 import './Profile.css';
-import axios from 'axios';
+import apiClient from '../api/axiosConfig';
 
 const Profile = () => {
   const { user, token, setUser, loading } = useAuth();
@@ -48,14 +48,8 @@ const Profile = () => {
 
   const handleUnitPreferenceChange = async (preference) => {
     try {
-      const response = await axios.put('/api/auth/unit-preference', 
-        { unitPreference: preference },
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        }
+      const response = await apiClient.put('/api/auth/unit-preference', 
+        { unitPreference: preference }
       );
       setUnitPreference(preference);
       setUser({ ...user, unitPreference: preference });
@@ -72,12 +66,7 @@ const Profile = () => {
     setMessage('');
 
     try {
-      const response = await axios.put('/api/auth/profile', formData, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
+      const response = await apiClient.put('/api/auth/profile', formData);
 
       // Update the user context
       setUser(response.data.user);
@@ -102,14 +91,9 @@ const Profile = () => {
     }
 
     try {
-      await axios.put('/api/auth/change-password', {
+      await apiClient.put('/api/auth/change-password', {
         currentPassword: passwordData.currentPassword,
         newPassword: passwordData.newPassword
-      }, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
       });
 
       setMessage('Password changed successfully!');
@@ -131,11 +115,7 @@ const Profile = () => {
     }
 
     try {
-      await axios.delete('/api/auth/profile', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
+      await apiClient.delete('/api/auth/profile');
 
       // Logout the user
       window.location.href = '/login';

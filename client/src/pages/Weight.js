@@ -43,16 +43,26 @@ const Weight = () => {
 
   const fetchWeights = async () => {
     try {
-      const response = await fetch('/api/weights', {
+      const API_BASE_URL = 'http://localhost:5000';
+      const response = await fetch(`${API_BASE_URL}/api/weights`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      if (response.ok) {
+      
+      if (!response.ok) {
+        console.error(`Error fetching weights: ${response.status} ${response.statusText}`);
+        return;
+      }
+
+      try {
         const data = await response.json();
         setWeights(data);
         // Convert all weights to current unit for display
         if (unit === 'kg' && data.length > 0 && data[0].unit === 'lbs') {
           convertWeights(data, 'kg');
         }
+      } catch (parseError) {
+        console.error('Failed to parse weights response:', parseError);
+        console.error('Response status:', response.status);
       }
     } catch (err) {
       console.error('Error fetching weights:', err);
@@ -78,8 +88,9 @@ const Weight = () => {
     }
 
     try {
+      const API_BASE_URL = 'http://localhost:5000';
       const dateTime = new Date(`${selectedDate}T${selectedTime}`);
-      const response = await fetch('/api/weights', {
+      const response = await fetch(`${API_BASE_URL}/api/weights`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -119,7 +130,8 @@ const Weight = () => {
 
   const handleDeleteWeight = async (id) => {
     try {
-      const response = await fetch(`/api/weights/${id}`, {
+      const API_BASE_URL = 'http://localhost:5000';
+      const response = await fetch(`${API_BASE_URL}/api/weights/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });

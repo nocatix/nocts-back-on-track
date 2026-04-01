@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import apiClient from '../api/axiosConfig';
 import { setCookie, getCookie, deleteCookie } from '../utils/cookieHelper';
 
 export const AuthContext = createContext();
@@ -25,11 +25,7 @@ export function AuthProvider({ children }) {
     const fetchUser = async () => {
       if (token && !user) {
         try {
-          const response = await axios.get('/api/auth/me', {
-            headers: {
-              'Authorization': `Bearer ${token}`
-            }
-          });
+          const response = await apiClient.get('/api/auth/me');
           setUser(response.data.user);
         } catch (err) {
           console.error('Failed to fetch user:', err);

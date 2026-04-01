@@ -5,11 +5,7 @@ const memorySchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  message: {
-    encrypted: String,
-    iv: String,
-    authTag: String
-  },
+  message: mongoose.Schema.Types.Mixed,
   imageUrl: {
     type: String
   },

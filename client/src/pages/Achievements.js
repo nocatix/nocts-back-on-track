@@ -18,8 +18,10 @@ const Achievements = () => {
 
     const fetchAchievementsAndTrophies = async () => {
       try {
+        const API_BASE_URL = 'http://localhost:5000';
+        
         // Check and award new trophies
-        await fetch('/api/trophies/check', {
+        await fetch(`${API_BASE_URL}/api/trophies/check`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -28,7 +30,7 @@ const Achievements = () => {
         });
 
         // Fetch trophy progress
-        const progressResponse = await fetch('/api/trophies/progress', {
+        const progressResponse = await fetch(`${API_BASE_URL}/api/trophies/progress`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -36,27 +38,42 @@ const Achievements = () => {
         });
         
         if (progressResponse.ok) {
-          const progressData = await progressResponse.json();
-          setTrophyProgress(progressData);
+          try {
+            const progressData = await progressResponse.json();
+            setTrophyProgress(progressData);
+          } catch (parseError) {
+            console.warn('Failed to parse trophy progress response:', parseError);
+          }
         }
 
         // Fetch achievements
-        const achievementsResponse = await fetch('/api/achievements', {
+        const achievementsResponse = await fetch(`${API_BASE_URL}/api/achievements`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
         });
         
+        console.log('Achievements response status:', achievementsResponse.status);
+        console.log('Achievements response headers:', achievementsResponse.headers);
+        const achievementsText = await achievementsResponse.text();
+        console.log('Achievements response body:', achievementsText);
+        
         if (!achievementsResponse.ok) {
           throw new Error('Failed to fetch achievements');
         }
         
-        const achievementsData = await achievementsResponse.json();
-        setAchievements(achievementsData);
+        try {
+          const achievementsData = JSON.parse(achievementsText);
+          setAchievements(achievementsData);
+        } catch (parseError) {
+          console.error('Failed to parse achievements response:', parseError);
+          console.error('Response headers:', achievementsResponse.headers);
+          throw new Error('Invalid response format from achievements endpoint');
+        }
 
         // Fetch trophies
-        const trophiesResponse = await fetch('/api/trophies', {
+        const trophiesResponse = await fetch(`${API_BASE_URL}/api/trophies`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -66,13 +83,24 @@ const Achievements = () => {
         if (!trophiesResponse.ok) {
           throw new Error('Failed to fetch trophies');
         }
-        
-        const trophiesData = await trophiesResponse.json();
-        setTrophies(trophiesData);
+
+        try {
+          const trophiesData = await trophiesResponse.json();
+          setTrophies(trophiesData);
+        } catch (parseError) {
+          console.error('Failed to parse trophies response:', parseError);
+          console.error('Response headers:', trophiesResponse.headers);
+          throw new Error('Invalid response format from trophies endpoint');
+        }
 
         setLoading(false);
       } catch (err) {
-        setError(err.message);
+        console.error('Error fetching achievements data:', err);
+        if (err instanceof SyntaxError) {
+          setError('Failed to parse server response. Please try again.');
+        } else {
+          setError(err.message);
+        }
         setLoading(false);
       }
     };

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import './Auth.css';
-import axios from 'axios';
+import apiClient from '../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
@@ -32,7 +32,7 @@ export default function Register() {
     }
 
     try {
-      const response = await axios.post('/api/auth/register', {
+      const response = await apiClient.post('/api/auth/register', {
         username: formData.username,
         fullName: formData.fullName,
         password: formData.password

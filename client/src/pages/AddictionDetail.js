@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './AddictionDetail.css';
-import axios from 'axios';
+import apiClient from '../api/axiosConfig';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import WithdrawalTimeline from '../components/WithdrawalTimeline';
@@ -22,9 +22,7 @@ export default function AddictionDetail() {
   useEffect(() => {
     const fetchAddiction = async () => {
       try {
-        const response = await axios.get(`/api/addictions/${id}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const response = await apiClient.get(`/api/addictions/${id}`);
         const addictionData = response.data;
         
         // Calculate daysStopped if not provided by backend
@@ -71,9 +69,7 @@ export default function AddictionDetail() {
         }
 
         // Check for new achievements
-        await axios.post(`/api/achievements/check/${id}`, {}, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await apiClient.post(`/api/achievements/check/${id}`, {});
       } catch (err) {
         console.error('Error loading addiction:', err);
         console.error('Error response:', err.response?.data);
@@ -106,9 +102,7 @@ export default function AddictionDetail() {
     if (window.confirm('Are you sure you want to log that you caved? This will reset your streak.')) {
       try {
         // Update the addiction to mark it as caved
-        await axios.put(`/api/addictions/${id}/caved`, {}, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await apiClient.put(`/api/addictions/${id}/caved`, {});
         
         // Update the UI to show that we've caved
         setCaved(true);
@@ -128,9 +122,7 @@ export default function AddictionDetail() {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`/api/addictions/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await apiClient.delete(`/api/addictions/${id}`);
       setShowDeleteConfirm(false);
       navigate('/');
     } catch (err) {

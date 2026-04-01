@@ -140,46 +140,35 @@ Your personal addiction recovery companion. A comprehensive Node.js + React appl
 - Specific withdrawal symptom descriptions
 - Addiction-specific recovery tips
 
-## � Screenshots
+## 📸 Screenshots
 
-To add screenshots to this section:
+<div align="center">
 
-1. **Run the application locally** or in Docker:
-   ```bash
-   # Local development
-   npm run dev
-   
-   # Or with Docker
-   docker compose up
-   ```
+### Dashboard
+![Dashboard](docs/screenshots/dashboard.png)
 
-2. **Access at**: `http://localhost:3000`
+### Addiction Detail & Tracking
+![Addiction Detail](docs/screenshots/addiction-detail.png)
+![Addiction Detail 2](docs/screenshots/addiction-detail2.png)
 
-3. **Take screenshots** of key pages (e.g., Login, Dashboard, Addiction Detail, Achievements)
+### Mood Tracker
+![Mood Tracker](docs/screenshots/mood-tracker.png)
 
-4. **Create directory** and add images:
-   ```bash
-   mkdir -p docs/screenshots
-   # Add your images here
-   ```
+### Diary
+![Diary](docs/screenshots/diary.png)
 
-5. **Update README** with image references:
-   ```markdown
-   ![Dashboard Screenshot](docs/screenshots/dashboard.png)
-   ![Addiction Detail](docs/screenshots/addiction-detail.png)
-   ```
+### Memories
+![Memories](docs/screenshots/memories.png)
 
-### Example Section Structure
-- 🏠 Dashboard Overview
-- ➕ Add/Track Addiction
-- 📊 Withdrawal Timeline
-- 🏆 Achievements
-- 🧘 Meditation & Support Tools
-- 🎮 Craving Game
+### Weight Tracker
+![Weight Tracker](docs/screenshots/weight-tracker.png)
 
-> **Note**: Screenshots help users understand the app's interface and features at a glance. Consider adding both light and dark mode examples!
+### Meditation
+![Meditation](docs/screenshots/meditation.png)
 
-## �🛠️ Technical Stack
+</div>
+
+## 🛠️ Technical Stack
 
 ### **Backend**
 - **Runtime**: Node.js with Express.js
@@ -511,3 +500,11 @@ Feel free to fork this project and submit pull requests for any improvements.
 ## 📄 License
 
 MIT License - See [LICENSE](LICENSE) file for details
+
+## 💝 Support
+
+If you find this project helpful in your recovery journey, consider supporting the developer:
+
+[![Ko-Fi](https://img.shields.io/badge/Support%20on-Ko--fi-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/noct1)
+
+Your support helps maintain and improve this recovery tool for everyone.

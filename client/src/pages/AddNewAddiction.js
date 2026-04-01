@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import './AddNewAddiction.css';
-import axios from 'axios';
+import apiClient from '../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { getFrequencyLabel, getCostLabel } from '../utils/withdrawalHelper';
@@ -90,14 +90,12 @@ export default function AddNewAddiction() {
     stopDateTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
 
     try {
-      await axios.post('/api/addictions', {
+      await apiClient.post('/api/addictions', {
         name: addictionName,
         stopDate: stopDateTime.toISOString(),
         frequencyPerDay: formData.frequencyPerDay,
         moneySpentPerDay: formData.moneySpentPerDay,
         notes: formData.notes
-      }, {
-        headers: { Authorization: `Bearer ${token}` }
       });
       navigate('/');
     } catch (err) {

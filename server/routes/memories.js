@@ -14,12 +14,15 @@ router.post('/', auth, async (req, res) => {
 
     const memory = new Memory({
       userId: req.user.userId,
-      message: message || '',
-      imageUrl: imageUrl || '',
+      message: message ? message : null,
+      imageUrl: imageUrl ? imageUrl : null,
     });
 
     await memory.save();
-    res.json(memory);
+    
+    // Fetch the memory back to trigger post-find hooks for decryption
+    const savedMemory = await Memory.findById(memory._id);
+    res.json(savedMemory);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

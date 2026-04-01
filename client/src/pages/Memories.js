@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './Memories.css';
-import axios from 'axios';
+import apiClient from '../api/axiosConfig';
 import { AuthContext } from '../context/AuthContext';
 
 export default function Memories() {
@@ -12,6 +12,8 @@ export default function Memories() {
   const [showForm, setShowForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [notification, setNotification] = useState('');
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteMemoryId, setDeleteMemoryId] = useState(null);
   const { token } = useContext(AuthContext);
 
   useEffect(() => {
@@ -20,9 +22,7 @@ export default function Memories() {
 
   const fetchMemories = async () => {
     try {
-      const response = await axios.get('/api/memories', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await apiClient.get('/api/memories');
       setMemories(response.data);
     } catch (error) {
       setNotification('Failed to load memories');
@@ -53,10 +53,9 @@ export default function Memories() {
 
     setSubmitting(true);
     try {
-      await axios.post(
+      await apiClient.post(
         '/api/memories',
-        { message, imageUrl },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { message, imageUrl }
       );
       
       setMessage('');
@@ -75,18 +74,23 @@ export default function Memories() {
   };
 
   const handleDelete = async (memoryId) => {
-    if (window.confirm('Are you sure you want to delete this memory?')) {
-      try {
-        await axios.delete(`/api/memories/${memoryId}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        
-        setNotification('Memory deleted');
-        setTimeout(() => setNotification(''), 3000);
-        fetchMemories();
-      } catch (error) {
-        setNotification('Failed to delete memory');
-      }
+    setDeleteMemoryId(memoryId);
+    setShowDeleteConfirm(true);
+  };
+
+  const confirmDelete = async () => {
+    try {
+      await apiClient.delete(`/api/memories/${deleteMemoryId}`);
+      
+      setNotification('Memory deleted');
+      setTimeout(() => setNotification(''), 3000);
+      setShowDeleteConfirm(false);
+      setDeleteMemoryId(null);
+      fetchMemories();
+    } catch (error) {
+      setNotification('Failed to delete memory');
+      setShowDeleteConfirm(false);
+      setDeleteMemoryId(null);
     }
   };
 
@@ -189,6 +193,23 @@ export default function Memories() {
       ) : (
         <div className="no-memories">
           <p>No memories yet. Create one to inspire yourself during difficult moments!</p>
+        </div>
+      )}
+
+      {showDeleteConfirm && (
+        <div className="delete-confirm-overlay">
+          <div className="delete-confirm-modal">
+            <h3>Are you sure?</h3>
+            <p>This will permanently delete this memory.</p>
+            <div className="confirm-buttons">
+              <button onClick={confirmDelete} className="btn btn-danger">
+                Yes
+              </button>
+              <button onClick={() => setShowDeleteConfirm(false)} className="btn btn-secondary">
+                No
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
