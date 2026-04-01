@@ -138,6 +138,46 @@ router.put('/:id', auth, async (req, res) => {
       return res.status(404).json({ message: 'Addiction not found' });
     }
     
+    // Recalculate achievements and trophies for this updated addiction
+    const MILESTONES = {
+      1: { name: '24 Hours', icon: '⏰', description: 'Made it through your first day!' },
+      3: { name: '3 Days', icon: '🌟', description: 'Three days sober! The hardest part is here.' },
+      7: { name: '1 Week', icon: '📅', description: 'One week! You\'re past the peak withdrawal.' },
+      14: { name: '2 Weeks', icon: '💪', description: 'Two weeks strong! Keep the momentum!' },
+      30: { name: '1 Month', icon: '🎉', description: 'ONE MONTH! Major milestone achieved!' },
+      60: { name: '2 Months', icon: '🚀', description: 'Two months! Your body is healing!' },
+      90: { name: '3 Months', icon: '👑', description: 'THREE MONTHS! You\'re crushing it!' },
+      180: { name: '6 Months', icon: '🌈', description: 'SIX MONTHS! You\'re unstoppable!' },
+      365: { name: '1 Year', icon: '🏆', description: 'ONE YEAR FREE! You did it! Complete transformation!' }
+    };
+
+    const daysStopped = addiction.getDaysStopped();
+    
+    // Check each milestone and update achievements
+    for (const [days, milestone] of Object.entries(MILESTONES)) {
+      const daysNum = parseInt(days);
+      if (daysStopped >= daysNum) {
+        // Use findOneAndUpdate with upsert to create/update achievement
+        await Achievement.findOneAndUpdate(
+          {
+            userId: req.user.userId,
+            milestoneDays: daysNum,
+            addictionId: req.params.id
+          },
+          {
+            userId: req.user.userId,
+            name: milestone.name,
+            description: milestone.description,
+            icon: milestone.icon,
+            milestoneDays: daysNum,
+            addictionId: req.params.id,
+            unreadAt: new Date()
+          },
+          { upsert: true, new: true }
+        );
+      }
+    }
+    
     res.json(enrichAddictionData(addiction));
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
