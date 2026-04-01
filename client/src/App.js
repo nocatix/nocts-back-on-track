@@ -21,6 +21,7 @@ import Whyusethis from './pages/Whyusethis';
 import HowToSucceed from './pages/HowToSucceed';
 import Crisis from './pages/Crisis';
 import WithdrawalSymptoms from './pages/WithdrawalSymptoms';
+import PreparationPlan from './pages/PreparationPlan';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AchievementNotification from './components/AchievementNotification';
@@ -173,6 +174,14 @@ export default function App() {
                 element={
                   <ProtectedRoute isAuthenticated={!!token}>
                     <WithdrawalSymptoms />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/preparation-plan"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <PreparationPlan />
                   </ProtectedRoute>
                 }
               />

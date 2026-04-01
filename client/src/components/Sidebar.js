@@ -97,6 +97,15 @@ export default function Sidebar() {
         </Link>
         
         <Link
+          to="/preparation-plan"
+          className={`nav-link ${isActive('/preparation-plan') ? 'active' : ''}`}
+          title="Preparation Plan"
+        >
+          <span className="emoji">📋</span>
+          <span className="text">Make a Plan</span>
+        </Link>
+        
+        <Link
           to="/withdrawal-symptoms"
           className={`nav-link ${isActive('/withdrawal-symptoms') ? 'active' : ''}`}
           title="Withdrawal Symptoms"
