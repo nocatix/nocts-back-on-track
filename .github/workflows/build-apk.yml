@@ -56,8 +56,30 @@ jobs:
 
       - name: Update app version
         working-directory: ./mobile
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
-          npm run update-version -- ${{ steps.version.outputs.version }}
+          # Update app.json with version
+          node -e "
+            const fs = require('fs');
+            const app = JSON.parse(fs.readFileSync('app.json'));
+            const version = process.env.VERSION;
+            const [major, minor, patch] = version.split('.').map(Number);
+            app.expo.version = version;
+            app.expo.android.versionCode = major * 10000 + minor * 100 + patch;
+            fs.writeFileSync('app.json', JSON.stringify(app, null, 2) + '\n');
+            console.log('✅ app.json version updated to', version);
+          "
+          
+          # Update package.json version
+          node -e "
+            const fs = require('fs');
+            const version = process.env.VERSION;
+            const pkg = JSON.parse(fs.readFileSync('package.json'));
+            pkg.version = version;
+            fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+            console.log('✅ package.json version updated to', version);
+          "
 
       - name: Build APK with EAS
         working-directory: ./mobile
@@ -68,40 +90,45 @@ jobs:
             --wait \
             --profile production
 
-      - name: Download APK artifact
-        id: download
+      - name: Create Release Notes
+        if: startsWith(github.ref, 'refs/tags/')
+        id: release
         run: |
-          # This step downloads the built APK
-          # The APK URL is provided by EAS after the build completes
-          echo "APK build completed. Downloading artifact..."
-          # Note: The actual download happens via EAS API
-          echo "apk_ready=true" >> $GITHUB_OUTPUT
+          cat > release-notes.md << 'EOF'
+          # Nocts: Back on Track v${{ steps.version.outputs.version }}
+          
+          ## Release Notes
+          - Offline-first mobile app
+          - All data stored locally on device
+          - Works completely without internet
+          
+          ## Installation
+          1. Download the APK from EAS Dashboard: https://expo.dev/builds
+          2. Transfer to your Android phone
+          3. Open Settings → Security → Enable "Unknown Sources"
+          4. Tap the APK file to install
+          
+          ## Features
+          - Full offline support
+          - SQLite local database
+          - No backend server required
+          - 10-25x faster operations
+          - Local password hashing (bcryptjs)
+          - Data encryption for sensitive fields
+          
+          ## Built with
+          - React Native + Expo
+          - SQLite (expo-sqlite)
+          - EAS Build (cloud compilation)
+          EOF
+          cat release-notes.md
 
-      - name: Upload to GitHub Releases
+      - name: Create Release with Notes
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
-          files: |
-            mobile/dist/**/*.apk
-          body: |
-            # Nocts: Back on Track v${{ steps.version.outputs.version }}
-            
-            ## Release Notes
-            - Offline-first mobile app
-            - All data stored locally on device
-            - Works completely without internet
-            
-            ## Installation
-            1. Download the APK file below
-            2. Transfer to your Android phone
-            3. Open Settings → Security → Enable "Unknown Sources"
-            4. Tap the APK file to install
-            
-            ## Changes
-            - Full offline support
-            - SQLite local database
-            - No backend server required
-            - 10-25x faster operations
+          body_path: release-notes.md
+          draft: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
