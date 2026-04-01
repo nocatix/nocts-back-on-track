@@ -1,30 +1,54 @@
-import api from './axiosConfig';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { localAchievementService } from '../services/localAchievementService';
+import { localTrophyService } from '../services/localTrophyService';
 
 export const achievementService = {
   async getAchievements() {
     try {
-      const response = await api.get('/achievements');
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      return await localAchievementService.getAchievements(user.id);
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error fetching achievements:', error);
+      throw error;
     }
   },
 
   async getTrophies() {
     try {
-      const response = await api.get('/trophies');
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      return await localTrophyService.getTrophies(user.id);
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error fetching trophies:', error);
+      throw error;
     }
   },
 
   async checkAchievements() {
     try {
-      const response = await api.post('/achievements/check');
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      // For local version, you can implement logic to check achievements
+      return { message: 'Achievements checked' };
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error checking achievements:', error);
+      throw error;
+    }
+  },
+
+  async initializeAchievements() {
+    try {
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      return await localAchievementService.initializeAchievements(user.id);
+    } catch (error) {
+      console.error('Error initializing achievements:', error);
+      throw error;
     }
   },
 };

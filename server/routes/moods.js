@@ -4,6 +4,17 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
+const parseLocalDate = (dateString) => {
+  if (typeof dateString === 'string') {
+    const parts = dateString.split('-').map(Number);
+    if (parts.length === 3 && parts.every(Number.isFinite)) {
+      const [year, month, day] = parts;
+      return new Date(year, month - 1, day);
+    }
+  }
+  return new Date(dateString);
+};
+
 // Create or update mood for a specific date
 router.post('/', auth, async (req, res) => {
   try {
@@ -14,7 +25,7 @@ router.post('/', auth, async (req, res) => {
     }
 
     // Convert date to start of day (no time component)
-    const moodDate = new Date(date);
+    const moodDate = parseLocalDate(date);
     moodDate.setHours(0, 0, 0, 0);
 
     let mood = await Mood.findOne({
@@ -72,7 +83,7 @@ router.get('/month/:year/:month', auth, async (req, res) => {
 // Get mood for a specific date
 router.get('/:date', auth, async (req, res) => {
   try {
-    const moodDate = new Date(req.params.date);
+    const moodDate = parseLocalDate(req.params.date);
     moodDate.setHours(0, 0, 0, 0);
 
     const mood = await Mood.findOne({
@@ -90,7 +101,7 @@ router.get('/:date', auth, async (req, res) => {
 // Delete mood for a specific date
 router.delete('/:date', auth, async (req, res) => {
   try {
-    const moodDate = new Date(req.params.date);
+    const moodDate = parseLocalDate(req.params.date);
     moodDate.setHours(0, 0, 0, 0);
 
     const result = await Mood.deleteOne({

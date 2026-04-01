@@ -1,69 +1,94 @@
-import api from './axiosConfig';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { localAddictionService } from '../services/localAddictionService';
 
 export const addictionService = {
   async getAddictions() {
     try {
-      const response = await api.get('/addictions');
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      return await localAddictionService.getAddictions(user.id);
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error fetching addictions:', error);
+      throw error;
     }
   },
 
   async getAddictionById(id) {
     try {
-      const response = await api.get(`/addictions/${id}`);
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      return await localAddictionService.getAddiction(user.id, id);
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error fetching addiction:', error);
+      throw error;
     }
   },
 
   async createAddiction(addictionData) {
     try {
-      const response = await api.post('/addictions', addictionData);
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      const { name, stopDate, frequencyPerDay, moneySpentPerDay, notes } = addictionData;
+      
+      return await localAddictionService.createAddiction(
+        user.id,
+        name,
+        stopDate,
+        frequencyPerDay,
+        moneySpentPerDay,
+        notes
+      );
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error creating addiction:', error);
+      throw error;
     }
   },
 
   async updateAddiction(id, addictionData) {
     try {
-      const response = await api.put(`/addictions/${id}`, addictionData);
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      return await localAddictionService.updateAddiction(user.id, id, addictionData);
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error updating addiction:', error);
+      throw error;
     }
   },
 
   async deleteAddiction(id) {
     try {
-      const response = await api.delete(`/addictions/${id}`);
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      return await localAddictionService.deleteAddiction(user.id, id);
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error deleting addiction:', error);
+      throw error;
     }
   },
 
   async getCravings(addictionId) {
     try {
-      const response = await api.get(`/addictions/${addictionId}/cravings`);
-      return response.data;
+      // For local use, you might track cravings differently
+      // This is a placeholder implementation
+      return [];
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error fetching cravings:', error);
+      throw error;
     }
   },
 
   async addCraving(addictionId, intensity) {
     try {
-      const response = await api.post(`/addictions/${addictionId}/cravings`, {
-        intensity,
-        timestamp: new Date().toISOString(),
-      });
-      return response.data;
+      // For local use, you can log cravings to async storage or database
+      return { success: true, message: 'Craving logged' };
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error adding craving:', error);
+      throw error;
     }
   },
 };

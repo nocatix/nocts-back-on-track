@@ -1,51 +1,84 @@
-import api from './axiosConfig';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { localMoodService } from '../services/localMoodService';
 
 export const moodService = {
-  async getMoods(filters = {}) {
+  async getMoods(year, month) {
     try {
-      const response = await api.get('/moods', { params: filters });
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      return await localMoodService.getMoodForMonth(user.id, year, month);
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error fetching moods:', error);
+      throw error;
     }
   },
 
-  async getMoodById(id) {
+  async getMoodById(date) {
     try {
-      const response = await api.get(`/moods/${id}`);
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      return await localMoodService.getMoodForDate(user.id, new Date(date));
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error fetching mood:', error);
+      throw error;
     }
   },
 
   async createMood(moodData) {
     try {
-      const response = await api.post('/moods', {
-        ...moodData,
-        timestamp: new Date().toISOString(),
-      });
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      const { date, primaryMood, secondaryMood, intensity, notes, triggers } = moodData;
+      
+      return await localMoodService.saveMood(
+        user.id,
+        date,
+        primaryMood,
+        secondaryMood,
+        intensity,
+        notes,
+        triggers
+      );
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error creating mood:', error);
+      throw error;
     }
   },
 
-  async updateMood(id, moodData) {
+  async updateMood(date, moodData) {
     try {
-      const response = await api.put(`/moods/${id}`, moodData);
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      const { primaryMood, secondaryMood, intensity, notes, triggers } = moodData;
+      
+      return await localMoodService.saveMood(
+        user.id,
+        date,
+        primaryMood,
+        secondaryMood,
+        intensity,
+        notes,
+        triggers
+      );
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error updating mood:', error);
+      throw error;
     }
   },
 
-  async deleteMood(id) {
+  async deleteMood(date) {
     try {
-      const response = await api.delete(`/moods/${id}`);
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      return await localMoodService.deleteMood(user.id, new Date(date));
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error deleting mood:', error);
+      throw error;
     }
   },
 };

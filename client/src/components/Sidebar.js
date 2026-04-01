@@ -88,6 +88,15 @@ export default function Sidebar() {
         </Link>
         
         <Link
+          to="/crisis"
+          className={`nav-link ${isActive('/crisis') ? 'active' : ''}`}
+          title="Crisis Support"
+        >
+          <span className="emoji">🆘</span>
+          <span className="text">Crisis Support</span>
+        </Link>
+        
+        <Link
           to="/achievements"
           className={`nav-link ${isActive('/achievements') ? 'active' : ''}`}
           title="Achievements"
@@ -130,6 +139,15 @@ export default function Sidebar() {
         >
           <span className="emoji">ℹ️</span>
           <span className="text">Why Use This</span>
+        </Link>
+        
+        <Link
+          to="/how-to-succeed"
+          className={`nav-link ${isActive('/how-to-succeed') ? 'active' : ''}`}
+          title="How to Succeed"
+        >
+          <span className="emoji">🎯</span>
+          <span className="text">How to Succeed</span>
         </Link>
         
         <Link

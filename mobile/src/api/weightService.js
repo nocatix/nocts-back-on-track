@@ -1,42 +1,60 @@
-import api from './axiosConfig';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { localWeightService } from '../services/localWeightService';
 
 export const weightService = {
-  async getWeights(filters = {}) {
+  async getWeights(limit = 100, offset = 0) {
     try {
-      const response = await api.get('/weights', { params: filters });
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      return await localWeightService.getWeights(user.id, limit, offset);
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error fetching weights:', error);
+      throw error;
     }
   },
 
   async createWeight(weightData) {
     try {
-      const response = await api.post('/weights', {
-        ...weightData,
-        date: new Date().toISOString(),
-      });
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      const { weight, unit, notes, date } = weightData;
+      
+      return await localWeightService.addWeight(
+        user.id,
+        date || new Date().toISOString().split('T')[0],
+        weight,
+        unit || 'lbs',
+        notes
+      );
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error creating weight:', error);
+      throw error;
     }
   },
 
   async updateWeight(id, weightData) {
     try {
-      const response = await api.put(`/weights/${id}`, weightData);
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      return await localWeightService.updateWeight(user.id, id, weightData);
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error updating weight:', error);
+      throw error;
     }
   },
 
   async deleteWeight(id) {
     try {
-      const response = await api.delete(`/weights/${id}`);
-      return response.data;
+      const user = JSON.parse(await AsyncStorage.getItem('user'));
+      if (!user) throw new Error('User not found');
+      
+      return await localWeightService.deleteWeight(user.id, id);
     } catch (error) {
-      throw error.response?.data || error.message;
+      console.error('Error deleting weight:', error);
+      throw error;
     }
   },
 };

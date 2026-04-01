@@ -187,10 +187,12 @@ html.dark .form-group select:focus {
   cursor: pointer;
   font-size: 16px;
   padding: 4px 6px;
+  width: auto;
   flex-shrink: 0;
   border-radius: 3px;
   transition: all 0.3s ease;
   grid-column: 2;
+  justify-self: end;
   align-self: center;
   line-height: 1;
 }
@@ -250,6 +252,32 @@ html.dark .weight-graph-section {
 .axis {
   stroke: var(--text-secondary);
   stroke-width: 2;
+}
+
+.point-guide {
+  stroke: var(--border-color);
+  stroke-width: 1;
+  stroke-dasharray: 2,3;
+  opacity: 0.65;
+}
+
+.axis-marker {
+  stroke: var(--text-secondary);
+  stroke-width: 1.5;
+}
+
+.axis-point-label {
+  font-size: 9px;
+  fill: var(--text-secondary);
+  opacity: 0.95;
+}
+
+.x-point-label {
+  dominant-baseline: hanging;
+}
+
+.y-point-label {
+  font-weight: 600;
 }
 
 .weight-line {

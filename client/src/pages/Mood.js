@@ -62,6 +62,13 @@ const getTextColor = (backgroundColor) => {
   return luminance > 128 ? '#000000' : '#FFFFFF';
 };
 
+const toLocalDateKey = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 const Mood = () => {
   const { user, token } = useAuth();
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -99,7 +106,7 @@ const Mood = () => {
 
           const moodMap = {};
           data.forEach(mood => {
-            const dateKey = new Date(mood.date).toISOString().split('T')[0];
+            const dateKey = toLocalDateKey(new Date(mood.date));
             moodMap[dateKey] = mood;
           });
           setMoods(moodMap);
@@ -118,7 +125,7 @@ const Mood = () => {
   // Fetch mood for selected date
   useEffect(() => {
     const loadMoodForDate = async () => {
-      const dateKey = selectedDate.toISOString().split('T')[0];
+      const dateKey = toLocalDateKey(selectedDate);
       if (moods[dateKey]) {
         const mood = moods[dateKey];
         setSelectedPrimary(mood.primaryMood);
@@ -153,7 +160,7 @@ const Mood = () => {
 
     try {
       const API_BASE_URL = 'http://localhost:5000';
-      const dateString = selectedDate.toISOString().split('T')[0];
+      const dateString = toLocalDateKey(selectedDate);
       const response = await fetch(`${API_BASE_URL}/api/moods`, {
         method: 'POST',
         headers: {
@@ -172,7 +179,7 @@ const Mood = () => {
 
       if (response.ok) {
         const mood = await response.json();
-        const dateKey = selectedDate.toISOString().split('T')[0];
+        const dateKey = toLocalDateKey(selectedDate);
         setMoods(prev => ({
           ...prev,
           [dateKey]: mood
@@ -195,7 +202,7 @@ const Mood = () => {
   };
 
   const getMoodColor = (moodDate) => {
-    const dateKey = moodDate.toISOString().split('T')[0];
+    const dateKey = toLocalDateKey(moodDate);
     const mood = moods[dateKey];
     if (!mood) return 'transparent';
 
@@ -215,9 +222,9 @@ const Mood = () => {
     // Days of the month
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, month, day);
-      const dateKey = date.toISOString().split('T')[0];
-      const isToday = dateKey === new Date().toISOString().split('T')[0];
-      const isSelected = dateKey === selectedDate.toISOString().split('T')[0];
+      const dateKey = toLocalDateKey(date);
+      const isToday = dateKey === toLocalDateKey(new Date());
+      const isSelected = dateKey === toLocalDateKey(selectedDate);
       const moodColor = getMoodColor(date);
 
       const mood = moods[dateKey];

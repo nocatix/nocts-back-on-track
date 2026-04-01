@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import authService from '../api/authService';
+import { initializeDatabase } from '../db/database';
+import { achievementService } from '../api/achievementService';
 
 export const AuthContext = createContext();
 
@@ -17,6 +19,15 @@ export function AuthProvider({ children }) {
   const bootstrapAsync = async () => {
     try {
       console.log('[Auth] Starting bootstrap');
+      
+      // Initialize the database first
+      try {
+        await initializeDatabase();
+        console.log('[Auth] Database initialized successfully');
+      } catch (dbError) {
+        console.error('[Auth] Error initializing database:', dbError);
+      }
+      
       const currentUser = await authService.getCurrentUser();
       console.log('[Auth] Bootstrap complete. User:', currentUser ? 'exists' : 'null');
       if (currentUser) {
@@ -55,6 +66,15 @@ export function AuthProvider({ children }) {
       const result = await authService.register(email, password, nameOnPhone);
       setUser(result.user);
       setUserToken('authenticated');
+      
+      // Initialize achievements for new user
+      try {
+        await achievementService.initializeAchievements();
+        console.log('[Auth] Achievements initialized for new user');
+      } catch (achievementError) {
+        console.error('[Auth] Error initializing achievements:', achievementError);
+      }
+      
       return result;
     } catch (err) {
       const errorMessage = err.message || 'Registration failed';

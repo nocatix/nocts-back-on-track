@@ -227,26 +227,47 @@ const Weight = () => {
     return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
   };
 
+  const dateLocale = unit === 'kg' ? 'en-GB' : 'en-US';
+
+  const formatDate = (dateValue, options = {}) => {
+    return new Date(dateValue).toLocaleDateString(dateLocale, options);
+  };
+
   const renderGraph = () => {
     const sortedWeights = [...weights].sort((a, b) => new Date(a.date) - new Date(b.date));
     if (sortedWeights.length === 0) return null;
+
+    const CHART_LEFT = 30;
+    const CHART_RIGHT = 330;
+    const CHART_TOP = 0;
+    const CHART_BOTTOM = 150;
+    const CHART_WIDTH = CHART_RIGHT - CHART_LEFT;
+    const CHART_HEIGHT = CHART_BOTTOM - CHART_TOP;
 
     const minWeight = Math.min(...sortedWeights.map(w => parseFloat(w.weight))) - 5;
     const maxWeight = Math.max(...sortedWeights.map(w => parseFloat(w.weight))) + 5;
     const range = maxWeight - minWeight;
 
     const points = sortedWeights.map((w, index) => {
-      const x = (index / (sortedWeights.length - 1 || 1)) * 300;
-      const y = 150 - ((parseFloat(w.weight) - minWeight) / range) * 150;
-      return { x, y, weight: w.weight, date: new Date(w.date).toLocaleDateString() };
+      const x = CHART_LEFT + (index / (sortedWeights.length - 1 || 1)) * CHART_WIDTH;
+      const y = CHART_BOTTOM - ((parseFloat(w.weight) - minWeight) / range) * CHART_HEIGHT;
+      const date = new Date(w.date);
+      return {
+        x,
+        y,
+        weight: w.weight,
+        weightLabel: Number.parseFloat(w.weight).toFixed(1),
+        dateLabel: formatDate(date, { month: 'numeric', day: 'numeric' }),
+        date: formatDate(date)
+      };
     });
 
     const pathData = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
-    const goalY = goalWeight.weight > 0 ? 150 - ((goalWeight.weight - minWeight) / range) * 150 : null;
+    const goalY = goalWeight.weight > 0 ? CHART_BOTTOM - ((goalWeight.weight - minWeight) / range) * CHART_HEIGHT : null;
 
     return (
       <div className="weight-graph-container">
-        <svg viewBox="0 0 350 200" className="weight-graph">
+        <svg viewBox="0 0 350 225" className="weight-graph">
           {/* Grid lines */}
           {[0, 50, 100, 150].map((y) => (
             <line key={`grid-${y}`} x1="30" y1={y} x2="330" y2={y} className="grid-line" />
@@ -254,20 +275,48 @@ const Weight = () => {
 
           {/* Goal weight line */}
           {goalY !== null && (
-            <line x1="30" y1={goalY} x2="330" y2={goalY} className="goal-line" />
+            <line x1={CHART_LEFT} y1={goalY} x2={CHART_RIGHT} y2={goalY} className="goal-line" />
           )}
 
           {/* Weight trend line */}
           <path d={pathData} className="weight-line" />
 
+          {/* Per-point axis markers and guides */}
+          {points.map((p, i) => (
+            <g key={`marker-${i}`}>
+              <line x1={p.x} y1={p.y} x2={p.x} y2={CHART_BOTTOM} className="point-guide" />
+              <line x1={CHART_LEFT} y1={p.y} x2={p.x} y2={p.y} className="point-guide" />
+              <line x1={p.x} y1={CHART_BOTTOM} x2={p.x} y2={CHART_BOTTOM + 4} className="axis-marker" />
+              <line x1={CHART_LEFT - 4} y1={p.y} x2={CHART_LEFT} y2={p.y} className="axis-marker" />
+              <text
+                x={p.x}
+                y={CHART_BOTTOM + 14 + (i % 2) * 10}
+                className="axis-point-label x-point-label"
+                textAnchor="middle"
+              >
+                {p.dateLabel}
+              </text>
+              <text
+                x={CHART_LEFT - 8}
+                y={p.y + 3}
+                className="axis-point-label y-point-label"
+                textAnchor="end"
+              >
+                {p.weightLabel}
+              </text>
+            </g>
+          ))}
+
           {/* Data points */}
           {points.map((p, i) => (
-            <circle key={`point-${i}`} cx={p.x} cy={p.y} r="3" className="weight-point" />
+            <circle key={`point-${i}`} cx={p.x} cy={p.y} r="3" className="weight-point">
+              <title>{`${p.date} - ${p.weightLabel} ${unit}`}</title>
+            </circle>
           ))}
 
           {/* Axes */}
-          <line x1="30" y1="0" x2="30" y2="150" className="axis" />
-          <line x1="30" y1="150" x2="330" y2="150" className="axis" />
+          <line x1={CHART_LEFT} y1={CHART_TOP} x2={CHART_LEFT} y2={CHART_BOTTOM} className="axis" />
+          <line x1={CHART_LEFT} y1={CHART_BOTTOM} x2={CHART_RIGHT} y2={CHART_BOTTOM} className="axis" />
           
           {/* Y-axis label */}
           <text x="10" y="75" className="axis-label y-axis-label" textAnchor="middle">
@@ -275,7 +324,7 @@ const Weight = () => {
           </text>
           
           {/* X-axis label */}
-          <text x="180" y="185" className="axis-label x-axis-label" textAnchor="middle">
+          <text x="180" y="215" className="axis-label x-axis-label" textAnchor="middle">
             Time
           </text>
           
@@ -317,7 +366,7 @@ const Weight = () => {
             ◀
           </button>
           <span className="calendar-month-display">
-            {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+            {formatDate(currentMonth, { month: 'long', year: 'numeric' })}
           </span>
           <button
             className="calendar-nav-btn next-btn"
@@ -499,7 +548,7 @@ const Weight = () => {
                   <div key={w._id || index} className="weight-entry">
                     <div className="entry-info">
                       <span className="entry-weight">{parseFloat(w.weight).toFixed(1)} {w.unit}</span>
-                      <span className="entry-date">{new Date(w.date).toLocaleDateString()} at {new Date(w.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                      <span className="entry-date">{formatDate(w.date)} at {new Date(w.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                     </div>
                     <button
                       className="btn-delete"
@@ -522,7 +571,7 @@ const Weight = () => {
             <h3>Delete Weight Entry</h3>
             <p>Are you sure you want to delete this weight entry?</p>
             <p style={{ fontWeight: 'bold', marginBottom: '10px' }}>
-              {parseFloat(selectedWeightValue.weight).toFixed(1)} {selectedWeightValue.unit} on {new Date(selectedWeightValue.date).toLocaleDateString()}
+              {parseFloat(selectedWeightValue.weight).toFixed(1)} {selectedWeightValue.unit} on {formatDate(selectedWeightValue.date)}
             </p>
             <p style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>
               This action cannot be undone.

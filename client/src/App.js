@@ -18,6 +18,8 @@ import Mood from './pages/Mood';
 import Weight from './pages/Weight';
 import Memories from './pages/Memories';
 import Whyusethis from './pages/Whyusethis';
+import HowToSucceed from './pages/HowToSucceed';
+import Crisis from './pages/Crisis';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AchievementNotification from './components/AchievementNotification';
@@ -146,6 +148,22 @@ export default function App() {
                 element={
                   <ProtectedRoute isAuthenticated={!!token}>
                     <Whyusethis />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/how-to-succeed"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <HowToSucceed />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/crisis"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <Crisis />
                   </ProtectedRoute>
                 }
               />
