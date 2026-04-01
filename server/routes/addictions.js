@@ -152,17 +152,21 @@ router.put('/:id', auth, async (req, res) => {
     };
 
     const daysStopped = addiction.getDaysStopped();
+    console.log(`[Edit Addiction] ID: ${req.params.id}, daysStopped: ${daysStopped}`);
     
     // Remove achievements for this addiction that are no longer valid (milestones beyond current days)
     const allMilestoneDays = Object.keys(MILESTONES).map(Number);
     const invalidMilestones = allMilestoneDays.filter(days => days > daysStopped);
     
+    console.log(`[Edit Addiction] invalidMilestones: ${invalidMilestones.join(', ')}`);
+    
     if (invalidMilestones.length > 0) {
-      await Achievement.deleteMany({
+      const deleteResult = await Achievement.deleteMany({
         userId: req.user.userId,
         addictionId: req.params.id,
         milestoneDays: { $in: invalidMilestones }
       });
+      console.log(`[Edit Addiction] Deleted ${deleteResult.deletedCount} invalid achievements`);
     }
     
     // Check each milestone and update achievements
@@ -192,7 +196,8 @@ router.put('/:id', auth, async (req, res) => {
     
     // Clear all trophies for the user so they can be recalculated based on new addiction dates
     // This ensures trophy progress is accurate when addiction dates change
-    await Trophy.deleteMany({ userId: req.user.userId });
+    const trophyDeleteResult = await Trophy.deleteMany({ userId: req.user.userId });
+    console.log(`[Edit Addiction] Deleted ${trophyDeleteResult.deletedCount} trophies`);
     
     res.json(enrichAddictionData(addiction));
   } catch (error) {

@@ -36,6 +36,11 @@ router.get('/', auth, asyncHandler(async (req, res) => {
     .populate('addictionId', 'name')
     .sort({ unreadAt: -1 });
   
+  console.log(`[Get Achievements] Found ${achievements.length} achievements:`);
+  achievements.forEach(a => {
+    console.log(`  - ${a.milestoneDays}d: ${a.name} (addictionId: ${a.addictionId})`);
+  });
+  
   // Deduplicate achievements (in case of duplicates from before unique index was added)
   const seen = new Set();
   achievements = achievements.filter(achievement => {
@@ -101,17 +106,21 @@ router.post('/check/:addictionId', auth, asyncHandler(async (req, res) => {
   }
 
   const daysStopped = addiction.getDaysStopped();
+  console.log(`[Achievement Check] addictionId: ${req.params.addictionId}, daysStopped: ${daysStopped}`);
   
   // First, remove any achievements for milestones not yet reached
   const allMilestoneDays = Object.keys(MILESTONES).map(Number);
   const invalidMilestones = allMilestoneDays.filter(days => days > daysStopped);
   
+  console.log(`[Achievement Check] invalidMilestones: ${invalidMilestones.join(', ')}`);
+  
   if (invalidMilestones.length > 0) {
-    await Achievement.deleteMany({
+    const deleteResult = await Achievement.deleteMany({
       userId: req.user.userId,
       addictionId: req.params.addictionId,
       milestoneDays: { $in: invalidMilestones }
     });
+    console.log(`[Achievement Check] Deleted ${deleteResult.deletedCount} invalid achievements`);
   }
 
   const newAchievements = [];

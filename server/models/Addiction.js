@@ -70,7 +70,11 @@ addictionSchema.methods.getTotalMoneySaved = function() {
 
 // Calculate days since stopping
 addictionSchema.methods.getDaysStopped = function() {
-  return Math.floor((Date.now() - this.stopDate) / (1000 * 60 * 60 * 24));
+  const daysStopped = Math.floor((Date.now() - this.stopDate) / (1000 * 60 * 60 * 24));
+  const msElapsed = Date.now() - this.stopDate;
+  const hoursElapsed = msElapsed / (1000 * 60 * 60);
+  console.log(`[getDaysStopped] stopDate: ${this.stopDate}, now: ${new Date()}, msElapsed: ${msElapsed}, hoursElapsed: ${hoursElapsed.toFixed(2)}, daysStopped: ${daysStopped}`);
+  return daysStopped;
 };
 
 module.exports = mongoose.model('Addiction', addictionSchema);
