@@ -42,6 +42,25 @@ router.get('/', auth, asyncHandler(async (req, res) => {
     console.log(`  - ${a.milestoneDays}d: ${a.name} (addictionId: ${a.addictionId?._id} type: ${typeof a.addictionId?._id}) (raw: ${JSON.stringify(a.addictionId)})`);
   });
   
+  // Validate achievements - only return those where daysStopped >= milestoneDays
+  achievements = achievements.filter(achievement => {
+    const addiction = addictions.find(a => {
+      // Handle both ObjectId and string comparison
+      const addictionIdStr = a._id.toString();
+      const achievementAddictionIdStr = achievement.addictionId?._id?.toString();
+      return addictionIdStr === achievementAddictionIdStr;
+    });
+    
+    if (!addiction) {
+      return false; // Addiction not found, filter out this achievement
+    }
+    
+    const daysStopped = addiction.getDaysStopped();
+    const isValid = daysStopped >= achievement.milestoneDays;
+    console.log(`  - Validating ${achievement.milestoneDays}d: daysStopped=${daysStopped}, required=${achievement.milestoneDays}, valid=${isValid}`);
+    return isValid;
+  });
+  
   // Deduplicate achievements (in case of duplicates from before unique index was added)
   const seen = new Set();
   achievements = achievements.filter(achievement => {
@@ -68,6 +87,23 @@ router.get('/unread', auth, asyncHandler(async (req, res) => {
     .populate('addictionId', 'name')
     .sort({ unreadAt: -1 });
   
+  // Validate achievements - only return those where daysStopped >= milestoneDays
+  achievements = achievements.filter(achievement => {
+    const addiction = addictions.find(a => {
+      // Handle both ObjectId and string comparison
+      const addictionIdStr = a._id.toString();
+      const achievementAddictionIdStr = achievement.addictionId?._id?.toString();
+      return addictionIdStr === achievementAddictionIdStr;
+    });
+    
+    if (!addiction) {
+      return false; // Addiction not found, filter out this achievement
+    }
+    
+    const daysStopped = addiction.getDaysStopped();
+    return daysStopped >= achievement.milestoneDays;
+  });
+  
   // Deduplicate achievements (in case of duplicates from before unique index was added)
   const seen = new Set();
   achievements = achievements.filter(achievement => {
@@ -78,6 +114,9 @@ router.get('/unread', auth, asyncHandler(async (req, res) => {
     seen.add(key);
     return true;
   });
+  
+  res.json(achievements);
+}));
   
   res.json(achievements);
 }));
