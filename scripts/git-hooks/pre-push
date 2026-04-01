@@ -1,0 +1,31 @@
+#!/bin/bash
+# Pre-push hook to prevent pushing directly to main branch
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# Check if we're trying to push to main
+if [ "$1" = "origin" ] && [ "$2" = "refs/heads/main:refs/heads/main" ]; then
+    echo "❌ ERROR: Direct push to 'main' branch is not allowed."
+    echo ""
+    echo "✅ Please follow this workflow:"
+    echo "   1. Push your topic branch: git push origin $BRANCH"
+    echo "   2. Create a Pull Request on GitHub"
+    echo "   3. After review, merge via Pull Request on GitHub"
+    echo ""
+    exit 1
+fi
+
+# Also check if current branch is main and we're pushing (catches most cases)
+if [ "$BRANCH" = "main" ]; then
+    echo "❌ ERROR: You are on the 'main' branch and trying to push."
+    echo ""
+    echo "✅ Please follow this workflow:"
+    echo "   1. Switch to your topic branch: git checkout -b feature/your-feature"
+    echo "   2. Make your changes"
+    echo "   3. Push your topic branch: git push origin feature/your-feature"
+    echo "   4. Create a Pull Request on GitHub"
+    echo ""
+    exit 1
+fi
+
+exit 0
