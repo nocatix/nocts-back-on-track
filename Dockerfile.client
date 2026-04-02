@@ -6,7 +6,6 @@ COPY client/package*.json ./
 
 RUN npm install
 
-COPY client/* .
 COPY client/public ./public
 COPY client/src ./src
 
