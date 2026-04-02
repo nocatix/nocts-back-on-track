@@ -30,9 +30,10 @@ router.get('/:date', verifyToken, async (req, res) => {
       date: { $gte: startOfDay, $lt: endOfDay }
     });
 
-    res.json(entry || { content: '' });
+    res.json(entry ? entry.toObject() : { content: '' });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch diary entry' });
+    console.error('Error fetching diary entry:', error);
+    res.status(500).json({ error: 'Failed to fetch diary entry', details: error.message });
   }
 });
 
@@ -40,9 +41,10 @@ router.get('/:date', verifyToken, async (req, res) => {
 router.get('/', verifyToken, async (req, res) => {
   try {
     const entries = await Diary.find({ userId: req.userId }).sort({ date: -1 });
-    res.json(entries);
+    res.json(entries.map(entry => entry.toObject()));
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch diary entries' });
+    console.error('Error fetching diary entries:', error);
+    res.status(500).json({ error: 'Failed to fetch diary entries', details: error.message });
   }
 });
 
@@ -72,9 +74,10 @@ router.post('/:date', verifyToken, async (req, res) => {
     }
 
     await entry.save();
-    res.json(entry);
+    res.json(entry.toObject());
   } catch (error) {
-    res.status(500).json({ error: 'Failed to save diary entry' });
+    console.error('Error saving diary entry:', error);
+    res.status(500).json({ error: 'Failed to save diary entry', details: error.message });
   }
 });
 
@@ -93,7 +96,8 @@ router.delete('/:date', verifyToken, async (req, res) => {
 
     res.json({ message: 'Diary entry deleted' });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete diary entry' });
+    console.error('Error deleting diary entry:', error);
+    res.status(500).json({ error: 'Failed to delete diary entry', details: error.message });
   }
 });
 

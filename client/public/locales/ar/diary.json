@@ -1,0 +1,32 @@
+{
+  "pageTitle": "My Diary",
+  "addEntry": "Add New Entry",
+  "entry": "Entry",
+  "noEntries": "No diary entries yet. Start writing!",
+  "entryDate": "Entry Date",
+  "entryContent": "How are you feeling?",
+  "entryContentPlaceholder": "Write your thoughts and feelings here...",
+  "recentEntries": "Recent Entries",
+  "previousDay": "◀ Previous",
+  "nextDay": "Next ▶",
+  "today": "Today",
+  "lastSaved": "Last saved",
+  "writeHere": "Write your thoughts here... You can use markdown:\n# Heading 1\n## Heading 2\n**bold** *italic*\n- bullet points",
+  "markdownTip": "💡 Tip: Use markdown for formatting - **bold**, *italic*, # headings, - bullets",
+  "hideTip": "▼ Hide Tip",
+  "showTip": "▶ Show Tip",
+  "savingEntry": "Saving...",
+  "saveEntry": "💾 Save Entry",
+  "editEntry": "✏️ Edit Entry",
+  "cancel": "Cancel",
+  "noEntryForDay": "No entry for this day yet.",
+  "journalingTipsTitle": "💭 Journaling Tips for Recovery",
+  "journalingTips": [
+    "Gratitude: Each day, write 3 things you're grateful for",
+    "Progress: Track how many days you've stayed strong",
+    "Triggers: Note what triggered cravings and how you handled them",
+    "Emotions: Write about your feelings to process them",
+    "Goals: Remind yourself why you're on this journey",
+    "Victories: Celebrate every small win, no matter how small"
+  ]
+}

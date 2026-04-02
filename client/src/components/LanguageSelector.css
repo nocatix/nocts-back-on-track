@@ -1,0 +1,40 @@
+.language-selector {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  gap: 1rem;
+}
+
+.language-selector h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.language-selector-note {
+  font-size: 0.9rem;
+  color: var(--text-secondary, #666);
+  margin: 0 0 1.5rem 0;
+  padding: 0.75rem 1rem;
+  background-color: #fff8e1;
+  border-left: 3px solid #ffc107;
+  border-radius: 4px;
+  line-height: 1.5;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .language-selector-note {
+    background-color: #4a3d1a;
+    color: #ffdb58;
+    border-left-color: #ffc107;
+  }
+}
+
+/* RTL support for Arabic */
+.language-button[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+  unicode-bidi: bidi-override;
+}

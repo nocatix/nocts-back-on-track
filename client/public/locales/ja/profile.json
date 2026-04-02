@@ -1,0 +1,18 @@
+{
+  "pageTitle": "私のプロフィール",
+  "changePassword": "パスワードを変更",
+  "currentPassword": "現在のパスワード",
+  "newPassword": "新しいパスワード",
+  "confirmNewPassword": "新しいパスワード確認",
+  "passwordChanged": "パスワードが正常に変更されました!",
+  "darkMode": "ダークモード",
+  "language": "言語",
+  "unitPreference": "単位設定",
+  "selectLanguage": "言語を選択",
+  "resetProgress": "すべての進捗をリセット",
+  "resetProgressWarning": "本当ですか?アカウント以外のすべてのデータが削除されます。",
+  "deleteAccount": "アカウント削除",
+  "deleteAccountWarning": "本当ですか?このアクションは元に戻せず、アカウントが永久に削除されます。",
+  "imperialUnits": "ヤード・ポンド法 (ポンド, °F)",
+  "metricUnits": "メートル法 (キログラム, °C)"
+}

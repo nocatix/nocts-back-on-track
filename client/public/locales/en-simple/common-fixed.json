@@ -1,0 +1,22 @@
+{
+  "appName": "Back on Track",
+  "loading": "Loading...",
+  "saving": "Saving...",
+  "error": "Error",
+  "success": "Done",
+  "cancel": "Cancel",
+  "save": "Save",
+  "delete": "Delete",
+  "edit": "Edit",
+  "close": "Close",
+  "submit": "Send",
+  "back": "Go Back",
+  "next": "Next",
+  "previous": "Previous",
+  "confirm": "Yes",
+  "continue": "Keep Going",
+  "optional": "Not needed",
+  "required": "Must fill",
+  "yes": "Yes",
+  "no": "No"
+}

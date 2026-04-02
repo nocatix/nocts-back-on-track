@@ -22,17 +22,23 @@ export default function Footer() {
 
       <div className="footer-content">
         <div className="footer-section">
-          <h4>noct's Back on Track <span className="version-badge">v{VERSION}</span></h4>
+          <a 
+            href="https://github.com/nocatix/nocts-back-on-track" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="footer-project-name"
+          >
+            noct's Back on Track <span className="version-badge">v{VERSION}</span>
+          </a>
           <p>Your personal addiction recovery companion</p>
         </div>
         
         <div className="footer-section">
-          <h4>Resources</h4>
           <Link to="/privacy" className="footer-link">🔒 Privacy Policy</Link>
         </div>
 
         <div className="footer-section copyright">
-          <p>&copy; {currentYear} Made by <strong>noct</strong></p>
+          <p>&copy; {currentYear} proudly made in 🇨🇦 by <strong>noct</strong></p>
           <p className="tagline">Recovery is possible. You've got this. 💪</p>
         </div>
       </div>

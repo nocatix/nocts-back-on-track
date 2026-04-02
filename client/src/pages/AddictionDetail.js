@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './AddictionDetail.css';
 import apiClient from '../api/axiosConfig';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import WithdrawalTimeline from '../components/WithdrawalTimeline';
 import { getFrequencyLabel, getCostLabel } from '../utils/withdrawalHelper';
@@ -10,6 +10,7 @@ import { addictionDatabase } from '../data/addictions';
 export default function AddictionDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const { token } = useContext(AuthContext);
   const [addiction, setAddiction] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -79,6 +80,11 @@ export default function AddictionDetail() {
 
         // Check for new achievements
         await apiClient.post(`/api/achievements/check/${id}`, {});
+        
+        // Open edit mode if navigated from pledge conversion
+        if (location.state?.editMode) {
+          setIsEditing(true);
+        }
       } catch (err) {
         console.error('Error loading addiction:', err);
         console.error('Error response:', err.response?.data);

@@ -8,12 +8,14 @@ const path = require('path');
 const connectDB = require('./config/database');
 const authRoutes = require('./routes/auth');
 const addictionRoutes = require('./routes/addictions');
+const pledgeRoutes = require('./routes/pledges');
 const achievementRoutes = require('./routes/achievements');
 const diaryRoutes = require('./routes/diary');
 const moodRoutes = require('./routes/moods');
 const weightRoutes = require('./routes/weights');
 const memoryRoutes = require('./routes/memories');
 const trophyRoutes = require('./routes/trophies');
+const preparationRoutes = require('./routes/preparation');
 const { createIPWhitelistMiddleware } = require('./utils/ipWhitelist');
 
 const app = express();
@@ -94,12 +96,14 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/addictions', addictionRoutes);
+app.use('/api/pledges', pledgeRoutes);
 app.use('/api/achievements', achievementRoutes);
 app.use('/api/diary', diaryRoutes);
 app.use('/api/moods', moodRoutes);
 app.use('/api/weights', weightRoutes);
 app.use('/api/memories', memoryRoutes);
 app.use('/api/trophies', trophyRoutes);
+app.use('/api/preparation', preparationRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

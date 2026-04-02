@@ -23,6 +23,8 @@ import Crisis from './pages/Crisis';
 import WithdrawalSymptoms from './pages/WithdrawalSymptoms';
 import PreparationPlan from './pages/PreparationPlan';
 import Hobbies from './pages/Hobbies';
+import FunctioningUser from './pages/FunctioningUser';
+import SelfAssessment from './pages/SelfAssessment';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AchievementNotification from './components/AchievementNotification';
@@ -193,6 +195,18 @@ export default function App() {
                     <Hobbies />
                   </ProtectedRoute>
                 }
+              />
+              <Route
+                path="/functioning-user"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <FunctioningUser />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/self-assessment"
+                element={<SelfAssessment />}
               />
             </Routes>
           </main>

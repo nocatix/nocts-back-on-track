@@ -1,0 +1,18 @@
+{
+  "pageTitle": "Мой профиль",
+  "changePassword": "Изменить пароль",
+  "currentPassword": "Текущий пароль",
+  "newPassword": "Новый пароль",
+  "confirmNewPassword": "Подтвердить новый пароль",
+  "passwordChanged": "Пароль изменен!",
+  "darkMode": "Темный режим",
+  "language": "Язык",
+  "unitPreference": "Единицы",
+  "selectLanguage": "Выберите язык",
+  "resetProgress": "Перезагрузить",
+  "resetProgressWarning": "Вы уверены? Это удалит все. Отменить нельзя.",
+  "deleteAccount": "Удалить аккаунт",
+  "deleteAccountWarning": "Вы уверены? Это удалит все. Отменить нельзя.",
+  "imperialUnits": "Фунты и Фаренгейт",
+  "metricUnits": "Килограммы и Цельсий"
+}

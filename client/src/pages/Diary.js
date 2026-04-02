@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import './Diary.css';
 import apiClient from '../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +9,7 @@ import { getCookie, setCookie } from '../utils/cookieHelper';
 export default function Diary() {
   const navigate = useNavigate();
   const { token } = useContext(AuthContext);
+  const { t } = useTranslation('diary');
   const [currentDate, setCurrentDate] = useState(new Date());
   const [content, setContent] = useState('');
   const [isEditing, setIsEditing] = useState(false);
@@ -118,20 +120,20 @@ export default function Diary() {
     <div className="diary-page">
       {message && <div className="message-notification error">{message}</div>}
       <div className="diary-header">
-        <button onClick={handlePreviousDay} className="btn btn-small">◀ Previous</button>
+        <button onClick={handlePreviousDay} className="btn btn-small">{t('previousDay')}</button>
         <div className="date-display">
           <h2>{formatDate(currentDate)}</h2>
           {lastSaved && (
             <p className="last-saved">
-              Last saved: {new Date(lastSaved).toLocaleTimeString()}
+              {t('lastSaved')}: {new Date(lastSaved).toLocaleTimeString()}
             </p>
           )}
         </div>
-        <button onClick={handleNextDay} className="btn btn-small">Next ▶</button>
+        <button onClick={handleNextDay} className="btn btn-small">{t('nextDay')}</button>
       </div>
 
       <button onClick={handleToday} className="btn btn-accent today-btn">
-        Today
+        {t('today')}
       </button>
 
       {isEditing ? (
@@ -139,16 +141,16 @@ export default function Diary() {
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Write your thoughts here... You can use markdown:&#10;# Heading 1&#10;## Heading 2&#10;**bold** *italic*&#10;- bullet points"
+            placeholder={t('writeHere')}
             className="diary-textarea"
           />
           
           <div className="editor-info">
             {showMarkdownHint && (
-              <p className="markdown-hint">💡 Tip: Use markdown for formatting - **bold**, *italic*, # headings, - bullets</p>
+              <p className="markdown-hint">{t('markdownTip')}</p>
             )}
             <button className="btn-hint-toggle" onClick={() => setShowMarkdownHint(!showMarkdownHint)}>
-              {showMarkdownHint ? '▼ Hide Tip' : '▶ Show Tip'}
+              {showMarkdownHint ? t('hideTip') : t('showTip')}
             </button>
           </div>
 
@@ -158,13 +160,13 @@ export default function Diary() {
               disabled={isSaving}
               className="btn btn-primary"
             >
-              {isSaving ? 'Saving...' : '💾 Save Entry'}
+              {isSaving ? t('savingEntry') : t('saveEntry')}
             </button>
             <button
               onClick={() => setIsEditing(false)}
               className="btn btn-secondary"
             >
-              Cancel
+              {t('common:cancel')}
             </button>
           </div>
         </div>
@@ -176,20 +178,20 @@ export default function Diary() {
               dangerouslySetInnerHTML={{ __html: parseMarkdown(content) }}
             />
           ) : (
-            <p className="no-entry">No entry for this day yet.</p>
+            <p className="no-entry">{t('noEntryForDay')}</p>
           )}
           <button
             onClick={() => setIsEditing(true)}
             className="btn btn-primary"
           >
-            ✏️ Edit Entry
+            {t('editEntry')}
           </button>
         </div>
       )}
 
       <div className="diary-tips">
         <div className="diary-tips-header">
-          <h3>💭 Journaling Tips for Recovery</h3>
+          <h3>{t('journalingTipsTitle')}</h3>
           <button 
             className="btn-hint-toggle-arrow" 
             onClick={() => setShowJournalingTips(!showJournalingTips)}
@@ -199,12 +201,9 @@ export default function Diary() {
         </div>
         {showJournalingTips && (
           <ul>
-            <li><strong>Gratitude:</strong> Each day, write 3 things you're grateful for</li>
-            <li><strong>Progress:</strong> Track how many days you've stayed strong</li>
-            <li><strong>Triggers:</strong> Note what triggered cravings and how you handled them</li>
-            <li><strong>Emotions:</strong> Write about your feelings to process them</li>
-            <li><strong>Goals:</strong> Remind yourself why you're on this journey</li>
-            <li><strong>Victories:</strong> Celebrate every small win, no matter how small</li>
+            {t('journalingTips', { returnObjects: true }).map((tip, idx) => (
+              <li key={idx}>{tip}</li>
+            ))}
           </ul>
         )}
       </div>

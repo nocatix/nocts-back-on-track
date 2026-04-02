@@ -1,0 +1,42 @@
+{
+  "saved": "保存に成功しました!",
+  "deleted": "削除に成功しました!",
+  "updated": "更新に成功しました!",
+  "error": "エラーが発生しました。もう一度お試しください。",
+  "serverError": "サーバーエラー。後でもう一度お試しください。",
+  "networkError": "ネットワークエラー。接続を確認してください。",
+  "unauthorized": "このアクションを実行する権限がありません",
+  "validation": {
+    "required": "このフィールドは必須です",
+    "invalidEmail": "有効なメールアドレスを入力してください",
+    "passwordTooShort": "パスワードは最低6文字である必要があります",
+    "passwordMismatch": "パスワードが一致しません",
+    "invalidInput": "無効な入力"
+  },
+  "mainMenu": {
+    "pageTitle": "Main Menu",
+    "failedToLoadAddictions": "Failed to load your addictions",
+    "failedToUpdateAddiction": "Failed to update addiction",
+    "aboutToCave": "About to cave?",
+    "craviingSupport": "Craving Support",
+    "cravineSupportMessage": "Feeling a craving? Get support now!",
+    "cravingEncouragement": "You can overcome this. Take a deep breath.",
+    "managedCraving": "I Managed the Craving",
+    "needHelp": "I Need Help",
+    "whichAddiction": "Which addiction are you struggling with?",
+    "selectAddictionForLogging": "Select the addiction you're struggling with to log it and get support",
+    "noAddictionsToLog": "No addictions tracked yet. Add one first.",
+    "amazingWork": "🎉 Amazing Work!",
+    "resistedCraving": "You've resisted a craving. That's huge! Every moment you stay strong builds your recovery.",
+    "messageClosing": "You're doing great. Keep going!",
+    "cravingSupport": {
+      "message": "Feeling a craving? Get support now!",
+      "encouragement": "You can overcome this. Take a deep breath.",
+      "buttons": "Get Help"
+    },
+    "todaysOutlook": "Today's Outlook",
+    "todaysSavings": "Today's Savings",
+    "totalSaved": "Total Saved",
+    "todaysTips": "Today's Tips"
+  }
+}

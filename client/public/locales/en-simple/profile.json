@@ -1,0 +1,18 @@
+{
+  "pageTitle": "My Info",
+  "changePassword": "Change Password",
+  "currentPassword": "Old Password",
+  "newPassword": "New Password",
+  "confirmNewPassword": "Type New Password Again",
+  "passwordChanged": "Password changed!",
+  "darkMode": "Dark Mode",
+  "language": "Language",
+  "unitPreference": "Size Units",
+  "selectLanguage": "Pick language",
+  "resetProgress": "Start Over",
+  "resetProgressWarning": "Sure? This erases all info. Can't undo.",
+  "deleteAccount": "Delete Account",
+  "deleteAccountWarning": "Sure? This deletes everything. Can't undo.",
+  "imperialUnits": "Pounds and Fahrenheit",
+  "metricUnits": "Kilos and Celsius"
+}

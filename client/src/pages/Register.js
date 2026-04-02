@@ -1,13 +1,16 @@
 import React, { useState, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import './Auth.css';
 import apiClient from '../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import Footer from '../components/Footer';
+import { DarkModeContext } from '../context/DarkModeContext';
 
 export default function Register() {
+  const { t } = useTranslation(['common', 'auth', 'validation', 'messages']);
   const [formData, setFormData] = useState({
     username: '',
-    fullName: '',
     password: '',
     confirmPassword: ''
   });
@@ -27,14 +30,13 @@ export default function Register() {
     setError('');
 
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError(t('auth:passwordsNotMatch'));
       return;
     }
 
     try {
       const response = await apiClient.post('/api/auth/register', {
         username: formData.username,
-        fullName: formData.fullName,
         password: formData.password
       });
 
@@ -43,7 +45,7 @@ export default function Register() {
       localStorage.setItem('token', response.data.token);
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      setError(err.response?.data?.message || t('common:error'));
     }
   };
 
@@ -53,29 +55,22 @@ export default function Register() {
         <p>💚 <strong>100% Open Source • Completely Free • No Ads • No Tracking</strong></p>
       </div>
       <div className="auth-card">
-        <h2>Register</h2>
+        <h1>{t('header.title')}</h1>
+        <h2>{t('auth:register')}</h2>
         {error && <p className="error">{error}</p>}
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             name="username"
-            placeholder="Username"
+            placeholder={t('auth:username')}
             value={formData.username}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="fullName"
-            placeholder="Full Name"
-            value={formData.fullName}
             onChange={handleChange}
             required
           />
           <input
             type="password"
             name="password"
-            placeholder="Password"
+            placeholder={t('auth:password')}
             value={formData.password}
             onChange={handleChange}
             required
@@ -83,15 +78,19 @@ export default function Register() {
           <input
             type="password"
             name="confirmPassword"
-            placeholder="Confirm Password"
+            placeholder={t('auth:confirmPassword')}
             value={formData.confirmPassword}
             onChange={handleChange}
             required
           />
-          <button type="submit">Register</button>
+          <button type="submit">{t('auth:register')}</button>
         </form>
-        <p>Already have an account? <a href="/login">Login here</a></p>
+        <p>{t('auth:alreadyHaveAccount')} <a href="/login">{t('auth:login')}</a></p>
+        <p style={{ marginTop: '20px', textAlign: 'center' }}>
+          Not sure if this is for you? <a href="/self-assessment">Take our self-assessment quiz</a>
+        </p>
       </div>
+      <Footer />
     </div>
   );
 }

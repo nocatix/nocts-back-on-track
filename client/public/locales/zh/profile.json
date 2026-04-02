@@ -1,0 +1,18 @@
+{
+  "pageTitle": "我的资料",
+  "changePassword": "更改密码",
+  "currentPassword": "当前密码",
+  "newPassword": "新密码",
+  "confirmNewPassword": "确认新密码",
+  "passwordChanged": "密码已更改!",
+  "darkMode": "深色模式",
+  "language": "语言",
+  "unitPreference": "单位",
+  "selectLanguage": "选择语言",
+  "resetProgress": "重置",
+  "resetProgressWarning": "确定? 这将删除所有内容。无法撤消。",
+  "deleteAccount": "删除账户",
+  "deleteAccountWarning": "确定? 这将删除所有内容。无法撤消。",
+  "imperialUnits": "磅和华氏度",
+  "metricUnits": "公斤和摄氏度"
+}

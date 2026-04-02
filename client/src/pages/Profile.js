@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import { DarkModeContext } from '../context/DarkModeContext';
+import LanguageSelector from '../components/LanguageSelector';
 import './Profile.css';
 import apiClient from '../api/axiosConfig';
 
 const Profile = () => {
   const { user, token, setUser, loading } = useAuth();
   const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
-  const [formData, setFormData] = useState({
-    username: '',
-    fullName: ''
-  });
+  const { t } = useTranslation(['profile', 'messages']);
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
     newPassword: '',
@@ -25,21 +24,9 @@ const Profile = () => {
 
   useEffect(() => {
     if (user) {
-      setFormData({
-        username: user.username || '',
-        fullName: user.fullName || ''
-      });
       setUnitPreference(user.unitPreference || 'metric');
     }
   }, [user]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
 
   const handlePasswordChange = (e) => {
     const { name, value } = e.target;
@@ -56,28 +43,9 @@ const Profile = () => {
       );
       setUnitPreference(preference);
       setUser({ ...user, unitPreference: preference });
-      setMessage('Unit preference updated successfully!');
+      setMessage(t('messages:updated'));
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to update unit preference');
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError('');
-    setMessage('');
-
-    try {
-      const response = await apiClient.put('/api/auth/profile', formData);
-
-      // Update the user context
-      setUser(response.data.user);
-      setMessage('Profile updated successfully!');
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to update profile');
-    } finally {
-      setIsSubmitting(false);
+      setError(err.response?.data?.message || t('messages:error'));
     }
   };
 
@@ -88,7 +56,7 @@ const Profile = () => {
     setMessage('');
 
     if (passwordData.newPassword !== passwordData.confirmPassword) {
-      setError('New passwords do not match');
+      setError(t('common:passwordMismatch'));
       setIsSubmitting(false);
       return;
     }
@@ -99,14 +67,14 @@ const Profile = () => {
         newPassword: passwordData.newPassword
       });
 
-      setMessage('Password changed successfully!');
+      setMessage(t('passwordChanged'));
       setPasswordData({
         currentPassword: '',
         newPassword: '',
         confirmPassword: ''
       });
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to change password');
+      setError(err.response?.data?.message || t('messages:error'));
     } finally {
       setIsSubmitting(false);
     }
@@ -119,7 +87,7 @@ const Profile = () => {
       // Logout the user
       window.location.href = '/login';
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to delete account');
+      setError(err.response?.data?.message || t('messages:error'));
     }
   };
 
@@ -131,9 +99,9 @@ const Profile = () => {
     try {
       await apiClient.post('/api/auth/reset-progress');
       setShowResetModal(false);
-      setMessage('All progress has been reset. You are starting fresh.');
+      setMessage(t('messages:updated'));
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to reset progress');
+      setError(err.response?.data?.message || t('messages:error'));
       setShowResetModal(false);
     } finally {
       setIsSubmitting(false);
@@ -141,53 +109,21 @@ const Profile = () => {
   };
 
   if (loading || !user) {
-    return <div className="profile-loading">Loading profile...</div>;
+    return <div className="profile-loading">{t('common:loading')}</div>;
   }
 
   return (
     <div className="profile-page">
-      <h1>Profile</h1>
+      <h1>{t('pageTitle')}</h1>
       
       {message && <div className="profile-message success">{message}</div>}
       {error && <div className="profile-message error">{error}</div>}
       
       <div className="profile-card">
-        <h2>Edit Profile</h2>
-        <form onSubmit={handleSubmit} className="profile-form">
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              disabled
-            />
-          </div>
-          
-          <div className="form-group">
-            <label htmlFor="fullName">Full Name</label>
-            <input
-              type="text"
-              id="fullName"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          
-          <button type="submit" disabled={loading} className="profile-button">
-            {loading ? 'Saving...' : 'Save Changes'}
-          </button>
-        </form>
-      </div>
-      
-      <div className="profile-card">
-        <h2>Change Password</h2>
+        <h2>{t('changePassword')}</h2>
         <form onSubmit={handlePasswordSubmit} className="profile-form">
           <div className="form-group">
-            <label htmlFor="currentPassword">Current Password</label>
+            <label htmlFor="currentPassword">{t('currentPassword')}</label>
             <input
               type="password"
               id="currentPassword"
@@ -199,7 +135,7 @@ const Profile = () => {
           </div>
           
           <div className="form-group">
-            <label htmlFor="newPassword">New Password</label>
+            <label htmlFor="newPassword">{t('newPassword')}</label>
             <input
               type="password"
               id="newPassword"
@@ -212,7 +148,7 @@ const Profile = () => {
           </div>
           
           <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm New Password</label>
+            <label htmlFor="confirmPassword">{t('confirmNewPassword')}</label>
             <input
               type="password"
               id="confirmPassword"
@@ -225,13 +161,13 @@ const Profile = () => {
           </div>
           
           <button type="submit" disabled={loading} className="profile-button">
-            {loading ? 'Updating...' : 'Change Password'}
+            {loading ? t('common:loading') : t('changePassword')}
           </button>
         </form>
       </div>
       
       <div className="profile-card">
-        <h2>Measurement Preference</h2>
+        <h2>{t('unitPreference')}</h2>
         <div className="unit-preference-section">
           <p>Choose your preferred unit of measurement:</p>
           <div className="unit-buttons">
@@ -240,40 +176,21 @@ const Profile = () => {
               onClick={() => handleUnitPreferenceChange('metric')}
             >
               <span>🌍</span>
-              <span>Metric (kg)</span>
+              <span>{t('metricUnits')}</span>
             </button>
             <button 
               className={`unit-button ${unitPreference === 'imperial' ? 'active' : ''}`}
               onClick={() => handleUnitPreferenceChange('imperial')}
             >
               <span>🇺🇸</span>
-              <span>Imperial (lbs)</span>
+              <span>{t('imperialUnits')}</span>
             </button>
           </div>
         </div>
       </div>
-      
+
       <div className="profile-card">
-        <h2>Appearance</h2>
-        <div className="theme-section">
-          <p>Choose your preferred theme:</p>
-          <div className="theme-buttons">
-            <button 
-              className={`theme-button ${!isDarkMode ? 'active' : ''}`}
-              onClick={() => isDarkMode && toggleDarkMode()}
-            >
-              <span>🌙</span>
-              <span>Light Mode</span>
-            </button>
-            <button 
-              className={`theme-button ${isDarkMode ? 'active' : ''}`}
-              onClick={() => !isDarkMode && toggleDarkMode()}
-            >
-              <span>☀️</span>
-              <span>Dark Mode</span>
-            </button>
-          </div>
-        </div>
+        <LanguageSelector />
       </div>
       
       <div className="profile-section">
