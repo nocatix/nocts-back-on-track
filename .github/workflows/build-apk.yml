@@ -2,6 +2,8 @@ name: Build and Publish Mobile APK
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'mobile/**'
       - '.github/workflows/build-apk.yml'
