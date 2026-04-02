@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import apiClient from './api/axiosConfig';
 import { AuthContext } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -9,6 +8,9 @@ import MainMenu from './pages/MainMenu';
 import AddNewAddiction from './pages/AddNewAddiction';
 import AddictionDetail from './pages/AddictionDetail';
 import Meditation from './pages/Meditation';
+import Mindfulness from './pages/Mindfulness';
+import Exercise from './pages/Exercise';
+import Therapy from './pages/Therapy';
 import Diary from './pages/Diary';
 import CravingGame from './pages/CravingGame';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -20,14 +22,16 @@ import Memories from './pages/Memories';
 import Whyusethis from './pages/Whyusethis';
 import HowToSucceed from './pages/HowToSucceed';
 import Crisis from './pages/Crisis';
+import WithdrawalSymptoms from './pages/WithdrawalSymptoms';
+import PreparationPlan from './pages/PreparationPlan';
+import Hobbies from './pages/Hobbies';
+import FunctioningUser from './pages/FunctioningUser';
+import SelfAssessment from './pages/SelfAssessment';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AchievementNotification from './components/AchievementNotification';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import Sidebar from './components/Sidebar.js';
-
-// Configure API URL (already configured in apiClient)
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 function ProtectedRoute({ children, isAuthenticated }) {
   return isAuthenticated ? children : <Navigate to="/login" />;
@@ -76,6 +80,30 @@ export default function App() {
                 element={
                   <ProtectedRoute isAuthenticated={!!token}>
                     <Meditation />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/mindfulness"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <Mindfulness />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/exercise"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <Exercise />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/therapy"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <Therapy />
                   </ProtectedRoute>
                 }
               />
@@ -166,6 +194,42 @@ export default function App() {
                     <Crisis />
                   </ProtectedRoute>
                 }
+              />
+              <Route
+                path="/withdrawal-symptoms"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <WithdrawalSymptoms />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/preparation-plan"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <PreparationPlan />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/hobbies"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <Hobbies />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/functioning-user"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <FunctioningUser />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/self-assessment"
+                element={<SelfAssessment />}
               />
             </Routes>
           </main>

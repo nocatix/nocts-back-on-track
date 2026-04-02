@@ -1,0 +1,394 @@
+.therapy-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  padding-bottom: 4rem;
+}
+
+.therapy-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 3px solid var(--accent-color);
+}
+
+.therapy-header h1 {
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  margin-bottom: 0.75rem;
+  transition: color 0.3s ease;
+}
+
+html.dark .therapy-header h1 {
+  color: #7a8efc;
+}
+
+.therapy-header p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  transition: color 0.3s ease;
+}
+
+.therapy-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.therapy-section {
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card-bg);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+html.dark .therapy-section {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.therapy-section:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.15);
+}
+
+.therapy-section-header {
+  cursor: pointer;
+  padding: 1.75rem;
+  background: var(--input-bg);
+  border-bottom: 2px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.therapy-section-header:hover {
+  background: linear-gradient(135deg, var(--accent-color), #764ba2);
+}
+
+.therapy-section-header:hover .section-title h2 {
+  color: white;
+}
+
+.therapy-section-header:hover .toggle-arrow {
+  color: white;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.section-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.section-title h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.toggle-arrow {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  transition: transform 0.3s ease, color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.therapy-section.collapsed .section-content {
+  display: none !important;
+  max-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  margin: 0;
+  padding: 0 !important;
+  height: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.therapy-section.expanded .section-content {
+  max-height: 10000px;
+  overflow: visible;
+  visibility: visible;
+  opacity: 1;
+  height: auto;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  margin-top: 20px;
+  padding: 2rem;
+}
+
+.therapy-section.collapsed .toggle-arrow {
+  transform: rotate(-90deg);
+}
+
+.section-content {
+  color: var(--text-primary);
+}
+
+.section-content p {
+  margin: 1rem 0;
+  line-height: 1.7;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.section-content p:first-child {
+  margin-top: 0;
+}
+
+.section-content ul {
+  margin: 1.5rem 0;
+  padding-left: 2rem;
+  list-style-position: outside;
+}
+
+.section-content li {
+  margin: 0.75rem 0;
+  line-height: 1.6;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.highlight-box {
+  background: var(--input-bg);
+  border-left: 4px solid var(--accent-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.highlight-box h4 {
+  margin-top: 0;
+  color: var(--accent-color);
+  transition: color 0.3s ease;
+}
+
+.highlight-box p {
+  margin: 0.5rem 0;
+}
+
+.highlight-box ul {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.highlight-box li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+/* Benefit Cards Grid */
+.therapy-benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.benefit-card {
+  background: var(--input-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+}
+
+.benefit-card h4 {
+  color: var(--accent-color);
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.benefit-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+/* Step Section */
+.step-section {
+  margin: 1.5rem 0 0 0;
+}
+
+.step-item {
+  background: var(--input-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  border-left: 5px solid var(--accent-color);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.step-item:hover {
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.step-number {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -20px;
+  width: 40px;
+  height: 40px;
+  background: var(--accent-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+}
+
+.step-item:hover .step-number {
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.step-item h4 {
+  color: var(--accent-color);
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.step-item p {
+  margin: 0.75rem 0 0 0;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Physician Roles Grid */
+.physician-roles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.role-card {
+  background: var(--input-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.role-card:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+}
+
+.role-card h4 {
+  color: var(--accent-color);
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.role-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+/* Getting Started Steps */
+.getting-started-steps {
+  margin: 1.5rem 0 0 0;
+}
+
+.closing-section {
+  background: linear-gradient(135deg, var(--accent-color), #764ba2);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.closing-section h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.closing-section p {
+  margin: 0.75rem 0;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .therapy-container {
+    padding: 1rem;
+    padding-bottom: 3rem;
+  }
+
+  .therapy-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .therapy-section-header {
+    padding: 1.25rem;
+  }
+
+  .section-icon {
+    font-size: 1.5rem;
+  }
+
+  .section-title h2 {
+    font-size: 1.1rem;
+  }
+
+  .therapy-section.expanded .section-content {
+    padding: 1.5rem;
+  }
+
+  .therapy-benefits,
+  .physician-roles {
+    grid-template-columns: 1fr;
+  }
+
+  .step-number {
+    width: 35px;
+    height: 35px;
+    font-size: 1.1rem;
+    top: -18px;
+  }
+
+  .closing-section {
+    padding: 1.5rem;
+  }
+
+  .closing-section h3 {
+    font-size: 1.3rem;
+  }
+}

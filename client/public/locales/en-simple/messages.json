@@ -1,0 +1,48 @@
+{
+  "saved": "Saved!",
+  "deleted": "Deleted!",
+  "updated": "Updated!",
+  "error": "Error. Try again.",
+  "serverError": "Server error. Try again later.",
+  "networkError": "Network error. Check your connection.",
+  "unauthorized": "You don't have permission",
+  "validation": {
+    "required": "Required",
+    "invalidEmail": "Wrong email",
+    "passwordTooShort": "Password must have 6 or more letters",
+    "passwordMismatch": "Passwords are not the same",
+    "invalidInput": "Wrong input"
+  },
+  "mainMenu": {
+    "pageTitle": "Main Menu",
+    "failedToLoadAddictions": "Failed to load addictions",
+    "failedToUpdateAddiction": "Failed to update",
+    "aboutToCave": "Want to use?",
+    "craviingSupport": "Need Help?",
+    "cravineSupportMessage": "Do you want to use? Get help now!",
+    "cravingEncouragement": "You can do this. Take a breath.",
+    "managedCraving": "I Did Not Use",
+    "needHelp": "I Need Help",
+    "whichAddiction": "Which addiction?",
+    "selectAddictionForLogging": "Pick the addiction you want to use. We will help.",
+    "noAddictionsToLog": "No addictions yet. Add one first.",
+    "amazingWork": "🎉 Great Work!",
+    "resistedCraving": "You did not use! That is great! Every moment you stay strong helps you get well.",
+    "messageClosing": "You are doing great. Keep going!",
+    "cravingSupport": {
+      "message": "Do you want to use? Get help now!",
+      "encouragement": "You can do this. Take a breath.",
+      "buttons": "Get Help"
+    },
+    "todaysOutlook": "Today",
+    "todaysSavings": "Money Saved Today",
+    "totalSaved": "Total Saved",
+    "todaysTips": "Tips Today"
+  },
+  "addictionCard": {
+    "days": "Days",
+    "saved": "Saved",
+    "encouragement": "You are doing great!",
+    "youreDoingGreat": "You are doing great! Keep going!"
+  }
+}

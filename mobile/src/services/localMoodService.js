@@ -1,5 +1,5 @@
 import { getDatabase } from '../db/database';
-import { encrypt, decrypt } from './encryption';
+import { encrypt, decrypt } from '../utils/encryption';
 
 const toLocalDateKey = (date) => {
   const year = date.getFullYear();

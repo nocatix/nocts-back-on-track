@@ -3,6 +3,7 @@ import './AddNewAddiction.css';
 import apiClient from '../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { useAddictions } from '../context/AddictionsContext';
 import { getFrequencyLabel, getCostLabel } from '../utils/withdrawalHelper';
 
 export default function AddNewAddiction() {
@@ -20,7 +21,8 @@ export default function AddNewAddiction() {
   const [timePeriod, setTimePeriod] = useState('AM');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { token, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const { addAddiction } = useAddictions();
   const unitPreference = user?.unitPreference || 'metric';
 
   // Convert 12h format to 24h format
@@ -31,15 +33,6 @@ export default function AddNewAddiction() {
     } else {
       return h === 12 ? 12 : h + 12;
     }
-  };
-
-  // Convert 24h format to 12h format
-  const convert24to12 = (hour) => {
-    const h = parseInt(hour);
-    if (h === 0) return { hour: '12', period: 'AM' };
-    if (h < 12) return { hour: h.toString(), period: 'AM' };
-    if (h === 12) return { hour: '12', period: 'PM' };
-    return { hour: (h - 12).toString(), period: 'PM' };
   };
 
   const handleTimeChange = () => {
@@ -90,13 +83,15 @@ export default function AddNewAddiction() {
     stopDateTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
 
     try {
-      await apiClient.post('/api/addictions', {
+      const response = await apiClient.post('/api/addictions', {
         name: addictionName,
         stopDate: stopDateTime.toISOString(),
         frequencyPerDay: formData.frequencyPerDay,
         moneySpentPerDay: formData.moneySpentPerDay,
         notes: formData.notes
       });
+      // Add the new addiction to the context so it appears in the sidebar immediately
+      addAddiction(response.data);
       navigate('/');
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to create addiction entry');

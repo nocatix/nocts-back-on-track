@@ -1,0 +1,32 @@
+{
+  "pageTitle": "Отслеживание зависимостей",
+  "addNew": "Добавить новую зависимость",
+  "addictionName": "Название зависимости",
+  "addictionNameLabel": "Название зависимости",
+  "enterAddictionName": "Введите название вашей зависимости",
+  "addictionNamePlaceholder": "например Курение, Алкоголь, Социальные сети",
+  "dateYouStopped": "Дата прекращения",
+  "timeYouStopped": "Время прекращения",
+  "timeFormat12h": "12-часовой формат (AM/PM)",
+  "timeFormat24h": "24-часовой формат",
+  "frequency": "Частота",
+  "timesPerDay": "Раз в день",
+  "frequencyPlaceholder": "Сколько раз в день?",
+  "money": "Потраченные деньги",
+  "moneyPlaceholder": "Сумма в вашей валюте",
+  "additionalNotes": "Дополнительные примечания",
+  "additionalNotesPlaceholder": "Другие детали об этой зависимости...",
+  "selectAddiction": "Выберите зависимость",
+  "description": "Описание",
+  "startDate": "Дата начала",
+  "category": "Категория",
+  "severity": "Тяжесть",
+  "noAddictions": "Еще не отслеживаются зависимости. Начните прямо сейчас!",
+  "daysSoberCount": "Дней трезвости",
+  "addictionCard": {
+    "days": "Дни",
+    "saved": "Сэкономлено",
+    "encouragement": "Вы добиваетесь невероятных успехов!",
+    "youreDoingGreat": "Вы делаете отлично! Продолжайте!"
+  }
+}

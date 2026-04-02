@@ -1,0 +1,308 @@
+{
+  "meditation": {
+    "pageTitle": "Meditation",
+    "startMeditation": "Start",
+    "duration": "Minutes",
+    "guidedMeditation": "Guided",
+    "timerId": "Timer",
+    "breathingExercise": "Breathing",
+    "relaxationTechnique": "Relax",
+    "noRecords": "No records yet. Start!",
+    "backToMeditations": "← Back",
+    "sessionTimer": "⏱️ Timer",
+    "sessionTimerLabel": "Timer",
+    "guidedBreathing": "🫁 Breathing",
+    "breathingPace": "Speed",
+    "startBreathingGuide": "▶ Start",
+    "stopBreathingGuide": "⏹ Stop",
+    "showBreathingGuide": "Show",
+    "hideBreathingGuide": "Hide",
+    "start": "Start",
+    "pause": "Pause",
+    "resume": "Resume",
+    "reset": "Reset",
+    "minutes": "minutes",
+    "meditationMusic": "🎵 Music",
+    "guide": "Guide",
+    "postureTips": "🧘 How to Sit",
+    "quickTools": "Quick Tools",
+    "emergencyCalmTitle": "🆘 Quick Calm",
+    "emergencyCalmDesc": "Fast help for big cravings",
+    "emergencyCalm3Min": "3 Minute Calm",
+    "quickBreathingTitle": "🫁 Breathing",
+    "quickBreathingDesc": "Calm your body",
+    "progressTitle": "📈 Your Progress",
+    "sessionsCompleted": "Sessions done",
+    "minsTotal": "Minutes total",
+    "guidedBreathingExercise": "Breathing Guide",
+    "breathingTip1": "👉 Breathe in slow. Hold it. Breathe out slow.",
+    "breathingTip2": "💡 This helps your body calm down. It stops cravings.",
+    "recommendedMusicTitle": "🎵 Music",
+    "listenToMusic": "Listen to calm music",
+    "youtubeMusic": "YouTube: Meditation",
+    "spotifyMusic": "Spotify: Meditation",
+    "calmApp": "Calm App",
+    "recentSessionsTitle": "📝 Recent Sessions",
+    "tipsForMeditation": "💡 Tips for Meditation",
+    "meditations": [
+      {
+        "id": 1,
+        "title": "Breath",
+        "duration": "5 min",
+        "description": "Start with simple breathing.",
+        "guide": "Sit quiet. Close eyes. Breathe normal. Count 1 to 10 as you breathe out. Start again. If your mind goes away, that is OK. Come back to counting. Do this 5 minutes. This helps stop cravings.",
+        "musicUrl": "https://www.youtube.com/embed/7qJZy4DpOWA"
+      },
+      {
+        "id": 2,
+        "title": "Body Scan",
+        "duration": "7 min",
+        "description": "Feel your body. Let go of hurt.",
+        "guide": "Lie down or sit. Close eyes. Start at your head. Feel any hurt. Breathe and let it go. Go down: face, neck, arms, chest, belly, legs, feet. Do this slow. This helps your body relax.",
+        "musicUrl": "https://www.youtube.com/embed/2DRyAW0ljHQ"
+      },
+      {
+        "id": 3,
+        "title": "Stop Craving",
+        "duration": "10 min",
+        "description": "For when you crave.",
+        "guide": "Sit quiet. Close eyes. Feel your craving. Don't fight it. Just watch it. Where is it? What does it feel? Imagine it like a wave. It comes up, then goes down. Cravings go away in 15-20 minutes. You can do this.",
+        "musicUrl": "https://www.youtube.com/embed/sTzHDPqBN-8"
+      },
+      {
+        "id": 4,
+        "title": "Love Yourself",
+        "duration": "8 min",
+        "description": "Be kind to yourself.",
+        "guide": "Sit quiet. Close eyes. Put hand on heart. Say: 'I am OK. I am healthy. I am happy. I will get better.' Say it slow. Feel it. Then say: 'Others will get better too.' This helps you love yourself.",
+        "musicUrl": "https://www.youtube.com/embed/lE5n6gYzJLo"
+      }
+    ],
+    "tips": [
+      "Start with 5 minutes. Do it every day.",
+      "Do it at the same time each day.",
+      "Cravings go away in 15-20 minutes. Sit through it.",
+      "Use meditation when you crave most.",
+      "Your mind will go away. That is OK. Come back.",
+      "See how good you get. Cravings get easier."
+    ],
+    "postureTipsList": [
+      {
+        "label": "Spine",
+        "text": "Keep it straight but not hard"
+      },
+      {
+        "label": "Shoulders",
+        "text": "Let them down"
+      },
+      {
+        "label": "Hands",
+        "text": "On your knees or lap"
+      },
+      {
+        "label": "Chin",
+        "text": "Look down a bit"
+      },
+      {
+        "label": "Feet",
+        "text": "On the ground"
+      }
+    ]
+  },
+  "preparationPlan": {
+    "header": {
+      "title": "Get Ready to Stop",
+      "subtitle": "Plan now to get better. Ready people do better."
+    },
+    "motivation": {
+      "title": "Why Plan?",
+      "mainMessage": "Getting better is something you make happen. You have to plan.",
+      "description": "Time you spend planning helps you succeed. People who plan do better.",
+      "benefits": [
+        "Plans help you make good choices when it is hard",
+        "Plans make you ready and sure before you start",
+        "Plans show you hard things before they happen",
+        "Plans give you help from day one",
+        "Plans show you that you are serious about change"
+      ],
+      "insight": "💡 Every minute you plan now saves you hard times later."
+    },
+    "assess": {
+      "title": "1. Know Yourself",
+      "intro": "Before you stop, know where you are:",
+      "questions": {
+        "frequency": "How much do I use? (daily, every week, many times a day)",
+        "money": "How much money do I spend each day or week?",
+        "time": "What time do I use most?",
+        "triggers": "What makes me want to use? (stress, bored, with people, sad)",
+        "impact": "How has this hurt me? (health, people, work, money)",
+        "obstacles": "What stops me from quitting?"
+      },
+      "placeholder": "Write here...",
+      "tip": "Tip: Track your use for a few days. Real numbers help more than guesses."
+    },
+    "quitDate": {
+      "title": "2. Pick a Date to Stop",
+      "mainAdvice": "Pick a day in 1-2 weeks. Give yourself time to get ready. Not too long.",
+      "goodTiming": [
+        "✓ Good: After a hard time passes",
+        "✓ Good: When people can help you"
+      ],
+      "badTiming": [
+        "✗ Bad: When you are stressed or sad",
+        "✗ Bad: When you are alone and can easily use"
+      ],
+      "finalAdvice": "Write the date on your calendar. Tell people about it. Put it where you see it. Make it real."
+    },
+    "triggers": {
+      "title": "3. Know What Makes You Use",
+      "intro": "Know what makes you want to use. Then you can plan what to do.",
+      "categories": {
+        "emotional": {
+          "title": "Feelings",
+          "description": "Stress, bored, lonely, angry, scared, sad... what feeling makes you use?"
+        },
+        "social": {
+          "title": "People",
+          "description": "Do you use with some people? In some places?"
+        },
+        "environmental": {
+          "title": "Places and Times",
+          "description": "Times of day or places? Your room? Late night?"
+        },
+        "habitual": {
+          "title": "Habits",
+          "description": "Things you always do? After coffee? After work?"
+        }
+      },
+      "action": "For each trigger: Write what you will do instead."
+    },
+    "support": {
+      "title": "4. Get Help",
+      "intro": "You cannot do this alone. Get help now, before you quit.",
+      "people": {
+        "title": "👥 Tell People",
+        "items": [
+          "Tell one person you trust. Call them anytime.",
+          "Tell someone who will not judge you",
+          "Tell someone who will be happy for you",
+          "Tell a doctor or therapist"
+        ]
+      },
+      "resources": {
+        "title": "📱 Get Help",
+        "items": [
+          "Groups like AA or NA",
+          "A therapist or counselor",
+          "This app - use all of it",
+          "Help hotlines"
+        ]
+      },
+      "professional": {
+        "title": "🏥 Doctor Help",
+        "items": [
+          "Doctor help to stop safely",
+          "Medicine if you need it",
+          "Help for brain or heart problems",
+          "Don't try alone if it is dangerous"
+        ]
+      },
+      "action": "Write 3-5 people you can call. Save their numbers now."
+    },
+    "coping": {
+      "title": "5. Plan What to Do",
+      "intro": "You will crave. You need tools ready.",
+      "strategies": {
+        "meditation": {
+          "title": "🧘 Meditate",
+          "description": "Meditate even 2 minutes helps."
+        },
+        "distraction": {
+          "title": "🎮 Do Something",
+          "description": "Craving Game, movie, call a friend, shower, move."
+        },
+        "physical": {
+          "title": "💪 Move",
+          "description": "Walk, run, yoga, dance. Move your body."
+        },
+        "journaling": {
+          "title": "📔 Write",
+          "description": "Write in diary. Write about cravings and feelings."
+        },
+        "emotions": {
+          "title": "🎭 Feel",
+          "description": "Track moods. Name your feelings. Feel them."
+        },
+        "connection": {
+          "title": "🤝 Talk",
+          "description": "Call someone. Text. Go to a meeting."
+        }
+      },
+      "action": "Make a list: 3-5 things you will do when you crave. Put it where you see it."
+    },
+    "remove": {
+      "title": "6. Remove Things",
+      "intro": "Make it hard to use. You can't use what you don't have.",
+      "actions": {
+        "clean": {
+          "title": "🚭 Clean",
+          "description": "Get rid of all things you use with. Clean your room, car, bag."
+        },
+        "delete": {
+          "title": "🗑️ Delete",
+          "description": "Delete apps, block sites, delete people's numbers."
+        },
+        "money": {
+          "title": "💳 Money",
+          "description": "Give your money to someone you trust. Remove cards."
+        },
+        "avoid": {
+          "title": "📍 Avoid Places",
+          "description": "Plan different ways to go. Avoid places you use."
+        },
+        "distance": {
+          "title": "👥 Distance",
+          "description": "Tell friends you are quitting. Real friends will help."
+        }
+      }
+    },
+    "fortyEightHours": {
+      "title": "7. Plan First 48 Hours",
+      "intro": "The first 48 hours are the hardest. Plan every hour.",
+      "blocks": {
+        "wakeUp": {
+          "title": "First Thing",
+          "description": "Tell someone you started. Do something healthy. Exercise, eat good, meditate."
+        },
+        "morning": {
+          "title": "Morning",
+          "description": "Plan something. Exercise, meet a friend, hobby, meditate."
+        },
+        "afternoon": {
+          "title": "Afternoon",
+          "description": "Call your helper. Use your tools. This time will pass."
+        },
+        "evening": {
+          "title": "Evening",
+          "description": "Be with people. Stay busy. Write in diary."
+        },
+        "night": {
+          "title": "Night",
+          "description": "Bath, tea, meditate, book. You can do this."
+        }
+      },
+      "insight": "💡 If you make 48 hours, you will probably get better for long time. You can do this."
+    },
+    "mental": {
+      "title": "8. Get Your Mind Ready",
+      "intro": "Your mind decides if you win. Think these things now:",
+      "beliefs": [
+        "✓ You can do this. Many people did. You can too.",
+        "✓ This is hard but it gets easier",
+        "✓ Cravings do not last long. Maybe 20 minutes",
+        "✓ You are not bad. You are brave for trying",
+        "✓ Every day you don't use makes you stronger"
+      ]
+    }
+  }
+}

@@ -1,0 +1,297 @@
+{
+  "pageTitle": "새로운 취미 발견",
+  "subtitle": "목적, 의미, 연결로 가득한 매혹적인 활동을 통해 회복을 촉진하세요",
+  "whyHobbiesTitle": "취미가 회복에 중요한 이유",
+  "benefits": [
+    {
+      "emoji": "⏰",
+      "title": "시간 채우기",
+      "description": "취미는 일반적으로 사용하던 시간을 채웁니다. 지루함은 위험합니다. 몰입은 안전합니다."
+    },
+    {
+      "emoji": "😊",
+      "title": "도파민 방출",
+      "description": "취미는 중독에서 찾던 즐거움을 뇌에 제공하며, 자연스럽고 건강합니다."
+    },
+    {
+      "emoji": "🎯",
+      "title": "목적 구축",
+      "description": "무언가를 마스터하거나 달성하기 위해 노력하면 '사용하지 않는 것' 이상의 의미가 생깁니다."
+    },
+    {
+      "emoji": "🤝",
+      "title": "공동체 창조",
+      "description": "사회 취미는 다른 사람들과 연결하고 건강한 관계를 구축합니다."
+    },
+    {
+      "emoji": "💪",
+      "title": "자신감 구축",
+      "description": "뭔가를 배우고 개선하면 실제 성취감과 자존감이 생깁니다."
+    },
+    {
+      "emoji": "🧠",
+      "title": "건강한 탈출",
+      "description": "취미는 해를 끼치지 않으면서 정신적 탈출을 제공하며, 순수한 기쁨입니다."
+    }
+  ],
+  "filterTitle": "취미 필터",
+  "filterOptions": [
+    {
+      "value": "all",
+      "label": "모든 취미"
+    },
+    {
+      "value": "solo",
+      "label": "😊 혼자",
+      "subtext": "(혼자 하기)"
+    },
+    {
+      "value": "social",
+      "label": "👥 사교",
+      "subtext": "(다른 사람들과)"
+    },
+    {
+      "value": "outdoor",
+      "label": "🌳 야외"
+    },
+    {
+      "value": "indoor",
+      "label": "🏠 실내"
+    },
+    {
+      "value": "free",
+      "label": "💰 무료"
+    },
+    {
+      "value": "paid",
+      "label": "💵 유료"
+    }
+  ],
+  "categoryLabels": {
+    "solo": "😊 혼자",
+    "social": "👥 사교",
+    "outdoor": "🌳 야외",
+    "indoor": "🏠 실내",
+    "free": "💰 무료",
+    "paid": "💵 유료"
+  },
+  "recoveryBenefitsTitle": "✨ 회복 혜택",
+  "getStartedTitle": "🚀 시작",
+  "finalTitle": "탐색 시작",
+  "finalMessages": [
+    "정말로 흥미로운 취미를 선택하세요. 생각만 하지 마세요. 그냥 해보세요.",
+    "이번 주에 시도하세요. 진지하게 시도하세요. 능숙할 필요는 없고, 그냥 하면 됩니다.",
+    "목표는 완벽함이 아닙니다. 목표는 몰입, 행복, 살 가치가 있는 맑은 삶입니다."
+  ],
+  "hobbies": [
+    {
+      "id": 1,
+      "name": "산책",
+      "emoji": "🚶",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "30분 - 2시간",
+      "description": "신체를 움직이고 마음을 맑게 하는 간단하고 무료한 방법입니다. 산책은 갈망을 줄입니다.",
+      "recovery_benefits": [
+        "신체 활동",
+        "신선한 공기",
+        "정신 명확함",
+        "스트레스 완화"
+      ],
+      "get_started": "매일 20분 산책으로 시작하세요. 주변을 관찰하세요."
+    },
+    {
+      "id": 2,
+      "name": "달리기/조깅",
+      "emoji": "🏃",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "20-60분",
+      "description": "가장 강력한 엔도르핀 방출이며 신경 에너지를 소모합니다.",
+      "recovery_benefits": [
+        "엔도르핀 방출",
+        "강한 운동",
+        "갈망 억제",
+        "자신감 구축"
+      ],
+      "get_started": "초보자라면 달리기/산책 간격으로 시작하세요. 앱이 안내할 수 있습니다."
+    },
+    {
+      "id": 3,
+      "name": "등산",
+      "emoji": "⛰️",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "1-4시간",
+      "description": "자연 접촉, 신체 활동, 목표 설정을 의미 있는 취미로 결합합니다.",
+      "recovery_benefits": [
+        "자연과의 연결",
+        "성취감",
+        "운동",
+        "정신적 재설정"
+      ],
+      "get_started": "지역 등산로를 찾으세요. 초급 코스부터 시작하세요."
+    },
+    {
+      "id": 4,
+      "name": "정원 가꾸기",
+      "emoji": "🌱",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "30분 - 2시간",
+      "description": "무언가를 재배하면 목적, 인내심, 생활 관리의 만족감을 얻습니다.",
+      "recovery_benefits": [
+        "목적 감각",
+        "자연과의 연결",
+        "인내심 발전",
+        "성취감"
+      ],
+      "get_started": "키우기 쉬운 식물부터 시작하세요. 작은 창끝 정원도 괜찮습니다."
+    },
+    {
+      "id": 5,
+      "name": "도시 탐험",
+      "emoji": "🗺️",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "1-3시간",
+      "description": "지역사회를 재발견하세요. 미처 알아채지 못한 공원과 카페를 찾으세요.",
+      "recovery_benefits": [
+        "호기심",
+        "활동",
+        "새로운 시각",
+        "일상 깨기"
+      ],
+      "get_started": "잘 모르는 지역을 선택하세요. 목표 없이 탐험하세요."
+    },
+    {
+      "id": 6,
+      "name": "자전거 타기",
+      "emoji": "🚴",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "30분 - 2시간",
+      "description": "거리를 커버하고 자유로움을 느끼는 재미있고 빠른 방법입니다.",
+      "recovery_benefits": [
+        "속도와 자유",
+        "심혈관 건강",
+        "탐험",
+        "엔도르핀"
+      ],
+      "get_started": "지역 가게나 온라인에서 중고 자전거를 구매하세요. 헬멧과 자물쇠에 투자하세요."
+    },
+    {
+      "id": 7,
+      "name": "암벽 등반",
+      "emoji": "🧗",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-3시간",
+      "description": "자신감과 초점을 구축하는 강렬한 신체적, 정신적 도전입니다.",
+      "recovery_benefits": [
+        "문제 해결",
+        "자신감",
+        "전신 근력",
+        "집중력 향상"
+      ],
+      "get_started": "지역 클라이밍 체육관에서 시작하세요. 강사가 올바른 기술과 안전을 가르칩니다."
+    },
+    {
+      "id": 8,
+      "name": "사진",
+      "emoji": "📸",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-4시간",
+      "description": "아름다움을 포착하고, 미적 감각을 발전시키고, 창의적 출구를 탐험하세요.",
+      "recovery_benefits": [
+        "창의성",
+        "마음챙김",
+        "탐험",
+        "성취감"
+      ],
+      "get_started": "휴대폰 카메라부터 시작하세요. 무료 온라인 튜토리얼에서 배우세요."
+    },
+    {
+      "id": 9,
+      "name": "수상 스포츠",
+      "emoji": "🏄",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-3시간",
+      "description": "서핑, 카야킹, 스탠드업 패들링은 물과 연결되고 아드레날린을 제공합니다.",
+      "recovery_benefits": [
+        "자연과의 연결",
+        "아드레날린",
+        "전신 운동",
+        "현재 순간"
+      ],
+      "get_started": "지역 해변이나 호수에서 초급 수업을 받으세요. 잔잔한 물에서 시작하세요."
+    },
+    {
+      "id": 10,
+      "name": "독서",
+      "emoji": "📖",
+      "category": [
+        "solo",
+        "indoor",
+        "free"
+      ],
+      "duration": "30분 - 2시간",
+      "description": "이야기에 몰입하고, 새로운 것을 배우고, 건강한 방식으로 마음을 도전하세요.",
+      "recovery_benefits": [
+        "정신적 탈출",
+        "어휘력 증가",
+        "휴식",
+        "지식"
+      ],
+      "get_started": "지역 도서관을 방문하세요. 책을 무료로 빌리세요."
+    },
+    {
+      "id": 11,
+      "name": "글쓰기/일기",
+      "emoji": "✍️",
+      "category": [
+        "solo",
+        "indoor",
+        "free"
+      ],
+      "duration": "20-60분",
+      "description": "감정을 처리하고, 여정을 추적하고, 자신에 대한 통찰력을 발견하세요.",
+      "recovery_benefits": [
+        "감정 처리",
+        "자기 발견",
+        "스트레스 완화",
+        "진행 추적"
+      ],
+      "get_started": "자유 글쓰기로 시작하세요. 규칙 없음. 참된 것을 작성하세요."
+    }
+  ]
+}

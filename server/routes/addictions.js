@@ -5,6 +5,7 @@
  */
 
 const express = require('express');
+const mongoose = require('mongoose');
 const auth = require('../middleware/auth');
 const Addiction = require('../models/Addiction');
 const Achievement = require('../models/Achievement');
@@ -34,6 +35,8 @@ function enrichAddictionData(addiction) {
   addictionData.daysStopped = addiction.getDaysStopped();
   addictionData.totalMoneySaved = addiction.getTotalMoneySaved();
   addictionData.addictionType = extractAddictionType(addictionData.name);
+  addictionData.daysUntilPlannedStop = addiction.getDaysUntilPlannedStop();
+  addictionData.hasActivePlannedStop = addiction.hasActivePlannedStop();
   return addictionData;
 }
 
@@ -138,6 +141,151 @@ router.put('/:id', auth, async (req, res) => {
       return res.status(404).json({ message: 'Addiction not found' });
     }
     
+    // Recalculate achievements and trophies for this updated addiction
+    const MILESTONES = {
+      1: { name: '24 Hours', icon: '⏰', description: 'Made it through your first day!' },
+      3: { name: '3 Days', icon: '🌟', description: 'Three days sober! The hardest part is here.' },
+      7: { name: '1 Week', icon: '📅', description: 'One week! You\'re past the peak withdrawal.' },
+      14: { name: '2 Weeks', icon: '💪', description: 'Two weeks strong! Keep the momentum!' },
+      30: { name: '1 Month', icon: '🎉', description: 'ONE MONTH! Major milestone achieved!' },
+      60: { name: '2 Months', icon: '🚀', description: 'Two months! Your body is healing!' },
+      90: { name: '3 Months', icon: '👑', description: 'THREE MONTHS! You\'re crushing it!' },
+      180: { name: '6 Months', icon: '🌈', description: 'SIX MONTHS! You\'re unstoppable!' },
+      365: { name: '1 Year', icon: '🏆', description: 'ONE YEAR FREE! You did it! Complete transformation!' }
+    };
+
+    const daysStopped = addiction.getDaysStopped();
+    console.log(`[Edit Addiction] ID: ${req.params.id}, daysStopped: ${daysStopped}`);
+    
+    // Remove achievements for this addiction that are no longer valid (milestones beyond current days)
+    const allMilestoneDays = Object.keys(MILESTONES).map(Number);
+    const invalidMilestones = allMilestoneDays.filter(days => days > daysStopped);
+    
+    console.log(`[Edit Addiction] invalidMilestones: ${invalidMilestones.join(', ')}`);
+    
+    if (invalidMilestones.length > 0) {
+      const deleteResult = await Achievement.deleteMany({
+        userId: req.user.userId,
+        addictionId: new mongoose.Types.ObjectId(req.params.id),
+        milestoneDays: { $in: invalidMilestones }
+      });
+      console.log(`[Edit Addiction] Deleted ${deleteResult.deletedCount} invalid achievements`);
+    }
+    
+    // Check each milestone and update achievements
+    const addictionObjectId = new mongoose.Types.ObjectId(req.params.id);
+    for (const [days, milestone] of Object.entries(MILESTONES)) {
+      const daysNum = parseInt(days);
+      if (daysStopped >= daysNum) {
+        // Use findOneAndUpdate with upsert to create/update achievement
+        await Achievement.findOneAndUpdate(
+          {
+            userId: req.user.userId,
+            milestoneDays: daysNum,
+            addictionId: addictionObjectId
+          },
+          {
+            userId: req.user.userId,
+            name: milestone.name,
+            description: milestone.description,
+            icon: milestone.icon,
+            milestoneDays: daysNum,
+            addictionId: addictionObjectId,
+            unreadAt: new Date()
+          },
+          { upsert: true, new: true }
+        );
+      }
+    }
+    
+    // Clear all trophies for the user so they can be recalculated based on new addiction dates
+    // This ensures trophy progress is accurate when addiction dates change
+    const trophyDeleteResult = await Trophy.deleteMany({ userId: req.user.userId });
+    console.log(`[Edit Addiction] Deleted ${trophyDeleteResult.deletedCount} trophies`);
+    
+    res.json(enrichAddictionData(addiction));
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+/**
+ * @route   PUT /api/addictions/:id/planned-stop-date
+ * @desc    Set a planned stop date for an addiction
+ * @access  Private (requires JWT token)
+ * @param   {string} id - Addiction MongoDB ID
+ * @param   {date} plannedStopDate - The date user plans to stop (or null to clear)
+ * @returns {Object} Updated addiction object
+ */
+router.put('/:id/planned-stop-date', auth, async (req, res) => {
+  try {
+    const { plannedStopDate } = req.body;
+    
+    // Validate that plannedStopDate is either null or a valid future date
+    if (plannedStopDate !== null) {
+      const date = new Date(plannedStopDate);
+      if (isNaN(date.getTime())) {
+        return res.status(400).json({ message: 'Invalid date format' });
+      }
+      // Optionally: ensure the date is in the future
+      if (date <= new Date()) {
+        return res.status(400).json({ message: 'Planned stop date must be in the future' });
+      }
+    }
+    
+    // Find the addiction and verify ownership
+    const addiction = await Addiction.findOne({
+      _id: req.params.id,
+      userId: req.user.userId
+    });
+    
+    if (!addiction) {
+      return res.status(404).json({ message: 'Addiction not found' });
+    }
+    
+    // Update the planned stop date
+    addiction.plannedStopDate = plannedStopDate ? new Date(plannedStopDate) : null;
+    addiction.updatedAt = new Date();
+    await addiction.save();
+    
+    res.json(enrichAddictionData(addiction));
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+/**
+ * @route   PUT /api/addictions/:id/caved
+ * @desc    Mark addiction as relapsed - resets stopDate to today and removes achievements
+ * @access  Private (requires JWT token)
+ * @returns {Object} Updated addiction object
+ */
+router.put('/:id/caved', auth, async (req, res) => {
+  try {
+    // Find the addiction and verify it belongs to the user
+    const addiction = await Addiction.findOne({
+      _id: req.params.id,
+      userId: req.user.userId
+    });
+
+    if (!addiction) {
+      return res.status(404).json({ message: 'Addiction not found' });
+    }
+
+    // Reset the stop date to today (timestamp when they caved)
+    addiction.stopDate = new Date();
+    addiction.updatedAt = new Date();
+    await addiction.save();
+
+    // Remove all achievements and trophies for this addiction
+    await Promise.all([
+      Achievement.deleteMany({
+        userId: req.user.userId,
+        addictionId: addiction._id
+      }),
+      Trophy.deleteMany({ userId: req.user.userId })
+    ]);
+
     res.json(enrichAddictionData(addiction));
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });

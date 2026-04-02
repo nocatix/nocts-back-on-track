@@ -1,0 +1,32 @@
+{
+  "pageTitle": "Rastreie suas dependências",
+  "addNew": "Adicionar nova dependência",
+  "addictionName": "Nome da dependência",
+  "addictionNameLabel": "Nome da dependência",
+  "enterAddictionName": "Digite o nome da sua dependência",
+  "addictionNamePlaceholder": "Ex. cigarro, álcool, redes sociais",
+  "dateYouStopped": "Data em que parou",
+  "timeYouStopped": "Hora em que parou",
+  "timeFormat12h": "Formato 12 horas (AM/PM)",
+  "timeFormat24h": "Formato 24 horas",
+  "frequency": "Frequência",
+  "timesPerDay": "Vezes por dia",
+  "frequencyPlaceholder": "Quantas vezes por dia?",
+  "money": "Dinheiro gasto",
+  "moneyPlaceholder": "Valor em sua moeda",
+  "additionalNotes": "Notas adicionais",
+  "additionalNotesPlaceholder": "Outros detalhes sobre essa dependência...",
+  "selectAddiction": "Selecionar dependência",
+  "description": "Descrição",
+  "startDate": "Data de início",
+  "category": "Categoria",
+  "severity": "Severidade",
+  "noAddictions": "Nenhuma dependência sendo rastreada. Comece hoje!",
+  "daysSoberCount": "Dias sóbrio",
+  "addictionCard": {
+    "days": "dias",
+    "saved": "economizado",
+    "encouragement": "Você está fazendo progresso incrível!",
+    "youreDoingGreat": "Você está indo bem! Continue assim!"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "pageTitle": "追踪你的成瘾",
+  "addNew": "添加新的成瘾",
+  "addictionName": "成瘾名称",
+  "addictionNameLabel": "成瘾名称",
+  "enterAddictionName": "输入你的成瘾名称",
+  "addictionNamePlaceholder": "例如 吸烟、酒精、社交媒体",
+  "dateYouStopped": "戒掉的日期",
+  "timeYouStopped": "戒掉的时间",
+  "timeFormat12h": "12小时格式（AM/PM）",
+  "timeFormat24h": "24小时格式",
+  "frequency": "频率",
+  "timesPerDay": "每天次数",
+  "frequencyPlaceholder": "每天多少次？",
+  "money": "花费金额",
+  "moneyPlaceholder": "你的货币金额",
+  "additionalNotes": "附加说明",
+  "additionalNotesPlaceholder": "关于这个成瘾的其他详情...",
+  "selectAddiction": "选择成瘾",
+  "description": "描述",
+  "startDate": "开始日期",
+  "category": "类别",
+  "severity": "严重程度",
+  "noAddictions": "暂无追踪的成瘾。今天就开始吧！",
+  "daysSoberCount": "清醒天数",
+  "addictionCard": {
+    "days": "天",
+    "saved": "节省",
+    "encouragement": "你正在取得令人难以置信的进步！",
+    "youreDoingGreat": "你做得很好！继续加油！"
+  }
+}

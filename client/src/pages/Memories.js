@@ -2,8 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import './Memories.css';
 import apiClient from '../api/axiosConfig';
 import { AuthContext } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 export default function Memories() {
+  const { t } = useTranslation(['resources', 'common']);
   const [memories, setMemories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState('');
@@ -18,14 +20,14 @@ export default function Memories() {
 
   useEffect(() => {
     fetchMemories();
-  }, [token]);
+  }, []);
 
   const fetchMemories = async () => {
     try {
       const response = await apiClient.get('/api/memories');
       setMemories(response.data);
     } catch (error) {
-      setNotification('Failed to load memories');
+      setNotification(t('memories.failedToLoadMemories'));
     } finally {
       setLoading(false);
     }
@@ -47,7 +49,7 @@ export default function Memories() {
     e.preventDefault();
     
     if (!message.trim() && !imageUrl) {
-      setNotification('Please provide either a message or an image, or both');
+      setNotification(t('memories.requiresMessageOrImage'));
       return;
     }
 
@@ -62,12 +64,12 @@ export default function Memories() {
       setImageUrl('');
       setPreview('');
       setShowForm(false);
-      setNotification('Memory saved successfully!');
+      setNotification(t('memories.memorySavedSuccessfully'));
       setTimeout(() => setNotification(''), 3000);
       
       fetchMemories();
     } catch (error) {
-      setNotification('Failed to save memory');
+      setNotification(t('memories.failedToSaveMemory'));
     } finally {
       setSubmitting(false);
     }
@@ -82,19 +84,19 @@ export default function Memories() {
     try {
       await apiClient.delete(`/api/memories/${deleteMemoryId}`);
       
-      setNotification('Memory deleted');
+      setNotification(t('memories.memoryDeleted'));
       setTimeout(() => setNotification(''), 3000);
       setShowDeleteConfirm(false);
       setDeleteMemoryId(null);
       fetchMemories();
     } catch (error) {
-      setNotification('Failed to delete memory');
+      setNotification(t('memories.failedToDeleteMemory'));
       setShowDeleteConfirm(false);
       setDeleteMemoryId(null);
     }
   };
 
-  if (loading) return <div className="loading">Loading memories...</div>;
+  if (loading) return <div className="loading">{t('common:loading')}...</div>;
 
   return (
     <div className="memories-page">
@@ -104,33 +106,32 @@ export default function Memories() {
         </div>
       )}
 
-      <h1>💭 My Memories</h1>
+      <h1>{t('memories.title')}</h1>
       <p className="memories-description">
-        Save photos and messages that remind you why you're fighting for recovery. 
-        These will inspire you when you're struggling most.
+        {t('memories.description')}
       </p>
 
       <div className="memories-actions">
         {!showForm ? (
           <button className="btn btn-primary" onClick={() => setShowForm(true)}>
-            + Add New Memory
+            {t('memories.addNewMemory')}
           </button>
         ) : (
           <div className="memory-form">
-            <h2>Add a Memory</h2>
+            <h2>{t('memories.addMemoryTitle')}</h2>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label>Message (optional)</label>
+                <label>{t('memories.message')} {t('common:optional')}</label>
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Write your inspiring message here... (e.g., 'I'm stronger than my addiction', 'My family believes in me')"
+                  placeholder={t('memories.messagePlaceholder')}
                   rows="4"
                 />
               </div>
 
               <div className="form-group">
-                <label>Upload Image (optional)</label>
+                <label>{t('memories.uploadImage')} {t('common:optional')}</label>
                 <input
                   type="file"
                   accept="image/*"
@@ -145,7 +146,7 @@ export default function Memories() {
 
               <div className="form-buttons">
                 <button type="submit" className="btn btn-success" disabled={submitting}>
-                  {submitting ? 'Saving...' : 'Save Memory'}
+                  {submitting ? t('common:saving') : t('memories.saveMemory')}
                 </button>
                 <button
                   type="button"
@@ -157,7 +158,7 @@ export default function Memories() {
                     setPreview('');
                   }}
                 >
-                  Cancel
+                  {t('common:cancel')}
                 </button>
               </div>
             </form>
@@ -177,12 +178,12 @@ export default function Memories() {
                   <p className="memory-message">{memory.message}</p>
                 )}
                 {!memory.imageUrl && !memory.message && (
-                  <p className="memory-message">Memory content unavailable</p>
+                  <p className="memory-message">{t('memories.contentUnavailable')}</p>
                 )}
                 <button
                   className="btn-delete"
                   onClick={() => handleDelete(memory._id)}
-                  title="Delete this memory"
+                  title={t('memories.deleteMemory')}
                 >
                   🗑️
                 </button>
@@ -192,21 +193,21 @@ export default function Memories() {
         </div>
       ) : (
         <div className="no-memories">
-          <p>No memories yet. Create one to inspire yourself during difficult moments!</p>
+          <p>{t('memories.noMemoriesYet')}</p>
         </div>
       )}
 
       {showDeleteConfirm && (
         <div className="delete-confirm-overlay">
           <div className="delete-confirm-modal">
-            <h3>Are you sure?</h3>
-            <p>This will permanently delete this memory.</p>
+            <h3>{t('memories.confirmDelete')}</h3>
+            <p>{t('memories.deleteWarning')}</p>
             <div className="confirm-buttons">
               <button onClick={confirmDelete} className="btn btn-danger">
-                Yes
+                {t('common:yes')}
               </button>
               <button onClick={() => setShowDeleteConfirm(false)} className="btn btn-secondary">
-                No
+                {t('common:no')}
               </button>
             </div>
           </div>

@@ -1,0 +1,297 @@
+{
+  "pageTitle": "Entdecke neue Hobbys",
+  "subtitle": "Vorantreiben deiner Genesung durch ansprechende Aktivitäten, die dein Leben mit Zweck, Bedeutung und Verbindung erfüllen",
+  "whyHobbiesTitle": "Warum Hobbys entscheidend für die Genesung sind",
+  "benefits": [
+    {
+      "emoji": "⏰",
+      "title": "Fülle deine Zeit",
+      "description": "Hobbys beanspruchen die Zeit, die normalerweise für den Gebrauch aufgewendet wird. Langeweile ist gefährlich. Engagement ist Sicherheit."
+    },
+    {
+      "emoji": "😊",
+      "title": "Dopamin freisetzen",
+      "description": "Hobbys geben deinem Gehirn das Vergnügen, das es von der Abhängigkeit suchte - natürlich und gesund."
+    },
+    {
+      "emoji": "🎯",
+      "title": "Zweck aufbauen",
+      "description": "An etwas arbeiten oder etwas erreichen wollen gibt deinem Leben einen Sinn jenseits von 'nicht verwenden'."
+    },
+    {
+      "emoji": "🤝",
+      "title": "Gemeinschaft schaffen",
+      "description": "Soziale Hobbys verbinden dich mit anderen und bauen gesunde Beziehungen auf."
+    },
+    {
+      "emoji": "💪",
+      "title": "Selbstvertrauen aufbauen",
+      "description": "Lernen und Verbessern in etwas erzeugt echte Leistung und Selbstwertgefühl."
+    },
+    {
+      "emoji": "🧠",
+      "title": "Gesunde Flucht",
+      "description": "Hobbys bieten mentale Flucht ohne Schaden - pure Freude."
+    }
+  ],
+  "filterTitle": "Hobbys filtern",
+  "filterOptions": [
+    {
+      "value": "all",
+      "label": "Alle Hobbys"
+    },
+    {
+      "value": "solo",
+      "label": "😊 Einzeln",
+      "subtext": "(Allein tun)"
+    },
+    {
+      "value": "social",
+      "label": "👥 Sozial",
+      "subtext": "(Mit anderen)"
+    },
+    {
+      "value": "outdoor",
+      "label": "🌳 Outdoor"
+    },
+    {
+      "value": "indoor",
+      "label": "🏠 Indoor"
+    },
+    {
+      "value": "free",
+      "label": "💰 Kostenlos"
+    },
+    {
+      "value": "paid",
+      "label": "💵 Bezahlt"
+    }
+  ],
+  "categoryLabels": {
+    "solo": "😊 Einzeln",
+    "social": "👥 Sozial",
+    "outdoor": "🌳 Outdoor",
+    "indoor": "🏠 Indoor",
+    "free": "💰 Kostenlos",
+    "paid": "💵 Bezahlt"
+  },
+  "recoveryBenefitsTitle": "✨ Genesungsbenefit",
+  "getStartedTitle": "🚀 Erste Schritte",
+  "finalTitle": "Beginne mit der Erkundung",
+  "finalMessages": [
+    "Wähle ein Hobby, das dich wirklich interessiert. Denke nicht zu viel nach. Versuche es einfach.",
+    "Probiere es diese Woche aus. Gib dir eine echte Chance. Du musst nicht gut darin sein - du musst es einfach tun.",
+    "Das Ziel ist nicht Perfektion. Das Ziel ist Engagement, Glück und ein nüchternes Leben, das es wert ist, gelebt zu werden."
+  ],
+  "hobbies": [
+    {
+      "id": 1,
+      "name": "Gehen",
+      "emoji": "🚶",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "30 Min - 2 Stunden",
+      "description": "Ein einfacher, kostenloses Weg, deinen Körper zu bewegen und deine Gedanken zu klären. Gehen reduziert Heißhunger.",
+      "recovery_benefits": [
+        "Körperliche Aktivität",
+        "Frische Luft",
+        "Mentale Klarheit",
+        "Stressabbau"
+      ],
+      "get_started": "Beginne mit 20-minütigen Spaziergängen täglich. Beachte deine Umgebung."
+    },
+    {
+      "id": 2,
+      "name": "Laufen/Joggen",
+      "emoji": "🏃",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "20-60 Min",
+      "description": "Intensivere Bewegung setzt Endorphine frei und verbrennt nervöse Energie.",
+      "recovery_benefits": [
+        "Endorphin-Freisetzung",
+        "Intensive Bewegung",
+        "Heißhunger-Unterdrückung",
+        "Selbstvertrauen stärken"
+      ],
+      "get_started": "Wenn du neu dabei bist, beginne mit Lauf-/Geh-Intervallen. Apps können dir helfen."
+    },
+    {
+      "id": 3,
+      "name": "Wandern",
+      "emoji": "⛰️",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "1-4 Stunden",
+      "description": "Kombiniert Naturexposition, körperliche Aktivität und Zielsetzung in ein lohnendes Hobby.",
+      "recovery_benefits": [
+        "Naturverbindung",
+        "Leistung",
+        "Bewegung",
+        "Mentale Neubewertung"
+      ],
+      "get_started": "Finde lokale Wanderwege. Beginne mit Anfängerpfaden."
+    },
+    {
+      "id": 4,
+      "name": "Gartenbau",
+      "emoji": "🌱",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "30 Min - 2 Stunden",
+      "description": "Etwas Wachsen zu lassen bietet Zweck, Geduld und die Zufriedenheit, sich um das Leben zu kümmern.",
+      "recovery_benefits": [
+        "Gefühl von Zweck",
+        "Naturverbindung",
+        "Geduld aufbauen",
+        "Leistung"
+      ],
+      "get_started": "Beginne mit einfachen Pflanzen aus Samen oder Setzlingen. Auch ein kleine Fensterbank zählt."
+    },
+    {
+      "id": 5,
+      "name": "Deine Stadt erkunden",
+      "emoji": "🗺️",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "1-3 Stunden",
+      "description": "Entdecke deine Gegend neu. Finde Parks und Cafés, die du nie bemerkt hast.",
+      "recovery_benefits": [
+        "Neugier",
+        "Aktivität",
+        "Neue Perspektive",
+        "Routine brechen"
+      ],
+      "get_started": "Wähle ein Viertel oder eine Gegend, die du nicht gut kennst. Erkunde ohne Plan."
+    },
+    {
+      "id": 6,
+      "name": "Radfahren",
+      "emoji": "🚴",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "30 Min - 2 Stunden",
+      "description": "Ein unterhaltsamer, schneller Weg, Entfernungen zu bewältigen und Freiheit zu spüren.",
+      "recovery_benefits": [
+        "Geschwindigkeit und Freiheit",
+        "Herz-Kreislauf-Gesundheit",
+        "Erkundung",
+        "Endorphine"
+      ],
+      "get_started": "Kaufe ein Fahrrad aus einem lokalen Geschäft oder online. Investiere in einen Helm und ein Schloss."
+    },
+    {
+      "id": 7,
+      "name": "Klettern",
+      "emoji": "🧗",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-3 Stunden",
+      "description": "Der intensive körperliche und mentale Herausforderungen bauen Vertrauen und Fokus auf.",
+      "recovery_benefits": [
+        "Problemlösen",
+        "Selbstvertrauen",
+        "Ganzkörperstärke",
+        "Verbesserter Fokus"
+      ],
+      "get_started": "Starten Sie in einer lokalen Boulderhalle. Instruktoren unterrichten richtige Technik und Sicherheit."
+    },
+    {
+      "id": 8,
+      "name": "Fotografie",
+      "emoji": "📸",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-4 Stunden",
+      "description": "Erfassen Sie Schönheit, entwickeln Sie ein künstlerisches Auge und haben Sie ein kreatives Ventil zum Erkunden.",
+      "recovery_benefits": [
+        "Kreativität",
+        "Achtsamkeit",
+        "Erkundung",
+        "Leistung"
+      ],
+      "get_started": "Beginne mit der Kamera deines Handys. Lerne von kostenlosen Online-Tutorials."
+    },
+    {
+      "id": 9,
+      "name": "Wassersport",
+      "emoji": "🏄",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-3 Stunden",
+      "description": "Surfen, Kajakfahren oder Paddleboarding verbindet dich mit Wasser und bietet Adrenalinkicks.",
+      "recovery_benefits": [
+        "Naturverbindung",
+        "Adrenalin",
+        "Ganzkörper-Bewegung",
+        "Gegenwärtiger Moment"
+      ],
+      "get_started": "Nimm Anfängerkurse an einem lokalen Strand oder See. Starten Sie in ruhigem Wasser."
+    },
+    {
+      "id": 10,
+      "name": "Lesen",
+      "emoji": "📖",
+      "category": [
+        "solo",
+        "indoor",
+        "free"
+      ],
+      "duration": "30 Min - 2 Stunden",
+      "description": "Tauche dich in Geschichten ein, lerne Neues und gib deinem Verstand gesunde Herausforderungen.",
+      "recovery_benefits": [
+        "Mentale Flucht",
+        "Wortschatzverlauf",
+        "Entspannung",
+        "Wissen"
+      ],
+      "get_started": "Besuche deine lokale Bibliothek. Leihe Bücher kostenlos aus."
+    },
+    {
+      "id": 11,
+      "name": "Schreiben/Tagebuch",
+      "emoji": "✍️",
+      "category": [
+        "solo",
+        "indoor",
+        "free"
+      ],
+      "duration": "20-60 Min",
+      "description": "Verarbeite Emotionen, verfolge deine Reise und entdecke Erkenntnisse über dich selbst.",
+      "recovery_benefits": [
+        "Emotionale Verarbeitung",
+        "Selbstentdeckung",
+        "Stressabbau",
+        "Fortschritt verfolgen"
+      ],
+      "get_started": "Beginne mit freiem Schreiben. Keine Regeln. Schreibe, was real ist."
+    }
+  ]
+}

@@ -1,0 +1,308 @@
+{
+  "meditation": {
+    "pageTitle": "Meditazione",
+    "startMeditation": "Inizia meditazione",
+    "duration": "Durata (minuti)",
+    "guidedMeditation": "Meditazione guidata",
+    "timerId": "Timer",
+    "breathingExercise": "Esercizio di respirazione",
+    "relaxationTechnique": "Tecnica di rilassamento",
+    "noRecords": "Nessun record di meditazione. Inizia a meditare!",
+    "backToMeditations": "← Torna a meditazioni",
+    "sessionTimer": "⏱️ Timer di sessione",
+    "sessionTimerLabel": "Timer di sessione",
+    "guidedBreathing": "🫁 Respirazione guidata",
+    "breathingPace": "Ritmo di respirazione",
+    "startBreathingGuide": "▶ Avvia guida di respirazione",
+    "stopBreathingGuide": "⏹ Arresta guida di respirazione",
+    "showBreathingGuide": "Mostra guida di respirazione",
+    "hideBreathingGuide": "Nascondi guida di respirazione",
+    "start": "Inizia",
+    "pause": "Pausa",
+    "resume": "Riprendi",
+    "reset": "Ripristina",
+    "minutes": "minuti",
+    "meditationMusic": "🎵 Musica di meditazione",
+    "guide": "Guida",
+    "postureTips": "🧘 Suggerimenti di postura",
+    "quickTools": "Strumenti rapidi",
+    "emergencyCalmTitle": "🆘 Calma d'emergenza",
+    "emergencyCalmDesc": "Sollievo istantaneo per un desiderio intenso",
+    "emergencyCalm3Min": "Calma d'emergenza 3 minuti",
+    "quickBreathingTitle": "🫁 Respirazione rapida",
+    "quickBreathingDesc": "Riavvia il sistema nervoso",
+    "progressTitle": "📈 Il tuo progresso",
+    "sessionsCompleted": "Sessioni completate",
+    "minsTotal": "Minuti totali",
+    "guidedBreathingExercise": "Esercizio di respirazione guidata",
+    "breathingTip1": "👉 Respira lentamente dal naso, trattieni delicatamente il fiato, poi espira dalla bocca",
+    "breathingTip2": "💡 Questo può calmare il tuo sistema nervoso e ridurre naturalmente il desiderio",
+    "recommendedMusicTitle": "🎵 Musica di meditazione consigliata",
+    "listenToMusic": "Ascolta musica ambientale durante la meditazione",
+    "youtubeMusic": "YouTube: Musica di meditazione",
+    "spotifyMusic": "Spotify: Playlist di meditazione",
+    "calmApp": "App Calm",
+    "recentSessionsTitle": "📝 Sessioni recenti",
+    "tipsForMeditation": "💡 Suggerimenti per una meditazione di successo",
+    "meditations": [
+      {
+        "id": 1,
+        "title": "Consapevolezza del respiro",
+        "duration": "5 minuti",
+        "description": "Inizia con la consapevolezza del respiro base per calmare la mente.",
+        "guide": "Siediti comodamente. Chiudi gli occhi. Respira naturalmente dal naso. Conta da 1 a 10 ad ogni espirazione, poi ricomincia. Se la tua mente vaga, va bene - torna al conteggio. Continua per 5 minuti. Questa pratica semplice aiuta a calmare l'ansia e il desiderio.",
+        "musicUrl": "https://www.youtube.com/embed/7qJZy4DpOWA"
+      },
+      {
+        "id": 2,
+        "title": "Scansione del corpo",
+        "duration": "7 minuti",
+        "description": "Rilascia sistematicamente la tensione dal tuo corpo.",
+        "guide": "Sdraiati o siediti comodamente. Chiudi gli occhi. Inizia dalla sommità della testa. Nota qualsiasi tensione. Mentre respiri, immagina di rilasciare quella tensione ad ogni espirazione. Muoviti lentamente verso il basso: fronte, mascella, collo, spalle, braccia, petto, pancia, gambe, piedi. Trascorri 10-15 secondi in ogni area. Questa tecnica riduce lo stress fisico del ritiro.",
+        "musicUrl": "https://www.youtube.com/embed/2DRyAW0ljHQ"
+      },
+      {
+        "id": 3,
+        "title": "Rilascio del desiderio",
+        "duration": "10 minuti",
+        "description": "Una meditazione specifica per gestire il desiderio.",
+        "guide": "Siediti comodamente. Chiudi gli occhi. Osserva senza giudizio qualsiasi desiderio nel tuo corpo. Non cercare di combatterlo. Osserva: dove si trova? Come si sente? Ha un colore, una forma o una temperatura? Mentre respiri, immagina il desiderio come un'onda che passa attraverso di te. Osserva mentre sale, raggiunge il picco e scende. Ricorda: il desiderio è temporaneo. Passerà anche questo. Scompaiono naturalmente in 15-20 minuti.",
+        "musicUrl": "https://www.youtube.com/embed/sTzHDPqBN-8"
+      },
+      {
+        "id": 4,
+        "title": "Amore e gentilezza",
+        "duration": "8 minuti",
+        "description": "Coltiva compassione e amore di sé nel tuo percorso di recupero.",
+        "guide": "Siediti comodamente. Chiudi gli occhi. Metti la mano sul cuore. Dici silenziosamente: 'Che io sia in pace. Che io sia sano. Che io sia felice. Che sia libero dalla dipendenza.' Ripeti lentamente, sentendo ogni parola. Poi espandi: 'Che gli altri trovino anche pace e guarigione.' Questa pratica costruisce l'autocompassione e il momento della guarigione.",
+        "musicUrl": "https://www.youtube.com/embed/lE5n6gYzJLo"
+      }
+    ],
+    "tips": [
+      "Inizia con soli 5 minuti al giorno. La coerenza è più importante della durata.",
+      "Medita alla stessa ora ogni giorno per costruire l'abitudine.",
+      "Il desiderio raggiunge il picco in 15-20 minuti. Medita oltre il picco.",
+      "Usa la meditazione quando senti la tentazione più forte.",
+      "La tua mente divagherà - è normale. Riportala gentilmente.",
+      "Tieni traccia del tuo progresso. Nota quanto più facilmente puoi gestire il desiderio."
+    ],
+    "postureTipsList": [
+      {
+        "label": "Alla colonna vertebrale",
+        "text": "Mantenere diritto ma non rigido - immagina una linea dal fondo al vertice della testa"
+      },
+      {
+        "label": "Spalle",
+        "text": "Rilassa verso il basso e indietro, lontano dalle orecchie"
+      },
+      {
+        "label": "Mani",
+        "text": "Posiziona sulle ginocchia, con i palmi rivolti verso l'alto o verso il basso come sei comodo"
+      },
+      {
+        "label": "Mento",
+        "text": "Leggermente ritratto, gli occhi naturalmente guardano in basso (aperti o chiusi vanno bene)"
+      },
+      {
+        "label": "Piedi",
+        "text": "Se seduto, i piedi piantati saldamente sul pavimento. Se sdraiato, consenti loro di cadere naturalmente verso l'esterno"
+      }
+    ]
+  },
+  "preparationPlan": {
+    "header": {
+      "title": "Fai un piano e preparati a smettere",
+      "subtitle": "La preparazione è il fondamento del recupero di successo. Usa questa guida per prepararti al successo."
+    },
+    "motivation": {
+      "title": "Perché la preparazione è importante",
+      "mainMessage": "Il recupero non è qualcosa che accade, è qualcosa che costruisci.",
+      "description": "Il tempo che dedichi alla preparazione adesso deciderà direttamente il tuo successo. Le persone che pianificano il recupero hanno molte più probabilità di attenersi ai giorni difficili iniziali.",
+      "benefits": [
+        "La preparazione riduce le decisioni impulsive quando affronti le difficoltà",
+        "Ti fa sentire preparato e sicuro prima di iniziare",
+        "Identifica gli ostacoli potenziali prima che ti sorprendano",
+        "Garantisce che il sistema di supporto sia in atto dal primo giorno",
+        "Dimostra a te stesso che sei serio nel cambiamento"
+      ],
+      "insight": "💡 Ogni minuto che trascorri nella pianificazione adesso farà risparmiare ore di lotta dopo."
+    },
+    "assess": {
+      "title": "1. Valuta la tua posizione attuale",
+      "intro": "Prima di smettere, comprendi dove sei:",
+      "questions": {
+        "frequency": "Con quale frequenza consumo / mi impegno? (giornalmente, settimanalmente, più volte al giorno)",
+        "money": "Quanto spendo al giorno / alla settimana?",
+        "time": "A che ora del giorno è più probabile che io consumi?",
+        "triggers": "Quali situazioni scatenano il mio consumo? (stress, noia, sociale, emotional)",
+        "impact": "In che modo questa dipendenza ha influenzato la mia salute, relazioni, lavoro, finanze?",
+        "obstacles": "Quali ostacoli ho affrontato quando ho provato a smettere in passato?"
+      },
+      "placeholder": "Inserisci le tue risposte qui...",
+      "tip": "Suggerimento: utilizza questa app per tracciare il tuo consumo attuale per alcuni giorni prima di smettere. I dati reali sono più potenti delle supposizioni."
+    },
+    "quitDate": {
+      "title": "2. Imposta una data di scadenza specifica",
+      "mainAdvice": "Scegli una data entro 1-2 settimane. Darti abbastanza tempo per prepararti, ma non così tanto da perdere lo slancio.",
+      "goodTiming": [
+        "✓ Buon momento: scegli un giorno dopo un evento stressante",
+        "✓ Buon momento: scegli un giorno quando il supporto è disponibile"
+      ],
+      "badTiming": [
+        "✗ Cattivo momento: non scegliere quando sei già stressato o emotivo",
+        "✗ Cattivo momento: non scegliere quando sei solo e facilmente accessibile"
+      ],
+      "finalAdvice": "Dopo aver scelto la data, contrassegnala sul calendario. Dillo alle persone. Mettilo da qualche parte che vedi ogni giorno. Rendilo reale."
+    },
+    "triggers": {
+      "title": "3. Identifica i tuoi fattori scatenanti",
+      "intro": "I fattori scatenanti sono situazioni, emozioni o persone che ti fanno desiderare di consumare. Conoscerli in anticipo significa che puoi pianificare per loro.",
+      "categories": {
+        "emotional": {
+          "title": "Fattori scatenanti emotivi",
+          "description": "Stress, noia, solitudine, rabbia, ansia, tristezza... quale emozione guida il tuo consumo?"
+        },
+        "social": {
+          "title": "Fattori scatenanti sociali",
+          "description": "Persone, luoghi o gruppi specifici. Consumi con determinati amici? In un luogo particolare?"
+        },
+        "environmental": {
+          "title": "Fattori scatenanti ambientali",
+          "description": "L'ora del giorno, il luogo. La tua camera ti attiva? Tarda sera?"
+        },
+        "habitual": {
+          "title": "Fattori scatenanti abituali",
+          "description": "Cose che fai sempre insieme. La cerimonia del caffè mattutino? La routine post-lavoro?"
+        }
+      },
+      "action": "Azione: per ogni fattore scatenante, scrivi un piano specifico per cosa farai invece."
+    },
+    "support": {
+      "title": "4. Costruisci la tua rete di supporto",
+      "intro": "Non puoi farlo da solo. Il recupero di successo richiede connessione e supporto. Costruisci la tua rete ora prima di smettere.",
+      "people": {
+        "title": "👥 Persone da dirle",
+        "items": [
+          "Almeno una persona di cui ti fidi completamente, che puoi chiamare in qualsiasi momento",
+          "Una persona che non ti giudicherà se avrai difficoltà",
+          "Una persona che celebrerà le tue vittorie",
+          "Considera di dirlo a un terapeuta, un consulente o un medico"
+        ]
+      },
+      "resources": {
+        "title": "📱 Risorse di supporto",
+        "items": [
+          "Gruppi di supporto (AA, NA, SMART Recovery, ecc.)",
+          "Servizi di psicoterapia o consulenza",
+          "Questa app - usa tutte le sue funzioni (diario, umore, meditazione)",
+          "Linee di aiuto e linee di testo di crisi"
+        ]
+      },
+      "professional": {
+        "title": "🏥 Aiuto professionale",
+        "items": [
+          "Supporto per il disintossicazione medico per alcol o droghe (se necessario)",
+          "Trattamento assistito da farmaci (se raccomandato)",
+          "Psicoterapia per i problemi di fondo",
+          "Non provare da solo se è pericoloso"
+        ]
+      },
+      "action": "Scrivi 3-5 persone specifiche che puoi chiamare quando le cose sono difficili. Ora prendi i loro numeri e salvali nel tuo telefono."
+    },
+    "coping": {
+      "title": "5. Piano le tue strategie di coping",
+      "intro": "Il desiderio arriverà. Hai bisogno di strumenti concreti pronti prima che arrivino.",
+      "strategies": {
+        "meditation": {
+          "title": "🧘 Meditazione e consapevolezza",
+          "description": "Usa la funzione di meditazione di questa app. Anche 2 minuti aiutano."
+        },
+        "distraction": {
+          "title": "🎮 Strategie di distrazione",
+          "description": "Usa il gioco della brama, guarda un film, chiama un amico, fai un bagno, fai esercizio."
+        },
+        "physical": {
+          "title": "💪 Attività fisica",
+          "description": "Camminata, corsa, yoga, danza - qualsiasi cosa che muova il tuo corpo e cambi la chimica."
+        },
+        "journaling": {
+          "title": "📔 Diario",
+          "description": "Usa la funzione diario per scrivere il tuo desiderio e le emozioni."
+        },
+        "emotions": {
+          "title": "🎭 Elaborazione delle emozioni",
+          "description": "Tieni traccia dell'umore, nomina i sentimenti, sentili senza agire."
+        },
+        "connection": {
+          "title": "🤝 Connessione",
+          "description": "Chiama qualcuno, invia un messaggio a un amico, partecipa a una riunione di supporto."
+        }
+      },
+      "action": "Crea un kit di strumenti personale per una crisi di desiderio: scrivi 3-5 cose che farai quando il desiderio arriva. Appiccia in un luogo visibile."
+    },
+    "remove": {
+      "title": "6. Rimuovi la tentazione",
+      "intro": "Rendi il consumo il più difficile possibile. Non puoi rifiutare quello che non hai.",
+      "actions": {
+        "clean": {
+          "title": "🚭 Pulisci lo spazio",
+          "description": "Sbarazzati di tutti i rifornimenti, gli strumenti, i promemoria. Pulisci a fondo la tua stanza, auto, borsa."
+        },
+        "delete": {
+          "title": "🗑️ Elimina accesso",
+          "description": "Elimina app, blocca siti web, smetti di seguire account, elimina i contatti dei fornitori."
+        },
+        "money": {
+          "title": "💳 Limita denaro",
+          "description": "Dai il controllo finanziario a qualcuno di cui ti fidi. Elimina l'accesso alla carta se necessario."
+        },
+        "avoid": {
+          "title": "📍 Evita i luoghi",
+          "description": "Pianifica i percorsi che evitano i soliti punti di consumo. Cammina in una strada diversa."
+        },
+        "distance": {
+          "title": "👥 Distanza dalle persone",
+          "description": "Considera di dire agli amici che stai smettendo - i veri amici supporteranno."
+        }
+      }
+    },
+    "fortyEightHours": {
+      "title": "7. Piano le prime 48 ore",
+      "intro": "Le prime 48 ore sono le più difficili. Pianifica ogni ora se necessario.",
+      "blocks": {
+        "wakeUp": {
+          "title": "Quando ti svegli",
+          "description": "Dicci a qualcuno che il tuo inizio è iniziato. Fai qualcosa di salutare (esercizio, meditazione, colazione sana)."
+        },
+        "morning": {
+          "title": "Mattina (dopo il sonno)",
+          "description": "Il tempo non strutturato è pericoloso. Pianifica qualcosa: esercizio, vedi amici, hobby, meditazione."
+        },
+        "afternoon": {
+          "title": "Pomeriggio (ora di picco del desiderio)",
+          "description": "Chiama la tua persona di supporto. Usa il tuo kit di strumenti. Questo tempo passerà."
+        },
+        "evening": {
+          "title": "Sera (tempo solo)",
+          "description": "Stai con le persone o telefonica con qualcuno. Rimani occupato. Usa il diario per elaborare."
+        },
+        "night": {
+          "title": "Notte (più difficile per molti)",
+          "description": "Preparati per il sonno: bagno caldo, tè, meditazione, audiolibro. Puoi farcela."
+        }
+      },
+      "insight": "💡 Se le prime 48 ore passano senza consumare, le tue probabilità di successo a lungo termine aumentano notevolmente. Puoi farcela."
+    },
+    "mental": {
+      "title": "8. Preparazione mentale",
+      "intro": "La tua mente decide il tuo successo. Pianta queste verità adesso prima di iniziare:",
+      "beliefs": [
+        "✓ È possibile. Milioni di persone l'hanno fatto. Anche tu puoi.",
+        "✓ È difficile, ma è più facile.",
+        "✓ Il desiderio raggiunge il picco in 15-20 minuti.",
+        "✓ Non sei una persona cattiva. Provare è coraggioso.",
+        "✓ Ogni giorno che non consumi ti rende più forte."
+      ]
+    }
+  }
+}

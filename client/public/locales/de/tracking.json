@@ -1,0 +1,176 @@
+{
+  "mood": {
+    "pageTitle": "🎭 Stimmungstracker",
+    "loading": "Wird geladen...",
+    "moodLegend": "Stimmungslegende:",
+    "noMoodRecorded": "Keine Stimmung für diesen Tag erfasst",
+    "addMood": "Stimmung hinzufügen",
+    "editMood": "Stimmung bearbeiten",
+    "howAreYouFeeling": "Wie fühlst du dich?",
+    "moreSpecifically": "Genauer gesagt...",
+    "changePrimary": "← Hauptstimmung ändern",
+    "intensityFormLabel": "Intensität (1-5)",
+    "intensityStatusDisplay": "Intensität: {{intensity}}/5",
+    "triggersLabel": "Auslöser (durch Kommas getrennt)",
+    "triggersPlaceholder": "z.B. Kaffee, Schlafmangel, Arbeitsstress",
+    "notesLabel": "Notizen",
+    "notesPlaceholder": "Füge weitere Notizen zu deiner Stimmung hinzu...",
+    "saveMoodButton": "Stimmung speichern",
+    "cancelButton": "Abbrechen",
+    "selectPrimaryError": "Bitte wähle eine Hauptstimmung",
+    "loginRequired": "Du musst angemeldet sein, um Stimmungen zu speichern",
+    "saveFailed": "Fehler beim Speichern der Stimmung",
+    "notesTitle": "Notizen: ",
+    "triggersTitle": "Auslöser: ",
+    "monthNames": [
+      "Januar",
+      "Februar",
+      "März",
+      "April",
+      "Mai",
+      "Juni",
+      "Juli",
+      "August",
+      "September",
+      "Oktober",
+      "November",
+      "Dezember"
+    ],
+    "weekdays": [
+      "So",
+      "Mo",
+      "Di",
+      "Mi",
+      "Do",
+      "Fr",
+      "Sa"
+    ],
+    "emotions": {
+      "primary": [
+        "😊 Glücklich",
+        "😢 Traurig",
+        "😠 Wütend",
+        "😰 Ängstlich",
+        "😌 Ruhig",
+        "⚡ Energisch",
+        "😴 Müde",
+        "😐 Neutral"
+      ],
+      "secondary": {
+        "😊 Glücklich": [
+          "😄 Fröhlich",
+          "🤩 Aufgeregt",
+          "😌 Zufrieden",
+          "🙏 Dankbar",
+          "😎 Stolz"
+        ],
+        "😢 Traurig": [
+          "😞 Depressiv",
+          "😕 Enttäuscht",
+          "😔 Einsam",
+          "😩 Hoffnungslos",
+          "☔ Melancholisch"
+        ],
+        "😠 Wütend": [
+          "🤬 Wütend",
+          "😤 Reizbar",
+          "😒 Verbittert",
+          "😤 Frustriert",
+          "😑 Genervt"
+        ],
+        "😰 Ängstlich": [
+          "😟 Besorgt",
+          "😨 Erschrocken",
+          "😰 Nervös",
+          "😩 Gestresst",
+          "😵 Überwältigt"
+        ],
+        "😌 Ruhig": [
+          "☮️ Friedlich",
+          "😌 Entspannt",
+          "😇 Gelassen",
+          "🌳 Geankert",
+          "🧘 Meditativ"
+        ],
+        "⚡ Energisch": [
+          "💪 Motiviert",
+          "🎯 Ehrgeizig",
+          "🚀 Produktiv",
+          "💡 Inspiriert",
+          "✨ Strahlend"
+        ],
+        "😴 Müde": [
+          "🥱 Erschöpft",
+          "😑 Faul",
+          "🪫 Entkräftet",
+          "😴 Schläfrig",
+          "🚪 Ausgebrannt"
+        ],
+        "😐 Neutral": [
+          "🤷 Gleichgültig",
+          "🙈 Losgelöst",
+          "👁️ Beobachtend",
+          "⚖️ Ausgeglichen",
+          "😐 Neutral"
+        ]
+      }
+    }
+  },
+  "weight": {
+    "pageTitle": "⚖️ Gewichtstracker",
+    "loading": "Wird geladen...",
+    "pleaseLogin": "Bitte melden Sie sich an, um das Gewicht zu verfolgen",
+    "statsTitle": "Gewichtsstatistiken",
+    "latestWeight": "Letztes Gewicht",
+    "goalWeight": "Zielgewicht",
+    "difference": "Unterschied",
+    "notSet": "Nicht festgelegt",
+    "logWeightTitle": "📊 Gewicht protokollieren",
+    "weightLabel": "Gewicht",
+    "enterWeight": "Gewicht eingeben",
+    "dateLabel": "Datum",
+    "timeLabel": "Uhrzeit",
+    "logWeightButton": "Gewicht protokollieren",
+    "goalWeightTitle": "🎯 Zielgewicht",
+    "noGoalSet": "Kein Ziel festgelegt",
+    "updateGoal": "Ziel aktualisieren",
+    "setGoal": "Ziel festlegen",
+    "goalWeightLabel": "Zielgewicht",
+    "enterGoalWeight": "Zielgewicht eingeben",
+    "saveGoalButton": "Ziel speichern",
+    "cancelButton": "Abbrechen",
+    "weightTrendTitle": "📈 Gewichtstrend",
+    "weightCalendarTitle": "📅 Gewichtskalender",
+    "weightHistoryTitle": "📋 Gewichtsverlauf",
+    "noDataMessage": "Noch keine Gewichtseinträge. Beginne dein Gewicht zu verfolgen!",
+    "deleteEntryTitle": "Gewichtseintrag löschen",
+    "deleteConfirmation": "Möchtest du diesen Gewichtseintrag wirklich löschen?",
+    "deleteWarning": "Diese Aktion kann nicht rückgängig gemacht werden.",
+    "deleteEntryButton": "Eintrag löschen",
+    "recordWeight": "Gewicht aufzeichnen",
+    "weight": "Gewicht",
+    "date": "Datum",
+    "noRecords": "Noch keine Gewichtsaufzeichnungen. Beginne zu verfolgen!"
+  },
+  "achievements": {
+    "pageTitle": "🏆 Erfolge & Trophäen",
+    "loading": "Erfolge werden geladen...",
+    "error": "Fehler: ",
+    "description": "Deine Meilensteine, Erfolge und Trophäen auf deinem Weg zur Nüchternheit",
+    "trophyProgress": "🎯 Trophäenfortschritt",
+    "currentTrophy": "Aktuelle Trophäe",
+    "nextTrophy": "Nächste Trophäe",
+    "progressText": "{{progress}}% zu {{trophyName}}",
+    "trophyCategories": {
+      "daily": "⭐ Tägliche Trophäen",
+      "weekly": "🎖️ Wöchentliche Trophäen",
+      "monthly": "🏅 Monatliche Trophäen",
+      "yearly": "🏆 Jährliche Trophäen"
+    },
+    "earnedOn": "Verdient am: {{date}}",
+    "achievementsTitle": "⭐ Erfolge",
+    "noAchievements": "Noch keine Erfolge. Halte durch und du wirst Meilensteine freischalten!",
+    "unlockedOn": "Freigeschaltet am: {{date}}",
+    "for": "Für: {{addiction}}"
+  }
+}

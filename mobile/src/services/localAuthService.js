@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { getDatabase } from '../db/database';
-import { createToken, verifyToken } from './jwtHelper';
+import { createToken, verifyToken } from '../utils/jwtHelper';
 
 export const localAuthService = {
   async register(username, fullName, password) {

@@ -10,6 +10,8 @@ const moodRoutes = require('./routes/moods');
 const weightRoutes = require('./routes/weights');
 const memoryRoutes = require('./routes/memories');
 const trophyRoutes = require('./routes/trophies');
+const pledgeRoutes = require('./routes/pledges');
+const preparationRoutes = require('./routes/preparation');
 const { createIPWhitelistMiddleware } = require('./utils/ipWhitelist');
 
 const app = express();
@@ -89,6 +91,8 @@ app.use('/api/moods', moodRoutes);
 app.use('/api/weights', weightRoutes);
 app.use('/api/memories', memoryRoutes);
 app.use('/api/trophies', trophyRoutes);
+app.use('/api/pledges', pledgeRoutes);
+app.use('/api/preparation', preparationRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

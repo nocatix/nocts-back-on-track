@@ -1,0 +1,32 @@
+{
+  "pageTitle": "我的日记",
+  "addEntry": "添加新条目",
+  "entry": "条目",
+  "noEntries": "暂无日记条目。开始写吧！",
+  "entryDate": "条目日期",
+  "entryContent": "你感觉如何？",
+  "entryContentPlaceholder": "在这里写下你的想法和感受...",
+  "recentEntries": "最近的条目",
+  "previousDay": "◀ 前一天",
+  "nextDay": "后一天 ▶",
+  "today": "今天",
+  "lastSaved": "最后保存",
+  "writeHere": "在这里写..你可以使用markdown:\n# 标题 1\n## 标题 2\n**粗体** *斜体*\n- 要点",
+  "markdownTip": "💡 提示：使用markdown格式化 - **粗体**，*斜体*，# 标题，- 要点",
+  "hideTip": "▼ 隐藏提示",
+  "showTip": "▶ 显示提示",
+  "savingEntry": "保存中...",
+  "saveEntry": "💾 保存条目",
+  "editEntry": "✏️ 编辑条目",
+  "cancel": "取消",
+  "noEntryForDay": "这一天没有条目。",
+  "journalingTipsTitle": "💭 康复的日记提示",
+  "journalingTips": [
+    "感恩：每天写下3件你感谢的事情",
+    "进度：追踪你坚强的天数",
+    "触发因素：记下什么引发了渴望，以及你如何处理它",
+    "情绪：写下你的感受来处理它们",
+    "目标：提醒自己为什么要踏上这段旅程",
+    "胜利：庆祝每一个小胜利，无论多么渺小"
+  ]
+}

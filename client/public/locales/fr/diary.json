@@ -1,0 +1,32 @@
+{
+  "pageTitle": "Mon journal",
+  "addEntry": "Ajouter une nouvelle entrée",
+  "entry": "Entrée",
+  "noEntries": "Pas encore d'entrées de journal. Commencez à écrire !",
+  "entryDate": "Date de l'entrée",
+  "entryContent": "Comment vous sentez-vous ?",
+  "entryContentPlaceholder": "Écrivez vos pensées et sentiments ici...",
+  "recentEntries": "Entrées récentes",
+  "previousDay": "◀ Jour précédent",
+  "nextDay": "Jour suivant ▶",
+  "today": "Aujourd'hui",
+  "lastSaved": "Dernière sauvegarde",
+  "writeHere": "Écrivez ici... Vous pouvez utiliser le markdown :\n# En-tête 1\n## En-tête 2\n**gras** *italique*\n- points",
+  "markdownTip": "💡 Conseil : Utilisez le markdown pour formater - **gras**, *italique*, # en-têtes, - points",
+  "hideTip": "▼ Masquer le conseil",
+  "showTip": "▶ Afficher le conseil",
+  "savingEntry": "Enregistrement...",
+  "saveEntry": "💾 Enregistrer l'entrée",
+  "editEntry": "✏️ Modifier l'entrée",
+  "cancel": "Annuler",
+  "noEntryForDay": "Pas d'entrée pour ce jour.",
+  "journalingTipsTitle": "💭 Conseils de journalisation pour la récupération",
+  "journalingTips": [
+    "Gratitude : Chaque jour, écrivez 3 choses pour lesquelles vous êtes reconnaissant",
+    "Progrès : Suivez combien de jours vous avez tenu bon",
+    "Déclencheurs : Notez ce qui a déclenché le désir et comment vous l'avez géré",
+    "Émotions : Écrivez sur vos sentiments pour les traiter",
+    "Objectifs : Rappelez-vous pourquoi vous êtes dans ce voyage",
+    "Victoires : Célébrez chaque petite victoire, peu importe sa taille"
+  ]
+}

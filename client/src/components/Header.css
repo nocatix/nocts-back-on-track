@@ -1,29 +1,33 @@
 .header {
   background: var(--bg-primary);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 15px 0;
+  backdrop-filter: blur(10px);
+  background-color: rgba(var(--bg-primary-rgb, 255, 255, 255), 0.95);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 16px 0;
   position: sticky;
   top: 0;
-  z-index: 100;
-  transition: background 0.3s ease;
+  z-index: 99;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .header.dark {
-  background: var(--bg-secondary);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background-color: rgba(15, 15, 15, 0.95);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
 
 .header-content {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 20px;
   color: var(--accent-color);
   margin: 0;
   transition: color 0.3s ease;
@@ -34,55 +38,136 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 8px;
 }
 
 .logo-section:hover {
-  opacity: 0.8;
+  opacity: 1;
+  background: var(--bg-secondary);
+  transform: translateY(-1px);
 }
 
 .logo-section svg {
+  width: 24px;
+  height: 24px;
   color: var(--accent-color);
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.logo-section:hover svg {
+  transform: scale(1.05);
 }
 
 .logo-text {
-  font-size: 24px;
+  font-size: 1.1rem;
   color: var(--accent-color);
   margin: 0;
   font-weight: 700;
+  letter-spacing: -0.3px;
   transition: color 0.3s ease;
 }
 
 .user-section {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
 }
 
 .user-name {
   color: var(--text-primary);
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 0.95rem;
   transition: color 0.3s ease;
 }
 
-/* Dark mode styles for header */
-.header.dark .logo-text {
-  color: var(--text-primary);
+/* Button styles in header */
+.header button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.header.dark .user-name {
-  color: var(--text-primary);
-}
-
-.header.dark .btn-dark-mode {
+.btn-dark-mode,
+.btn-logout {
   background: var(--bg-secondary);
   color: var(--text-primary);
   border: 1px solid var(--border-color);
 }
 
-.header.dark .btn-logout {
+.btn-dark-mode:hover,
+.btn-logout:hover {
+  background: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .header-content {
+    padding: 0 16px;
+  }
+
+  .logo-text {
+    font-size: 1rem;
+  }
+
+  .user-name {
+    display: none;
+  }
+
+  .user-section {
+    gap: 8px;
+  }
+
+  .header button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 12px 0;
+  }
+
+  .header-content {
+    padding: 0 12px;
+  }
+
+  .logo-section svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .logo-text {
+    font-size: 0.95rem;
+  }
+
+  .header button {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+}
+
+/* Dark mode enhancement */
+.dark .header {
+  background-color: rgba(15, 15, 15, 0.95);
+}
+
+.dark .logo-section:hover {
   background: var(--bg-secondary);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
+}
+
+.dark .btn-dark-mode,
+.dark .btn-logout {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
 }

@@ -1,28 +1,16 @@
 {
+  "cli": {
+    "version": ">= 0.52.0"
+  },
   "build": {
     "production": {
-      "node": "18.18.0",
-      "env": {
-        "EXPO_DEBUG": "0"
-      },
       "android": {
-        "image": "latest",
         "buildType": "apk"
       }
     },
     "development": {
-      "node": "18.18.0",
       "android": {
-        "image": "latest",
         "buildType": "apk"
-      }
-    }
-  },
-  "submit": {
-    "production": {
-      "android": {
-        "serviceAccountKeyPath": "**REQUIRED**",
-        "track": "internal"
       }
     }
   }

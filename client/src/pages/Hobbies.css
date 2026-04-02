@@ -1,0 +1,466 @@
+/* Hobbies Page Styles */
+
+.hobbies-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Header */
+.hobbies-header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 40px 30px;
+  background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+  border-radius: 15px;
+  color: white;
+  box-shadow: 0 6px 20px rgba(255, 107, 157, 0.3);
+}
+
+.hobbies-header h1 {
+  font-size: 2.5em;
+  margin: 0 0 10px 0;
+  font-weight: bold;
+  letter-spacing: -0.5px;
+}
+
+.hobbies-header p {
+  font-size: 1.2em;
+  opacity: 0.95;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Why Hobbies Section */
+.why-hobbies {
+  background: var(--card-bg);
+  padding: 40px 30px;
+  border-radius: 15px;
+  margin-bottom: 50px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.why-hobbies h2 {
+  text-align: center;
+  color: var(--accent-color);
+  margin: 0 0 30px 0;
+  font-size: 2em;
+  transition: color 0.3s ease;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.benefit {
+  text-align: center;
+  padding: 25px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+html.dark .benefit {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.benefit:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-color);
+}
+
+html.dark .benefit:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.benefit-emoji {
+  font-size: 2.5em;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.benefit h3 {
+  margin: 0 0 10px 0;
+  color: var(--text-primary);
+  font-size: 1.2em;
+  transition: color 0.3s ease;
+}
+
+.benefit p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.95em;
+  transition: color 0.3s ease;
+}
+
+/* Filter Section */
+.filter-section {
+  margin-bottom: 50px;
+}
+
+.filter-section h2 {
+  text-align: center;
+  color: var(--text-primary);
+  margin: 0 0 25px 0;
+  font-size: 1.8em;
+  transition: color 0.3s ease;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.filter-btn {
+  padding: 12px 20px;
+  border: 2px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+html.dark .filter-btn {
+  background: var(--bg-secondary);
+}
+
+.filter-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.filter-label {
+  font-weight: 600;
+}
+
+.filter-subtext {
+  font-size: 0.75em;
+  opacity: 0.8;
+}
+
+/* Hobbies Grid */
+.hobbies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+  .hobbies-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Hobby Card */
+.hobby-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+html.dark .hobby-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hobby-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-color: var(--accent-color);
+}
+
+html.dark .hobby-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Hobby Header */
+.hobby-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.hobby-emoji {
+  font-size: 2.5em;
+  flex-shrink: 0;
+  min-width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hobby-title-section {
+  flex: 1;
+}
+
+.hobby-name {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.3em;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.hobby-duration {
+  color: var(--text-secondary);
+  font-size: 0.85em;
+  margin-top: 4px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* Description */
+.hobby-description {
+  color: var(--text-secondary);
+  margin: 5px 0 0 0;
+  line-height: 1.5;
+  font-size: 0.95em;
+  transition: color 0.3s ease;
+}
+
+/* Recovery Benefits */
+.recovery-benefits {
+  padding: 15px;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+}
+
+.recovery-benefits h4 {
+  margin: 0 0 10px 0;
+  color: var(--text-primary);
+  font-size: 0.95em;
+  transition: color 0.3s ease;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.benefits-list li {
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 6px;
+  color: var(--text-secondary);
+  font-size: 0.9em;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.benefits-list li:before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+/* Get Started */
+.get-started {
+  padding: 15px;
+  background: rgba(102, 126, 234, 0.08);
+  border-left: 3px solid var(--accent-color);
+  border-radius: 6px;
+}
+
+.get-started h4 {
+  margin: 0 0 8px 0;
+  color: var(--text-primary);
+  font-size: 0.95em;
+  transition: color 0.3s ease;
+}
+
+.get-started p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9em;
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+/* Tags */
+.hobby-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 5px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.tag-solo,
+.tag-social {
+  background: rgba(102, 126, 234, 0.15);
+  color: #667eea;
+  border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.tag-outdoor,
+.tag-indoor {
+  background: rgba(76, 175, 80, 0.15);
+  color: #4CAF50;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.tag-free,
+.tag-paid {
+  background: rgba(255, 152, 0, 0.15);
+  color: #FF9800;
+  border: 1px solid rgba(255, 152, 0, 0.3);
+}
+
+/* Final Section */
+.hobbies-final {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(76, 175, 80, 0.1));
+  padding: 40px 30px;
+  border-radius: 15px;
+  text-align: center;
+  border: 2px solid var(--accent-color);
+  margin-top: 50px;
+}
+
+.hobbies-final h2 {
+  color: var(--accent-color);
+  margin: 0 0 20px 0;
+  font-size: 2em;
+  transition: color 0.3s ease;
+}
+
+.hobbies-final p {
+  color: var(--text-secondary);
+  font-size: 1.05em;
+  line-height: 1.8;
+  margin: 15px 0;
+  transition: color 0.3s ease;
+}
+
+.hobbies-final p strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hobbies-container {
+    padding: 15px;
+  }
+
+  .hobbies-header {
+    padding: 25px 20px;
+    margin-bottom: 30px;
+  }
+
+  .hobbies-header h1 {
+    font-size: 1.8em;
+  }
+
+  .hobbies-header p {
+    font-size: 1em;
+  }
+
+  .why-hobbies {
+    padding: 25px 20px;
+  }
+
+  .why-hobbies h2 {
+    font-size: 1.5em;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .filter-buttons {
+    gap: 8px;
+  }
+
+  .filter-btn {
+    padding: 10px 15px;
+    font-size: 0.85em;
+  }
+
+  .hobby-card {
+    padding: 20px;
+  }
+
+  .hobbies-final {
+    padding: 25px 20px;
+  }
+
+  .hobbies-final h2 {
+    font-size: 1.5em;
+  }
+
+  .hobbies-final p {
+    font-size: 0.95em;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .filter-section {
+    display: none;
+  }
+
+  .hobby-card {
+    page-break-inside: avoid;
+  }
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hobby-card {
+  animation: slideIn 0.3s ease-out;
+}

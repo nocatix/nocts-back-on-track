@@ -119,7 +119,7 @@ router.get('/me', auth, async (req, res) => {
     }
     
     res.json({
-      user: { id: user._id, username: user.username, fullName: user.fullName, unitPreference: user.unitPreference }
+      user: { id: user._id, username: user.username, fullName: user.fullName, unitPreference: user.unitPreference, language: user.language }
     });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
@@ -145,7 +145,7 @@ router.put('/profile', auth, async (req, res) => {
     
     res.json({
       message: 'Profile updated successfully',
-      user: { id: user._id, username: user.username, fullName: user.fullName, unitPreference: user.unitPreference }
+      user: { id: user._id, username: user.username, fullName: user.fullName, unitPreference: user.unitPreference, language: user.language }
     });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
@@ -204,6 +204,33 @@ router.put('/unit-preference', auth, async (req, res) => {
     res.json({
       message: 'Unit preference updated successfully',
       unitPreference: user.unitPreference
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Update Language Preference
+router.put('/language', auth, async (req, res) => {
+  try {
+    const { language } = req.body;
+    const validLanguages = ['en', 'en-simple', 'de', 'es', 'fr', 'ru', 'zh', 'ja', 'ar'];
+    
+    if (!language || !validLanguages.includes(language)) {
+      return res.status(400).json({ message: 'Invalid language preference' });
+    }
+    
+    const user = await User.findById(req.user.userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    
+    user.language = language;
+    await user.save();
+    
+    res.json({
+      message: 'Language preference updated successfully',
+      language: user.language
     });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });

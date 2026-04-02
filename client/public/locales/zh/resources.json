@@ -1,0 +1,308 @@
+{
+  "meditation": {
+    "pageTitle": "冥想",
+    "startMeditation": "开始冥想",
+    "duration": "持续时间（分钟）",
+    "guidedMeditation": "指导冥想",
+    "timerId": "计时器",
+    "breathingExercise": "呼吸练习",
+    "relaxationTechnique": "放松技巧",
+    "noRecords": "暂无冥想记录。开始冥想！",
+    "backToMeditations": "← 返回冥想",
+    "sessionTimer": "⏱️ 会话计时器",
+    "sessionTimerLabel": "会话计时器",
+    "guidedBreathing": "🫁 指导呼吸",
+    "breathingPace": "呼吸速度",
+    "startBreathingGuide": "▶ 开始呼吸指南",
+    "stopBreathingGuide": "⏹ 停止呼吸指南",
+    "showBreathingGuide": "显示呼吸指南",
+    "hideBreathingGuide": "隐藏呼吸指南",
+    "start": "开始",
+    "pause": "暂停",
+    "resume": "恢复",
+    "reset": "重启",
+    "minutes": "分钟",
+    "meditationMusic": "🎵 冥想音乐",
+    "guide": "指南",
+    "postureTips": "🧘 姿势提示",
+    "quickTools": "快速工具",
+    "emergencyCalmTitle": "🆘 紧急平静",
+    "emergencyCalmDesc": "强烈渴望的即时缓解",
+    "emergencyCalm3Min": "3分钟紧急平静",
+    "quickBreathingTitle": "🫁 快速呼吸",
+    "quickBreathingDesc": "重启神经系统",
+    "progressTitle": "📈 你的进度",
+    "sessionsCompleted": "完成的会话",
+    "minsTotal": "总分钟数",
+    "guidedBreathingExercise": "指导呼吸练习",
+    "breathingTip1": "👉 通过鼻子慢慢呼吸，温和地屏住呼吸，然后通过嘴巴呼气",
+    "breathingTip2": "💡 这可以平静你的神经系统并自然地减少渴望",
+    "recommendedMusicTitle": "🎵 推荐的冥想音乐",
+    "listenToMusic": "冥想时听环境音乐",
+    "youtubeMusic": "YouTube：冥想音乐",
+    "spotifyMusic": "Spotify：冥想播放列表",
+    "calmApp": "Calm应用",
+    "recentSessionsTitle": "📝 最近的会话",
+    "tipsForMeditation": "💡 成功冥想的提示",
+    "meditations": [
+      {
+        "id": 1,
+        "title": "呼吸意识",
+        "duration": "5分钟",
+        "description": "从基本的呼吸意识开始平静你的思想。",
+        "guide": "舒适地坐下。闭上眼睛。通过鼻子自然呼吸。从1数到10每个呼气，然后重新开始。如果你的思想漂移，没关系——只需回到计数。继续5分钟。这个简单的练习有助于平静焦虑和渴望。",
+        "musicUrl": "https://www.youtube.com/embed/7qJZy4DpOWA"
+      },
+      {
+        "id": 2,
+        "title": "身体扫描",
+        "duration": "7分钟",
+        "description": "系统地释放身体的紧张。",
+        "guide": "舒适地躺下或坐下。闭上眼睛。从头顶开始。注意任何紧张。当你呼吸时，想象每次呼气时释放那种紧张。缓慢向下移动：额头、下颌、脖子、肩膀、手臂、胸部、腹部、腿、脚。在每个区域花费10-15秒。这种技巧可以减少戒断的身体压力。",
+        "musicUrl": "https://www.youtube.com/embed/2DRyAW0ljHQ"
+      },
+      {
+        "id": 3,
+        "title": "渴望释放",
+        "duration": "10分钟",
+        "description": "管理渴望的特定冥想。",
+        "guide": "舒适地坐下。闭上眼睛。不加评判地观察你身体中的任何渴望。不要试图与之对抗。观察：它在哪里？感觉如何？它有颜色、形状或温度吗？当你呼吸时，想象渴望是通过你的一波。看着它上升、达到峰值并下降。记住：渴望是暂时的。这也会消退。它们在15-20分钟内自然消失。",
+        "musicUrl": "https://www.youtube.com/embed/sTzHDPqBN-8"
+      },
+      {
+        "id": 4,
+        "title": "爱心善待",
+        "duration": "8分钟",
+        "description": "在康复过程中培养同情心和自爱。",
+        "guide": "舒适地坐下。闭上眼睛。把手放在心上。默默地说：'愿我和平。愿我健康。愿我快乐。愿我从成瘾中解放。'缓慢地重复，感受每个词。然后扩展：'愿他人也找到和平与治愈。'这种实践建立了自我同情和康复的动力。",
+        "musicUrl": "https://www.youtube.com/embed/lE5n6gYzJLo"
+      }
+    ],
+    "tips": [
+      "每天只从5分钟开始。一致性比持续时间更重要。",
+      "每天在同一时间冥想以养成习惯。",
+      "渴望在15-20分钟达到峰值。通过峰值冥想。",
+      "当你感到最大诱惑时使用冥想。",
+      "你的头脑会漂移——这很正常。温和地将其带回。",
+      "追踪你的进度。注意渴望变得多么容易管理。"
+    ],
+    "postureTipsList": [
+      {
+        "label": "脊柱",
+        "text": "保持笔直但不僵硬——想象从底部到头顶的线"
+      },
+      {
+        "label": "肩膀",
+        "text": "向下和向后放松，远离耳朵"
+      },
+      {
+        "label": "双手",
+        "text": "放在膝盖或膝盖上，手心向上或向下如你舒服"
+      },
+      {
+        "label": "下巴",
+        "text": "略微收缩，眼睛自然向下看（睁开或闭上均可）"
+      },
+      {
+        "label": "脚",
+        "text": "如果坐着，脚掌牢固地放在地板上。如果躺下，让它们自然向外下垂"
+      }
+    ]
+  },
+  "preparationPlan": {
+    "header": {
+      "title": "制定计划并准备戒掉",
+      "subtitle": "准备是成功康复的基础。使用本指南为成功做准备。"
+    },
+    "motivation": {
+      "title": "为什么准备很重要",
+      "mainMessage": "康复不是发生的事情，而是你建立的东西。",
+      "description": "你现在花在准备上的时间将直接决定你的成功。计划康复的人在最初的困难日子里坚持下去的可能性要高得多。",
+      "benefits": [
+        "准备在你处理时减少冲动决定",
+        "让你在开始前准备好并充满信心",
+        "在潜在障碍令你惊讶之前识别它们",
+        "确保从第一天起支持系统",
+        "向自己展示你认真对待变革"
+      ],
+      "insight": "💡 你现在在规划上花费的每一分钟都会节省以后数小时的挣扎。"
+    },
+    "assess": {
+      "title": "1. 评估你的现状",
+      "intro": "在戒掉之前，了解你的位置：",
+      "questions": {
+        "frequency": "我消费/参与的频率有多高？（每天、每周、每天多次）",
+        "money": "我每天/周花多少钱？",
+        "time": "我一天中什么时候最常消费？",
+        "triggers": "什么情况会引发我的消费？（压力、无聊、社交、情感）",
+        "impact": "这种成瘾如何影响了我的健康、关系、工作、财务？",
+        "obstacles": "我过去戒掉的障碍有哪些？"
+      },
+      "placeholder": "在此输入答案...",
+      "tip": "提示：使用此应用在戒掉前的几天追踪你当前的消费。真实数据比猜测更强大。"
+    },
+    "quitDate": {
+      "title": "2. 设定具体的戒掉日期",
+      "mainAdvice": "选择1-2周内的日期。给自己足够的时间准备，但不要太多以至于失去动力。",
+      "goodTiming": [
+        "✓ 好时机：选择压力事件过后的一天",
+        "✓ 好时机：选择支持可用的一天"
+      ],
+      "badTiming": [
+        "✗ 坏时机：不要在你已经感到压力或情感化时选择",
+        "✗ 坏时机：不要在你独处且容易获取时选择"
+      ],
+      "finalAdvice": "选择日期后，在日历上标记。告诉人们。把它放在你每天看到的地方。让它变成现实。"
+    },
+    "triggers": {
+      "title": "3. 识别你的触发因素",
+      "intro": "触发因素是让你想要消费的情况、情绪或人。提前认识它们意味着你可以为它们做计划。",
+      "categories": {
+        "emotional": {
+          "title": "情感触发因素",
+          "description": "压力、无聊、孤独、愤怒、焦虑、悲伤...什么情绪推动你的消费？"
+        },
+        "social": {
+          "title": "社交触发因素",
+          "description": "特定的人、地方或团体。你与某些朋友一起消费吗？在特定的地方？"
+        },
+        "environmental": {
+          "title": "环境触发因素",
+          "description": "一天中的时间、地点。你的房间是否触发你？深夜？"
+        },
+        "habitual": {
+          "title": "习惯性触发因素",
+          "description": "你一直一起做的事情。早晨的咖啡仪式？下班后的日常？"
+        }
+      },
+      "action": "行动：对于每个触发因素，写下你将代替做什么的具体计划。"
+    },
+    "support": {
+      "title": "4. 建立你的支持网络",
+      "intro": "你不能单独做这件事。成功的康复需要联系和支持。在戒掉前现在建立你的网络。",
+      "people": {
+        "title": "👥 要告诉的人",
+        "items": [
+          "至少一个你完全信任的人，你可以随时打电话给他",
+          "如果你有困难，不会评判你的人",
+          "会庆祝你胜利的人",
+          "考虑告诉治疗师、顾问或医生"
+        ]
+      },
+      "resources": {
+        "title": "📱 支持资源",
+        "items": [
+          "支持团体（AA、NA、SMART恢复等）",
+          "心理治疗或咨询服务",
+          "此应用——使用它的所有功能（日记、心情、冥想）",
+          "帮助热线和危机文本热线"
+        ]
+      },
+      "professional": {
+        "title": "🏥 专业帮助",
+        "items": [
+          "酒精或毒品的医疗排毒支持（如必要）",
+          "药物辅助治疗（如推荐）",
+          "针对潜在问题的心理健康治疗",
+          "如果危险就不要单独尝试"
+        ]
+      },
+      "action": "写下3-5个当事情困难时可以打电话的具体人。现在获取他们的号码并保存在你的手机。"
+    },
+    "coping": {
+      "title": "5. 规划你的应对策略",
+      "intro": "渴望会来临。你需要具体的工具在它们到达前准备好。",
+      "strategies": {
+        "meditation": {
+          "title": "🧘 冥想和正念",
+          "description": "使用此应用的冥想功能。即使2分钟也有帮助。"
+        },
+        "distraction": {
+          "title": "🎮 分散策略",
+          "description": "使用渴望游戏、看电影、打电话给朋友、洗澡、锻炼。"
+        },
+        "physical": {
+          "title": "💪 身体活动",
+          "description": "散步、奔跑、瑜伽、跳舞——任何移动身体和改变化学物质的东西。"
+        },
+        "journaling": {
+          "title": "📔 日记",
+          "description": "使用日记功能通过渴望和情绪写下去。"
+        },
+        "emotions": {
+          "title": "🎭 情感处理",
+          "description": "追踪心情、命名感受、不动地感受它们。"
+        },
+        "connection": {
+          "title": "🤝 联系",
+          "description": "打电话给某人、给朋友发短信、参加支持团体会议。"
+        }
+      },
+      "action": "为渴望危机创建个人工具包：写下当渴望来临时你将做的3-5件事。将其张贴在可见的地方。"
+    },
+    "remove": {
+      "title": "6. 消除诱惑",
+      "intro": "使消费尽可能困难。你不能拒绝你没有的东西。",
+      "actions": {
+        "clean": {
+          "title": "🚭 清洁空间",
+          "description": "摆脱所有用品、用具、提醒物。彻底清洁你的房间、车、包。"
+        },
+        "delete": {
+          "title": "🗑️ 删除访问权限",
+          "description": "删除应用、阻止网站、停止关注账户、删除毒贩联系方式。"
+        },
+        "money": {
+          "title": "💳 限制金钱",
+          "description": "将财务控制权交给你信任的人。如必要删除卡片访问权限。"
+        },
+        "avoid": {
+          "title": "📍 避免地方",
+          "description": "规划避免典型消费点的路线。走不同的路。"
+        },
+        "distance": {
+          "title": "👥 与人保持距离",
+          "description": "考虑告诉朋友你在戒掉——真正的朋友会支持。"
+        }
+      }
+    },
+    "fortyEightHours": {
+      "title": "7. 规划最初的48小时",
+      "intro": "最初的48小时是最困难的。如必要逐小时规划。",
+      "blocks": {
+        "wakeUp": {
+          "title": "当你醒来时",
+          "description": "告诉某人你的戒掉开始了。做些健康的事情（锻炼、冥想、健康早餐）。"
+        },
+        "morning": {
+          "title": "早晨（睡眠后）",
+          "description": "没有结构的时间很危险。规划些东西：锻炼、见朋友、爱好、冥想。"
+        },
+        "afternoon": {
+          "title": "下午（渴望峰值时间）",
+          "description": "打电话给你的支持人。使用你的渴望工具包。这个时间会过去。"
+        },
+        "evening": {
+          "title": "晚上（独居时间）",
+          "description": "与人在一起或通过电话与某人在一起。保持忙碌。使用日记处理。"
+        },
+        "night": {
+          "title": "夜晚（对许多人来说更困难）",
+          "description": "准备睡眠：温水浴、茶、冥想、有声书。你能做到这一点。"
+        }
+      },
+      "insight": "💡 如果最初的48小时在没有消费的情况下过去，你的长期成功可能性会大幅增加。你能做到这一点。"
+    },
+    "mental": {
+      "title": "8. 心理准备",
+      "intro": "你的思想决定你的成功。在开始前现在植入这些真理：",
+      "beliefs": [
+        "✓ 这是可能的。百万人做过。你也可以。",
+        "✓ 这很难，但变得更容易。",
+        "✓ 渴望在15-20分钟达到峰值。",
+        "✓ 你不是坏人。尝试是勇敢。",
+        "✓ 你不消费的每一天都让你更强大。"
+      ]
+    }
+  }
+}

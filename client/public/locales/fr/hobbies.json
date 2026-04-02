@@ -1,0 +1,297 @@
+{
+  "pageTitle": "Découvrez de nouveaux loisirs",
+  "subtitle": "Avancez votre rétablissement par des activités attrayantes qui remplissent la vie de but, de sens et de connexion",
+  "whyHobbiesTitle": "Pourquoi les loisirs sont essentiels à la récupération",
+  "benefits": [
+    {
+      "emoji": "⏰",
+      "title": "Remplissez votre temps",
+      "description": "Les loisirs comblent le temps que vous aviez l'habitude de passer en consommation. L'ennui est dangereux. L'engagement est la sécurité."
+    },
+    {
+      "emoji": "😊",
+      "title": "Libérez la dopamine",
+      "description": "Les loisirs donnent à votre cerveau le plaisir qu'il recherchait de la dépendance, de manière naturelle et saine."
+    },
+    {
+      "emoji": "🎯",
+      "title": "Construisez un but",
+      "description": "Travailler pour maîtriser ou accomplir quelque chose donne à votre vie un sens au-delà de 'ne pas consommer'."
+    },
+    {
+      "emoji": "🤝",
+      "title": "Créez une communauté",
+      "description": "Les loisirs sociaux vous connectent avec d'autres et construisent des relations saines."
+    },
+    {
+      "emoji": "💪",
+      "title": "Construisez la confiance",
+      "description": "Apprendre et s'améliorer en quelque chose génère des réalisations réelles et de l'estime de soi."
+    },
+    {
+      "emoji": "🧠",
+      "title": "Escapade saine",
+      "description": "Les loisirs fournissent une fuite mentale sans préjudice, juste de la joie pure."
+    }
+  ],
+  "filterTitle": "Filtrer les loisirs",
+  "filterOptions": [
+    {
+      "value": "all",
+      "label": "Tous les loisirs"
+    },
+    {
+      "value": "solo",
+      "label": "😊 Seul",
+      "subtext": "(Faire seul)"
+    },
+    {
+      "value": "social",
+      "label": "👥 Social",
+      "subtext": "(Avec d'autres)"
+    },
+    {
+      "value": "outdoor",
+      "label": "🌳 Extérieur"
+    },
+    {
+      "value": "indoor",
+      "label": "🏠 Intérieur"
+    },
+    {
+      "value": "free",
+      "label": "💰 Gratuit"
+    },
+    {
+      "value": "paid",
+      "label": "💵 Payant"
+    }
+  ],
+  "categoryLabels": {
+    "solo": "😊 Seul",
+    "social": "👥 Social",
+    "outdoor": "🌳 Extérieur",
+    "indoor": "🏠 Intérieur",
+    "free": "💰 Gratuit",
+    "paid": "💵 Payant"
+  },
+  "recoveryBenefitsTitle": "✨ Avantages pour la récupération",
+  "getStartedTitle": "🚀 Commencer",
+  "finalTitle": "Commencez à explorer",
+  "finalMessages": [
+    "Choisissez un loisir qui vous intrigue vraiment. Ne réfléchissez pas trop. Essayez simplement.",
+    "Essayez cette semaine. Donnez-lui une vraie chance. Vous n'avez pas besoin d'être bon, vous avez juste besoin de le faire.",
+    "L'objectif n'est pas la perfection. L'objectif est l'engagement, le bonheur et une vie sobre qui en vaut la peine."
+  ],
+  "hobbies": [
+    {
+      "id": 1,
+      "name": "Marcher",
+      "emoji": "🚶",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "30 min - 2 heures",
+      "description": "Un moyen simple et gratuit de bouger votre corps et de clarifier votre esprit. La marche réduit les envies.",
+      "recovery_benefits": [
+        "Activité physique",
+        "Air frais",
+        "Clarté mentale",
+        "Soulagement du stress"
+      ],
+      "get_started": "Commencez avec des promenades de 20 minutes quotidiennes. Prêtez attention à votre environnement."
+    },
+    {
+      "id": 2,
+      "name": "Courir/Jogger",
+      "emoji": "🏃",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "20-60 min",
+      "description": "L'exercice le plus intense libère les endorphines et brûle l'énergie nerveuse.",
+      "recovery_benefits": [
+        "Libération d'endorphines",
+        "Exercice intensif",
+        "Suppression des envies",
+        "Renforcer la confiance"
+      ],
+      "get_started": "Si vous êtes nouveau, commencez par des intervalles de course/marche. Les applications peuvent vous guider."
+    },
+    {
+      "id": 3,
+      "name": "Randonnée",
+      "emoji": "⛰️",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "1-4 heures",
+      "description": "Combinez l'exposition à la nature, l'activité physique et l'établissement d'objectifs dans un passe-temps gratifiant.",
+      "recovery_benefits": [
+        "Connexion à la nature",
+        "Accomplissement",
+        "Exercice",
+        "Réinitialisation mentale"
+      ],
+      "get_started": "Trouvez des sentiers de randonnée locaux. Commencez par des sentiers pour débutants."
+    },
+    {
+      "id": 4,
+      "name": "Jardinage",
+      "emoji": "🌱",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "30 min - 2 heures",
+      "description": "Faire pousser quelque chose vous donne un but, de la patience et la satisfaction de soigner la vie.",
+      "recovery_benefits": [
+        "Sens du but",
+        "Connexion à la nature",
+        "Construire la patience",
+        "Accomplissement"
+      ],
+      "get_started": "Commencez avec des plantes faciles à partir de graines ou de plants. Même un petit jardin de fenêtre compte."
+    },
+    {
+      "id": 5,
+      "name": "Explorez votre ville",
+      "emoji": "🗺️",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "1-3 heures",
+      "description": "Redécouvrez votre quartier. Trouvez des parcs et des cafés que vous n'aviez jamais remarqués.",
+      "recovery_benefits": [
+        "Curiosité",
+        "Activité",
+        "Nouvelle perspective",
+        "Casser la routine"
+      ],
+      "get_started": "Choisissez un quartier ou une zone que vous ne connaissez pas bien. Explorez sans agenda."
+    },
+    {
+      "id": 6,
+      "name": "Cyclisme",
+      "emoji": "🚴",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "30 min - 2 heures",
+      "description": "Un moyen amusant et rapide de couvrir la distance et de ressentir la liberté.",
+      "recovery_benefits": [
+        "Vitesse et liberté",
+        "Santé cardiovasculaire",
+        "Exploration",
+        "Endorphines"
+      ],
+      "get_started": "Achetez un vélo d'occasion dans un magasin local ou en ligne. Investissez dans un casque et un verrou."
+    },
+    {
+      "id": 7,
+      "name": "Escalade de roche",
+      "emoji": "🧗",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-3 heures",
+      "description": "Les défis physiques et mentaux intenses construisent la confiance et la concentration.",
+      "recovery_benefits": [
+        "Résolution de problèmes",
+        "Confiance",
+        "Force de corps entier",
+        "Concentration améliorée"
+      ],
+      "get_started": "Commencez dans un gymnase d'escalade local. Les instructeurs enseignent la bonne technique et la sécurité."
+    },
+    {
+      "id": 8,
+      "name": "Photographie",
+      "emoji": "📸",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-4 heures",
+      "description": "Capturez la beauté, développez un œil artistique et ayez une sortie créative pour explorer.",
+      "recovery_benefits": [
+        "Créativité",
+        "Pleine conscience",
+        "Exploration",
+        "Accomplissement"
+      ],
+      "get_started": "Commencez avec l'appareil photo de votre téléphone. Apprenez des tutoriels gratuits en ligne."
+    },
+    {
+      "id": 9,
+      "name": "Sports nautiques",
+      "emoji": "🏄",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-3 heures",
+      "description": "Le surf, le kayak ou le paddleboard vous connectent à l'eau et fournissent de l'adrénaline.",
+      "recovery_benefits": [
+        "Connexion à la nature",
+        "Adrénaline",
+        "Exercice de corps entier",
+        "Présent du moment"
+      ],
+      "get_started": "Prenez des leçons pour débutants sur une plage ou un lac local. Commencez en eau calme."
+    },
+    {
+      "id": 10,
+      "name": "Lecture",
+      "emoji": "📖",
+      "category": [
+        "solo",
+        "indoor",
+        "free"
+      ],
+      "duration": "30 min - 2 heures",
+      "description": "Plongez dans des histoires, apprenez des choses nouvelles et défiez sainement votre esprit.",
+      "recovery_benefits": [
+        "Fuite mentale",
+        "Développement du vocabulaire",
+        "Relaxation",
+        "Connaissance"
+      ],
+      "get_started": "Visitez votre bibliothèque locale. Empruntez des livres gratuitement."
+    },
+    {
+      "id": 11,
+      "name": "Écriture/Journal",
+      "emoji": "✍️",
+      "category": [
+        "solo",
+        "indoor",
+        "free"
+      ],
+      "duration": "20-60 min",
+      "description": "Traitez les émotions, suivez votre voyage et découvrez des perspectives sur vous-même.",
+      "recovery_benefits": [
+        "Traitement émotionnel",
+        "Autodécouverte",
+        "Soulagement du stress",
+        "Suivre les progrès"
+      ],
+      "get_started": "Commencez par l'écriture libre. Sans règles. Écrivez ce qui est vrai."
+    }
+  ]
+}

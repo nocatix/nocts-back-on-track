@@ -1,0 +1,303 @@
+.stop-date-countdown {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(102, 126, 234, 0.04));
+  border: 2px solid var(--accent-color, #6366f1);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 20px 0;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+/* Intensity levels */
+.stop-date-countdown.low {
+  border-color: #10b981;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.04));
+}
+
+.stop-date-countdown.medium {
+  border-color: #f59e0b;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.04));
+}
+
+.stop-date-countdown.high {
+  border-color: #ef4444;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.04));
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.stop-date-countdown.critical {
+  border-color: #dc2626;
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.12), rgba(220, 38, 38, 0.06));
+  animation: pulse-critical 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.2);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+  }
+}
+
+@keyframes pulse-critical {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
+  }
+}
+
+.countdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+}
+
+.countdown-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary, #6b7280);
+}
+
+.countdown-date {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-color, #6366f1);
+}
+
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0;
+}
+
+.days-circle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-color, #6366f1), #764ba2);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.stop-date-countdown.low .days-circle {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.stop-date-countdown.medium .days-circle {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.stop-date-countdown.high .days-circle {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.stop-date-countdown.critical .days-circle {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+}
+
+.days-number {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.days-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+  opacity: 0.9;
+}
+
+.countdown-content {
+  margin: 20px 0;
+  padding: 16px;
+  background: var(--card-bg, #ffffff);
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-color, #6366f1);
+}
+
+.stop-date-countdown.low .countdown-content {
+  border-left-color: #10b981;
+}
+
+.stop-date-countdown.medium .countdown-content {
+  border-left-color: #f59e0b;
+}
+
+.stop-date-countdown.high .countdown-content {
+  border-left-color: #ef4444;
+}
+
+.stop-date-countdown.critical .countdown-content {
+  border-left-color: #dc2626;
+}
+
+.encouragement-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.milestone-message {
+  font-size: 13px;
+  color: var(--text-secondary, #6b7280);
+  margin: 0;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.countdown-progress {
+  margin-top: 20px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--border-color, #e5e7eb);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-color, #6366f1), #764ba2);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.stop-date-countdown.low .progress-fill {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.stop-date-countdown.medium .progress-fill {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.stop-date-countdown.high .progress-fill {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+.stop-date-countdown.critical .progress-fill {
+  background: linear-gradient(90deg, #dc2626, #b91c1c);
+}
+
+.progress-text {
+  display: block;
+  font-size: 12px;
+  color: var(--text-secondary, #6b7280);
+  text-align: center;
+  font-weight: 500;
+}
+
+.countdown-tips {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--bg-secondary, #f9fafb);
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #e5e7eb);
+}
+
+.tip-header {
+  margin: 0 0 12px 0;
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+  font-size: 14px;
+}
+
+.countdown-tips ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.countdown-tips li {
+  color: var(--text-secondary, #6b7280);
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 16px;
+}
+
+.countdown-tips li:before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent-color, #6366f1);
+  font-weight: 700;
+}
+
+.stop-date-countdown.low .countdown-tips li:before {
+  color: #10b981;
+}
+
+.stop-date-countdown.medium .countdown-tips li:before {
+  color: #f59e0b;
+}
+
+.stop-date-countdown.high .countdown-tips li:before {
+  color: #ef4444;
+}
+
+.stop-date-countdown.critical .countdown-tips li:before {
+  color: #dc2626;
+}
+
+/* Dark mode */
+body.dark-mode .countdown-content {
+  background: var(--card-bg, #1f2937);
+}
+
+body.dark-mode .countdown-tips {
+  background: var(--bg-secondary, #111827);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .stop-date-countdown {
+    padding: 16px;
+    margin: 16px 0;
+  }
+
+  .countdown-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .days-circle {
+    width: 80px;
+    height: 80px;
+  }
+
+  .days-number {
+    font-size: 24px;
+  }
+
+  .encouragement-text {
+    font-size: 14px;
+  }
+
+  .milestone-message {
+    font-size: 12px;
+  }
+}

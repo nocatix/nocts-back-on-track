@@ -92,7 +92,20 @@ const costLabels = {
  * @returns {string} The frequency label for the addiction
  */
 export const getFrequencyLabel = (addictionName) => {
-  return frequencyLabels[addictionName] || 'units per day';
+  // Try direct lookup first
+  if (frequencyLabels[addictionName]) {
+    return frequencyLabels[addictionName];
+  }
+  
+  // If not found, search for a key containing the addiction name (case-insensitive)
+  const searchTerm = addictionName.toLowerCase();
+  for (const key in frequencyLabels) {
+    if (key.toLowerCase().includes(searchTerm)) {
+      return frequencyLabels[key];
+    }
+  }
+  
+  return 'units per day';
 };
 
 /**
@@ -101,7 +114,20 @@ export const getFrequencyLabel = (addictionName) => {
  * @returns {string} The cost label for the addiction
  */
 export const getCostLabel = (addictionName) => {
-  return costLabels[addictionName] || '$ per unit';
+  // Try direct lookup first
+  if (costLabels[addictionName]) {
+    return costLabels[addictionName];
+  }
+  
+  // If not found, search for a key containing the addiction name (case-insensitive)
+  const searchTerm = addictionName.toLowerCase();
+  for (const key in costLabels) {
+    if (key.toLowerCase().includes(searchTerm)) {
+      return costLabels[key];
+    }
+  }
+  
+  return '$ per unit';
 };
 
 /**
@@ -165,16 +191,22 @@ export const calculateDailyPredictions = (addictions) => {
     return [];
   }
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const now = new Date();
+  const midnight = new Date();
+  midnight.setHours(0, 0, 0, 0);
 
   return addictions.map(addiction => {
     const stopDate = new Date(addiction.stopDate);
-    stopDate.setHours(0, 0, 0, 0);
     
-    // Calculate days since addiction was started (at least 1 to show day1 withdrawal info)
-    const daysSoFar = Math.max(1, Math.floor((today - stopDate) / (1000 * 60 * 60 * 24)));
-    const addictionType = addiction.name.toLowerCase();
+    // Calculate days since addiction was stopped with exact time precision
+    const diffMs = now - stopDate;
+    const totalDaysElapsed = diffMs / (1000 * 60 * 60 * 24);
+    const daysSoFar = Math.floor(totalDaysElapsed);
+    
+    // Calculate daily savings since midnight (time from midnight to now)
+    const msSinceMidnight = now - midnight;
+    const daysSinceMidnight = msSinceMidnight / (1000 * 60 * 60 * 24);
+    const dailySavingsSinceMidnight = daysSinceMidnight * (addiction.moneySpentPerDay || 0);
     
     // Get the withdrawal timeline for this addiction
     const addictionData = addictionDatabase[addiction.name];
@@ -197,6 +229,14 @@ export const calculateDailyPredictions = (addictions) => {
       }
     }
 
+    // Calculate money saved: (elapsed days) × (money spent per day)
+    const totalMoneySaved = totalDaysElapsed * (addiction.moneySpentPerDay || 0);
+    
+    // Cap today's savings to not exceed total saved (can happen on first day if stopped recently)
+    const cappedDailySavings = Math.min(dailySavingsSinceMidnight, totalMoneySaved);
+    
+    console.log(`${addiction.name}: elapsed=${totalDaysElapsed.toFixed(4)} days, moneyPerDay=${addiction.moneySpentPerDay}, totalSaved=${totalMoneySaved.toFixed(2)}, dailySinceMidnight=${dailySavingsSinceMidnight.toFixed(2)}, cappedDaily=${cappedDailySavings.toFixed(2)}`);
+
     return {
       _id: addiction._id,
       name: addiction.name,
@@ -209,7 +249,8 @@ export const calculateDailyPredictions = (addictions) => {
       tip: tip,
       moneySpent: addiction.moneySpentPerDay,
       frequencyPerDay: addiction.frequencyPerDay,
-      totalMoneySaved: addiction.totalMoneySaved
+      totalMoneySaved: totalMoneySaved,
+      dailySavingsSinceMidnight: cappedDailySavings
     };
   });
 };

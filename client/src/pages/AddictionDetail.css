@@ -57,9 +57,165 @@ html.dark .message-notification.error {
   transition: color 0.3s ease;
 }
 
+.detail-header-buttons {
+  display: flex;
+  gap: 10px;
+}
+
 .detail-header button {
   padding: 8px 16px;
   white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--accent-color) !important;
+  color: white !important;
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark) !important;
+  transform: translateY(-2px);
+}
+
+.edit-section {
+  background: var(--bg-secondary);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+html.dark .edit-section {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.edit-section h2 {
+  margin-top: 0;
+  color: var(--text-primary);
+  font-size: 1.3em;
+  margin-bottom: 20px;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  font-size: 0.95em;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+html.dark .form-group input,
+html.dark .form-group textarea {
+  background: #1a1a1a;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+}
+
+.form-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.form-buttons button {
+  flex: 1;
+  padding: 12px 20px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95em;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-success {
+  background: #4CAF50;
+  color: white;
+}
+
+.btn-success:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+.btn-secondary {
+  background: var(--text-secondary);
+  color: var(--bg-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.stop-date-section {
+  margin-bottom: 30px;
+}
+
+.stop-date-card {
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-dark) 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+html.dark .stop-date-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.stop-date-info h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.stop-date-datetime {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+.elapsed-time {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  word-break: break-word;
 }
 
 .stats-container {

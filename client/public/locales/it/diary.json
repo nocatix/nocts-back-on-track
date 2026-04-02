@@ -1,0 +1,32 @@
+{
+  "pageTitle": "Il mio diario",
+  "addEntry": "Aggiungi una nuova voce",
+  "entry": "Voce",
+  "noEntries": "Nessuna voce di diario. Inizia a scrivere!",
+  "entryDate": "Data della voce",
+  "entryContent": "Come ti senti?",
+  "entryContentPlaceholder": "Scrivi i tuoi pensieri e sentimenti qui...",
+  "recentEntries": "Voci recenti",
+  "previousDay": "◀ Giorno precedente",
+  "nextDay": "Giorno successivo ▶",
+  "today": "Oggi",
+  "lastSaved": "Ultimo salvataggio",
+  "writeHere": "Scrivi qui... Puoi usare markdown:\n# Titolo 1\n## Titolo 2\n**Grassetto** *Corsivo*\n- Punti elenco",
+  "markdownTip": "💡 Suggerimento: usa la formattazione markdown - **grassetto**, *corsivo*, # titolo, - punti",
+  "hideTip": "▼ Nascondi suggerimento",
+  "showTip": "▶ Mostra suggerimento",
+  "savingEntry": "Salvataggio in corso...",
+  "saveEntry": "💾 Salva voce",
+  "editEntry": "✏️ Modifica voce",
+  "cancel": "Annulla",
+  "noEntryForDay": "Nessuna voce per questo giorno.",
+  "journalingTipsTitle": "💭 Suggerimenti per il diario della guarigione",
+  "journalingTips": [
+    "Gratitudine: Scrivi 3 cose di cui sei grato ogni giorno",
+    "Progresso: Tieni traccia dei giorni in cui sei forte",
+    "Trigger: Annota cosa scatena il desiderio e come lo hai affrontato",
+    "Emozioni: Scrivi quello che provi per elaborarlo",
+    "Obiettivi: Ricordati a te stesso perché hai iniziato questo viaggio",
+    "Vittorie: Celebra ogni piccola vittoria, non importa quanto piccola"
+  ]
+}

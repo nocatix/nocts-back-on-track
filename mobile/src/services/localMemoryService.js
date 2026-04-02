@@ -1,5 +1,5 @@
 import { getDatabase } from '../db/database';
-import { encrypt, decrypt } from './encryption';
+import { encrypt, decrypt } from '../utils/encryption';
 
 export const localMemoryService = {
   async createMemory(userId, date, title, description, type) {

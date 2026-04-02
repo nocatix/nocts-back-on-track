@@ -1,0 +1,18 @@
+{
+  "pageTitle": "My Profile",
+  "changePassword": "Change Password",
+  "currentPassword": "Current Password",
+  "newPassword": "New Password",
+  "confirmNewPassword": "Confirm New Password",
+  "passwordChanged": "Password changed!",
+  "darkMode": "Dark Mode",
+  "language": "Language",
+  "unitPreference": "Units",
+  "selectLanguage": "Pick Language",
+  "resetProgress": "Delete All Data",
+  "resetProgressWarning": "Are you sure? All data will be deleted.",
+  "deleteAccount": "Delete Account",
+  "deleteAccountWarning": "Are you sure? You cannot undo this.",
+  "imperialUnits": "US Units (Pounds, °F)",
+  "metricUnits": "Metric Units (Kilograms, °C)"
+}

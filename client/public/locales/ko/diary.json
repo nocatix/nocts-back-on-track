@@ -1,0 +1,32 @@
+{
+  "pageTitle": "내 일기",
+  "addEntry": "새 항목 추가",
+  "entry": "항목",
+  "noEntries": "일기 항목이 없습니다. 작성을 시작하세요!",
+  "entryDate": "항목 날짜",
+  "entryContent": "기분이 어떠신가요?",
+  "entryContentPlaceholder": "여기에 생각과 감정을 작성하세요...",
+  "recentEntries": "최근 항목",
+  "previousDay": "◀ 이전 날",
+  "nextDay": "다음 날 ▶",
+  "today": "오늘",
+  "lastSaved": "마지막 저장",
+  "writeHere": "여기에 작성하세요... 마크다운을 사용할 수 있습니다:\n# 제목 1\n## 제목 2\n**굵게** *기울임*\n- 목록 항목",
+  "markdownTip": "💡 팁: 마크다운 형식 사용 - **굵게**, *기울임*, # 제목, - 목록",
+  "hideTip": "▼ 팁 숨기기",
+  "showTip": "▶ 팁 보기",
+  "savingEntry": "저장 중...",
+  "saveEntry": "💾 항목 저장",
+  "editEntry": "✏️ 항목 수정",
+  "cancel": "취소",
+  "noEntryForDay": "이 날짜에 대한 항목이 없습니다.",
+  "journalingTipsTitle": "💭 회복을 위한 일기 팁",
+  "journalingTips": [
+    "감사: 매일 감사한 것 3가지 작성",
+    "진행: 강한 날들을 추적",
+    "트리거: 갈망을 유발한 것과 처리 방식 기록",
+    "감정: 느끼는 것을 작성하여 처리",
+    "목표: 이 여정을 시작한 이유 상기",
+    "승리: 아무리 작은 승리든 축하"
+  ]
+}

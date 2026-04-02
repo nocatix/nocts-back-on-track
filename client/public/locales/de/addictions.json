@@ -1,0 +1,32 @@
+{
+  "pageTitle": "Deine Abhängigkeiten verfolgen",
+  "addNew": "Neue Abhängigkeit hinzufügen",
+  "addictionName": "Name der Abhängigkeit",
+  "addictionNameLabel": "Name der Abhängigkeit",
+  "enterAddictionName": "Gib den Namen deiner Abhängigkeit ein",
+  "addictionNamePlaceholder": "z.B. Rauchen, Alkohol, Soziale Medien",
+  "dateYouStopped": "Datum, an dem du aufgehört hast",
+  "timeYouStopped": "Uhrzeit, zu der du aufgehört hast",
+  "timeFormat12h": "12-Stunden-Format (AM/PM)",
+  "timeFormat24h": "24-Stunden-Format",
+  "frequency": "Häufigkeit",
+  "timesPerDay": "Mal pro Tag",
+  "frequencyPlaceholder": "Wie oft pro Tag?",
+  "money": "Geld ausgegeben",
+  "moneyPlaceholder": "Betrag in deiner Währung",
+  "additionalNotes": "Zusätzliche Notizen",
+  "additionalNotesPlaceholder": "Andere Details über diese Abhängigkeit...",
+  "selectAddiction": "Abhängigkeit auswählen",
+  "description": "Beschreibung",
+  "startDate": "Startdatum",
+  "category": "Kategorie",
+  "severity": "Schweregrad",
+  "noAddictions": "Noch keine Abhängigkeiten verfolgt. Beginne heute!",
+  "daysSoberCount": "Tage nüchtern",
+  "addictionCard": {
+    "days": "Tage",
+    "saved": "Gespart",
+    "encouragement": "Du machst erstaunliche Fortschritte!",
+    "youreDoingGreat": "Du machst das großartig! Mach weiter!"
+  }
+}

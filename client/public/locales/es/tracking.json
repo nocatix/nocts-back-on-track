@@ -1,0 +1,176 @@
+{
+  "mood": {
+    "pageTitle": "🎭 Rastreador de estado de ánimo",
+    "loading": "Cargando...",
+    "moodLegend": "Leyenda de estado de ánimo:",
+    "noMoodRecorded": "Sin estado de ánimo registrado para este día",
+    "addMood": "Agregar estado de ánimo",
+    "editMood": "Editar estado de ánimo",
+    "howAreYouFeeling": "¿Cómo te sientes?",
+    "moreSpecifically": "Más específicamente...",
+    "changePrimary": "← Cambiar estado de ánimo principal",
+    "intensityFormLabel": "Intensidad (1-5)",
+    "intensityStatusDisplay": "Intensidad: {{intensity}}/5",
+    "triggersLabel": "Disparadores (separados por comas)",
+    "triggersPlaceholder": "p.ej., Café, Falta de sueño, Estrés laboral",
+    "notesLabel": "Notas",
+    "notesPlaceholder": "Agrega notas adicionales sobre tu estado de ánimo...",
+    "saveMoodButton": "Guardar estado de ánimo",
+    "cancelButton": "Cancelar",
+    "selectPrimaryError": "Por favor, selecciona un estado de ánimo principal",
+    "loginRequired": "Necesitas estar registrado para guardar estados de ánimo",
+    "saveFailed": "Falló al guardar el estado de ánimo",
+    "notesTitle": "Notas: ",
+    "triggersTitle": "Disparadores: ",
+    "monthNames": [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre"
+    ],
+    "weekdays": [
+      "Dom",
+      "Lun",
+      "Mar",
+      "Mié",
+      "Jue",
+      "Vie",
+      "Sab"
+    ],
+    "emotions": {
+      "primary": [
+        "😊 Feliz",
+        "😢 Triste",
+        "😠 Enojado",
+        "😰 Ansioso",
+        "😌 Calmado",
+        "⚡ Energético",
+        "😴 Cansado",
+        "😐 Neutral"
+      ],
+      "secondary": {
+        "😊 Feliz": [
+          "😄 Alegre",
+          "🤩 Emocionado",
+          "😌 Contento",
+          "🙏 Agradecido",
+          "😎 Orgulloso"
+        ],
+        "😢 Triste": [
+          "😞 Deprimido",
+          "😕 Decepcionado",
+          "😔 Solitario",
+          "😩 Desesperado",
+          "☔ Melancólico"
+        ],
+        "😠 Enojado": [
+          "🤬 Furioso",
+          "😤 Irritado",
+          "😒 Resentido",
+          "😤 Frustrado",
+          "😑 Molesto"
+        ],
+        "😰 Ansioso": [
+          "😟 Preocupado",
+          "😨 Asustado",
+          "😰 Nervioso",
+          "😩 Estresado",
+          "😵 Abrumado"
+        ],
+        "😌 Calmado": [
+          "☮️ Pacífico",
+          "😌 Relajado",
+          "😇 Sereno",
+          "🌳 Anclado",
+          "🧘 Meditativo"
+        ],
+        "⚡ Energético": [
+          "💪 Motivado",
+          "🎯 Ambicioso",
+          "🚀 Productivo",
+          "💡 Inspirado",
+          "✨ Radiante"
+        ],
+        "😴 Cansado": [
+          "🥱 Agotado",
+          "😑 Perezoso",
+          "🪫 Drenado",
+          "😴 Somnoliento",
+          "🚪 Quemado"
+        ],
+        "😐 Neutral": [
+          "🤷 Indiferente",
+          "🙈 Desapegado",
+          "👁️ Observador",
+          "⚖️ Equilibrado",
+          "😐 Neutral"
+        ]
+      }
+    }
+  },
+  "weight": {
+    "pageTitle": "⚖️ Rastreador de peso",
+    "loading": "Cargando...",
+    "pleaseLogin": "Por favor, inicia sesión para rastrear peso",
+    "statsTitle": "Estadísticas de peso",
+    "latestWeight": "Peso más reciente",
+    "goalWeight": "Peso objetivo",
+    "difference": "Diferencia",
+    "notSet": "No establecido",
+    "logWeightTitle": "📊 Registrar peso",
+    "weightLabel": "Peso",
+    "enterWeight": "Ingresa peso",
+    "dateLabel": "Fecha",
+    "timeLabel": "Hora",
+    "logWeightButton": "Registrar peso",
+    "goalWeightTitle": "🎯 Peso objetivo",
+    "noGoalSet": "Sin objetivo establecido",
+    "updateGoal": "Actualizar objetivo",
+    "setGoal": "Establecer objetivo",
+    "goalWeightLabel": "Peso objetivo",
+    "enterGoalWeight": "Ingresa peso objetivo",
+    "saveGoalButton": "Guardar objetivo",
+    "cancelButton": "Cancelar",
+    "weightTrendTitle": "📈 Tendencia de peso",
+    "weightCalendarTitle": "📅 Calendario de peso",
+    "weightHistoryTitle": "📋 Historial de peso",
+    "noDataMessage": "Sin entradas de peso todavía. ¡Comienza a rastrear tu peso!",
+    "deleteEntryTitle": "Eliminar entrada de peso",
+    "deleteConfirmation": "¿Estás seguro de que quieres eliminar esta entrada de peso?",
+    "deleteWarning": "Esta acción no se puede deshacer.",
+    "deleteEntryButton": "Eliminar entrada",
+    "recordWeight": "Registrar peso",
+    "weight": "Peso",
+    "date": "Fecha",
+    "noRecords": "Sin registros de peso todavía. ¡Comienza a rastrear!"
+  },
+  "achievements": {
+    "pageTitle": "🏆 Logros y trofeos",
+    "loading": "Cargando logros...",
+    "error": "Error: ",
+    "description": "Tus hitos, logros y trofeos en tu viaje hacia la sobriedad",
+    "trophyProgress": "🎯 Progreso de trofeo",
+    "currentTrophy": "Trofeo actual",
+    "nextTrophy": "Próximo trofeo",
+    "progressText": "{{progress}}% hacia {{trophyName}}",
+    "trophyCategories": {
+      "daily": "⭐ Trofeos diarios",
+      "weekly": "🎖️ Trofeos semanales",
+      "monthly": "🏅 Trofeos mensuales",
+      "yearly": "🏆 Trofeos anuales"
+    },
+    "earnedOn": "Obtenido en: {{date}}",
+    "achievementsTitle": "⭐ Logros",
+    "noAchievements": "Sin logros todavía. ¡Continúa y desbloquearás hitos!",
+    "unlockedOn": "Desbloqueado en: {{date}}",
+    "for": "Para: {{addiction}}"
+  }
+}

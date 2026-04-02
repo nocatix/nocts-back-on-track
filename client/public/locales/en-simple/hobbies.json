@@ -1,0 +1,297 @@
+{
+  "pageTitle": "Find New Hobbies",
+  "subtitle": "Do fun activities. Fill your life with things you like and people you like.",
+  "whyHobbiesTitle": "Why Hobbies Help You Get Well",
+  "benefits": [
+    {
+      "emoji": "⏰",
+      "title": "Fill Your Time",
+      "description": "Hobbies give you things to do. Boredom is bad. Doing things is good."
+    },
+    {
+      "emoji": "😊",
+      "title": "Feel Happy",
+      "description": "Hobbies make your brain happy in a healthy way."
+    },
+    {
+      "emoji": "🎯",
+      "title": "Have A Goal",
+      "description": "Learning new things gives your life meaning."
+    },
+    {
+      "emoji": "🤝",
+      "title": "Meet People",
+      "description": "Hobbies help you meet people and make friends."
+    },
+    {
+      "emoji": "💪",
+      "title": "Build Confidence",
+      "description": "Learning new things makes you feel good about yourself."
+    },
+    {
+      "emoji": "🧠",
+      "title": "Healthy Fun",
+      "description": "Hobbies give you joy and fun things to do."
+    }
+  ],
+  "filterTitle": "Filter Hobbies",
+  "filterOptions": [
+    {
+      "value": "all",
+      "label": "All Hobbies"
+    },
+    {
+      "value": "solo",
+      "label": "😊 Alone",
+      "subtext": "(Do alone)"
+    },
+    {
+      "value": "social",
+      "label": "👥 With Friends",
+      "subtext": "(With others)"
+    },
+    {
+      "value": "outdoor",
+      "label": "🌳 Outside"
+    },
+    {
+      "value": "indoor",
+      "label": "🏠 Inside"
+    },
+    {
+      "value": "free",
+      "label": "💰 Free"
+    },
+    {
+      "value": "paid",
+      "label": "💵 Costs Money"
+    }
+  ],
+  "categoryLabels": {
+    "solo": "😊 Alone",
+    "social": "👥 With Friends",
+    "outdoor": "🌳 Outside",
+    "indoor": "🏠 Inside",
+    "free": "💰 Free",
+    "paid": "💵 Costs Money"
+  },
+  "recoveryBenefitsTitle": "✨ How It Helps",
+  "getStartedTitle": "🚀 Get Started",
+  "finalTitle": "Start Now",
+  "finalMessages": [
+    "Pick something you like. Don't think too much. Just try it.",
+    "Try it this week. Give it a real try. You don't need to be good at it.",
+    "The goal is fun and a good life without drugs."
+  ],
+  "hobbies": [
+    {
+      "id": 1,
+      "name": "Walking",
+      "emoji": "🚶",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "30 min - 2 hours",
+      "description": "Walk outside. It is free and helps your mind.",
+      "recovery_benefits": [
+        "Exercise",
+        "Fresh air",
+        "Clear mind",
+        "Less stress"
+      ],
+      "get_started": "Walk 20 minutes each day. Look around."
+    },
+    {
+      "id": 2,
+      "name": "Running",
+      "emoji": "🏃",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "20-60 min",
+      "description": "Run fast. It makes you feel good and strong.",
+      "recovery_benefits": [
+        "Feel happy",
+        "Be strong",
+        "No cravings",
+        "Feel good"
+      ],
+      "get_started": "Start slow. Walk and run together. Apps can help."
+    },
+    {
+      "id": 3,
+      "name": "Hiking",
+      "emoji": "⛰️",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "1-4 hours",
+      "description": "Hike in nature. Walk up hills. Feel the air.",
+      "recovery_benefits": [
+        "Nature",
+        "Goal",
+        "Exercise",
+        "Clear mind"
+      ],
+      "get_started": "Find trails near you. Start with easy trails."
+    },
+    {
+      "id": 4,
+      "name": "Gardening",
+      "emoji": "🌱",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "30 min - 2 hours",
+      "description": "Grow plants. Care for living things.",
+      "recovery_benefits": [
+        "Purpose",
+        "Nature",
+        "Wait",
+        "Happy"
+      ],
+      "get_started": "Plant seeds or small plants. A window plant is enough."
+    },
+    {
+      "id": 5,
+      "name": "Explore Your City",
+      "emoji": "🗺️",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "1-3 hours",
+      "description": "See your area. Find new parks and places.",
+      "recovery_benefits": [
+        "New things",
+        "Movement",
+        "New ideas",
+        "New routine"
+      ],
+      "get_started": "Pick a place you don't know. Look around."
+    },
+    {
+      "id": 6,
+      "name": "Cycling",
+      "emoji": "🚴",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "30 min - 2 hours",
+      "description": "Ride a bike. Feel free.",
+      "recovery_benefits": [
+        "Freedom",
+        "Strong heart",
+        "Explore",
+        "Happy"
+      ],
+      "get_started": "Buy or rent a bike. Get a helmet."
+    },
+    {
+      "id": 7,
+      "name": "Rock Climbing",
+      "emoji": "🧗",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-3 hours",
+      "description": "Climb rocks. Build strength and mind power.",
+      "recovery_benefits": [
+        "Think",
+        "Brave",
+        "Strong",
+        "Focus"
+      ],
+      "get_started": "Go to a climbing gym. Teachers help you learn."
+    },
+    {
+      "id": 8,
+      "name": "Photography",
+      "emoji": "📸",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-4 hours",
+      "description": "Take pictures. Learn to see beauty.",
+      "recovery_benefits": [
+        "Create",
+        "Notice",
+        "Explore",
+        "Proud"
+      ],
+      "get_started": "Use your phone camera. Watch videos to learn."
+    },
+    {
+      "id": 9,
+      "name": "Water Sports",
+      "emoji": "🏄",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-3 hours",
+      "description": "Swim, sail, or paddle. Feel the water.",
+      "recovery_benefits": [
+        "Nature",
+        "Exciting",
+        "Exercise",
+        "Now"
+      ],
+      "get_started": "Take a class. Start in calm water."
+    },
+    {
+      "id": 10,
+      "name": "Reading",
+      "emoji": "📖",
+      "category": [
+        "solo",
+        "indoor",
+        "free"
+      ],
+      "duration": "30 min - 2 hours",
+      "description": "Read books. Have new worlds in your mind.",
+      "recovery_benefits": [
+        "Escape",
+        "Learn",
+        "Relax",
+        "Know more"
+      ],
+      "get_started": "Go to a library. Get free books."
+    },
+    {
+      "id": 11,
+      "name": "Writing/Journaling",
+      "emoji": "✍️",
+      "category": [
+        "solo",
+        "indoor",
+        "free"
+      ],
+      "duration": "20-60 min",
+      "description": "Write about your life. Find out who you are.",
+      "recovery_benefits": [
+        "Feelings",
+        "Know yourself",
+        "Less stress",
+        "See progress"
+      ],
+      "get_started": "Write free. No rules. Write what is real."
+    }
+  ]
+}

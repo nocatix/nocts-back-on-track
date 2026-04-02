@@ -3,7 +3,6 @@
     "name": "Nocts: Back on Track",
     "slug": "nocts-back-on-track",
     "version": "0.1.0",
-    "sdkVersion": "54.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -16,7 +15,6 @@
       "**/*"
     ],
     "ios": {
-      "supportsTabletMode": false,
       "bundleIdentifier": "com.noctstracker.app"
     },
     "android": {
@@ -25,6 +23,12 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.noctstracker.app"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b52c30a2-5cee-48b9-80f5-f01f0507450f"
+      }
+    },
+    "owner": "nocatix"
   }
 }

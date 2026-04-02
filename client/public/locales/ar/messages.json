@@ -1,0 +1,48 @@
+{
+  "saved": "تم الحفظ بنجاح!",
+  "deleted": "تم الحذف بنجاح!",
+  "updated": "تم التحديث بنجاح!",
+  "error": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+  "serverError": "خطأ في الخادم. يرجى المحاولة لاحقاً.",
+  "networkError": "خطأ في الشبكة. يرجى التحقق من اتصالك.",
+  "unauthorized": "ليس لديك الصلاحية للقيام بهذا الإجراء",
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "invalidEmail": "يرجى إدخال عنوان بريد إلكتروني صحيح",
+    "passwordTooShort": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+    "passwordMismatch": "كلمات المرور غير متطابقة",
+    "invalidInput": "إدخال غير صحيح"
+  },
+  "mainMenu": {
+    "pageTitle": "القائمة الرئيسية",
+    "failedToLoadAddictions": "فشل تحميل إدماناتك",
+    "failedToUpdateAddiction": "فشل تحديث الإدمان",
+    "aboutToCave": "هل تريد الاستسلام؟",
+    "craviingSupport": "دعم الرغبات",
+    "cravineSupportMessage": "هل تشعر برغبة؟ احصل على الدعم الآن!",
+    "cravingEncouragement": "يمكنك التغلب على هذا. خذ نفساً عميقاً.",
+    "managedCraving": "تغلبت على الرغبة",
+    "needHelp": "أحتاج إلى مساعدة",
+    "whichAddiction": "أي إدمان تواجه صعوبة فيه؟",
+    "selectAddictionForLogging": "اختر الإدمان الذي تواجه صعوبة فيه لتسجيله والحصول على الدعم",
+    "noAddictionsToLog": "لم يتم تتبع أي إدمان بعد. أضف واحداً أولاً.",
+    "amazingWork": "🎉 عمل رائع!",
+    "resistedCraving": "لقد قاومت الرغبة. هذا عظيم! كل لحظة تبقى فيها قوياً تبني تعافيك.",
+    "messageClosing": "أنت تقوم بعمل رائع. استمر!",
+    "cravingSupport": {
+      "message": "هل تشعر برغبة؟ احصل على الدعم الآن!",
+      "encouragement": "يمكنك التغلب على هذا. خذ نفساً عميقاً.",
+      "buttons": "احصل على المساعدة"
+    },
+    "todaysOutlook": "نظرة اليوم",
+    "todaysSavings": "مخزون اليوم",
+    "totalSaved": "إجمالي المدخرات",
+    "todaysTips": "نصائح اليوم"
+  },
+  "addictionCard": {
+    "days": "أيام",
+    "saved": "تم الحفظ",
+    "encouragement": "أنت تحرز تقدماً رائعاً!",
+    "youreDoingGreat": "أنت تقوم بعمل رائع! استمر!"
+  }
+}

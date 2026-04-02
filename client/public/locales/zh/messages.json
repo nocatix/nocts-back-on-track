@@ -1,0 +1,48 @@
+{
+  "saved": "保存成功！",
+  "deleted": "删除成功！",
+  "updated": "更新成功！",
+  "error": "发生错误。请稍后重试。",
+  "serverError": "服务器错误。请稍后重试。",
+  "networkError": "网络错误。请检查你的连接。",
+  "unauthorized": "你没有权限执行此操作",
+  "validation": {
+    "required": "此字段为必填项",
+    "invalidEmail": "请输入有效的电子邮件地址",
+    "passwordTooShort": "密码必须至少6个字符",
+    "passwordMismatch": "密码不匹配",
+    "invalidInput": "无效输入"
+  },
+  "mainMenu": {
+    "pageTitle": "主菜单",
+    "failedToLoadAddictions": "加载成瘾失败",
+    "failedToUpdateAddiction": "更新成瘾失败",
+    "aboutToCave": "你即将屈服吗？",
+    "craviingSupport": "渴望支持",
+    "cravineSupportMessage": "感到渴望？现在获得支持！",
+    "cravingEncouragement": "你能度过难关。深呼吸。",
+    "managedCraving": "管理了渴望",
+    "needHelp": "需要帮助",
+    "whichAddiction": "你在处理哪种成瘾？",
+    "selectAddictionForLogging": "选择你要处理的成瘾来记录并获得支持",
+    "noAddictionsToLog": "暂无追踪的成瘾。先添加一个。",
+    "amazingWork": "🎉 了不起的工作！",
+    "resistedCraving": "你抵抗了渴望。这太棒了！你坚强的每一刻都在构建你的康复。",
+    "messageClosing": "你做得很好！继续加油！",
+    "cravingSupport": {
+      "message": "感到渴望？现在获得支持！",
+      "encouragement": "你能度过难关。深呼吸。",
+      "buttons": "获得帮助"
+    },
+    "todaysOutlook": "今天的展望",
+    "todaysSavings": "今天的节省",
+    "totalSaved": "总节省",
+    "todaysTips": "今日提示"
+  },
+  "addictionCard": {
+    "days": "天",
+    "saved": "节省",
+    "encouragement": "你正在取得令人难以置信的进步！",
+    "youreDoingGreat": "你做得很好！继续加油！"
+  }
+}
