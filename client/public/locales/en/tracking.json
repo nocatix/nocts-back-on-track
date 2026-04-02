@@ -1,0 +1,176 @@
+{
+  "mood": {
+    "pageTitle": "🎭 Mood Tracker",
+    "loading": "Loading...",
+    "moodLegend": "Mood Legend:",
+    "noMoodRecorded": "No mood recorded for this day",
+    "addMood": "Add Mood",
+    "editMood": "Edit Mood",
+    "howAreYouFeeling": "How are you feeling?",
+    "moreSpecifically": "More specifically...",
+    "changePrimary": "← Change Primary",
+    "intensityFormLabel": "Intensity (1-5)",
+    "intensityStatusDisplay": "Intensity: {{intensity}}/5",
+    "triggersLabel": "Triggers (comma-separated)",
+    "triggersPlaceholder": "e.g., Coffee, Sleep deprivation, Work stress",
+    "notesLabel": "Notes",
+    "notesPlaceholder": "Add any additional notes about your mood...",
+    "saveMoodButton": "Save Mood",
+    "cancelButton": "Cancel",
+    "selectPrimaryError": "Please select a primary emotion",
+    "loginRequired": "You need to be logged in to save moods",
+    "saveFailed": "Failed to save mood",
+    "notesTitle": "Notes: ",
+    "triggersTitle": "Triggers: ",
+    "monthNames": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "weekdays": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ],
+    "emotions": {
+      "primary": [
+        "😊 Happy",
+        "😢 Sad",
+        "😠 Angry",
+        "😰 Anxious",
+        "😌 Calm",
+        "⚡ Energetic",
+        "😴 Tired",
+        "😐 Neutral"
+      ],
+      "secondary": {
+        "😊 Happy": [
+          "😄 Joyful",
+          "🤩 Excited",
+          "😌 Content",
+          "🙏 Grateful",
+          "😎 Proud"
+        ],
+        "😢 Sad": [
+          "😞 Depressed",
+          "😕 Disappointed",
+          "😔 Lonely",
+          "😩 Hopeless",
+          "☔ Melancholic"
+        ],
+        "😠 Angry": [
+          "🤬 Furious",
+          "😤 Irritated",
+          "😒 Resentful",
+          "😤 Frustrated",
+          "😑 Annoyed"
+        ],
+        "😰 Anxious": [
+          "😟 Worried",
+          "😨 Panicked",
+          "😰 Nervous",
+          "😩 Stressed",
+          "😵 Overwhelmed"
+        ],
+        "😌 Calm": [
+          "☮️ Peaceful",
+          "😌 Relaxed",
+          "😇 Serene",
+          "🌳 Grounded",
+          "🧘 Meditative"
+        ],
+        "⚡ Energetic": [
+          "💪 Motivated",
+          "🎯 Ambitious",
+          "🚀 Productive",
+          "💡 Inspired",
+          "✨ Vibrant"
+        ],
+        "😴 Tired": [
+          "🥱 Exhausted",
+          "😑 Lazy",
+          "🪫 Drained",
+          "😴 Sleepy",
+          "🚪 Burnt Out"
+        ],
+        "😐 Neutral": [
+          "🤷 Indifferent",
+          "🙈 Detached",
+          "👁️ Observant",
+          "⚖️ Balanced",
+          "😐 Neutral"
+        ]
+      }
+    }
+  },
+  "weight": {
+    "pageTitle": "⚖️ Weight Tracker",
+    "loading": "Loading...",
+    "pleaseLogin": "Please log in to track weight",
+    "statsTitle": "Weight Statistics",
+    "latestWeight": "Latest Weight",
+    "goalWeight": "Goal Weight",
+    "difference": "Difference",
+    "notSet": "Not set",
+    "logWeightTitle": "📊 Log Weight",
+    "weightLabel": "Weight",
+    "enterWeight": "Enter weight",
+    "dateLabel": "Date",
+    "timeLabel": "Time",
+    "logWeightButton": "Log Weight",
+    "goalWeightTitle": "🎯 Goal Weight",
+    "noGoalSet": "No goal set",
+    "updateGoal": "Update Goal",
+    "setGoal": "Set Goal",
+    "goalWeightLabel": "Goal Weight",
+    "enterGoalWeight": "Enter goal weight",
+    "saveGoalButton": "Save Goal",
+    "cancelButton": "Cancel",
+    "weightTrendTitle": "📈 Weight Trend",
+    "weightCalendarTitle": "📅 Weight Calendar",
+    "weightHistoryTitle": "📋 Weight History",
+    "noDataMessage": "No weight entries yet. Start tracking your weight!",
+    "deleteEntryTitle": "Delete Weight Entry",
+    "deleteConfirmation": "Are you sure you want to delete this weight entry?",
+    "deleteWarning": "This action cannot be undone.",
+    "deleteEntryButton": "Delete Entry",
+    "recordWeight": "Record Weight",
+    "weight": "Weight",
+    "date": "Date",
+    "noRecords": "No weight records yet. Start tracking!"
+  },
+  "achievements": {
+    "pageTitle": "🏆 Achievements & Trophies",
+    "loading": "Loading achievements...",
+    "error": "Error: ",
+    "description": "Your milestones, achievements, and trophies on your journey to sobriety",
+    "trophyProgress": "🎯 Trophy Progress",
+    "currentTrophy": "Current Trophy",
+    "nextTrophy": "Next Trophy",
+    "progressText": "{{progress}}% towards {{trophyName}}",
+    "trophyCategories": {
+      "daily": "⭐ Daily Trophies",
+      "weekly": "🎖️ Weekly Trophies",
+      "monthly": "🏅 Monthly Trophies",
+      "yearly": "🏆 Yearly Trophies"
+    },
+    "earnedOn": "Earned on: {{date}}",
+    "achievementsTitle": "⭐ Achievements",
+    "noAchievements": "No achievements yet. Keep going and you'll unlock milestones!",
+    "unlockedOn": "Unlocked on: {{date}}",
+    "for": "For: {{addiction}}"
+  }
+}

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 import './Weight.css';
 
 const Weight = () => {
+  const { t } = useTranslation('tracking');
   const { user, loading, token } = useAuth();
   const [weights, setWeights] = useState([]);
   const [goalWeight, setGoalWeight] = useState(() => {
@@ -41,6 +43,7 @@ const Weight = () => {
       // Then fetch weights with the correct unit
       fetchWeightsWithUnit(targetUnit);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, user]);
 
   // Update goal weight display when unit changes
@@ -64,6 +67,7 @@ const Weight = () => {
     if (token) {
       fetchWeightsWithUnit(unit);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [unit, token]);
 
   const fetchWeights = async () => {
@@ -233,6 +237,34 @@ const Weight = () => {
     return new Date(dateValue).toLocaleDateString(dateLocale, options);
   };
 
+  // Calculate linear regression trendline
+  const calculateTrendline = (points, CHART_LEFT, CHART_RIGHT, CHART_BOTTOM, minWeight, range) => {
+    if (points.length < 2) return null;
+
+    const n = points.length;
+    let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+
+    points.forEach((p, i) => {
+      sumX += i;
+      sumY += p.weight;
+      sumXY += i * p.weight;
+      sumX2 += i * i;
+    });
+
+    const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+    const intercept = (sumY - slope * sumX) / n;
+
+    // Calculate trendline points
+    const trendPoints = points.map((p, i) => {
+      const trendWeight = slope * i + intercept;
+      const trendY = CHART_BOTTOM - ((trendWeight - minWeight) / range) * (CHART_BOTTOM - 0);
+      return { x: p.x, y: trendY };
+    });
+
+    const trendPathData = trendPoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+    return trendPathData;
+  };
+
   const renderGraph = () => {
     const sortedWeights = [...weights].sort((a, b) => new Date(a.date) - new Date(b.date));
     if (sortedWeights.length === 0) return null;
@@ -255,7 +287,7 @@ const Weight = () => {
       return {
         x,
         y,
-        weight: w.weight,
+        weight: parseFloat(w.weight),
         weightLabel: Number.parseFloat(w.weight).toFixed(1),
         dateLabel: formatDate(date, { month: 'numeric', day: 'numeric' }),
         date: formatDate(date)
@@ -263,6 +295,7 @@ const Weight = () => {
     });
 
     const pathData = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+    const trendlineData = calculateTrendline(points, CHART_LEFT, CHART_RIGHT, CHART_BOTTOM, minWeight, range);
     const goalY = goalWeight.weight > 0 ? CHART_BOTTOM - ((goalWeight.weight - minWeight) / range) * CHART_HEIGHT : null;
 
     return (
@@ -276,6 +309,11 @@ const Weight = () => {
           {/* Goal weight line */}
           {goalY !== null && (
             <line x1={CHART_LEFT} y1={goalY} x2={CHART_RIGHT} y2={goalY} className="goal-line" />
+          )}
+
+          {/* Trendline (linear regression) */}
+          {trendlineData && (
+            <path d={trendlineData} className="trend-line" />
           )}
 
           {/* Weight trend line */}
@@ -409,12 +447,12 @@ const Weight = () => {
     );
   };
 
-  if (loading) return <div className="loading">Loading...</div>;
-  if (!user) return <div className="loading">Please log in to track weight</div>;
+  if (loading) return <div className="loading">{t('weight.loading')}</div>;
+  if (!user) return <div className="loading">{t('weight.pleaseLogin')}</div>;
 
   return (
     <div className="weight-tracker">
-      <h1>⚖️ Weight Tracker</h1>
+      <h1>{t('weight.pageTitle')}</h1>
 
       {message && <div className="message">{message}</div>}
 
@@ -424,16 +462,16 @@ const Weight = () => {
           {weights.length > 0 && (
             <div className="weight-stats">
               <div className="stat-item">
-                <label>Latest Weight</label>
+                <label>{t('weight.latestWeight')}</label>
                 <span className="stat-value">{parseFloat(weights[0].weight).toFixed(1)} {weights[0].unit}</span>
               </div>
               <div className="stat-item">
-                <label>Goal Weight</label>
-                <span className="stat-value">{goalWeight.weight > 0 ? `${goalWeight.weight} ${goalWeight.unit}` : 'Not set'}</span>
+                <label>{t('weight.goalWeight')}</label>
+                <span className="stat-value">{goalWeight.weight > 0 ? `${goalWeight.weight} ${goalWeight.unit}` : t('weight.notSet')}</span>
               </div>
               {goalWeight.weight > 0 && weights.length > 0 && (
                 <div className="stat-item">
-                  <label>Difference</label>
+                  <label>{t('weight.difference')}</label>
                   <span className="stat-value">
                     {(weights[0].weight - goalWeight.weight).toFixed(1)} {unit}
                   </span>
@@ -446,23 +484,23 @@ const Weight = () => {
         {/* Log Weight Form */}
         <div className="weight-form-container">
           <form onSubmit={handleLogWeight} className="weight-form bento-box">
-            <h2>📊 Log Weight</h2>
+            <h2>{t('weight.logWeightTitle')}</h2>
 
             <div className="form-group">
-              <label>Weight ({unit})</label>
+              <label>{t('weight.weightLabel')} ({unit})</label>
               <input
                 type="number"
                 step="0.1"
                 value={currentWeight}
                 onChange={(e) => setCurrentWeight(e.target.value)}
-                placeholder="Enter weight"
+                placeholder={t('weight.enterWeight')}
                 required
               />
             </div>
 
             <div className="form-row">
               <div className="form-group">
-                <label>Date</label>
+                <label>{t('weight.dateLabel')}</label>
                 <input
                   type="date"
                   value={selectedDate}
@@ -471,7 +509,7 @@ const Weight = () => {
                 />
               </div>
               <div className="form-group">
-                <label>Time</label>
+                <label>{t('weight.timeLabel')}</label>
                 <input
                   type="time"
                   value={selectedTime}
@@ -481,41 +519,41 @@ const Weight = () => {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary">Log Weight</button>
+            <button type="submit" className="btn btn-primary">{t('weight.logWeightButton')}</button>
           </form>
 
           {/* Goal Weight Section */}
           <div className="goal-weight-section bento-box">
-            <h2>🎯 Goal Weight</h2>
+            <h2>{t('weight.goalWeightTitle')}</h2>
             {!showGoalForm ? (
               <>
                 <div className="goal-display">
-                  <p>{goalWeight.weight > 0 ? `${goalWeight.weight} ${goalWeight.unit}` : 'No goal set'}</p>
+                  <p>{goalWeight.weight > 0 ? `${goalWeight.weight} ${goalWeight.unit}` : t('weight.noGoalSet')}</p>
                 </div>
                 <button
                   type="button"
                   className="btn btn-secondary"
                   onClick={() => setShowGoalForm(true)}
                 >
-                  {goalWeight.weight > 0 ? 'Update Goal' : 'Set Goal'}
+                  {goalWeight.weight > 0 ? t('weight.updateGoal') : t('weight.setGoal')}
                 </button>
               </>
             ) : (
               <form onSubmit={handleSetGoal}>
                 <div className="form-group">
-                  <label>Goal Weight ({unit === 'lbs' ? 'lbs' : 'kg'})</label>
+                  <label>{t('weight.goalWeightLabel')} ({unit === 'lbs' ? 'lbs' : 'kg'})</label>
                   <input
                     type="number"
                     step="0.1"
                     value={goalWeight.weight}
                     onChange={(e) => setGoalWeight({ ...goalWeight, weight: e.target.value, unit })}
-                    placeholder="Enter goal weight"
+                    placeholder={t('weight.enterGoalWeight')}
                   />
                 </div>
                 <div style={{ display: 'flex', gap: '10px' }}>
-                  <button type="submit" className="btn btn-primary">Save Goal</button>
+                  <button type="submit" className="btn btn-primary">{t('weight.saveGoalButton')}</button>
                   <button type="button" className="btn btn-secondary" onClick={() => setShowGoalForm(false)}>
-                    Cancel
+                    {t('weight.cancelButton')}
                   </button>
                 </div>
               </form>
@@ -526,7 +564,7 @@ const Weight = () => {
         {/* Graph Section */}
         {weights.length > 0 && (
           <div className="weight-graph-section bento-box">
-            <h2>📈 Weight Trend</h2>
+            <h2>{t('weight.weightTrendTitle')}</h2>
             {renderGraph()}
           </div>
         )}
@@ -534,15 +572,15 @@ const Weight = () => {
         {/* Calendar and History */}
         <div className="weight-history-section">
           <div className="weight-calendar bento-box">
-            <h2>📅 Weight Calendar</h2>
+            <h2>{t('weight.weightCalendarTitle')}</h2>
             {renderCalendar()}
           </div>
 
           <div className="weight-list bento-box">
-            <h2>📋 Weight History</h2>
+            <h2>{t('weight.weightHistoryTitle')}</h2>
             <div className="weight-list-container">
               {weights.length === 0 ? (
-                <p className="no-data">No weight entries yet. Start tracking your weight!</p>
+                <p className="no-data">{t('weight.noDataMessage')}</p>
               ) : (
                 weights.map((w, index) => (
                   <div key={w._id || index} className="weight-entry">
@@ -568,26 +606,26 @@ const Weight = () => {
       {showDeleteModal && selectedWeightValue && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h3>Delete Weight Entry</h3>
-            <p>Are you sure you want to delete this weight entry?</p>
+            <h3>{t('weight.deleteEntryTitle')}</h3>
+            <p>{t('weight.deleteConfirmation')}</p>
             <p style={{ fontWeight: 'bold', marginBottom: '10px' }}>
               {parseFloat(selectedWeightValue.weight).toFixed(1)} {selectedWeightValue.unit} on {formatDate(selectedWeightValue.date)}
             </p>
             <p style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>
-              This action cannot be undone.
+              {t('weight.deleteWarning')}
             </p>
             <div className="modal-actions">
               <button 
                 onClick={() => setShowDeleteModal(false)}
                 className="cancel-button"
               >
-                Cancel
+                {t('weight.cancelButton')}
               </button>
               <button 
                 onClick={confirmDeleteWeight}
                 className="confirm-delete-button"
               >
-                Delete Entry
+                {t('weight.deleteEntryButton')}
               </button>
             </div>
           </div>

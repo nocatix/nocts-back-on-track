@@ -208,8 +208,6 @@ export const calculateDailyPredictions = (addictions) => {
     const daysSinceMidnight = msSinceMidnight / (1000 * 60 * 60 * 24);
     const dailySavingsSinceMidnight = daysSinceMidnight * (addiction.moneySpentPerDay || 0);
     
-    const addictionType = addiction.name.toLowerCase();
-    
     // Get the withdrawal timeline for this addiction
     const addictionData = addictionDatabase[addiction.name];
     const timeline = addictionData?.withdrawalTimeline || {};

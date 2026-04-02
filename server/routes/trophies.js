@@ -143,9 +143,9 @@ router.get('/progress', auth, asyncHandler(async (req, res) => {
       currentTrophy = WEEKLY_TROPHIES[weeksDifference - 1];
       nextTrophy = weeksDifference < 3 ? WEEKLY_TROPHIES[weeksDifference] : MONTHLY_TROPHIES[0];
     }
-    const daysInWeek = daysDifference % 7;
+    const daysInWeek = totalDaysDifference % 7;
     progress = (daysInWeek / 7) * 100;
-    progressDescription = `Week ${weeksDifference}, Day ${daysInWeek + 1}/7 - ${Math.round(progress)}% towards ${nextTrophy.name}`;
+    progressDescription = `Week ${weeksDifference}, Day ${Math.floor(daysInWeek) + 1}/7 - ${Math.round(progress)}% towards ${nextTrophy.name}`;
     const daysUntilNextWeek = 7 - daysInWeek;
     timeRemaining = daysUntilNextWeek * 24 * 60 * 60 * 1000;
   }

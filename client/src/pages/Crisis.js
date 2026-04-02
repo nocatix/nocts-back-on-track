@@ -266,10 +266,10 @@ const Crisis = () => {
       icon: '🏳️‍🌈'
     },
     {
-      title: 'Crisis.chat',
-      description: 'Free online support through trained counselors',
-      link: 'https://www.crisis.chat',
-      icon: '💻'
+      title: '7 Cups',
+      description: 'Free emotional support chat with trained listeners',
+      link: 'https://www.7cups.com',
+      icon: '☕'
     },
     {
       title: 'BetterHelp',

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import './Meditation.css';
-import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getCookie, setCookie } from '../utils/cookieHelper';
 
 export default function Meditation() {
-  const navigate = useNavigate();
+  const { t } = useTranslation('resources');
   const [selectedMeditation, setSelectedMeditation] = React.useState(null);
   const [showMeditationTips, setShowMeditationTips] = React.useState(() => {
     const saved = getCookie('showMeditationTips');
@@ -21,62 +21,10 @@ export default function Meditation() {
     const saved = getCookie('meditationSessions');
     return saved ? JSON.parse(saved) : [];
   });
-  const [selectedTool, setSelectedTool] = React.useState(null);
 
-  const meditations = [
-    {
-      id: 1,
-      title: 'Breath Awareness',
-      duration: '5 min',
-      description: 'Start with basic breath awareness to calm your mind.',
-      guide: `Take a comfortable seat. Close your eyes. Breathe naturally through your nose. 
-      Count each exhale from 1 to 10, then start again. If your mind wanders, that's okay - just return to counting.
-      Continue for 5 minutes. This simple practice helps calm anxiety and cravings.`,
-      musicUrl: 'https://www.youtube.com/embed/7qJZy4DpOWA'
-    },
-    {
-      id: 2,
-      title: 'Body Scan',
-      duration: '7 min',
-      description: 'Release tension from your body systematically.',
-      guide: `Lie down or sit comfortably. Close your eyes. Start at the top of your head.
-      Notice any tension. As you breathe, imagine releasing that tension with each exhale.
-      Slowly move down: forehead, jaw, neck, shoulders, arms, chest, stomach, legs, feet.
-      Spend 10-15 seconds on each area. This technique reduces physical stress from withdrawal.`,
-      musicUrl: 'https://www.youtube.com/embed/2DRyAW0ljHQ'
-    },
-    {
-      id: 3,
-      title: 'Craving Release',
-      duration: '10 min',
-      description: 'Specific meditation for handling cravings.',
-      guide: `Sit comfortably. Close your eyes. Notice any craving in your body without judgment.
-      Don't try to fight it. Observe: where is it? What does it feel like? Does it have a color, shape, or temperature?
-      As you breathe, imagine the craving as a wave passing through you. Watch it rise, peak, and fall.
-      Remember: cravings are temporary. This too shall pass. They fade naturally within 15-20 minutes.`,
-      musicUrl: 'https://www.youtube.com/embed/sTzHDPqBN-8'
-    },
-    {
-      id: 4,
-      title: 'Loving Kindness',
-      duration: '8 min',
-      description: 'Cultivate compassion and self-love during recovery.',
-      guide: `Sit comfortably. Close your eyes. Place hand on heart. Say silently:
-      "May I be peaceful. May I be healthy. May I be happy. May I be free from addiction."
-      Repeat slowly, feeling each word. Then extend: "May others also find peace and healing."
-      This practice builds self-compassion and motivation for recovery.`,
-      musicUrl: 'https://www.youtube.com/embed/lE5n6gYzJLo'
-    }
-  ];
-
-  const tips = [
-    'Start with just 5 minutes daily. Consistency matters more than duration.',
-    'Practice at the same time each day to build a habit.',
-    'Cravings peak 15-20 minutes. Meditate through the peak.',
-    'Use meditation when you feel most tempted.',
-    'Your mind will wander - that\'s normal. Gently bring it back.',
-    'Track your progress. Notice how cravings become easier to handle.'
-  ];
+  const meditations = t('meditation.meditations', { returnObjects: true });
+  const tips = t('meditation.tips', { returnObjects: true });
+  const postureTips = t('meditation.postureTipsList', { returnObjects: true });
 
   // Breathing guide animation
   React.useEffect(() => {
@@ -110,6 +58,16 @@ export default function Meditation() {
     return () => clearInterval(interval);
   }, [isBreathing, breathDuration]);
 
+  const completeSession = useCallback(() => {
+    const newSession = {
+      date: new Date().toLocaleDateString(),
+      duration: sessionMinutes,
+      type: selectedMeditation?.title || 'Quick Session'
+    };
+    setSessions([...sessions, newSession]);
+    setCookie('meditationSessions', JSON.stringify([...sessions, newSession]), 365);
+  }, [sessionMinutes, selectedMeditation, sessions]);
+
   // Timer logic
   React.useEffect(() => {
     if (!timerActive) return;
@@ -126,17 +84,7 @@ export default function Meditation() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [timerActive]);
-
-  const completeSession = () => {
-    const newSession = {
-      date: new Date().toLocaleDateString(),
-      duration: sessionMinutes,
-      type: selectedMeditation?.title || 'Quick Session'
-    };
-    setSessions([...sessions, newSession]);
-    setCookie('meditationSessions', JSON.stringify([...sessions, newSession]), 365);
-  };
+  }, [timerActive, completeSession, sessionMinutes, sessions]);
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -164,14 +112,14 @@ export default function Meditation() {
       {selectedMeditation ? (
         <div className="meditation-detail">
           <button onClick={() => setSelectedMeditation(null)} className="btn btn-secondary">
-            &larr; Back to Meditations
+            {t('meditation.backToMeditations')}
           </button>
           <h2>{selectedMeditation.title}</h2>
           <p className="duration">Duration: {selectedMeditation.duration}</p>
 
           <div className="meditation-tools">
             <div className="timer-section">
-              <h3>⏱️ Session Timer</h3>
+              <h3>{t('meditation.sessionTimer')}</h3>
               <div className="timer-display">{formatTime(timeLeft)}</div>
               <div className="timer-controls">
                 <input
@@ -187,22 +135,22 @@ export default function Meditation() {
                   className="timer-slider"
                 />
                 <div className="timer-buttons">
-                  <button onClick={startTimer} disabled={timerActive} className="btn btn-primary">Start</button>
+                  <button onClick={startTimer} disabled={timerActive} className="btn btn-primary">{t('meditation.start')}</button>
                   <button onClick={() => setTimerActive(!timerActive)} className="btn btn-secondary">
-                    {timerActive ? 'Pause' : 'Resume'}
+                    {timerActive ? t('meditation.pause') : t('meditation.resume')}
                   </button>
-                  <button onClick={resetTimer} className="btn btn-outline">Reset</button>
+                  <button onClick={resetTimer} className="btn btn-outline">{t('meditation.reset')}</button>
                 </div>
-                <p className="timer-label">{sessionMinutes} minutes</p>
+                <p className="timer-label">{sessionMinutes} {t('meditation.minutes')}</p>
               </div>
             </div>
 
             <div className="breathing-section">
-              <h3>🫁 Guided Breathing</h3>
+              <h3>{t('meditation.guidedBreathing')}</h3>
               <div className={`breathing-circle ${isBreathing ? 'active' : ''} ${breathingPhase}`}></div>
               <p className="breathing-instruction">{breathingPhase.toUpperCase()}</p>
               <div className="breathing-controls">
-                <label>Breathing pace: {breathDuration}s</label>
+                <label>{t('meditation.breathingPace')}: {breathDuration}s</label>
                 <input
                   type="range"
                   min="3"
@@ -217,14 +165,14 @@ export default function Meditation() {
                   onClick={() => setIsBreathing(!isBreathing)}
                   className={isBreathing ? 'btn-breathing-stop' : 'btn btn-primary'}
                 >
-                  {isBreathing ? '⏹ Stop Breathing Guide' : '▶ Start Breathing Guide'}
+                  {isBreathing ? t('meditation.stopBreathingGuide') : t('meditation.startBreathingGuide')}
                 </button>
               </div>
             </div>
           </div>
           
           <div className="music-player">
-            <h3>🎵 Meditation Music</h3>
+            <h3>{t('meditation.meditationMusic')}</h3>
             <iframe
               width="100%"
               height="315"
@@ -236,18 +184,16 @@ export default function Meditation() {
           </div>
           
           <div className="meditation-guide">
-            <h3>Guide:</h3>
+            <h3>{t('meditation.guide')}:</h3>
             <p>{selectedMeditation.guide}</p>
           </div>
 
           <div className="posture-tips">
-            <h3>🧘 Posture Tips</h3>
+            <h3>{t('meditation.postureTips')}</h3>
             <ul>
-              <li><strong>Spine:</strong> Keep it straight but not rigid - imagine a string from your tail to the top of your head</li>
-              <li><strong>Shoulders:</strong> Relax down and back, away from your ears</li>
-              <li><strong>Hands:</strong> Rest on your knees or lap, palms up or down as comfortable</li>
-              <li><strong>Chin:</strong> Tuck slightly, eyes looking down naturally (open or closed both fine)</li>
-              <li><strong>Feet:</strong> If sitting, plant firmly on ground. If lying down, let them naturally fall outward</li>
+              {postureTips.map((tip, idx) => (
+                <li key={idx}><strong>{tip.label}:</strong> {tip.text}</li>
+              ))}
             </ul>
           </div>
         </div>
@@ -255,41 +201,41 @@ export default function Meditation() {
         <>
           <div className="quick-tools">
             <div className="quick-tool-card urgent">
-              <h3>🆘 Emergency Calm</h3>
-              <p>Instant relief for intense cravings</p>
+              <h3>{t('meditation.emergencyCalmTitle')}</h3>
+              <p>{t('meditation.emergencyCalmDesc')}</p>
               <button type="button" className="btn-emergency-calm" onClick={() => {
                 setSessionMinutes(3);
                 setTimeLeft(180);
                 setTimerActive(true);
                 setIsBreathing(true);
                 setShowBreathingGuide(true);
-              }}>3-Min Emergency Calm</button>
+              }}>{t('meditation.emergencyCalm3Min')}</button>
             </div>
 
             <div className="quick-tool-card breathing">
-              <h3>🫁 Quick Breathing</h3>
-              <p>Reset your nervous system</p>
+              <h3>{t('meditation.quickBreathingTitle')}</h3>
+              <p>{t('meditation.quickBreathingDesc')}</p>
               <button className="btn btn-primary" onClick={() => setShowBreathingGuide(!showBreathingGuide)}>
-                {showBreathingGuide ? 'Hide Breathing Guide' : 'Show Breathing Guide'}
+                {showBreathingGuide ? t('meditation.hideBreathingGuide') : t('meditation.showBreathingGuide')}
               </button>
             </div>
 
             <div className="quick-tool-card stats">
-              <h3>📈 Your Progress</h3>
+              <h3>{t('meditation.progressTitle')}</h3>
               <div className="stats-display">
-                <p><strong>{sessions.length}</strong> sessions completed</p>
-                <p><strong>{sessions.reduce((sum, s) => sum + s.duration, 0)}</strong> mins total</p>
+                <p><strong>{sessions.length}</strong> {t('meditation.sessionsCompleted')}</p>
+                <p><strong>{sessions.reduce((sum, s) => sum + s.duration, 0)}</strong> {t('meditation.minsTotal')}</p>
               </div>
             </div>
           </div>
 
           {showBreathingGuide && (
             <div className="breathing-guide-full">
-              <h2>Guided Breathing Exercise</h2>
+              <h2>{t('meditation.guidedBreathingExercise')}</h2>
               <div className={`breathing-circle large ${isBreathing ? 'active' : ''} ${breathingPhase}`}></div>
               <p className="breathing-instruction large">{breathingPhase.toUpperCase()}</p>
               <div className="breathing-fullpage-controls">
-                <label>Breathing pace: {breathDuration}s</label>
+                <label>{t('meditation.breathingPace')}: {breathDuration}s</label>
                 <input
                   type="range"
                   min="3"
@@ -304,12 +250,12 @@ export default function Meditation() {
                   onClick={() => setIsBreathing(!isBreathing)}
                   className={isBreathing ? 'btn-breathing-stop-large' : 'btn btn-large btn-primary'}
                 >
-                  {isBreathing ? '⏹ Stop' : '▶ Start'} Breathing Guide
+                  {isBreathing ? t('meditation.stopBreathingGuide') : t('meditation.startBreathingGuide')}
                 </button>
               </div>
               <div className="breathing-tips">
-                <p>👉 Breathe in slowly through your nose, hold gently, then exhale through your mouth</p>
-                <p>💡 This calms your nervous system and reduces cravings naturally</p>
+                <p>{t('meditation.breathingTip1')}</p>
+                <p>{t('meditation.breathingTip2')}</p>
               </div>
             </div>
           )}
@@ -330,24 +276,24 @@ export default function Meditation() {
           </div>
 
           <div className="music-section">
-            <h2>🎵 Recommended Meditation Music</h2>
-            <p>Listen to ambient music while meditating:</p>
+            <h2>{t('meditation.recommendedMusicTitle')}</h2>
+            <p>{t('meditation.listenToMusic')}</p>
             <div className="music-links">
               <a href="https://www.youtube.com/results?search_query=meditation+music+10+hours" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                YouTube: Meditation Music
+                {t('meditation.youtubeMusic')}
               </a>
               <a href="https://open.spotify.com/search/meditation" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                Spotify: Meditation Playlists
+                {t('meditation.spotifyMusic')}
               </a>
               <a href="https://www.calm.com" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                Calm App
+                {t('meditation.calmApp')}
               </a>
             </div>
           </div>
 
           {sessions.length > 0 && (
             <div className="sessions-history">
-              <h2>📝 Recent Sessions</h2>
+              <h2>{t('meditation.recentSessionsTitle')}</h2>
               <div className="sessions-list">
                 {sessions.slice(-5).reverse().map((session, idx) => (
                   <div key={idx} className="session-item">
@@ -362,7 +308,7 @@ export default function Meditation() {
 
           <div className="tips-section">
             <div className="tips-header">
-              <h2>💡 Tips for Successful Meditation</h2>
+              <h2>{t('meditation.tipsForMeditation')}</h2>
               <button className="btn-hint-toggle-arrow" onClick={() => setShowMeditationTips(!showMeditationTips)} title={showMeditationTips ? 'Hide tips' : 'Show tips'}>
                 {showMeditationTips ? '▼' : '▶'}
               </button>

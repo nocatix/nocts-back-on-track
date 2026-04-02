@@ -1,0 +1,308 @@
+{
+  "meditation": {
+    "pageTitle": "Meditation",
+    "startMeditation": "Beginne Meditation",
+    "duration": "Dauer (Minuten)",
+    "guidedMeditation": "Geführte Meditation",
+    "timerId": "Timer",
+    "breathingExercise": "Atemübung",
+    "relaxationTechnique": "Entspannungstechnik",
+    "noRecords": "Noch keine Meditationsaufzeichnungen. Beginne zu meditieren!",
+    "backToMeditations": "← Zurück zu Meditationen",
+    "sessionTimer": "⏱️ Sitzungs-Timer",
+    "sessionTimerLabel": "Sitzungs-Timer",
+    "guidedBreathing": "🫁 Geführtes Atmen",
+    "breathingPace": "Atemtempo",
+    "startBreathingGuide": "▶ Atemführung starten",
+    "stopBreathingGuide": "⏹ Atemführung stoppen",
+    "showBreathingGuide": "Atemführung anzeigen",
+    "hideBreathingGuide": "Atemführung ausblenden",
+    "start": "Starten",
+    "pause": "Pause",
+    "resume": "Fortsetzen",
+    "reset": "Zurücksetzen",
+    "minutes": "Minuten",
+    "meditationMusic": "🎵 Meditationsmusik",
+    "guide": "Führung",
+    "postureTips": "🧘 Haltungstipps",
+    "quickTools": "Schnellwerkzeuge",
+    "emergencyCalmTitle": "🆘 Notfallruhigung",
+    "emergencyCalmDesc": "Soforterleichterung für intensive Heißhunger",
+    "emergencyCalm3Min": "3-Min Notfallruhigung",
+    "quickBreathingTitle": "🫁 Schnelles Atmen",
+    "quickBreathingDesc": "Stelle dein Nervensystem zurück",
+    "progressTitle": "📈 Dein Fortschritt",
+    "sessionsCompleted": "Sitzungen abgeschlossen",
+    "minsTotal": "Min. insgesamt",
+    "guidedBreathingExercise": "Geführte Atemübung",
+    "breathingTip1": "👉 Atme langsam durch deine Nase ein, halte sanft an, atme dann durch deinen Mund aus",
+    "breathingTip2": "💡 Dies beruhigt dein Nervensystem und reduziert natürlicherweise Heißhunger",
+    "recommendedMusicTitle": "🎵 Empfohlene Meditationsmusik",
+    "listenToMusic": "Entspannungsmusik während der Meditation anhören",
+    "youtubeMusic": "YouTube: Meditationsmusik",
+    "spotifyMusic": "Spotify: Meditationslisten",
+    "calmApp": "Calm-App",
+    "recentSessionsTitle": "📝 Letzte Sitzungen",
+    "tipsForMeditation": "💡 Tipps für erfolgreiche Meditation",
+    "meditations": [
+      {
+        "id": 1,
+        "title": "Atemerkenntnis",
+        "duration": "5 Min",
+        "description": "Beginne mit grundlegender Atemerkenntnis, um deinen Verstand zu beruhigen.",
+        "guide": "Nimm einen bequemen Sitz. Schließe deine Augen. Atme natürlich durch deine Nase. Zähle jeden Ausatmen von 1 bis 10, dann beginne erneut. Wenn dein Verstand wandert, ist das in Ordnung - kehre einfach zum Zählen zurück. Fahre 5 Minuten fort. Diese einfache Praxis hilft, Angst und Heißhunger zu beruhigen.",
+        "musicUrl": "https://www.youtube.com/embed/7qJZy4DpOWA"
+      },
+      {
+        "id": 2,
+        "title": "Body Scan",
+        "duration": "7 Min",
+        "description": "Befreie Spannungen systematisch aus deinem Körper.",
+        "guide": "Lege dich hin oder sitze bequem. Schließe deine Augen. Beginne an der Oberseite deines Kopfes. Beachte Verspannungen. Während du atmest, stelle dir vor, wie diese Anspannung mit jedem Ausatmen freigesetzt wird. Bewege dich langsam nach unten: Stirn, Kiefer, Nacken, Schultern, Arme, Brust, Bauch, Beine, Füße. Verbinge 10-15 Sekunden in jedem Bereich. Diese Technik reduziert körperlichen Stress durch Entzug.",
+        "musicUrl": "https://www.youtube.com/embed/2DRyAW0ljHQ"
+      },
+      {
+        "id": 3,
+        "title": "Heißhunger-Befreiung",
+        "duration": "10 Min",
+        "description": "Spezifische Meditation zum Umgang mit Heißhunger.",
+        "guide": "Sitze bequem. Schließe deine Augen. Bemerke Heißhunger in deinem Körper ohne Halos. Versuche nicht zu kämpfen. Beobachte: Wo ist es? Wie fühlt es sich an? Hat es eine Farbe, Form oder Temperatur? Während du atmest, stelle dir den Heißhunger als eine Welle vor, die durch dich hindurchgeht. Schau zu, wie sie aufsteigt, spitzt sich zu und fällt. Denk daran: Heißhunger ist vorübergehend. Dies auch wird vergehen. Sie verblassen auf natürliche Weise in 15-20 Minuten.",
+        "musicUrl": "https://www.youtube.com/embed/sTzHDPqBN-8"
+      },
+      {
+        "id": 4,
+        "title": "Liebevolle Güte",
+        "duration": "8 Min",
+        "description": "Pflege Mitgefühl und Selbstliebe während der Genesung.",
+        "guide": "Sitze bequem. Schließe deine Augen. Lege deine Hand auf dein Herz. Sag stilleschweigend: 'Möge ich friedlich sein. Möge ich gesund sein. Möge ich glücklich sein. Möge ich frei von Sucht sein.' Wiederhole langsam, wobei jedes Wort gewinnt wird. Dann erweitern: 'Mögen andere auch Frieden und Heilung finden.' Diese Praxis baut Selbstmitgefühl und Motivation für die Genesung auf.",
+        "musicUrl": "https://www.youtube.com/embed/lE5n6gYzJLo"
+      }
+    ],
+    "tips": [
+      "Beginne mit nur 5 Minuten täglich. Konsistenz ist wichtiger als Dauer.",
+      "Meditiere zur gleichen Zeit jeden Tag, um eine Gewohnheit zu entwickeln.",
+      "Heißhunger spitzt sich in 15-20 Minuten zu. Meditiere durch die Spitze.",
+      "Verwende Meditation, wenn du dich am meisten versucht fühlst.",
+      "Dein Verstand wird wandern - das ist normal. Bring ihn sanft zurück.",
+      "Verfolge deinen Fortschritt. Bemerke, wie Heißhunger einfacher zu verwalten wird."
+    ],
+    "postureTipsList": [
+      {
+        "label": "Wirbelsäule",
+        "text": "Halte es gerade, aber nicht starr - stelle dir einen Faden von deinem Steißbein bis zur Oberseite deines Kopfes vor"
+      },
+      {
+        "label": "Schultern",
+        "text": "Entspanne dich nach unten und zurück, weg von deinen Ohren"
+      },
+      {
+        "label": "Hände",
+        "text": "Ruhe auf deinen Knien oder Schoß, Handflächen oben oder unten wie komfortabel"
+      },
+      {
+        "label": "Kinn",
+        "text": "Leicht einklemmen, Augen blicken nach unten natürlich (offen oder geschlossen ist beide fein)"
+      },
+      {
+        "label": "Füße",
+        "text": "Wenn sitzt, legen Sie fest auf der Erde. Wenn liegend, lassen Sie sie natürlich nach außen fallen"
+      }
+    ]
+  },
+  "preparationPlan": {
+    "header": {
+      "title": "Machen Sie einen Plan & Seien Sie bereit zu stoppen",
+      "subtitle": "Vorbereitung ist die Grundlage einer erfolgreichen Genesung. Verwende diesen Leitfaden, um dich zum Erfolg einzustellen."
+    },
+    "motivation": {
+      "title": "Warum Vorbereitung wichtig ist",
+      "mainMessage": "Genesung ist nicht etwas, das einfach passiert - es ist etwas, das du aufbaust.",
+      "description": "Die Zeit, die du jetzt mit der Vorbereitung verbringst, bestimmt direkt deinen Erfolg. Personen, die ihre Genesung planen, bleiben in den schwierigen ersten Tagen eher dabei.",
+      "benefits": [
+        "Vorbereitung reduziert impulsive Entscheidungen, wenn du Schwierigkeiten hast",
+        "Dies macht dich bereit und zuversichtlich, bevor du startest",
+        "Es identifiziert potenzielle Hindernisse, bevor sie dich überraschen",
+        "Es sorgt dafür, dass ab Tag eins Unterstützungssysteme vorhanden sind",
+        "Es zeigt dir, dass du ernsthafte Änderungen anstrebst"
+      ],
+      "insight": "💡 Jede Minute, die du jetzt planst, spart dir Stunden Kampf später."
+    },
+    "assess": {
+      "title": "1. Bewerte deine aktuelle Situation",
+      "intro": "Bevor du aufhörst, verstehe wo du bist:",
+      "questions": {
+        "frequency": "Wie oft nutze/engagiere ich mich? (täglich, wöchentlich, mehrmals täglich)",
+        "money": "Wie viel Geld ausgebe ich pro Tag/Woche?",
+        "time": "Zu welcher Tageszeit nutze ich am meisten?",
+        "triggers": "Welche Situationen führen zu meinem Gebrauch? (Stress, Langeweile, sozial, emotional)",
+        "impact": "Wie hat diese Sucht Gesundheit, Beziehungen, Arbeit, Finanzen beeinflusst?",
+        "obstacles": "Was waren meine Hindernisse zum Aufhören in der Vergangenheit?"
+      },
+      "placeholder": "Gib deine Antwort hier ein...",
+      "tip": "Tipp: Verwende diese App, um deine aktuelle Nutzung für ein paar Tage zu verfolgen, bevor du aufhörst. Echte Daten sind leistungsstarker als Vermutungen."
+    },
+    "quitDate": {
+      "title": "2. Legen Sie ein konkretes Quitdatum fest",
+      "mainAdvice": "Wähle ein Datum innerhalb von 1-2 Wochen. Gib dir genug Zeit zum Vorbereiten, aber nicht so viel, dass du die Motivation verlierst.",
+      "goodTiming": [
+        "✓ Gutes Timing: Wähle einen Tag nach einem stressigen Ereignis",
+        "✓ Gutes Timing: Wähle einen Tag, an dem die Unterstützung verfügbar ist"
+      ],
+      "badTiming": [
+        "✗ Schlechtes Timing: Nicht, wenn du bereits gestresst oder emotional bist",
+        "✗ Schlechtes Timing: Nicht, wenn du allein mit leichtem Zugang sein wirst"
+      ],
+      "finalAdvice": "Wenn du dein Datum hast, markiere es in deinem Kalender. Sag den Leuten davon. Platziere es dort, wo du es täglich siehst. Mache es real."
+    },
+    "triggers": {
+      "title": "3. Identifiziere deine Auslöser",
+      "intro": "Auslöser sind Situationen, Emotionen oder Menschen, die dich zum Gebrauch bringen. Sie vorher zu kennen bedeutet, dass du für sie planen kannst.",
+      "categories": {
+        "emotional": {
+          "title": "Emotionale Auslöser",
+          "description": "Stress, Langeweile, Einsamkeit, Wut, Angst, Traurigkeit... welche Emotion treibt deinen Gebrauch?"
+        },
+        "social": {
+          "title": "Soziale Auslöser",
+          "description": "Bestimmte Personen, Orte oder Gruppen. Nutzt du mit bestimmten Freunden? An bestimmten Orten?"
+        },
+        "environmental": {
+          "title": "Umweltauslöser",
+          "description": "Zeiten des Tages, Orte. Juckt dich dein Zimmer? Späte Nächte?"
+        },
+        "habitual": {
+          "title": "Habituelle Auslöser",
+          "description": "Dinge, die du immer zusammen gemacht hast. Morgenkaffee-Ritual? Nach-Arbeit-Routine?"
+        }
+      },
+      "action": "Aktion: Für jeden Auslöser schreibe einen spezifischen Plan, was du stattdessen tun wirst."
+    },
+    "support": {
+      "title": "4. Baue dein Unterstützungsnetzwerk auf",
+      "intro": "Du kannst das nicht allein schaffen. Erfolgreiche Genesung erfordert Verbindung und Unterstützung. Baue dein Netzwerk jetzt auf, bevor du aufhörst.",
+      "people": {
+        "title": "👥 Personen zum Erzählen",
+        "items": [
+          "Mindestens eine Person, der du absolut vertraust, die du jederzeit anrufen kannst",
+          "Jemanden, der dich nicht verurteilt, wenn du Schwierigkeiten hast",
+          "Jemanden, der deine Gewinne feiern wird",
+          "Erwäge, einem Therapeuten, Berater oder Arzt zu erzählen"
+        ]
+      },
+      "resources": {
+        "title": "📱 Unterstützungsressourcen",
+        "items": [
+          "Unterstützungsgruppen (AA, NA, SMART Recovery usw.)",
+          "Therapie- oder Beratungsdienste",
+          "Diese App - nutze ALLE ihre Funktionen (Tagebuch, Stimmung, Meditation)",
+          "Hotlines und Krisent-Textlines"
+        ]
+      },
+      "professional": {
+        "title": "🏥 Professionelle Hilfe",
+        "items": [
+          "Medizinische Entzugsunterstützung, falls nötig für Alkohol oder Drogen",
+          "Medikamentengestützte Behandlung, falls empfohlen",
+          "Psychische Gesundheitsbehandlung für zugrunde liegende Probleme",
+          "Versuche nicht allein, wenn es gefährlich ist"
+        ]
+      },
+      "action": "Schreib 3-5 spezifische Personen auf, die du anrufen kannst, wenn es schwer wird. Holt jetzt ihre Nummern und speichere sie in deinem Handy."
+    },
+    "coping": {
+      "title": "5. Plane deine Bewältigungsstrategien",
+      "intro": "Heißhunger wird kommen. Du brauchst konkrete Werkzeuge bereit, BEVOR sie ankommen.",
+      "strategies": {
+        "meditation": {
+          "title": "🧘 Meditation & Achtsamkeit",
+          "description": "Verwende die Meditationsfunktion dieser App. Sogar 2 Minuten helfen."
+        },
+        "distraction": {
+          "title": "🎮 Ablenkungsstrategien",
+          "description": "Verwende das Heißhunger-Spiel, schau dir einen Film an, rufe einen Freund an, nimm ein Bad, trainiere."
+        },
+        "physical": {
+          "title": "💪 Körperliche Aktivität",
+          "description": "Gehe spazieren, renne, mache Yoga, tanze - alles um deinen Körper zu bewegen und deine Chemie zu verändern."
+        },
+        "journaling": {
+          "title": "📔 Tagebuchschreiben",
+          "description": "Verwende die Tagebuchfunktion, um durch Heißhunger und Emotionen schreiben."
+        },
+        "emotions": {
+          "title": "🎭 Emotionale Verarbeitung",
+          "description": "Verfolge deine Stimmung, benenne deine Gefühle, fühle sie, ohne danach zu handeln."
+        },
+        "connection": {
+          "title": "🤝 Verbindung",
+          "description": "Rufe jemanden an, schreibe einem Freund, besuche ein Unterstützungsgruppen-Meetup."
+        }
+      },
+      "action": "Erstelle dein persönliches Heißhunger-Toolkit: Schreibe 3-5 Dinge auf, die du tun wirst, wenn Heißhunger dich trifft. Poste es irgendwo sichtbar."
+    },
+    "remove": {
+      "title": "6. Entferne Versuchungen",
+      "intro": "Mache es so schwer wie möglich zu verwenden. Du kannst nicht ablehnen, was du nicht hast.",
+      "actions": {
+        "clean": {
+          "title": "🚭 Reinige deinen Platz",
+          "description": "Entferne alle Versorgungsmaterialien, Gegenstände, Erinnerungen. Tiefenreinigung deines Zimmers, deines Autos, deiner Tasche."
+        },
+        "delete": {
+          "title": "🗑️ Lösche Zugang",
+          "description": "Lösche Apps, sperre Websites, entfolge Konten, lösche Dealer-Kontakte."
+        },
+        "money": {
+          "title": "💳 Begrenze Geld",
+          "description": "Gib die Kontrolle deiner Finanzen an jemanden, dem du vertraust. Entferne Zugriffskarten, falls nötig."
+        },
+        "avoid": {
+          "title": "📍 Vermeide Orte",
+          "description": "Plane Strecken, die deine typischen Nutzungsplätze vermeiden. Gehe verschiedene Wege."
+        },
+        "distance": {
+          "title": "👥 Abstand von Menschen",
+          "description": "Erwäge, Freunden zu sagen, dass du aufhörst - echte Freunde werden dich unterstützen."
+        }
+      }
+    },
+    "fortyEightHours": {
+      "title": "7. Plane die ersten 48 Stunden",
+      "intro": "Die ersten 48 Stunden sind die härtesten. Plane stunde für Stunde, falls erforderlich.",
+      "blocks": {
+        "wakeUp": {
+          "title": "Wenn du aufwachst",
+          "description": "Sag jemandem, dass dein Ausstieg beginnt. Tu etwas Gesundes (trainiere, meditiere, gesundes Frühstück)."
+        },
+        "morning": {
+          "title": "Morgens (nach dem Schlaf)",
+          "description": "Unstrukturierte Zeit ist gefährlich. Plane etwas: trainiere, treffe dich mit einem Freund, Hobby, Meditation."
+        },
+        "afternoon": {
+          "title": "Nachmittags (Heißhunger-Spitzenzeit)",
+          "description": "Rufe deine Unterstützungsperson an. Verwende dein Heißhunger-Toolkit. Diese Zeit wird vergehen."
+        },
+        "evening": {
+          "title": "Abends (einsame Zeit)",
+          "description": "Sei bei Menschen oder am Telefon mit jemandem. Bleibe beschäftigt. Verwende das Tagebuch zur Verarbeitung."
+        },
+        "night": {
+          "title": "In der Nacht (am schwierigsten für viele)",
+          "description": "Bereite dich auf den Schlaf vor: warmes Bad, Tee, Meditation, Hörbuch. Du schaffst das."
+        }
+      },
+      "insight": "💡 Wenn die ersten 48 Stunden ohne Gebrauch vergehen, springen deine Chancen auf langfristigen Erfolg dramatisch. Du schaffst das."
+    },
+    "mental": {
+      "title": "8. Bereite deinen Verstand vor",
+      "intro": "Dein Verstand bestimmt deinen Erfolg. Pflanze diese Wahrheiten jetzt ein, bevor du startest:",
+      "beliefs": [
+        "✓ Das ist möglich. Millionen Menschen haben es getan. Du kannst auch.",
+        "✓ Dies ist schwer, aber wird einfacher.",
+        "✓ Heißhunger spitzt sich in 15-20 Minuten zu.",
+        "✓ Du bist nicht schlecht. Du bist mutig für die Versuche.",
+        "✓ Jeder Tag, an dem du nicht nutzt, macht dich stärker."
+      ]
+    }
+  }
+}

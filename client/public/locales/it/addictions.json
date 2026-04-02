@@ -1,0 +1,32 @@
+{
+  "pageTitle": "Sovrani le tue dipendenze",
+  "addNew": "Aggiungi una nuova dipendenza",
+  "addictionName": "Nome della dipendenza",
+  "addictionNameLabel": "Nome della dipendenza",
+  "enterAddictionName": "Inserisci il nome della tua dipendenza",
+  "addictionNamePlaceholder": "Ad es. fumo, alcool, social media",
+  "dateYouStopped": "Data in cui hai smesso",
+  "timeYouStopped": "Ora in cui hai smesso",
+  "timeFormat12h": "Formato 12 ore (AM/PM)",
+  "timeFormat24h": "Formato 24 ore",
+  "frequency": "Frequenza",
+  "timesPerDay": "Volte al giorno",
+  "frequencyPlaceholder": "Quante volte al giorno?",
+  "money": "Denaro speso",
+  "moneyPlaceholder": "Importo della tua valuta",
+  "additionalNotes": "Note aggiuntive",
+  "additionalNotesPlaceholder": "Altre informazioni su questa dipendenza...",
+  "selectAddiction": "Seleziona dipendenza",
+  "description": "Descrizione",
+  "startDate": "Data di inizio",
+  "category": "Categoria",
+  "severity": "Gravità",
+  "noAddictions": "Nessuna dipendenza in monitoraggio. Inizia oggi!",
+  "daysSoberCount": "Giorni sobrio",
+  "addictionCard": {
+    "days": "giorni",
+    "saved": "risparmiato",
+    "encouragement": "Stai facendo progressi incredibili!",
+    "youreDoingGreat": "Stai facendo bene! Continua così!"
+  }
+}

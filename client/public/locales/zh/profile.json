@@ -1,0 +1,18 @@
+{
+  "pageTitle": "我的个人资料",
+  "changePassword": "更改密码",
+  "currentPassword": "当前密码",
+  "newPassword": "新密码",
+  "confirmNewPassword": "确认新密码",
+  "passwordChanged": "密码更改成功！",
+  "darkMode": "深色模式",
+  "language": "语言",
+  "unitPreference": "单位偏好",
+  "selectLanguage": "选择语言",
+  "resetProgress": "重置所有进度",
+  "resetProgressWarning": "你确定吗？除你的账户外的所有数据都将被删除。",
+  "deleteAccount": "删除账户",
+  "deleteAccountWarning": "你确定吗？此操作无法撤销，你的账户将被永久删除。",
+  "imperialUnits": "英制单位（磅，°F）",
+  "metricUnits": "公制单位（公斤，°C）"
+}

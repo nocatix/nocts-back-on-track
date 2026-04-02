@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 import './Achievements.css';
 
 const Achievements = () => {
   const { token } = useAuth();
+  const { t } = useTranslation('tracking');
   const [achievements, setAchievements] = useState([]);
   const [trophies, setTrophies] = useState([]);
   const [trophyProgress, setTrophyProgress] = useState(null);
@@ -165,11 +167,11 @@ const Achievements = () => {
   }, [token]);
 
   if (loading) {
-    return <div className="achievements-loading">Loading achievements...</div>;
+    return <div className="achievements-loading">{t('achievements.loading')}</div>;
   }
 
   if (error) {
-    return <div className="achievements-error">Error: {error}</div>;
+    return <div className="achievements-error">{t('achievements.error')}{error}</div>;
   }
 
   const formatDate = (date) => {
@@ -178,20 +180,20 @@ const Achievements = () => {
 
   return (
     <div className="achievements-page">
-      <h1>Achievements & Trophies</h1>
+      <h1>{t('achievements.pageTitle')}</h1>
       <p className="achievements-description">
-        Your milestones, achievements, and trophies on your journey to sobriety
+        {t('achievements.description')}
       </p>
       
       {/* Trophy Progress Section */}
       {trophyProgress && (
         <div className="trophy-progress-section">
-          <h2>🎯 Trophy Progress</h2>
+          <h2>{t('achievements.trophyProgress')}</h2>
           
           <div className="trophy-progress-container">
             {trophyProgress.currentTrophy && (
               <div className="current-trophy">
-                <h3>Current Trophy</h3>
+                <h3>{t('achievements.currentTrophy')}</h3>
                 <div className="trophy-display">
                   <span className="trophy-icon-large">{trophyProgress.currentTrophy.name.split(' ')[0]}</span>
                   <div className="trophy-info">
@@ -211,7 +213,7 @@ const Achievements = () => {
                       style={{ width: `${trophyProgress.progress}%` }}
                     />
                     <span className="progress-text">
-                      {Math.round(trophyProgress.progress)}% towards {trophyProgress.nextTrophy.name}
+                      {t('achievements.progressText', { progress: Math.round(trophyProgress.progress), trophyName: trophyProgress.nextTrophy.name })}
                       {trophyProgress.timeRemainingFormatted && (
                         <span className="time-remaining"> (~{trophyProgress.timeRemainingFormatted})</span>
                       )}
@@ -220,7 +222,7 @@ const Achievements = () => {
                 </div>
                 
                 <div className="next-trophy greyed-out">
-                  <h3>Next Trophy</h3>
+                  <h3>{t('achievements.nextTrophy')}</h3>
                   <div className="trophy-display">
                     <span className="trophy-icon-large">{trophyProgress.nextTrophy.name.split(' ')[0]}</span>
                     <div className="trophy-info">
@@ -247,7 +249,7 @@ const Achievements = () => {
           {/* Daily Trophies */}
           {trophies.filter(t => t.type === 'daily').length > 0 && (
             <div className="trophy-category">
-              <h3>⭐ Daily Trophies</h3>
+              <h3>{t('achievements.trophyCategories.daily')}</h3>
               <div className="trophies-list">
                 {trophies.filter(t => t.type === 'daily').map((trophy) => (
                   <div key={trophy._id} className="trophy-card">
@@ -255,7 +257,7 @@ const Achievements = () => {
                     <h4 className="trophy-title">{trophy.name}</h4>
                     <p className="trophy-description">{trophy.description}</p>
                     <span className="trophy-date">
-                      Earned on: {formatDate(trophy.createdAt)}
+                      {t('achievements.earnedOn', { date: formatDate(trophy.createdAt) })}
                     </span>
                   </div>
                 ))}
@@ -266,7 +268,7 @@ const Achievements = () => {
           {/* Weekly Trophies */}
           {trophies.filter(t => t.type === 'weekly').length > 0 && (
             <div className="trophy-category">
-              <h3>🎖️ Weekly Trophies</h3>
+              <h3>{t('achievements.trophyCategories.weekly')}</h3>
               <div className="trophies-list">
                 {trophies.filter(t => t.type === 'weekly').map((trophy) => (
                   <div key={trophy._id} className="trophy-card">
@@ -274,7 +276,7 @@ const Achievements = () => {
                     <h4 className="trophy-title">{trophy.name}</h4>
                     <p className="trophy-description">{trophy.description}</p>
                     <span className="trophy-date">
-                      Earned on: {formatDate(trophy.createdAt)}
+                      {t('achievements.earnedOn', { date: formatDate(trophy.createdAt) })}
                     </span>
                   </div>
                 ))}
@@ -285,7 +287,7 @@ const Achievements = () => {
           {/* Monthly Trophies */}
           {trophies.filter(t => t.type === 'monthly').length > 0 && (
             <div className="trophy-category">
-              <h3>🏅 Monthly Trophies</h3>
+              <h3>{t('achievements.trophyCategories.monthly')}</h3>
               <div className="trophies-list">
                 {trophies.filter(t => t.type === 'monthly').map((trophy) => (
                   <div key={trophy._id} className="trophy-card">
@@ -293,7 +295,7 @@ const Achievements = () => {
                     <h4 className="trophy-title">{trophy.name}</h4>
                     <p className="trophy-description">{trophy.description}</p>
                     <span className="trophy-date">
-                      Earned on: {formatDate(trophy.createdAt)}
+                      {t('achievements.earnedOn', { date: formatDate(trophy.createdAt) })}
                     </span>
                   </div>
                 ))}
@@ -304,7 +306,7 @@ const Achievements = () => {
           {/* Yearly Trophies */}
           {trophies.filter(t => t.type === 'yearly').length > 0 && (
             <div className="trophy-category">
-              <h3>🏆 Yearly Trophies</h3>
+              <h3>{t('achievements.trophyCategories.yearly')}</h3>
               <div className="trophies-list">
                 {trophies.filter(t => t.type === 'yearly').map((trophy) => (
                   <div key={trophy._id} className="trophy-card">
@@ -312,7 +314,7 @@ const Achievements = () => {
                     <h4 className="trophy-title">{trophy.name}</h4>
                     <p className="trophy-description">{trophy.description}</p>
                     <span className="trophy-date">
-                      Earned on: {formatDate(trophy.createdAt)}
+                      {t('achievements.earnedOn', { date: formatDate(trophy.createdAt) })}
                     </span>
                   </div>
                 ))}
@@ -324,11 +326,11 @@ const Achievements = () => {
       
       {/* Achievements Section */}
       <div className="achievements-section">
-        <h2>⭐ Achievements</h2>
+        <h2>{t('achievements.achievementsTitle')}</h2>
         
         {achievements.length === 0 ? (
           <div className="achievements-empty">
-            <p>No achievements yet. Keep going and you'll unlock milestones!</p>
+            <p>{t('achievements.noAchievements')}</p>
           </div>
         ) : (
           <div className="achievements-list">
@@ -341,11 +343,11 @@ const Achievements = () => {
                 <p className="achievement-description">{achievement.description}</p>
                 <div className="achievement-details">
                   <span className="achievement-date">
-                    Unlocked on: {formatDate(achievement.createdAt)}
+                    {t('achievements.unlockedOn', { date: formatDate(achievement.createdAt) })}
                   </span>
                   {achievement.addictionId && (
                     <span className="achievement-addiction">
-                      For: {achievement.addictionId.name}
+                      {t('achievements.for', { addiction: achievement.addictionId.name })}
                     </span>
                   )}
                 </div>

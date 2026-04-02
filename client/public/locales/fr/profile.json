@@ -1,0 +1,18 @@
+{
+  "pageTitle": "Mon profil",
+  "changePassword": "Changer le mot de passe",
+  "currentPassword": "Mot de passe actuel",
+  "newPassword": "Nouveau mot de passe",
+  "confirmNewPassword": "Confirmer le nouveau mot de passe",
+  "passwordChanged": "Mot de passe changé avec succès !",
+  "darkMode": "Mode sombre",
+  "language": "Langue",
+  "unitPreference": "Préférence d'unités",
+  "selectLanguage": "Sélectionnez la langue",
+  "resetProgress": "Réinitialiser toute la progression",
+  "resetProgressWarning": "Êtes-vous sûr ? Toutes les données sauf votre compte seront supprimées.",
+  "deleteAccount": "Supprimer le compte",
+  "deleteAccountWarning": "Êtes-vous sûr ? Cette action ne peut pas être annulée et votre compte sera supprimé définitivement.",
+  "imperialUnits": "Unités impériales (livres, °F)",
+  "metricUnits": "Unités métriques (kilogrammes, °C)"
+}

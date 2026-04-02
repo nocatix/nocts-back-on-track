@@ -21,11 +21,7 @@ const moodSchema = new mongoose.Schema({
     max: 5,
     default: 3
   },
-  notes: {
-    encrypted: String,
-    iv: String,
-    authTag: String
-  },
+  notes: mongoose.Schema.Types.Mixed,
   triggers: [String],
   createdAt: {
     type: Date,
@@ -55,6 +51,17 @@ moodSchema.post('find', function(docs) {
       doc.notes = decrypt(doc.notes);
     }
   });
+});
+
+// Decrypt notes after saving (so response includes decrypted data)
+moodSchema.post('save', function(doc) {
+  if (doc && doc.notes) {
+    // If notes is an object with encrypted property, decrypt it
+    if (doc.notes.encrypted) {
+      doc.notes = decrypt(doc.notes);
+    }
+    // If notes is a string, leave it as is (wasn't encrypted because it was empty/falsy)
+  }
 });
 
 // Index for efficient querying by user and date

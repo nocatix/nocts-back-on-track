@@ -19,10 +19,7 @@ router.post('/', auth, async (req, res) => {
     });
 
     await memory.save();
-    
-    // Fetch the memory back to trigger post-find hooks for decryption
-    const savedMemory = await Memory.findById(memory._id);
-    res.json(savedMemory);
+    res.json(memory.toObject());
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -33,7 +30,7 @@ router.get('/', auth, async (req, res) => {
   try {
     const memories = await Memory.find({ userId: req.user.userId })
       .sort({ createdAt: -1 });
-    res.json(memories);
+    res.json(memories.map(memory => memory.toObject()));
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -49,7 +46,7 @@ router.get('/random', auth, async (req, res) => {
     }
 
     const randomMemory = memories[Math.floor(Math.random() * memories.length)];
-    res.json(randomMemory);
+    res.json(randomMemory.toObject());
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

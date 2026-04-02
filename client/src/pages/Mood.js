@@ -1,20 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 import './Mood.css';
-
-const EMOTIONS = {
-  primary: ['😊 Happy', '😢 Sad', '😠 Angry', '😰 Anxious', '😌 Calm', '⚡ Energetic', '😴 Tired', '😐 Neutral'],
-  secondary: {
-    '😊 Happy': ['😄 Joyful', '🤩 Excited', '😌 Content', '🙏 Grateful', '😎 Proud'],
-    '😢 Sad': ['😞 Depressed', '😕 Disappointed', '😔 Lonely', '😩 Hopeless', '☔ Melancholic'],
-    '😠 Angry': ['🤬 Furious', '😤 Irritated', '😒 Resentful', '😤 Frustrated', '😑 Annoyed'],
-    '😰 Anxious': ['😟 Worried', '😨 Panicked', '😰 Nervous', '😩 Stressed', '😵 Overwhelmed'],
-    '😌 Calm': ['☮️ Peaceful', '😌 Relaxed', '😇 Serene', '🌳 Grounded', '🧘 Meditative'],
-    '⚡ Energetic': ['💪 Motivated', '🎯 Ambitious', '🚀 Productive', '💡 Inspired', '✨ Vibrant'],
-    '😴 Tired': ['🥱 Exhausted', '😑 Lazy', '🪫 Drained', '😴 Sleepy', '🚪 Burnt Out'],
-    '😐 Neutral': ['🤷 Indifferent', '🙈 Detached', '👁️ Observant', '⚖️ Balanced', '😐 Neutral']
-  }
-};
+import apiClient from '../api/axiosConfig';
 
 const PRIMARY_COLORS = {
   '😊 Happy': '#FFD700',
@@ -71,6 +59,7 @@ const toLocalDateKey = (date) => {
 
 const Mood = () => {
   const { user, token } = useAuth();
+  const { t } = useTranslation('tracking');
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [moods, setMoods] = useState({});
@@ -147,13 +136,13 @@ const Mood = () => {
 
   const handleSaveMood = async () => {
     if (!selectedPrimary) {
-      setMessage('Please select a primary emotion');
+      setMessage(t('mood.selectPrimaryError'));
       setTimeout(() => setMessage(''), 3000);
       return;
     }
 
     if (!token) {
-      setMessage('You need to be logged in to save moods');
+      setMessage(t('mood.loginRequired'));
       setTimeout(() => setMessage(''), 3000);
       return;
     }
@@ -188,7 +177,7 @@ const Mood = () => {
       }
     } catch (error) {
       console.error('Error saving mood:', error);
-      setMessage('Failed to save mood');
+      setMessage(t('mood.saveFailed'));
       setTimeout(() => setMessage(''), 3000);
     }
   };
@@ -256,17 +245,16 @@ const Mood = () => {
     return days;
   };
 
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'];
+  const monthNames = t('mood.monthNames', { returnObjects: true });
 
   if (!user) {
-    return <div className="mood-container">Loading...</div>;
+    return <div className="mood-container">{t('mood.loading')}</div>;
   }
 
   return (
     <div className="mood-container">
       {message && <div className="message-notification error">{message}</div>}
-      <h1>🎭 Mood Tracker</h1>
+      <h1>{t('mood.pageTitle')}</h1>
 
       <div className="mood-layout">
         <div className="mood-calendar-section">
@@ -287,7 +275,7 @@ const Mood = () => {
           </div>
 
           <div className="calendar-weekdays">
-            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+            {t('mood.weekdays', { returnObjects: true }).map(day => (
               <div key={day} className="weekday-header">{day}</div>
             ))}
           </div>
@@ -297,9 +285,9 @@ const Mood = () => {
           </div>
 
           <div className="mood-legend">
-            <div className="legend-title">Mood Legend:</div>
+            <div className="legend-title">{t('mood.moodLegend')}</div>
             <div className="legend-items">
-              {EMOTIONS.primary.map(emotion => (
+              {t('mood.emotions.primary', { returnObjects: true }).map(emotion => (
                 <div key={emotion} className="legend-item">
                   <span className="legend-color" style={{
                     backgroundColor: PRIMARY_COLORS[emotion]
@@ -335,21 +323,21 @@ const Mood = () => {
                     <div className="mood-text">
                       <p className="primary-mood">{selectedPrimary}</p>
                       {selectedSecondary && <p className="secondary-mood">{selectedSecondary}</p>}
-                      <p className="intensity">Intensity: {intensity}/5</p>
+                      <p className="intensity">{t('mood.intensityStatusDisplay', { intensity })}</p>
                     </div>
                   </div>
 
-                  {notes && <div className="mood-notes"><strong>Notes:</strong> {notes}</div>}
-                  {triggers && <div className="mood-triggers"><strong>Triggers:</strong> {triggers}</div>}
+                  {notes && <div className="mood-notes"><strong>{t('mood.notesTitle')}</strong> {notes}</div>}
+                  {triggers && <div className="mood-triggers"><strong>{t('mood.triggersTitle')}</strong> {triggers}</div>}
                 </div>
               ) : (
                 <div className="no-mood">
-                  <p>No mood recorded for this day</p>
+                  <p>{t('mood.noMoodRecorded')}</p>
                 </div>
               )}
 
               <button onClick={() => setShowWheel(true)} className="btn btn-primary mood-edit-btn">
-                {selectedPrimary ? 'Edit Mood' : 'Add Mood'}
+                {selectedPrimary ? t('mood.editMood') : t('mood.addMood')}
               </button>
             </div>
           ) : (
@@ -358,9 +346,9 @@ const Mood = () => {
                 <div className="wheel-stage">
                   {!selectedPrimary ? (
                     <div className="primary-emotions">
-                      <p className="wheel-label">How are you feeling?</p>
+                      <p className="wheel-label">{t('mood.howAreYouFeeling')}</p>
                       <div className="emotions-grid">
-                        {EMOTIONS.primary.map(emotion => (
+                        {t('mood.emotions.primary', { returnObjects: true }).map(emotion => (
                           <button
                             key={emotion}
                             className="emotion-btn"
@@ -380,8 +368,8 @@ const Mood = () => {
                       <button className="back-btn" onClick={() => {
                         setSelectedPrimary(null);
                         setSelectedSecondary(null);
-                      }}>← Change Primary</button>
-                      <p className="wheel-label">More specifically...</p>
+                      }}>{t('mood.changePrimary')}</button>
+                      <p className="wheel-label">{t('mood.moreSpecifically')}</p>
                       <div className="emotions-grid">
                         <button
                           className={`emotion-btn ${!selectedSecondary ? 'selected' : ''}`}
@@ -393,7 +381,7 @@ const Mood = () => {
                         >
                           {selectedPrimary}
                         </button>
-                        {EMOTIONS.secondary[selectedPrimary]?.map((emotion, index) => {
+                        {t('mood.emotions.secondary', { returnObjects: true })[selectedPrimary]?.map((emotion, index) => {
                           const shades = getSecondaryShades(selectedPrimary);
                           return (
                             <button
@@ -417,7 +405,7 @@ const Mood = () => {
                 {selectedPrimary && (
                   <div className="mood-details-form">
                     <div className="form-group">
-                      <label>Intensity (1-5)</label>
+                      <label>{t('mood.intensityFormLabel')}</label>
                       <input
                         type="range"
                         min="1"
@@ -429,31 +417,31 @@ const Mood = () => {
                     </div>
 
                     <div className="form-group">
-                      <label>Triggers (comma-separated)</label>
+                      <label>{t('mood.triggersLabel')}</label>
                       <input
                         type="text"
                         value={triggers}
                         onChange={(e) => setTriggers(e.target.value)}
-                        placeholder="e.g., Coffee, Sleep deprivation, Work stress"
+                        placeholder={t('mood.triggersPlaceholder')}
                       />
                     </div>
 
                     <div className="form-group">
-                      <label>Notes</label>
+                      <label>{t('mood.notesLabel')}</label>
                       <textarea
                         value={notes}
                         onChange={(e) => setNotes(e.target.value)}
-                        placeholder="Add any additional notes about your mood..."
+                        placeholder={t('mood.notesPlaceholder')}
                         rows="3"
                       />
                     </div>
 
                     <div className="form-buttons">
                       <button onClick={handleSaveMood} className="btn btn-primary">
-                        Save Mood
+                        {t('mood.saveMoodButton')}
                       </button>
                       <button onClick={() => setShowWheel(false)} className="btn btn-secondary">
-                        Cancel
+                        {t('mood.cancelButton')}
                       </button>
                     </div>
                   </div>

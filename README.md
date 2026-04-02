@@ -15,7 +15,7 @@ Your personal addiction recovery companion. A comprehensive Node.js + React appl
 [![Express](https://img.shields.io/badge/Express-4.x-000000?logo=express&logoColor=white)](https://expressjs.com/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![Container Registry Backend](https://img.shields.io/badge/GHCR-Containers-4B0082?logo=github&logoColor=white)](https://github.com/nocatix/nocts-back-on-track/pkgs/container/nocts-back-on-track-backend)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Polyform%20Non--Commercial-blue.svg)](LICENSE)
 
 ---
 
@@ -345,7 +345,7 @@ Contributions welcome! Feel free to fork this project and submit pull requests f
 
 ## 📄 License
 
-MIT License - See [LICENSE](LICENSE) file for details
+Polyform Non-Commercial License - See [LICENSE](LICENSE) file for details
 
 ## Note from the Developer
 

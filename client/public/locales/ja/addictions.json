@@ -1,0 +1,32 @@
+{
+  "pageTitle": "依存症を追跡する",
+  "addNew": "新しい依存症を追加",
+  "addictionName": "依存症の名前",
+  "addictionNameLabel": "依存症の名前",
+  "enterAddictionName": "あなたの依存症の名前を入力してください",
+  "addictionNamePlaceholder": "例：喫煙、アルコール、ソーシャルメディア",
+  "dateYouStopped": "やめた日",
+  "timeYouStopped": "やめた時間",
+  "timeFormat12h": "12時間形式（AM/PM）",
+  "timeFormat24h": "24時間形式",
+  "frequency": "頻度",
+  "timesPerDay": "1日何回",
+  "frequencyPlaceholder": "1日何回ですか？",
+  "money": "使用金額",
+  "moneyPlaceholder": "あなたの通貨での金額",
+  "additionalNotes": "追加メモ",
+  "additionalNotesPlaceholder": "この依存症についての他の詳細...",
+  "selectAddiction": "依存症を選択",
+  "description": "説明",
+  "startDate": "開始日",
+  "category": "カテゴリ",
+  "severity": "重症度",
+  "noAddictions": "まだ追跡している依存症はありません。今日から始めましょう！",
+  "daysSoberCount": "禁欲の日数",
+  "addictionCard": {
+    "days": "日",
+    "saved": "節約",
+    "encouragement": "あなたは信じられない進歩を遂げています！",
+    "youreDoingGreat": "あなたは本当に頑張っています！続けてください！"
+  }
+}

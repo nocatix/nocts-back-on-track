@@ -1,0 +1,32 @@
+{
+  "pageTitle": "중독을 추적하세요",
+  "addNew": "새로운 중독 추가",
+  "addictionName": "중독 이름",
+  "addictionNameLabel": "중독 이름",
+  "enterAddictionName": "중독 이름을 입력하세요",
+  "addictionNamePlaceholder": "예: 담배, 알코올, 소셜 미디어",
+  "dateYouStopped": "멈춘 날짜",
+  "timeYouStopped": "멈춘 시간",
+  "timeFormat12h": "12시간 형식 (AM/PM)",
+  "timeFormat24h": "24시간 형식",
+  "frequency": "빈도",
+  "timesPerDay": "하루 횟수",
+  "frequencyPlaceholder": "하루에 몇 번?",
+  "money": "소비한 금액",
+  "moneyPlaceholder": "통화 금액",
+  "additionalNotes": "추가 메모",
+  "additionalNotesPlaceholder": "이 중독에 대한 다른 정보...",
+  "selectAddiction": "중독 선택",
+  "description": "설명",
+  "startDate": "시작 날짜",
+  "category": "카테고리",
+  "severity": "심각도",
+  "noAddictions": "추적 중인 중독이 없습니다. 오늘 시작하세요!",
+  "daysSoberCount": "맑은 날",
+  "addictionCard": {
+    "days": "일",
+    "saved": "절약",
+    "encouragement": "놀라운 진전을 이루고 있습니다!",
+    "youreDoingGreat": "잘 하고 있습니다! 계속 화이팅!"
+  }
+}

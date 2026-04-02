@@ -1,0 +1,48 @@
+{
+  "saved": "Erfolgreich gespeichert!",
+  "deleted": "Erfolgreich gelöscht!",
+  "updated": "Erfolgreich aktualisiert!",
+  "error": "Ein Fehler ist aufgetreten. Bitte versuche es erneut.",
+  "serverError": "Serverfehler. Bitte versuche es später erneut.",
+  "networkError": "Netzwerkfehler. Bitte überprüfe deine Verbindung.",
+  "unauthorized": "Du hast keine Berechtigung, diese Aktion auszuführen",
+  "validation": {
+    "required": "Dieses Feld ist erforderlich",
+    "invalidEmail": "Bitte gib eine gültige E-Mail-Adresse ein",
+    "passwordTooShort": "Das Passwort muss mindestens 6 Zeichen lang sein",
+    "passwordMismatch": "Passwörter stimmen nicht überein",
+    "invalidInput": "Ungültige Eingabe"
+  },
+  "mainMenu": {
+    "pageTitle": "Hauptmenü",
+    "failedToLoadAddictions": "Fehler beim Laden deiner Abhängigkeiten",
+    "failedToUpdateAddiction": "Fehler beim Aktualisieren der Abhängigkeit",
+    "aboutToCave": "Wirst du schwach?",
+    "craviingSupport": "Heißhunger-Unterstützung",
+    "cravineSupportMessage": "Hast du Heißhunger? Hole dir jetzt Unterstützung!",
+    "cravingEncouragement": "Du kannst das überwinden. Atme tief durch.",
+    "managedCraving": "Ich habe den Heißhunger überwunden",
+    "needHelp": "Ich brauche Hilfe",
+    "whichAddiction": "Mit welcher Sucht hast du Probleme?",
+    "selectAddictionForLogging": "Wähle die Sucht, mit der du Probleme hast, um sie zu protokollieren und Unterstützung zu erhalten",
+    "noAddictionsToLog": "Noch keine Abhängigkeiten verfolgt. Füge erst eine hinzu.",
+    "amazingWork": "🎉 Großartiges Werk!",
+    "resistedCraving": "Du hast dem Heißhunger widerstanden. Das ist riesig! Jeder Moment, in dem du stark bleibst, stärkt deine Genesung.",
+    "messageClosing": "Du machst das großartig. Mach weiter!",
+    "cravingSupport": {
+      "message": "Hast du Heißhunger? Hole dir jetzt Unterstützung!",
+      "encouragement": "Du kannst das überwinden. Atme tief durch.",
+      "buttons": "Hilfe holen"
+    },
+    "todaysOutlook": "Heutige Aussichten",
+    "todaysSavings": "Heutige Einsparungen",
+    "totalSaved": "Insgesamt gespart",
+    "todaysTips": "Heutige Tipps"
+  },
+  "addictionCard": {
+    "days": "Tage",
+    "saved": "Gespart",
+    "encouragement": "Du machst erstaunliche Fortschritte!",
+    "youreDoingGreat": "Du machst das großartig! Mach weiter!"
+  }
+}

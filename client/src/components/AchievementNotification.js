@@ -17,7 +17,7 @@ export default function AchievementNotification() {
     } catch (error) {
       console.error(`Failed to mark ${type} as read:`, error);
     }
-  }, [token]);
+  }, []);
 
   useEffect(() => {
     const showNotification = (notification) => {

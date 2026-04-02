@@ -1,0 +1,308 @@
+{
+  "meditation": {
+    "pageTitle": "Méditation",
+    "startMeditation": "Commencer la méditation",
+    "duration": "Durée (minutes)",
+    "guidedMeditation": "Méditation guidée",
+    "timerId": "Minuteur",
+    "breathingExercise": "Exercice de respiration",
+    "relaxationTechnique": "Technique de relaxation",
+    "noRecords": "Pas encore d'enregistrements de méditation. Commencez à méditer !",
+    "backToMeditations": "← Retour aux méditations",
+    "sessionTimer": "⏱️ Minuteur de séance",
+    "sessionTimerLabel": "Minuteur de séance",
+    "guidedBreathing": "🫁 Respiration guidée",
+    "breathingPace": "Rythme de respiration",
+    "startBreathingGuide": "▶ Commencer le guide de respiration",
+    "stopBreathingGuide": "⏹ Arrêter le guide de respiration",
+    "showBreathingGuide": "Afficher le guide de respiration",
+    "hideBreathingGuide": "Masquer le guide de respiration",
+    "start": "Commencer",
+    "pause": "Pause",
+    "resume": "Reprendre",
+    "reset": "Réinitialiser",
+    "minutes": "minutes",
+    "meditationMusic": "🎵 Musique de méditation",
+    "guide": "Guide",
+    "postureTips": "🧘 Conseils de posture",
+    "quickTools": "Outils rapides",
+    "emergencyCalmTitle": "🆘 Calme d'urgence",
+    "emergencyCalmDesc": "Soulagement instantané pour les envies intenses",
+    "emergencyCalm3Min": "3 minutes de calme d'urgence",
+    "quickBreathingTitle": "🫁 Respiration rapide",
+    "quickBreathingDesc": "Réinitialisez votre système nerveux",
+    "progressTitle": "📈 Votre progrès",
+    "sessionsCompleted": "séances complétées",
+    "minsTotal": "minutes au total",
+    "guidedBreathingExercise": "Exercice de respiration guidée",
+    "breathingTip1": "👉 Respirez lentement par votre nez, retenez doucement, puis expirez par votre bouche",
+    "breathingTip2": "💡 Cela calme votre système nerveux et réduit naturellement les envies",
+    "recommendedMusicTitle": "🎵 Musique de méditation recommandée",
+    "listenToMusic": "Écoutez de la musique d'ambiance en méditant",
+    "youtubeMusic": "YouTube : Musique de méditation",
+    "spotifyMusic": "Spotify : Listes de lecture de méditation",
+    "calmApp": "Application Calm",
+    "recentSessionsTitle": "📝 Séances récentes",
+    "tipsForMeditation": "💡 Conseils pour une méditation réussie",
+    "meditations": [
+      {
+        "id": 1,
+        "title": "Conscience de la respiration",
+        "duration": "5 min",
+        "description": "Commencez avec une conscience de respiration basique pour calmer votre esprit.",
+        "guide": "Prenez un siège confortable. Fermez vos yeux. Respirez naturellement par votre nez. Comptez chaque expiration de 1 à 10, puis recommencez. Si votre esprit s'égare, c'est normal - revenez simplement au comptage. Continuez pendant 5 minutes. Cette pratique simple aide à calmer l'anxiété et les envies.",
+        "musicUrl": "https://www.youtube.com/embed/7qJZy4DpOWA"
+      },
+      {
+        "id": 2,
+        "title": "Exploration du corps",
+        "duration": "7 min",
+        "description": "Libérez la tension de votre corps de manière systématique.",
+        "guide": "Allongez-vous ou asseyez-vous confortablement. Fermez vos yeux. Commencez en haut de votre tête. Remarquez toute tension. Lorsque vous respirez, imaginez libérer cette tension à chaque expiration. Déplacez-vous lentement vers le bas : front, mâchoire, cou, épaules, bras, poitrine, estomac, jambes, pieds. Passez 10-15 secondes sur chaque zone. Cette technique réduit le stress physique du sevrage.",
+        "musicUrl": "https://www.youtube.com/embed/2DRyAW0ljHQ"
+      },
+      {
+        "id": 3,
+        "title": "Libération des envies",
+        "duration": "10 min",
+        "description": "Méditation spécifique pour gérer les envies.",
+        "guide": "Asseyez-vous confortablement. Fermez vos yeux. Observez toute envie dans votre corps sans jugement. N'essayez pas de la combattre. Observez : Où est-elle ? Comment se sent-elle ? A-t-elle une couleur, une forme ou une température ? Lorsque vous respirez, imaginez l'envie comme une vague vous traversant. Regardez-la monter, atteindre son pic et retomber. Rappelez-vous : les envies sont temporaires. Cela aussi passera. Elles s'évanouissent naturellement en 15-20 minutes.",
+        "musicUrl": "https://www.youtube.com/embed/sTzHDPqBN-8"
+      },
+      {
+        "id": 4,
+        "title": "Bonté aimante",
+        "duration": "8 min",
+        "description": "Cultivez la compassion et l'amour de soi pendant la récupération.",
+        "guide": "Asseyez-vous confortablement. Fermez vos yeux. Placez votre main sur votre cœur. Dites silencieusement : 'Que je sois en paix. Que je sois en bonne santé. Que je sois heureux. Que je sois libre de la dépendance.' Répétez lentement, sentant chaque mot. Ensuite, étendez : 'Que d'autres aussi trouvent la paix et la guérison.' Cette pratique construit l'auto-compassion et la motivation pour la récupération.",
+        "musicUrl": "https://www.youtube.com/embed/lE5n6gYzJLo"
+      }
+    ],
+    "tips": [
+      "Commencez avec seulement 5 minutes par jour. La cohérence importe plus que la durée.",
+      "Méditez à la même heure chaque jour pour construire une habitude.",
+      "Les envies atteignent leur pic en 15-20 minutes. Méditez à travers le pic.",
+      "Utilisez la méditation lorsque vous vous sentez plus tenté.",
+      "Votre esprit s'égare - c'est normal. Ramenez-le doucement.",
+      "Suivez votre progrès. Remarquez comment les envies deviennent plus faciles à gérer."
+    ],
+    "postureTipsList": [
+      {
+        "label": "Colonne vertébrale",
+        "text": "Gardez-la droite mais pas rigide - imaginez un fil de la base au sommet de votre tête"
+      },
+      {
+        "label": "Épaules",
+        "text": "Détendez-vous vers le bas et vers l'arrière, loin de vos oreilles"
+      },
+      {
+        "label": "Mains",
+        "text": "Reposez sur vos genoux ou vos genoux, paumes vers le haut ou vers le bas comme vous le souhaitez"
+      },
+      {
+        "label": "Menton",
+        "text": "Rentré légèrement, yeux regardant naturellement vers le bas (ouverts ou fermés conviennent)"
+      },
+      {
+        "label": "Pieds",
+        "text": "Si vous êtes assis, plantes fermement sur le sol. Si vous êtes allongé, laissez-les tomber naturellement vers l'extérieur"
+      }
+    ]
+  },
+  "preparationPlan": {
+    "header": {
+      "title": "Faites votre plan et préparez-vous à arrêter",
+      "subtitle": "La préparation est le fondement du rétablissement réussi. Utilisez ce guide pour vous préparer au succès."
+    },
+    "motivation": {
+      "title": "Pourquoi la préparation est importante",
+      "mainMessage": "La récupération n'est pas quelque chose qui se produit, c'est quelque chose que vous construisez.",
+      "description": "Le temps que vous passez à vous préparer maintenant déterminera directement votre succès. Les personnes qui planifient leur rétablissement sont beaucoup plus susceptibles de s'y tenir lors des premiers jours difficiles.",
+      "benefits": [
+        "La préparation réduit les décisions impulsives lorsque vous avez affaire",
+        "Vous rend prêt et confiant avant de commencer",
+        "Identifie les obstacles potentiels avant qu'ils ne vous surprennent",
+        "Assure les systèmes de soutien dès le premier jour",
+        "Montre-vous que vous parlez sérieusement du changement"
+      ],
+      "insight": "💡 Chaque minute que vous passez à planifier maintenant vous rend des heures de lutte plus tard."
+    },
+    "assess": {
+      "title": "1. Évaluez votre situation actuelle",
+      "intro": "Avant d'arrêter, comprenez où vous en êtes :",
+      "questions": {
+        "frequency": "À quelle fréquence consomme-je/suis-je engagé ? (quotidiennement, hebdomadairement, plusieurs fois par jour)",
+        "money": "Combien d'argent dépensé-je par jour/semaine ?",
+        "time": "Quel moment de la journée consomme-je le plus ?",
+        "triggers": "Quelles situations déclenchent ma consommation ? (stress, ennui, social, émotionnel)",
+        "impact": "Comment cette dépendance a-t-elle affecté ma santé, mes relations, mon travail, mes finances ?",
+        "obstacles": "Quels ont été mes obstacles pour arrêter dans le passé ?"
+      },
+      "placeholder": "Entrez votre réponse ici...",
+      "tip": "Conseil : Utilisez cette application pour suivre votre consommation actuelle pendant quelques jours avant d'arrêter. Les données réelles sont plus puissantes que les devinettes."
+    },
+    "quitDate": {
+      "title": "2. Établissez une date d'arrêt spécifique",
+      "mainAdvice": "Choisissez une date dans 1-2 semaines. Donnez-vous suffisamment de temps pour vous préparer, mais pas trop pour perdre la motivation.",
+      "goodTiming": [
+        "✓ Bon timing : Choisissez un jour après qu'un événement stressant soit passé",
+        "✓ Bon timing : Choisissez un jour quand le soutien est disponible"
+      ],
+      "badTiming": [
+        "✗ Mauvais timing : Ne choisissez pas quand vous êtes déjà stressé ou émotif",
+        "✗ Mauvais timing : Ne choisissez pas quand vous serez seul avec un accès facile"
+      ],
+      "finalAdvice": "Une fois que vous avez choisi votre date, marquez-la sur le calendrier. Dites aux gens. Mettez-le où vous le voyez quotidiennement. Rendez-le réel."
+    },
+    "triggers": {
+      "title": "3. Identifiez vos déclencheurs",
+      "intro": "Les déclencheurs sont des situations, des émotions ou des personnes qui vous donnent envie de consommer. Les connaître d'avance signifie que vous pouvez les planifier.",
+      "categories": {
+        "emotional": {
+          "title": "Déclencheurs émotionnels",
+          "description": "Stress, ennui, solitude, colère, anxiété, tristesse... Quelle émotion pousse votre consommation ?"
+        },
+        "social": {
+          "title": "Déclencheurs sociaux",
+          "description": "Des personnes, des lieux ou des groupes spécifiques. Consommez-vous avec certains amis ? Dans des lieux spécifiques ?"
+        },
+        "environmental": {
+          "title": "Déclencheurs environnementaux",
+          "description": "Heures de la journée, lieux. Votre chambre vous déclenche-t-elle ? Les soirées tardives ?"
+        },
+        "habitual": {
+          "title": "Déclencheurs habituels",
+          "description": "Les choses que vous avez toujours faites ensemble. Rituel de café matinal ? Routine post-travail ?"
+        }
+      },
+      "action": "Action : Pour chaque déclencheur, écrivez un plan spécifique pour ce que vous ferez à la place."
+    },
+    "support": {
+      "title": "4. Construisez votre réseau de soutien",
+      "intro": "Vous ne pouvez pas faire cela seul. Le rétablissement réussi nécessite une connexion et un soutien. Construisez votre réseau maintenant, avant d'arrêter.",
+      "people": {
+        "title": "👥 Personnes à informer",
+        "items": [
+          "Au moins une personne en qui vous avez une entière confiance à qui vous pouvez appeler à tout moment",
+          "Quelqu'un qui ne vous jugera pas si vous avez du mal",
+          "Quelqu'un qui célébrera vos victoires",
+          "Envisagez de dire à un thérapeute, un conseiller ou un médecin"
+        ]
+      },
+      "resources": {
+        "title": "📱 Ressources de soutien",
+        "items": [
+          "Groupes de soutien (AA, NA, SMART Recovery, etc.)",
+          "Services de thérapie ou de conseil",
+          "Cette application - utilisez TOUTES ses fonctionnalités (Journal, État d'âme, Méditation)",
+          "Lignes d'aide et lignes de texte de crise"
+        ]
+      },
+      "professional": {
+        "title": "🏥 Aide professionnelle",
+        "items": [
+          "Soutien de désintoxication médicale si nécessaire pour l'alcool ou les drogues",
+          "Traitement assisté par la médication si recommandé",
+          "Traitement de la santé mentale pour les problèmes sous-jacents",
+          "N'essayez pas seul si c'est dangereux"
+        ]
+      },
+      "action": "Écrivez 3-5 personnes spécifiques que vous pouvez appeler quand c'est difficile. Obtenez leurs numéros maintenant et gardez-les dans votre téléphone."
+    },
+    "coping": {
+      "title": "5. Planifiez vos stratégies d'adaptation",
+      "intro": "Les envies viendront. Vous avez besoin d'outils concrets prêts AVANT qu'elles n'arrivent.",
+      "strategies": {
+        "meditation": {
+          "title": "🧘 Méditation et pleine conscience",
+          "description": "Utilisez la fonction de méditation de cette application. Même 2 minutes aident."
+        },
+        "distraction": {
+          "title": "🎮 Stratégies de distraction",
+          "description": "Utilisez le jeu du désir, regardez un film, appelez un ami, prenez un bain, faites de l'exercice."
+        },
+        "physical": {
+          "title": "💪 Activité physique",
+          "description": "Marchez, courez, yoga, dansez - n'importe quoi pour bouger votre corps et changer votre chimie."
+        },
+        "journaling": {
+          "title": "📔 Journalisation",
+          "description": "Utilisez la fonction de journal pour écrire à travers les envies et les émotions."
+        },
+        "emotions": {
+          "title": "🎭 Traitement émotionnel",
+          "description": "Suivez votre humeur, nommez vos sentiments, sentez-les sans agir."
+        },
+        "connection": {
+          "title": "🤝 Connexion",
+          "description": "Appelez quelqu'un, envoyez un message à un ami, assistez à une réunion de groupe de soutien."
+        }
+      },
+      "action": "Créez votre kit d'outils personnel pour les crises d'envie : Écrivez 3-5 choses que vous ferez quand vous êtes frappé par une envie. Affiche-lo quelque part en vue."
+    },
+    "remove": {
+      "title": "6. Éliminez les tentations",
+      "intro": "Rendez-le aussi difficile que possible à consommer. Vous ne pouvez pas refuser ce que vous n'avez pas.",
+      "actions": {
+        "clean": {
+          "title": "🚭 Nettoyez votre espace",
+          "description": "Débarrassez-vous de tous les fournitures, appareillage, rappels. Nettoyage en profondeur de votre chambre, voiture, sac."
+        },
+        "delete": {
+          "title": "🗑️ Éliminez l'accès",
+          "description": "Supprimez les applications, bloquez les sites Web, cessez de suivre les comptes, supprimez les contacts des dealers."
+        },
+        "money": {
+          "title": "💳 Limitez l'argent",
+          "description": "Donnez le contrôle de vos finances à quelqu'un en qui vous avez confiance. Supprimez l'accès aux cartes si nécessaire."
+        },
+        "avoid": {
+          "title": "📍 Évitez les lieux",
+          "description": "Planifiez des itinéraires qui évitent vos points de consommation typiques. Allez par des chemins différents."
+        },
+        "distance": {
+          "title": "👥 Distance des personnes",
+          "description": "Envisagez de dire à vos amis que vous arrêtez - les vrais amis vous soutiendront."
+        }
+      }
+    },
+    "fortyEightHours": {
+      "title": "7. Planifiez les premières 48 heures",
+      "intro": "Les premières 48 heures sont les plus difficiles. Planifiez heure par heure si nécessaire.",
+      "blocks": {
+        "wakeUp": {
+          "title": "Quand vous vous réveillez",
+          "description": "Dites à quelqu'un que votre arrêt commence. Faites quelque chose de sain (exercice, méditation, petit-déjeuner sain)."
+        },
+        "morning": {
+          "title": "Matin (après le sommeil)",
+          "description": "Le temps sans structure est dangereux. Planifiez quelque chose : exercice, rencontrez un ami, loisir, méditation."
+        },
+        "afternoon": {
+          "title": "Après-midi (pic d'envie)",
+          "description": "Appelez votre personne de soutien. Utilisez votre kit d'outils d'envie. Ce temps passera."
+        },
+        "evening": {
+          "title": "Soir (temps seul)",
+          "description": "Être avec des gens ou au téléphone avec quelqu'un. Restez occupé. Utilisez le journal pour traiter."
+        },
+        "night": {
+          "title": "La nuit (plus difficile pour beaucoup)",
+          "description": "Préparez-vous au sommeil : bain tiède, thé, méditation, audiobook. Vous pouvez le faire."
+        }
+      },
+      "insight": "💡 Si les premières 48 heures passent sans consommer, vos chances de succès à long terme augmentent considérablement. Vous pouvez le faire."
+    },
+    "mental": {
+      "title": "8. Préparez-vous mentalement",
+      "intro": "Votre esprit détermine votre succès. Plantez ces vérités maintenant, avant de commencer :",
+      "beliefs": [
+        "✓ C'est possible. Des millions de personnes l'ont fait. Vous aussi.",
+        "✓ C'est difficile, mais cela devient plus facile.",
+        "✓ Les envies atteignent leur pic en 15-20 minutes.",
+        "✓ Vous n'êtes pas mauvais. Vous êtes courageux d'essayer.",
+        "✓ Chaque jour où vous ne consommez vous rend plus fort."
+      ]
+    }
+  }
+}

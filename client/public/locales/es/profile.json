@@ -1,0 +1,18 @@
+{
+  "pageTitle": "Mi perfil",
+  "changePassword": "Cambiar contraseña",
+  "currentPassword": "Contraseña actual",
+  "newPassword": "Nueva contraseña",
+  "confirmNewPassword": "Confirmar nueva contraseña",
+  "passwordChanged": "¡Contraseña cambiada exitosamente!",
+  "darkMode": "Modo oscuro",
+  "language": "Idioma",
+  "unitPreference": "Preferencia de unidades",
+  "selectLanguage": "Selecciona idioma",
+  "resetProgress": "Reiniciar todo el progreso",
+  "resetProgressWarning": "¿Estás seguro? Todos los datos excepto tu cuenta serán eliminados.",
+  "deleteAccount": "Eliminar cuenta",
+  "deleteAccountWarning": "¿Estás seguro? Esta acción no se puede deshacer y tu cuenta será eliminada permanentemente.",
+  "imperialUnits": "Unidades imperiales (libras, °F)",
+  "metricUnits": "Unidades métricas (kilogramos, °C)"
+}

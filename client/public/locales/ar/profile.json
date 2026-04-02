@@ -1,0 +1,18 @@
+{
+  "pageTitle": "ملفي الشخصي",
+  "changePassword": "تغيير كلمة المرور",
+  "currentPassword": "كلمة المرور الحالية",
+  "newPassword": "كلمة المرور الجديدة",
+  "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
+  "passwordChanged": "تم تغيير كلمة المرور بنجاح!",
+  "darkMode": "الوضع الليلي",
+  "language": "اللغة",
+  "unitPreference": "تفضيل الوحدة",
+  "selectLanguage": "اختر اللغة",
+  "resetProgress": "إعادة تعيين جميع التقدم",
+  "resetProgressWarning": "هل أنت متأكد؟ سيتم حذف جميع البيانات ما عدا حسابك.",
+  "deleteAccount": "حذف الحساب",
+  "deleteAccountWarning": "هل أنت متأكد؟ هذا الإجراء لا يمكن التراجع عنه وسيتم حذف حسابك بشكل دائم.",
+  "imperialUnits": "الوحدات الإمبراطورية (رطل، درجات فهرنهايت)",
+  "metricUnits": "الوحدات المترية (كيلوجرام، درجات مئوية)"
+}

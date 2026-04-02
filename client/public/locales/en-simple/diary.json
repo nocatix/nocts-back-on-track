@@ -1,0 +1,32 @@
+{
+  "pageTitle": "My Diary",
+  "addEntry": "Add New Entry",
+  "entry": "Entry",
+  "noEntries": "No diary entries yet. Start writing!",
+  "entryDate": "Date",
+  "entryContent": "How do you feel?",
+  "entryContentPlaceholder": "Write what you think and feel...",
+  "recentEntries": "Recent Entries",
+  "previousDay": "◀ Before",
+  "nextDay": "Next ▶",
+  "today": "Today",
+  "lastSaved": "Last saved",
+  "writeHere": "Write here... You can use markdown:\n# Big Title\n## Small Title\n**bold** *slant*\n- list",
+  "markdownTip": "💡 Tip: Use markdown - **bold**, *slant*, # title, - list",
+  "hideTip": "▼ Hide",
+  "showTip": "▶ Show",
+  "savingEntry": "Saving...",
+  "saveEntry": "💾 Save",
+  "editEntry": "✏️ Edit",
+  "cancel": "Cancel",
+  "noEntryForDay": "No entry for today.",
+  "journalingTipsTitle": "💭 Tips for Your Diary",
+  "journalingTips": [
+    "Grateful: Write 3 things you thank God or the world for",
+    "Progress: Write how many days you have been strong",
+    "Triggers: Write what made you want to use, and what you did",
+    "Feelings: Write about your emotions to feel better",
+    "Goals: Remember why you want to stop",
+    "Wins: Celebrate every small win"
+  ]
+}

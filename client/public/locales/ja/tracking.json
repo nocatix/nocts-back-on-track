@@ -1,0 +1,176 @@
+{
+  "mood": {
+    "pageTitle": "🎭 気分トラッカー",
+    "loading": "読み込み中...",
+    "moodLegend": "気分凡例:",
+    "noMoodRecorded": "この日の気分は記録されていません",
+    "addMood": "気分を追加",
+    "editMood": "気分を編集",
+    "howAreYouFeeling": "気分はどうですか？",
+    "moreSpecifically": "より具体的には...",
+    "changePrimary": "← 主な気分を変更",
+    "intensityFormLabel": "強度（1-5）",
+    "intensityStatusDisplay": "強度：{{intensity}}/5",
+    "triggersLabel": "トリガー（カンマで区切る）",
+    "triggersPlaceholder": "例。カフェイン、睡眠不足、仕事のストレス",
+    "notesLabel": "ノート",
+    "notesPlaceholder": "あなたの気分についての追加ノートを追加します...",
+    "saveMoodButton": "気分を保存",
+    "cancelButton": "キャンセル",
+    "selectPrimaryError": "主な気分を選択してください",
+    "loginRequired": "気分を保存するために登録する必要があります",
+    "saveFailed": "気分を保存できませんでした",
+    "notesTitle": "ノート: ",
+    "triggersTitle": "トリガー: ",
+    "monthNames": [
+      "1月",
+      "2月",
+      "3月",
+      "4月",
+      "5月",
+      "6月",
+      "7月",
+      "8月",
+      "9月",
+      "10月",
+      "11月",
+      "12月"
+    ],
+    "weekdays": [
+      "日",
+      "月",
+      "火",
+      "水",
+      "木",
+      "金",
+      "土"
+    ],
+    "emotions": {
+      "primary": [
+        "😊 幸せ",
+        "😢 悲しい",
+        "😠 怒っている",
+        "😰 不安",
+        "😌 落ち着いている",
+        "⚡ 元気",
+        "😴 疲れた",
+        "😐 ニュートラル"
+      ],
+      "secondary": {
+        "😊 幸せ": [
+          "😄 嬉しい",
+          "🤩 興奮した",
+          "😌 満足した",
+          "🙏 感謝している",
+          "😎 誇りに思う"
+        ],
+        "😢 悲しい": [
+          "😞 落ち込んでいる",
+          "😕 失望している",
+          "😔 孤独",
+          "😩 絶望",
+          "☔ 沈んだ気分"
+        ],
+        "😠 怒っている": [
+          "🤬 激怒している",
+          "😤 イライラしている",
+          "😒 恨みを持つ",
+          "😤 イライラ",
+          "😑 不快"
+        ],
+        "😰 不安": [
+          "😟 心配している",
+          "😨 怖い",
+          "😰 神経過敏",
+          "😩 ストレスを受けている",
+          "😵 圧倒される"
+        ],
+        "😌 落ち着いている": [
+          "☮️ 平和",
+          "😌 リラックス",
+          "😇 穏やか",
+          "🌳 落ち着いている",
+          "🧘 瞑想的"
+        ],
+        "⚡ 元気": [
+          "💪 動機付けられた",
+          "🎯 野心的",
+          "🚀 生産的",
+          "💡 インスピレーション",
+          "✨ 輝く"
+        ],
+        "😴 疲れた": [
+          "🥱 疲れきっている",
+          "😑 怠け者",
+          "🪫 消耗している",
+          "😴 眠い",
+          "🚪 燃え尽きている"
+        ],
+        "😐 ニュートラル": [
+          "🤷 無関心",
+          "🙈 切り離されている",
+          "👁️ 観察者",
+          "⚖️ バランスの取れた",
+          "😐 ニュートラル"
+        ]
+      }
+    }
+  },
+  "weight": {
+    "pageTitle": "⚖️ 体重トラッカー",
+    "loading": "読み込み中...",
+    "pleaseLogin": "体重を追跡するにはログインしてください",
+    "statsTitle": "体重統計",
+    "latestWeight": "最終的な体重",
+    "goalWeight": "目標体重",
+    "difference": "差異",
+    "notSet": "設定されていません",
+    "logWeightTitle": "📊 体重をログ",
+    "weightLabel": "体重",
+    "enterWeight": "体重を入力",
+    "dateLabel": "日付",
+    "timeLabel": "時刻",
+    "logWeightButton": "体重をログ",
+    "goalWeightTitle": "🎯 目標体重",
+    "noGoalSet": "ゴールセットなし",
+    "updateGoal": "ゴールを更新",
+    "setGoal": "ゴールをセット",
+    "goalWeightLabel": "目標体重",
+    "enterGoalWeight": "目標体重を入力",
+    "saveGoalButton": "ゴールを保存",
+    "cancelButton": "キャンセル",
+    "weightTrendTitle": "📈 体重傾向",
+    "weightCalendarTitle": "📅 体重カレンダー",
+    "weightHistoryTitle": "📋 体重履歴",
+    "noDataMessage": "体重エントリをまだ使用していません。体重の追跡を開始してください！",
+    "deleteEntryTitle": "体重エントリを削除",
+    "deleteConfirmation": "この体重エントリを削除してもよろしいですか？",
+    "deleteWarning": "このアクションは取り消せません。",
+    "deleteEntryButton": "エントリを削除",
+    "recordWeight": "体重を記録",
+    "weight": "体重",
+    "date": "日付",
+    "noRecords": "まだ体重記録がありません。追跡を開始してください！"
+  },
+  "achievements": {
+    "pageTitle": "🏆 実績と報酬",
+    "loading": "実績を読み込み中...",
+    "error": "エラー: ",
+    "description": "あなたの禁欲へのジャーニーのマイルストーン、成就、報酬",
+    "trophyProgress": "🎯 報酬進捗",
+    "currentTrophy": "現在の報酬",
+    "nextTrophy": "次の報酬",
+    "progressText": "{{progress}}% {{trophyName}}へ",
+    "trophyCategories": {
+      "daily": "⭐ 日報酬",
+      "weekly": "🎖️ 週報酬",
+      "monthly": "🏅 月報酬",
+      "yearly": "🏆 年報酬"
+    },
+    "earnedOn": "取得日：{{date}}",
+    "achievementsTitle": "⭐ 実績",
+    "noAchievements": "まだ実績なし。続けてマイルストーンをロック解除してください！",
+    "unlockedOn": "ロック解除日：{{date}}",
+    "for": "対象：{{addiction}}"
+  }
+}

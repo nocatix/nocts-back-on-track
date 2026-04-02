@@ -1,0 +1,308 @@
+{
+  "meditation": {
+    "pageTitle": "Meditación",
+    "startMeditation": "Comenzar meditación",
+    "duration": "Duración (minutos)",
+    "guidedMeditation": "Meditación guiada",
+    "timerId": "Cronómetro",
+    "breathingExercise": "Ejercicio de respiración",
+    "relaxationTechnique": "Técnica de relajación",
+    "noRecords": "Sin registros de meditación todavía. ¡Comienza a meditar!",
+    "backToMeditations": "← Atrás a meditaciones",
+    "sessionTimer": "⏱️ Cronómetro de sesión",
+    "sessionTimerLabel": "Cronómetro de sesión",
+    "guidedBreathing": "🫁 Respiración guiada",
+    "breathingPace": "Ritmo de respiración",
+    "startBreathingGuide": "▶ Comenzar guía de respiración",
+    "stopBreathingGuide": "⏹ Detener guía de respiración",
+    "showBreathingGuide": "Mostrar guía de respiración",
+    "hideBreathingGuide": "Ocultar guía de respiración",
+    "start": "Comenzar",
+    "pause": "Pausa",
+    "resume": "Reanudar",
+    "reset": "Reiniciar",
+    "minutes": "minutos",
+    "meditationMusic": "🎵 Música de meditación",
+    "guide": "Guía",
+    "postureTips": "🧘 Consejos de postura",
+    "quickTools": "Herramientas rápidas",
+    "emergencyCalmTitle": "🆘 Calma de emergencia",
+    "emergencyCalmDesc": "Alivio instantáneo para antojos intensos",
+    "emergencyCalm3Min": "3 minutos de calma de emergencia",
+    "quickBreathingTitle": "🫁 Respiración rápida",
+    "quickBreathingDesc": "Reinicia tu sistema nervioso",
+    "progressTitle": "📈 Tu progreso",
+    "sessionsCompleted": "sesiones completadas",
+    "minsTotal": "minutos totales",
+    "guidedBreathingExercise": "Ejercicio de respiración guiada",
+    "breathingTip1": "👉 Respira lentamente por tu nariz, sostén suavemente, luego exhala por tu boca",
+    "breathingTip2": "💡 Esto calma tu sistema nervioso y reduce los antojos naturalmente",
+    "recommendedMusicTitle": "🎵 Música de meditación recomendada",
+    "listenToMusic": "Escucha música ambiente mientras meditas",
+    "youtubeMusic": "YouTube: Música de meditación",
+    "spotifyMusic": "Spotify: Listas de reproducción de meditación",
+    "calmApp": "Aplicación Calm",
+    "recentSessionsTitle": "📝 Sesiones recientes",
+    "tipsForMeditation": "💡 Consejos para meditación exitosa",
+    "meditations": [
+      {
+        "id": 1,
+        "title": "Conciencia de la respiración",
+        "duration": "5 min",
+        "description": "Comienza con conciencia de respiración básica para calmar tu mente.",
+        "guide": "Toma un asiento cómodo. Cierra los ojos. Respira naturalmente por tu nariz. Cuenta cada exhalación de 1 a 10, luego comienza de nuevo. Si tu mente divaga, está bien - solo vuelve a contar. Continúa durante 5 minutos. Esta práctica simple ayuda a calmar la ansiedad y los antojos.",
+        "musicUrl": "https://www.youtube.com/embed/7qJZy4DpOWA"
+      },
+      {
+        "id": 2,
+        "title": "Exploración corporal",
+        "duration": "7 min",
+        "description": "Libera tensión de tu cuerpo sistemáticamente.",
+        "guide": "Acuéstate o siéntate cómodamente. Cierra los ojos. Comienza en la parte superior de tu cabeza. Nota cualquier tensión. A medida que respiras, imagina liberar esa tensión con cada exhalación. Muévete lentamente hacia abajo: frente, mandíbula, cuello, hombros, brazos, pecho, estómago, piernas, pies. Pasa 10-15 segundos en cada área. Esta técnica reduce el estrés físico de la abstinencia.",
+        "musicUrl": "https://www.youtube.com/embed/2DRyAW0ljHQ"
+      },
+      {
+        "id": 3,
+        "title": "Liberación de antojos",
+        "duration": "10 min",
+        "description": "Meditación específica para manejar antojos.",
+        "guide": "Siéntate cómodamente. Cierra los ojos. Observa cualquier antojo en tu cuerpo sin juzgar. No intentes luchar. Observa: ¿Dónde está? ¿Cómo se siente? ¿Tiene color, forma o temperatura? A medida que respiras, imagina el antojo como una onda pasando a través de ti. Míralo subir, alcanzar su pico y caer. Recuerda: los antojos son temporales. Esto también pasará. Se desvanecen naturalmente en 15-20 minutos.",
+        "musicUrl": "https://www.youtube.com/embed/sTzHDPqBN-8"
+      },
+      {
+        "id": 4,
+        "title": "Amabilidad amorosa",
+        "duration": "8 min",
+        "description": "Cultiva compasión y amor propio durante la recuperación.",
+        "guide": "Siéntate cómodamente. Cierra los ojos. Coloca tu mano en tu corazón. Di silenciosamente: 'Que sea pacífico. Que sea saludable. Que sea feliz. Que sea libre de la adicción.' Repite lentamente, sintiendo cada palabra. Luego extiende: 'Que otros también encuentren paz y sanación.' Esta práctica construye autocompasión y motivación para la recuperación.",
+        "musicUrl": "https://www.youtube.com/embed/lE5n6gYzJLo"
+      }
+    ],
+    "tips": [
+      "Comienza con solo 5 minutos al día. La consistencia importa más que la duración.",
+      "Medita a la misma hora cada día para construir un hábito.",
+      "Los antojos alcanzan su pico en 15-20 minutos. Medita a través del pico.",
+      "Usa meditación cuando sientas más tentación.",
+      "Tu mente divagará - eso es normal. Tráela de vuelta gentilmente.",
+      "Rastrea tu progreso. Observa cómo los antojos se vuelven más fáciles de manejar."
+    ],
+    "postureTipsList": [
+      {
+        "label": "Columna vertebral",
+        "text": "Mantenla recta pero no rígida - imagina un hilo desde tu base hasta la cima de tu cabeza"
+      },
+      {
+        "label": "Hombros",
+        "text": "Relájate hacia abajo y hacia atrás, lejos de tus oídos"
+      },
+      {
+        "label": "Manos",
+        "text": "Descansa sobre tus rodillas o regazo, palmas hacia arriba o hacia abajo como sea cómodo"
+      },
+      {
+        "label": "Barbilla",
+        "text": "Metida ligeramente, ojos mirando naturalmente hacia abajo (abiertos o cerrados están bien)"
+      },
+      {
+        "label": "Pies",
+        "text": "Si estás sentado, plantas firmes en el piso. Si estás acostado, déjalos caer naturalmente hacia afuera"
+      }
+    ]
+  },
+  "preparationPlan": {
+    "header": {
+      "title": "Haz tu plan y prepárate para dejar",
+      "subtitle": "La preparación es la base de la recuperación exitosa. Usa esta guía para prepararte al éxito."
+    },
+    "motivation": {
+      "title": "Por qué importa la preparación",
+      "mainMessage": "La recuperación no es algo que suceda, es algo que construyes.",
+      "description": "El tiempo que pases preparándote ahora determinará directamente tu éxito. Las personas que planean su recuperación tienen muchas más probabilidades de apegarse a ella a través de los días difíciles iniciales.",
+      "benefits": [
+        "La preparación reduce decisiones impulsivas cuando estás lidiando",
+        "Te hace estar listo y confiado antes de comenzar",
+        "Identifica obstáculos potenciales antes de sorprenderte",
+        "Asegura sistemas de apoyo desde el día uno",
+        "Demuestra a ti mismo que hablas en serio sobre el cambio"
+      ],
+      "insight": "💡 Cada minuto que pases en la planificación ahora te ahorra horas de lucha después."
+    },
+    "assess": {
+      "title": "1. Evalúa tu situación actual",
+      "intro": "Antes de dejar, entiende dónde estás:",
+      "questions": {
+        "frequency": "¿Con qué frecuencia estoy usando/comprometido? (diariamente, semanalmente, varias veces al día)",
+        "money": "¿Cuánto dinero estoy gastando por día/semana?",
+        "time": "¿Cuándo del día estoy usando más?",
+        "triggers": "¿Qué situaciones activan mi uso? (estrés, aburrimiento, social, emocional)",
+        "impact": "¿Cómo ha afectado esta adicción mi salud, relaciones, trabajo, finanzas?",
+        "obstacles": "¿Cuáles han sido mis obstáculos para dejar en el pasado?"
+      },
+      "placeholder": "Ingresa tu respuesta aquí...",
+      "tip": "Consejo: Usa esta app para rastrear tu uso actual durante algunos días antes de dejar. Los datos reales son más poderosos que las conjeturas."
+    },
+    "quitDate": {
+      "title": "2. Establece una fecha de salida específica",
+      "mainAdvice": "Elige una fecha dentro de 1-2 semanas. Date suficiente tiempo para prepararte, pero no tanto como para perder motivación.",
+      "goodTiming": [
+        "✓ Buen timing: Elige un día después de que pase un evento estresante",
+        "✓ Buen timing: Elige un día cuando el apoyo esté disponible"
+      ],
+      "badTiming": [
+        "✗ Mal timing: No elijas cuando ya estés estresado o emocional",
+        "✗ Mal timing: No elijas cuando estarás solo con fácil acceso"
+      ],
+      "finalAdvice": "Una vez hayas elegido tu fecha, márcala en el calendario. Cuéntale a la gente. Pónlo donde lo veas diariamente. Hazlo real."
+    },
+    "triggers": {
+      "title": "3. Identifica tus disparadores",
+      "intro": "Los disparadores son situaciones, emociones o personas que te hacen querer usar. Conocerlos de antemano significa que puedes planificar para ellos.",
+      "categories": {
+        "emotional": {
+          "title": "Disparadores emocionales",
+          "description": "Estrés, aburrimiento, soledad, ira, ansiedad, tristeza... ¿Qué emoción impulsa tu uso?"
+        },
+        "social": {
+          "title": "Disparadores sociales",
+          "description": "Personas, lugares o grupos específicos. ¿Usas con ciertos amigos? ¿En lugares específicos?"
+        },
+        "environmental": {
+          "title": "Disparadores ambientales",
+          "description": "Horas del día, lugares. ¿Tu cuarto te dispara? ¿Las noches tarde?"
+        },
+        "habitual": {
+          "title": "Disparadores habituales",
+          "description": "Cosas que siempre has hecho juntas. ¿Ritual de café matutino? ¿Rutina después del trabajo?"
+        }
+      },
+      "action": "Acción: Para cada disparador, escribe un plan específico para lo que harás en su lugar."
+    },
+    "support": {
+      "title": "4. Construye tu red de apoyo",
+      "intro": "No puedes hacer esto solo. La recuperación exitosa requiere conexión y apoyo. Construye tu red ahora, antes de dejar.",
+      "people": {
+        "title": "👥 Personas para contar",
+        "items": [
+          "Al menos una persona en la que confíes completamente a quien puedas llamar en cualquier momento",
+          "Alguien que no te juzgará si luchas",
+          "Alguien que celebrará tus victorias",
+          "Considera contarle a un terapeuta, consejero o médico"
+        ]
+      },
+      "resources": {
+        "title": "📱 Recursos de apoyo",
+        "items": [
+          "Grupos de apoyo (AA, NA, SMART Recovery, etc.)",
+          "Servicios de terapia o asesoramiento",
+          "Esta app - usa TODAS sus funciones (Diario, Estado de ánimo, Meditación)",
+          "Líneas de ayuda y líneas de texto de crisis"
+        ]
+      },
+      "professional": {
+        "title": "🏥 Ayuda profesional",
+        "items": [
+          "Apoyo de desintoxicación médica si es necesario para alcohol o drogas",
+          "Tratamiento asistido con medicamentos si se recomienda",
+          "Tratamiento de salud mental para problemas subyacentes",
+          "No intentes solo si es peligroso"
+        ]
+      },
+      "action": "Escribe 3-5 personas específicas a las que puedas llamar cuando sea difícil. Consigue sus números ahora y guárdalos en tu teléfono."
+    },
+    "coping": {
+      "title": "5. Planifica tus estrategias de afrontamiento",
+      "intro": "Vendrán antojos. Necesitas herramientas concretas listas ANTES de que lleguen.",
+      "strategies": {
+        "meditation": {
+          "title": "🧘 Meditación y atención plena",
+          "description": "Usa la función de meditación de esta app. Incluso 2 minutos ayudan."
+        },
+        "distraction": {
+          "title": "🎮 Estrategias de distracción",
+          "description": "Usa el juego de antojos, mira una película, llama a un amigo, toma un baño, haz ejercicio."
+        },
+        "physical": {
+          "title": "💪 Actividad física",
+          "description": "Camina, corre, yoga, baila - cualquier cosa para mover tu cuerpo y cambiar tu química."
+        },
+        "journaling": {
+          "title": "📔 Escritura en el diario",
+          "description": "Usa la función de diario para escribir a través de antojos y emociones."
+        },
+        "emotions": {
+          "title": "🎭 Procesamiento emocional",
+          "description": "Rastrea tu estado de ánimo, nombra tus sentimientos, siéntelos sin actuar en ellos."
+        },
+        "connection": {
+          "title": "🤝 Conexión",
+          "description": "Llama a alguien, envía un mensaje de texto a un amigo, asiste a una reunión de grupo de apoyo."
+        }
+      },
+      "action": "Crea tu kit de herramientas personal para crisis de antojos: Escribe 3-5 cosas que harás cuando te golpeen los antojos. Póstalo en algún lugar visible."
+    },
+    "remove": {
+      "title": "6. Elimina tentaciones",
+      "intro": "Haz lo más difícil posible de usar. No puedes rechazar lo que no tienes.",
+      "actions": {
+        "clean": {
+          "title": "🚭 Limpia tu espacio",
+          "description": "Deshazte de todos los suministros, parafernalia, recordatorios. Limpieza profunda de tu cuarto, coche, bolsa."
+        },
+        "delete": {
+          "title": "🗑️ Elimina acceso",
+          "description": "Elimina apps, bloquea sitios web, deja de seguir cuentas, elimina contactos de traficantes."
+        },
+        "money": {
+          "title": "💳 Limita dinero",
+          "description": "Dale el control de tus finanzas a alguien en quien confíes. Elimina tarjetas de acceso si es necesario."
+        },
+        "avoid": {
+          "title": "📍 Evita lugares",
+          "description": "Planifica rutas que eviten tus puntos de uso típicos. Ve por caminos diferentes."
+        },
+        "distance": {
+          "title": "👥 Distancia de personas",
+          "description": "Considera decirle a amigos que estás dejando - los verdaderos amigos te apoyarán."
+        }
+      }
+    },
+    "fortyEightHours": {
+      "title": "7. Planifica las primeras 48 horas",
+      "intro": "Las primeras 48 horas son las más difíciles. Planifica hora por hora si es necesario.",
+      "blocks": {
+        "wakeUp": {
+          "title": "Cuando despiertes",
+          "description": "Cuéntale a alguien que tu salida está comenzando. Haz algo saludable (ejercicio, meditación, desayuno saludable)."
+        },
+        "morning": {
+          "title": "Mañana (después de dormir)",
+          "description": "El tiempo sin estructura es peligroso. Planifica algo: ejercicio, reúnete con un amigo, hobby, meditación."
+        },
+        "afternoon": {
+          "title": "Tarde (hora de antojo pico)",
+          "description": "Llama a tu persona de apoyo. Usa tu kit de herramientas de antojos. Este tiempo pasará."
+        },
+        "evening": {
+          "title": "Noche (tiempo solitario)",
+          "description": "Estar con gente o en el teléfono con alguien. Mantente ocupado. Usa el diario para procesar."
+        },
+        "night": {
+          "title": "De noche (más difícil para muchos)",
+          "description": "Prepárate para dormir: baño tibio, té, meditación, audiolibro. Puedes hacerlo."
+        }
+      },
+      "insight": "💡 Si las primeras 48 horas pasan sin usar, tus probabilidades de éxito a largo plazo se disparan. Puedes hacerlo."
+    },
+    "mental": {
+      "title": "8. Prepárate mentalmente",
+      "intro": "Tu mente determina tu éxito. Planta estas verdades ahora, antes de comenzar:",
+      "beliefs": [
+        "✓ Esto es posible. Millones de personas lo han hecho. Tú también puedes.",
+        "✓ Esto es difícil, pero se vuelve más fácil.",
+        "✓ Los antojos alcanzan su pico en 15-20 minutos.",
+        "✓ No eres malo. Eres valiente por intentar.",
+        "✓ Cada día que no usas te hace más fuerte."
+      ]
+    }
+  }
+}

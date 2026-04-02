@@ -1,0 +1,32 @@
+{
+  "pageTitle": "Mi diario",
+  "addEntry": "Agregar nueva entrada",
+  "entry": "Entrada",
+  "noEntries": "Sin entradas de diario todavía. ¡Comienza a escribir!",
+  "entryDate": "Fecha de entrada",
+  "entryContent": "¿Cómo te sientes?",
+  "entryContentPlaceholder": "Escribe tus pensamientos y sentimientos aquí...",
+  "recentEntries": "Entradas recientes",
+  "previousDay": "◀ Anterior",
+  "nextDay": "Siguiente ▶",
+  "today": "Hoy",
+  "lastSaved": "Último guardado",
+  "writeHere": "Escribe aquí... Puedes usar markdown:\n# Encabezado 1\n## Encabezado 2\n**negrita** *cursiva*\n- puntos",
+  "markdownTip": "💡 Consejo: Usa markdown para formatear - **negrita**, *cursiva*, # encabezados, - puntos",
+  "hideTip": "▼ Ocultar consejo",
+  "showTip": "▶ Mostrar consejo",
+  "savingEntry": "Guardando...",
+  "saveEntry": "💾 Guardar entrada",
+  "editEntry": "✏️ Editar entrada",
+  "cancel": "Cancelar",
+  "noEntryForDay": "Sin entrada para este día.",
+  "journalingTipsTitle": "💭 Consejos de diario para la recuperación",
+  "journalingTips": [
+    "Gratitud: Cada día escribe 3 cosas por las que estés agradecido",
+    "Progreso: Rastrear cuántos días has permanecido fuerte",
+    "Disparadores: Anota qué activó los antojos y cómo los manejaste",
+    "Emociones: Escribe sobre tus sentimientos para procesarlos",
+    "Metas: Recuerdate por qué estás en este viaje",
+    "Victorias: Celebra cada pequeña victoria, sin importar qué tan pequeña"
+  ]
+}

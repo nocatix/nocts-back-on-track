@@ -1,0 +1,32 @@
+{
+  "pageTitle": "Suivre vos dépendances",
+  "addNew": "Ajouter une nouvelle dépendance",
+  "addictionName": "Nom de la dépendance",
+  "addictionNameLabel": "Nom de la dépendance",
+  "enterAddictionName": "Entrez le nom de votre dépendance",
+  "addictionNamePlaceholder": "ex. Fumer, Alcool, Réseaux sociaux",
+  "dateYouStopped": "Date d'arrêt",
+  "timeYouStopped": "Heure d'arrêt",
+  "timeFormat12h": "Format 12 heures (AM/PM)",
+  "timeFormat24h": "Format 24 heures",
+  "frequency": "Fréquence",
+  "timesPerDay": "Fois par jour",
+  "frequencyPlaceholder": "Combien de fois par jour ?",
+  "money": "Argent dépensé",
+  "moneyPlaceholder": "Montant dans votre devise",
+  "additionalNotes": "Notes supplémentaires",
+  "additionalNotesPlaceholder": "Autres détails sur cette dépendance...",
+  "selectAddiction": "Sélectionnez la dépendance",
+  "description": "Description",
+  "startDate": "Date de début",
+  "category": "Catégorie",
+  "severity": "Gravité",
+  "noAddictions": "Pas encore de dépendances suivies. Commencez aujourd'hui !",
+  "daysSoberCount": "Jours de sobriété",
+  "addictionCard": {
+    "days": "Jours",
+    "saved": "Économisé",
+    "encouragement": "Vous faites des progrès incroyables !",
+    "youreDoingGreat": "Vous vous débrouillez très bien ! Continuez !"
+  }
+}

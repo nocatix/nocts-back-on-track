@@ -1,0 +1,297 @@
+{
+  "pageTitle": "发现新爱好",
+  "subtitle": "通过充斥着目的、意义和联系的迷人活动来推动你的康复",
+  "whyHobbiesTitle": "为什么爱好对康复至关重要",
+  "benefits": [
+    {
+      "emoji": "⏰",
+      "title": "填补你的时间",
+      "description": "爱好填补了你通常用于使用的时间。无聊是危险的。投入是安全的。"
+    },
+    {
+      "emoji": "😊",
+      "title": "释放多巴胺",
+      "description": "爱好为你的大脑提供了它从成瘾中寻求的快乐，自然而健康。"
+    },
+    {
+      "emoji": "🎯",
+      "title": "建立目的",
+      "description": "为了掌握或实现某事而工作给你的生活赋予了超越"不使用"的意义。"
+    },
+    {
+      "emoji": "🤝",
+      "title": "创建社区",
+      "description": "社交爱好将你与他人联系起来，建立健康的关系。"
+    },
+    {
+      "emoji": "💪",
+      "title": "建立信心",
+      "description": "学习和改进某事会产生真实的成就和自尊。"
+    },
+    {
+      "emoji": "🧠",
+      "title": "健康的逃脱",
+      "description": "爱好提供精神逃脱而不伤害，只是纯粹的快乐。"
+    }
+  ],
+  "filterTitle": "筛选爱好",
+  "filterOptions": [
+    {
+      "value": "all",
+      "label": "所有爱好"
+    },
+    {
+      "value": "solo",
+      "label": "😊 独自",
+      "subtext": "（独自做）"
+    },
+    {
+      "value": "social",
+      "label": "👥 社交",
+      "subtext": "（与他人）"
+    },
+    {
+      "value": "outdoor",
+      "label": "🌳 户外"
+    },
+    {
+      "value": "indoor",
+      "label": "🏠 室内"
+    },
+    {
+      "value": "free",
+      "label": "💰 免费"
+    },
+    {
+      "value": "paid",
+      "label": "💵 付费"
+    }
+  ],
+  "categoryLabels": {
+    "solo": "😊 独自",
+    "social": "👥 社交",
+    "outdoor": "🌳 户外",
+    "indoor": "🏠 室内",
+    "free": "💰 免费",
+    "paid": "💵 付费"
+  },
+  "recoveryBenefitsTitle": "✨ 康复的好处",
+  "getStartedTitle": "🚀 开始",
+  "finalTitle": "开始探索",
+  "finalMessages": [
+    "选择一个真正吸引你的爱好。不要想太多。只是试试。",
+    "本周尝试。认真尝试。你不需要擅长它，你只需要去做。",
+    "目标不是完美。目标是投入、幸福和值得活的清醒生活。"
+  ],
+  "hobbies": [
+    {
+      "id": 1,
+      "name": "散步",
+      "emoji": "🚶",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "30分钟 - 2小时",
+      "description": "移动身体和清理头脑的简单免费方法。散步可以减少渴望。",
+      "recovery_benefits": [
+        "身体活动",
+        "新鲜空气",
+        "心思清晰",
+        "缓解压力"
+      ],
+      "get_started": "从每天20分钟的散步开始。注意你的周围环境。"
+    },
+    {
+      "id": 2,
+      "name": "跑步/慢跑",
+      "emoji": "🏃",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "20-60分钟",
+      "description": "最强烈的运动释放内啡肽并燃烧神经能量。",
+      "recovery_benefits": [
+        "内啡肽释放",
+        "强烈运动",
+        "渴望抑制",
+        "促进信心"
+      ],
+      "get_started": "如果你是新手，从跑步/散步间隔开始。应用可以指导你。"
+    },
+    {
+      "id": 3,
+      "name": "登山",
+      "emoji": "⛰️",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "1-4小时",
+      "description": "将自然接触、身体活动和目标设定结合在有意义的爱好中。",
+      "recovery_benefits": [
+        "与自然的联系",
+        "成就感",
+        "运动",
+        "心灵复位"
+      ],
+      "get_started": "找到当地的登山路线。从初学者路线开始。"
+    },
+    {
+      "id": 4,
+      "name": "园艺",
+      "emoji": "🌱",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "30分钟 - 2小时",
+      "description": "种植东西给你目的、耐心和照顾生活的满足感。",
+      "recovery_benefits": [
+        "目标感",
+        "与自然的联系",
+        "培养耐心",
+        "成就感"
+      ],
+      "get_started": "从易于种植的植物开始。即使是小窗台花园也算。"
+    },
+    {
+      "id": 5,
+      "name": "探索你的城市",
+      "emoji": "🗺️",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "1-3小时",
+      "description": "重新发现你的社区。找到你从未注意到的公园和咖啡馆。",
+      "recovery_benefits": [
+        "好奇心",
+        "活动",
+        "新视角",
+        "打破常规"
+      ],
+      "get_started": "选择一个你不太了解的地区。无目的地探索。"
+    },
+    {
+      "id": 6,
+      "name": "骑自行车",
+      "emoji": "🚴",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "30分钟 - 2小时",
+      "description": "覆盖距离和感受自由的有趣快速方式。",
+      "recovery_benefits": [
+        "速度和自由",
+        "心血管健康",
+        "探索",
+        "内啡肽"
+      ],
+      "get_started": "在当地商店或网上买一辆二手自行车。投资头盔和锁。"
+    },
+    {
+      "id": 7,
+      "name": "攀岩",
+      "emoji": "🧗",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-3小时",
+      "description": "强烈的身体和精神挑战建立信心和专注力。",
+      "recovery_benefits": [
+        "问题解决",
+        "信心",
+        "全身力量",
+        "改进焦点"
+      ],
+      "get_started": "在当地攀岩馆开始。教练教授正确的技术和安全。"
+    },
+    {
+      "id": 8,
+      "name": "摄影",
+      "emoji": "📸",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-4小时",
+      "description": "捕捉美丽、发展艺术眼光并探索创意出口。",
+      "recovery_benefits": [
+        "创意",
+        "正念",
+        "探索",
+        "成就感"
+      ],
+      "get_started": "从手机摄像头开始。从免费在线教程中学习。"
+    },
+    {
+      "id": 9,
+      "name": "水上运动",
+      "emoji": "🏄",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-3小时",
+      "description": "冲浪、皮划艇或桨板将你与水连接并提供肾上腺素。",
+      "recovery_benefits": [
+        "与自然的联系",
+        "肾上腺素",
+        "全身运动",
+        "当下时刻"
+      ],
+      "get_started": "在当地海滩或湖泊参加初学者课程。在平静的水中开始。"
+    },
+    {
+      "id": 10,
+      "name": "阅读",
+      "emoji": "📖",
+      "category": [
+        "solo",
+        "indoor",
+        "free"
+      ],
+      "duration": "30分钟 - 2小时",
+      "description": "沉浸在故事中，学习新东西并以健康方式挑战你的思维。",
+      "recovery_benefits": [
+        "精神逃脱",
+        "词汇增长",
+        "放松",
+        "知识"
+      ],
+      "get_started": "访问你的当地图书馆。免费借书。"
+    },
+    {
+      "id": 11,
+      "name": "写作/日记",
+      "emoji": "✍️",
+      "category": [
+        "solo",
+        "indoor",
+        "free"
+      ],
+      "duration": "20-60分钟",
+      "description": "处理情绪、追踪你的旅程并发现关于自己的观点。",
+      "recovery_benefits": [
+        "情绪处理",
+        "自我发现",
+        "缓解压力",
+        "追踪进度"
+      ],
+      "get_started": "从自由写作开始。无规则。写真实的东西。"
+    }
+  ]
+}

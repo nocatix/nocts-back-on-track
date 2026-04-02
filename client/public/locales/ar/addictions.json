@@ -1,0 +1,32 @@
+{
+  "pageTitle": "تتبع إدماناتك",
+  "addNew": "إضافة إدمان جديد",
+  "addictionName": "اسم الإدمان",
+  "addictionNameLabel": "اسم الإدمان",
+  "enterAddictionName": "أدخل اسم إدمانك",
+  "addictionNamePlaceholder": "مثال: التدخين، الكحول، وسائل التواصل الاجتماعي",
+  "dateYouStopped": "التاريخ الذي توقفت فيه",
+  "timeYouStopped": "الوقت الذي توقفت فيه",
+  "timeFormat12h": "صيغة 12 ساعة (صباحاً/مساءً)",
+  "timeFormat24h": "صيغة 24 ساعة",
+  "frequency": "التكرار",
+  "timesPerDay": "عدد المرات في اليوم",
+  "frequencyPlaceholder": "كم مرة في اليوم؟",
+  "money": "المال المنفق",
+  "moneyPlaceholder": "المبلغ بعملتك",
+  "additionalNotes": "ملاحظات إضافية",
+  "additionalNotesPlaceholder": "تفاصيل أخرى عن هذا الإدمان...",
+  "selectAddiction": "اختر الإدمان",
+  "description": "الوصف",
+  "startDate": "تاريخ البداية",
+  "category": "الفئة",
+  "severity": "الشدة",
+  "noAddictions": "لم تتبع أي إدمان بعد. ابدأ اليوم!",
+  "daysSoberCount": "الأيام النظيفة",
+  "addictionCard": {
+    "days": "أيام",
+    "saved": "تم الحفظ",
+    "encouragement": "أنت تحرز تقدماً رائعاً!",
+    "youreDoingGreat": "أنت تقوم بعمل رائع! استمر!"
+  }
+}

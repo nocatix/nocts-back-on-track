@@ -35,6 +35,8 @@ function enrichAddictionData(addiction) {
   addictionData.daysStopped = addiction.getDaysStopped();
   addictionData.totalMoneySaved = addiction.getTotalMoneySaved();
   addictionData.addictionType = extractAddictionType(addictionData.name);
+  addictionData.daysUntilPlannedStop = addiction.getDaysUntilPlannedStop();
+  addictionData.hasActivePlannedStop = addiction.hasActivePlannedStop();
   return addictionData;
 }
 
@@ -201,6 +203,89 @@ router.put('/:id', auth, async (req, res) => {
     const trophyDeleteResult = await Trophy.deleteMany({ userId: req.user.userId });
     console.log(`[Edit Addiction] Deleted ${trophyDeleteResult.deletedCount} trophies`);
     
+    res.json(enrichAddictionData(addiction));
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+/**
+ * @route   PUT /api/addictions/:id/planned-stop-date
+ * @desc    Set a planned stop date for an addiction
+ * @access  Private (requires JWT token)
+ * @param   {string} id - Addiction MongoDB ID
+ * @param   {date} plannedStopDate - The date user plans to stop (or null to clear)
+ * @returns {Object} Updated addiction object
+ */
+router.put('/:id/planned-stop-date', auth, async (req, res) => {
+  try {
+    const { plannedStopDate } = req.body;
+    
+    // Validate that plannedStopDate is either null or a valid future date
+    if (plannedStopDate !== null) {
+      const date = new Date(plannedStopDate);
+      if (isNaN(date.getTime())) {
+        return res.status(400).json({ message: 'Invalid date format' });
+      }
+      // Optionally: ensure the date is in the future
+      if (date <= new Date()) {
+        return res.status(400).json({ message: 'Planned stop date must be in the future' });
+      }
+    }
+    
+    // Find the addiction and verify ownership
+    const addiction = await Addiction.findOne({
+      _id: req.params.id,
+      userId: req.user.userId
+    });
+    
+    if (!addiction) {
+      return res.status(404).json({ message: 'Addiction not found' });
+    }
+    
+    // Update the planned stop date
+    addiction.plannedStopDate = plannedStopDate ? new Date(plannedStopDate) : null;
+    addiction.updatedAt = new Date();
+    await addiction.save();
+    
+    res.json(enrichAddictionData(addiction));
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+/**
+ * @route   PUT /api/addictions/:id/caved
+ * @desc    Mark addiction as relapsed - resets stopDate to today and removes achievements
+ * @access  Private (requires JWT token)
+ * @returns {Object} Updated addiction object
+ */
+router.put('/:id/caved', auth, async (req, res) => {
+  try {
+    // Find the addiction and verify it belongs to the user
+    const addiction = await Addiction.findOne({
+      _id: req.params.id,
+      userId: req.user.userId
+    });
+
+    if (!addiction) {
+      return res.status(404).json({ message: 'Addiction not found' });
+    }
+
+    // Reset the stop date to today (timestamp when they caved)
+    addiction.stopDate = new Date();
+    addiction.updatedAt = new Date();
+    await addiction.save();
+
+    // Remove all achievements and trophies for this addiction
+    await Promise.all([
+      Achievement.deleteMany({
+        userId: req.user.userId,
+        addictionId: addiction._id
+      }),
+      Trophy.deleteMany({ userId: req.user.userId })
+    ]);
+
     res.json(enrichAddictionData(addiction));
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });

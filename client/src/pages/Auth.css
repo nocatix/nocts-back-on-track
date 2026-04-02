@@ -5,7 +5,7 @@
   align-items: center;
   min-height: 100vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 20px;
+  padding: 0;
   transition: background 0.3s ease;
 }
 
@@ -17,13 +17,12 @@ html.dark .auth-container {
   background: rgba(255, 255, 255, 0.95);
   color: var(--text-primary);
   padding: 15px 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  max-width: 400px;
+  margin: 0;
   width: 100%;
   text-align: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   transition: background 0.3s ease, color 0.3s ease;
+  order: -1;
 }
 
 html.dark .disclaimer-banner {
@@ -52,6 +51,7 @@ html.dark .disclaimer-banner {
   width: 100%;
   max-width: 400px;
   transition: background 0.3s ease, color 0.3s ease;
+  margin: 20px;
 }
 
 html.dark .auth-card {
@@ -60,6 +60,15 @@ html.dark .auth-card {
 
 .auth-card h2 {
   margin-bottom: 30px;
+  text-align: center;
+  color: var(--accent-color);
+  transition: color 0.3s ease;
+}
+
+.auth-card h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 5px;
   text-align: center;
   color: var(--accent-color);
   transition: color 0.3s ease;

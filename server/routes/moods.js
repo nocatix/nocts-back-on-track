@@ -54,7 +54,7 @@ router.post('/', auth, async (req, res) => {
     }
 
     await mood.save();
-    res.json(mood);
+    res.json(mood.toObject());
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error saving mood' });
@@ -73,7 +73,7 @@ router.get('/month/:year/:month', auth, async (req, res) => {
       date: { $gte: startDate, $lt: endDate }
     }).sort({ date: 1 });
 
-    res.json(moods);
+    res.json(moods.map(mood => mood.toObject()));
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error fetching moods' });
@@ -91,7 +91,7 @@ router.get('/:date', auth, async (req, res) => {
       date: moodDate
     });
 
-    res.json(mood || null);
+    res.json(mood ? mood.toObject() : null);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error fetching mood' });

@@ -29,9 +29,9 @@
 }
 
 .how-to-succeed-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 40px !important;
 }
 
 .how-to-succeed-section {
@@ -41,6 +41,64 @@
   padding: 30px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  display: block !important;
+  overflow: hidden !important;
+  min-height: auto !important;
+}
+
+.how-to-succeed-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+}
+
+.how-to-succeed-section-header:hover {
+  opacity: 0.8;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+}
+
+.toggle-arrow {
+  font-size: 1.5em;
+  transition: transform 0.3s ease;
+  color: var(--accent-color);
+  min-width: 24px;
+  text-align: center;
+}
+
+.how-to-succeed-section.collapsed .section-content {
+  max-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  height: 0;
+}
+
+.how-to-succeed-section.expanded .section-content {
+  max-height: 10000px;
+  overflow: visible;
+  visibility: visible;
+  opacity: 1;
+  height: auto;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  margin-top: 20px;
+}
+
+.how-to-succeed-section.collapsed .toggle-arrow {
+  transform: rotate(-90deg);
+}
+
+.how-to-succeed-section.expanded .toggle-arrow {
+  transform: rotate(0deg);
 }
 
 html.dark .how-to-succeed-section {
@@ -88,6 +146,12 @@ html.dark .how-to-succeed-section {
 .section-content {
   font-size: 1.05em;
   line-height: 1.8;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  overflow: visible !important;
+  visibility: visible !important;
+  color: var(--text-primary) !important;
 }
 
 .section-content p {

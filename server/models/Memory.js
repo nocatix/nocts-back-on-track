@@ -46,6 +46,17 @@ memorySchema.post('find', function(docs) {
   });
 });
 
+// Decrypt message after saving (so response includes decrypted data)
+memorySchema.post('save', function(doc) {
+  if (doc && doc.message) {
+    // If message is an object with encrypted property, decrypt it
+    if (doc.message.encrypted) {
+      doc.message = decrypt(doc.message);
+    }
+    // If message is a string, leave it as is (wasn't encrypted because it was empty/falsy)
+  }
+});
+
 memorySchema.index({ userId: 1, createdAt: -1 });
 
 module.exports = mongoose.model('Memory', memorySchema);

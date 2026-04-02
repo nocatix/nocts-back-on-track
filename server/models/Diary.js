@@ -12,11 +12,7 @@ const DiarySchema = new mongoose.Schema({
     required: true,
     default: Date.now
   },
-  content: {
-    encrypted: String,
-    iv: String,
-    authTag: String
-  },
+  content: mongoose.Schema.Types.Mixed,
   createdAt: {
     type: Date,
     default: Date.now
@@ -49,6 +45,17 @@ DiarySchema.post('find', function(docs) {
       doc.content = decrypt(doc.content);
     }
   });
+});
+
+// Decrypt content after saving (so response includes decrypted data)
+DiarySchema.post('save', function(doc) {
+  if (doc && doc.content) {
+    // If content is an object with encrypted property, decrypt it
+    if (doc.content.encrypted) {
+      doc.content = decrypt(doc.content);
+    }
+    // If content is a string, leave it as is (wasn't encrypted because it was empty/falsy)
+  }
 });
 
 // Index for faster queries

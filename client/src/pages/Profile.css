@@ -372,6 +372,51 @@ html.dark .modal-content {
   font-size: 24px;
 }
 
+.language-button-group {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.language-button {
+  flex: 1;
+  min-width: 150px;
+  padding: 15px 20px;
+  border: 2px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.language-button:hover {
+  border-color: var(--accent-color);
+  background: var(--card-bg);
+  transform: translateY(-2px);
+}
+
+.language-button.active {
+  border-color: var(--accent-color);
+  background: var(--accent-color);
+  color: white;
+  font-weight: bold;
+}
+
+.language-button span:first-child {
+  font-size: 24px;
+}
+
+.language-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 @media (max-width: 600px) {
   .profile-page {
     padding: 10px;

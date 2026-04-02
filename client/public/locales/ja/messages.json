@@ -1,0 +1,48 @@
+{
+  "saved": "正常に保存されました！",
+  "deleted": "正常に削除されました！",
+  "updated": "正常に更新されました！",
+  "error": "エラーが発生しました。もう一度やり直してください。",
+  "serverError": "サーバーエラー。後でやり直してください。",
+  "networkError": "ネットワークエラー。接続を確認してください。",
+  "unauthorized": "このアクションを実行する権限がありません",
+  "validation": {
+    "required": "このフィールドは必須です",
+    "invalidEmail": "有効なメールアドレスを入力してください",
+    "passwordTooShort": "パスワードは少なくとも6文字である必要があります",
+    "passwordMismatch": "パスワードが一致しません",
+    "invalidInput": "入力が無効です"
+  },
+  "mainMenu": {
+    "pageTitle": "メインメニュー",
+    "failedToLoadAddictions": "依存症をロードに失敗しました",
+    "failedToUpdateAddiction": "依存症の更新に失敗しました",
+    "aboutToCave": "屈する寸前ですか？",
+    "craviingSupport": "渇望サポート",
+    "cravineSupportMessage": "渇望を感じていますか？今すぐサポートを得てください！",
+    "cravingEncouragement": "あなたはこれを乗り越えることができます。深呼吸してください。",
+    "managedCraving": "渇望を管理しました",
+    "needHelp": "助けが必要です",
+    "whichAddiction": "どの依存症に対処していますか？",
+    "selectAddictionForLogging": "対処している依存症を選択してログして、サポートを得て",
+    "noAddictionsToLog": "まだ追跡している依存症はありません。最初に1つを追加してください。",
+    "amazingWork": "🎉 素晴らしい仕事！",
+    "resistedCraving": "渇望に抵抗しました。これは巨大です！強くとどまる各瞬間があなたの回復を構築します。",
+    "messageClosing": "あなたは本当に頑張っています！続けてください！",
+    "cravingSupport": {
+      "message": "渇望を感じていますか？今すぐサポートを得てください！",
+      "encouragement": "あなたはこれを乗り越えることができます。深呼吸してください。",
+      "buttons": "助けを得る"
+    },
+    "todaysOutlook": "今日の見通し",
+    "todaysSavings": "今日の貯蓄",
+    "totalSaved": "総節約",
+    "todaysTips": "今日のヒント"
+  },
+  "addictionCard": {
+    "days": "日",
+    "saved": "節約",
+    "encouragement": "あなたは信じられない進歩を遂げています！",
+    "youreDoingGreat": "あなたは本当に頑張っています！続けてください！"
+  }
+}

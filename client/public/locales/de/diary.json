@@ -1,0 +1,32 @@
+{
+  "pageTitle": "Mein Tagebuch",
+  "addEntry": "Neuen Eintrag hinzufügen",
+  "entry": "Eintrag",
+  "noEntries": "Noch keine Tagebucheinträge. Beginne zu schreiben!",
+  "entryDate": "Eintragsdatum",
+  "entryContent": "Wie fühlst du dich?",
+  "entryContentPlaceholder": "Schreibe deine Gedanken und Gefühle hier...",
+  "recentEntries": "Letzte Einträge",
+  "previousDay": "◀ Vorheriger",
+  "nextDay": "Weiter ▶",
+  "today": "Heute",
+  "lastSaved": "Zuletzt gespeichert",
+  "writeHere": "Schreibe hier... Du kannst Markdown verwenden:\n# Überschrift 1\n## Überschrift 2\n**fett** *kursiv*\n- Aufzählungspunkte",
+  "markdownTip": "💡 Tipp: Nutze Markdown für Formatierung - **fett**, *kursiv*, # Überschriften, - Aufzählungen",
+  "hideTip": "▼ Tipp ausblenden",
+  "showTip": "▶ Tipp anzeigen",
+  "savingEntry": "Wird gespeichert...",
+  "saveEntry": "💾 Eintrag speichern",
+  "editEntry": "✏️ Eintrag bearbeiten",
+  "cancel": "Abbrechen",
+  "noEntryForDay": "Kein Eintrag für diesen Tag.",
+  "journalingTipsTitle": "💭 Tagebuch-Tipps für die Genesung",
+  "journalingTips": [
+    "Dankbarkeit: Schreibe täglich 3 Dinge auf, für die du dankbar bist",
+    "Fortschritt: Verfolge, wie viele Tage du stark geblieben bist",
+    "Auslöser: Notiere, was Heißhunger ausgelöst hat und wie du damit umgegangen bist",
+    "Emotionen: Schreibe über deine Gefühle, um sie zu verarbeiten",
+    "Ziele: Erinnere dich, warum du auf dieser Reise bist",
+    "Siege: Feiere jeden kleinen Sieg, egal wie klein"
+  ]
+}

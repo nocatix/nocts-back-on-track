@@ -1,0 +1,176 @@
+{
+  "mood": {
+    "pageTitle": "🎭 기분 추적기",
+    "loading": "로딩 중...",
+    "moodLegend": "기분 범례:",
+    "noMoodRecorded": "이 날짜에 기록된 기분이 없습니다",
+    "addMood": "기분 추가",
+    "editMood": "기분 수정",
+    "howAreYouFeeling": "어떠신가요?",
+    "moreSpecifically": "더 구체적으로...",
+    "changePrimary": "← 주 기분 변경",
+    "intensityFormLabel": "강도 (1-5)",
+    "intensityStatusDisplay": "강도: {{intensity}}/5",
+    "triggersLabel": "트리거 (쉼표로 구분)",
+    "triggersPlaceholder": "예: 카페인, 수면 부족, 직장 스트레스",
+    "notesLabel": "메모",
+    "notesPlaceholder": "기분에 대한 다른 메모 추가...",
+    "saveMoodButton": "기분 저장",
+    "cancelButton": "취소",
+    "selectPrimaryError": "주 기분을 선택하세요",
+    "loginRequired": "기분을 저장하려면 등록해야 합니다",
+    "saveFailed": "기분 저장 실패",
+    "notesTitle": "메모: ",
+    "triggersTitle": "트리거: ",
+    "monthNames": [
+      "1월",
+      "2월",
+      "3월",
+      "4월",
+      "5월",
+      "6월",
+      "7월",
+      "8월",
+      "9월",
+      "10월",
+      "11월",
+      "12월"
+    ],
+    "weekdays": [
+      "일",
+      "월",
+      "화",
+      "수",
+      "목",
+      "금",
+      "토"
+    ],
+    "emotions": {
+      "primary": [
+        "😊 행복",
+        "😢 슬픔",
+        "😠 분노",
+        "😰 불안",
+        "😌 진정",
+        "⚡ 에너지",
+        "😴 피로",
+        "😐 중립"
+      ],
+      "secondary": {
+        "😊 행복": [
+          "😄 기쁨",
+          "🤩 열광",
+          "😌 만족",
+          "🙏 감사",
+          "😎 자부심"
+        ],
+        "😢 슬픔": [
+          "😞 낙담",
+          "😕 실망",
+          "😔 외로움",
+          "😩 절망",
+          "☔ 우울"
+        ],
+        "😠 분노": [
+          "🤬 분노",
+          "😤 짜증",
+          "😒 불만",
+          "😤 좌절",
+          "😑 불쾌"
+        ],
+        "😰 불안": [
+          "😟 걱정",
+          "😨 두려움",
+          "😰 신경",
+          "😩 스트레스",
+          "😵 압도"
+        ],
+        "😌 진정": [
+          "☮️ 평화",
+          "😌 느슨함",
+          "😇 고요함",
+          "🌳 뿌리내림",
+          "🧘 명상"
+        ],
+        "⚡ 에너지": [
+          "💪 동기",
+          "🎯 결단",
+          "🚀 생산성",
+          "💡 영감",
+          "✨ 활기"
+        ],
+        "😴 피로": [
+          "🥱 탈진",
+          "😑 게으름",
+          "🪫 고갈",
+          "😴 졸음",
+          "🚪 번아웃"
+        ],
+        "😐 중립": [
+          "🤷 무관심",
+          "🙈 초탈",
+          "👁️ 관찰자",
+          "⚖️ 균형",
+          "😐 중립"
+        ]
+      }
+    }
+  },
+  "weight": {
+    "pageTitle": "⚖️ 체중 추적기",
+    "loading": "로딩 중...",
+    "pleaseLogin": "체중을 추적하려면 로그인하세요",
+    "statsTitle": "체중 통계",
+    "latestWeight": "최근 체중",
+    "goalWeight": "목표 체중",
+    "difference": "차이",
+    "notSet": "설정되지 않음",
+    "logWeightTitle": "📊 체중 기록",
+    "weightLabel": "체중",
+    "enterWeight": "체중 입력",
+    "dateLabel": "날짜",
+    "timeLabel": "시간",
+    "logWeightButton": "체중 기록",
+    "goalWeightTitle": "🎯 목표 체중",
+    "noGoalSet": "설정된 목표 없음",
+    "updateGoal": "목표 업데이트",
+    "setGoal": "목표 설정",
+    "goalWeightLabel": "목표 체중",
+    "enterGoalWeight": "목표 체중 입력",
+    "saveGoalButton": "목표 저장",
+    "cancelButton": "취소",
+    "weightTrendTitle": "📈 체중 추세",
+    "weightCalendarTitle": "📅 체중 달력",
+    "weightHistoryTitle": "📋 체중 기록",
+    "noDataMessage": "체중 항목이 없습니다. 추적을 시작하세요!",
+    "deleteEntryTitle": "체중 항목 삭제",
+    "deleteConfirmation": "이 체중 항목을 삭제하시겠습니까?",
+    "deleteWarning": "이 작업은 취소할 수 없습니다.",
+    "deleteEntryButton": "항목 삭제",
+    "recordWeight": "체중 기록",
+    "weight": "체중",
+    "date": "날짜",
+    "noRecords": "체중 기록이 없습니다. 추적을 시작하세요!"
+  },
+  "achievements": {
+    "pageTitle": "🏆 성취 및 상",
+    "loading": "성취 로딩 중...",
+    "error": "오류: ",
+    "description": "당신의 치유 여정에서 이정표, 성취, 상",
+    "trophyProgress": "🎯 상 진행",
+    "currentTrophy": "현재 상",
+    "nextTrophy": "다음 상",
+    "progressText": "{{trophyName}}을(를) 향해 {{progress}}%",
+    "trophyCategories": {
+      "daily": "⭐ 일일 상",
+      "weekly": "🎖️ 주간 상",
+      "monthly": "🏅 월간 상",
+      "yearly": "🏆 연간 상"
+    },
+    "earnedOn": "획득: {{date}}",
+    "achievementsTitle": "⭐ 성취",
+    "noAchievements": "성취가 없습니다. 계속하고 이정표를 해제하세요!",
+    "unlockedOn": "해제: {{date}}",
+    "for": "대상: {{addiction}}"
+  }
+}

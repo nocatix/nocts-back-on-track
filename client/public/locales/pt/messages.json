@@ -1,0 +1,48 @@
+{
+  "saved": "Salvo com sucesso!",
+  "deleted": "Deletado com sucesso!",
+  "updated": "Atualizado com sucesso!",
+  "error": "Ocorreu um erro. Tente novamente mais tarde.",
+  "serverError": "Erro do servidor. Tente novamente mais tarde.",
+  "networkError": "Erro de rede. Verifique sua conexão.",
+  "unauthorized": "Você não tem permissão para executar esta ação",
+  "validation": {
+    "required": "Este campo é obrigatório",
+    "invalidEmail": "Digite um endereço de email válido",
+    "passwordTooShort": "A senha deve ter pelo menos 6 caracteres",
+    "passwordMismatch": "As senhas não correspondem",
+    "invalidInput": "Entrada inválida"
+  },
+  "mainMenu": {
+    "pageTitle": "Menu principal",
+    "failedToLoadAddictions": "Falha ao carregar dependências",
+    "failedToUpdateAddiction": "Falha ao atualizar dependência",
+    "aboutToCave": "Está prestes a ceder?",
+    "craviingSupport": "Suporte de compulsão",
+    "cravineSupportMessage": "Sentindo compulsão? Obtenha suporte agora!",
+    "cravingEncouragement": "Você consegue. Respire fundo.",
+    "managedCraving": "Gerenciou a compulsão",
+    "needHelp": "Preciso de ajuda",
+    "whichAddiction": "Qual dependência está enfrentando?",
+    "selectAddictionForLogging": "Selecione a dependência que está enfrentando para registrar e obter suporte",
+    "noAddictionsToLog": "Nenhuma dependência sendo rastreada. Adicione uma primeiro.",
+    "amazingWork": "🎉 Trabalho incrível!",
+    "resistedCraving": "Você resistiu à compulsão. Isso é incrível! Cada momento que você é forte constrói sua recuperação.",
+    "messageClosing": "Você está indo bem! Continue assim!",
+    "cravingSupport": {
+      "message": "Sentindo compulsão? Obtenha suporte agora!",
+      "encouragement": "Você consegue. Respire fundo.",
+      "buttons": "Obter ajuda"
+    },
+    "todaysOutlook": "Perspectiva de hoje",
+    "todaysSavings": "Economias de hoje",
+    "totalSaved": "Total economizado",
+    "todaysTips": "Dicas de hoje"
+  },
+  "addictionCard": {
+    "days": "dias",
+    "saved": "economizado",
+    "encouragement": "Você está fazendo progresso incrível!",
+    "youreDoingGreat": "Você está indo bem! Continue assim!"
+  }
+}

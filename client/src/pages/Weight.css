@@ -181,36 +181,50 @@ html.dark .form-group select:focus {
 }
 
 .btn-delete {
-  background: none;
-  border: 1px solid transparent;
-  color: #dc3545;
+  position: static !important;
+  background: #ff4444 !important;
+  border: 3px solid #990000 !important;
+  color: white !important;
   cursor: pointer;
-  font-size: 16px;
-  padding: 4px 6px;
-  width: auto;
+  font-size: 18px;
+  padding: 6px 8px;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px;
+  min-height: 40px;
   flex-shrink: 0;
-  border-radius: 3px;
+  border-radius: 6px;
   transition: all 0.3s ease;
-  grid-column: 2;
-  justify-self: end;
-  align-self: center;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  text-align: center;
   line-height: 1;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10;
+  margin-left: auto;
 }
 
 .btn-delete:hover {
-  color: #b71c1c;
-  background: rgba(220, 53, 69, 0.1);
-  border-color: #dc3545;
+  color: white !important;
+  background: #ff1744 !important;
+  border-color: #c41c3b !important;
+  transform: scale(1.15);
 }
 
 html.dark .btn-delete {
-  color: #ff5252;
+  color: white !important;
+  background: #ff4444 !important;
+  border-color: #ff0000 !important;
 }
 
 html.dark .btn-delete:hover {
-  color: #ff1744;
-  background: rgba(255, 82, 82, 0.15);
-  border-color: #ff5252;
+  color: #fff !important;
+  background: #ff1744 !important;
+  border-color: #d00000 !important;
+  transform: scale(1.15);
 }
 
 /* Graph Section */
@@ -293,6 +307,15 @@ html.dark .weight-graph-section {
   stroke-width: 2;
   stroke-dasharray: 5,5;
   opacity: 0.7;
+}
+
+.trend-line {
+  stroke: #9c27b0;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.8;
 }
 
 .weight-point {
@@ -462,8 +485,8 @@ html.dark .weight-calendar {
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 20px;
-  padding-right: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow: visible;
 }
 
 html.dark .weight-list {
@@ -478,18 +501,20 @@ html.dark .weight-list {
 
 .weight-list-container {
   max-height: 400px;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;
+  padding-right: 8px;
 }
 
 .weight-entry {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
+  flex-direction: row;
   gap: 10px;
   align-items: center;
   padding: 12px 8px;
   border-bottom: 1px solid var(--border-color);
   transition: all 0.3s ease;
+  width: 100%;
 }
 
 .weight-entry:last-child {
@@ -506,7 +531,8 @@ html.dark .weight-list {
   gap: 4px;
   min-width: 0;
   overflow: hidden;
-  grid-column: 1;
+  flex: 0 1 auto;
+  max-width: calc(100% - 60px);
 }
 
 .entry-weight {

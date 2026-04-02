@@ -1,0 +1,32 @@
+{
+  "pageTitle": "Track Your Addictions",
+  "addNew": "Add New Addiction",
+  "addictionName": "Addiction Name",
+  "addictionNameLabel": "Addiction Name",
+  "enterAddictionName": "Enter your addiction name",
+  "addictionNamePlaceholder": "e.g., Smoking, Alcohol, Social Media",
+  "dateYouStopped": "Date You Stopped",
+  "timeYouStopped": "Time You Stopped",
+  "timeFormat12h": "12-Hour Format (AM/PM)",
+  "timeFormat24h": "24-Hour Format",
+  "frequency": "Frequency",
+  "timesPerDay": "Times Per Day",
+  "frequencyPlaceholder": "How many times per day?",
+  "money": "Money Spent",
+  "moneyPlaceholder": "Amount in your currency",
+  "additionalNotes": "Additional Notes",
+  "additionalNotesPlaceholder": "Other details about this addiction...",
+  "selectAddiction": "Select Addiction",
+  "description": "Description",
+  "startDate": "Start Date",
+  "category": "Category",
+  "severity": "Severity",
+  "noAddictions": "No addictions tracked yet. Start one today!",
+  "daysSoberCount": "Days Clean",
+  "addictionCard": {
+    "days": "Days",
+    "saved": "Saved",
+    "encouragement": "You're making amazing progress!",
+    "youreDoingGreat": "You're doing great! Keep going!"
+  }
+}

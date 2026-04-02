@@ -1,0 +1,176 @@
+{
+  "mood": {
+    "pageTitle": "🎭 How Do You Feel?",
+    "loading": "Loading...",
+    "moodLegend": "Feelings:",
+    "noMoodRecorded": "No feeling today",
+    "addMood": "Add Feeling",
+    "editMood": "Edit Feeling",
+    "howAreYouFeeling": "How do you feel?",
+    "moreSpecifically": "More...",
+    "changePrimary": "← Change",
+    "intensityFormLabel": "How Much (1-5)",
+    "intensityStatusDisplay": "How Much: {{intensity}}/5",
+    "triggersLabel": "What Caused It",
+    "triggersPlaceholder": "e.g., Coffee, No sleep, Work",
+    "notesLabel": "Notes",
+    "notesPlaceholder": "Write more...",
+    "saveMoodButton": "Save",
+    "cancelButton": "Cancel",
+    "selectPrimaryError": "Pick a feeling",
+    "loginRequired": "Log in first",
+    "saveFailed": "Failed to save",
+    "notesTitle": "Notes: ",
+    "triggersTitle": "Reasons: ",
+    "monthNames": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "weekdays": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ],
+    "emotions": {
+      "primary": [
+        "😊 Happy",
+        "😢 Sad",
+        "😠 Angry",
+        "😰 Scared",
+        "😌 Calm",
+        "⚡ Energy",
+        "😴 Tired",
+        "😐 OK"
+      ],
+      "secondary": {
+        "😊 Happy": [
+          "😄 Happy",
+          "🤩 Excited",
+          "😌 Happy",
+          "🙏 Thank You",
+          "😎 Proud"
+        ],
+        "😢 Sad": [
+          "😞 Sad",
+          "😕 Sad",
+          "😔 Alone",
+          "😩 Hopeless",
+          "☔ Sad"
+        ],
+        "😠 Angry": [
+          "🤬 Angry",
+          "😤 Mad",
+          "😒 Mad",
+          "😤 Mad",
+          "😑 Mad"
+        ],
+        "😰 Scared": [
+          "😟 Scared",
+          "😨 Scared",
+          "😰 Scared",
+          "😩 Stressed",
+          "😵 Too Much"
+        ],
+        "😌 Calm": [
+          "☮️ Calm",
+          "😌 Relax",
+          "😇 Calm",
+          "🌳 Ground",
+          "🧘 Meditate"
+        ],
+        "⚡ Energy": [
+          "💪 Strong",
+          "🎯 Goal",
+          "🚀 Do",
+          "💡 New",
+          "✨ Shine"
+        ],
+        "😴 Tired": [
+          "🥱 Tired",
+          "😑 Lazy",
+          "🪫 Tired",
+          "😴 Sleep",
+          "🚪 Burn Out"
+        ],
+        "😐 OK": [
+          "🤷 OK",
+          "🙈 Away",
+          "👁️ Look",
+          "⚖️ Balance",
+          "😐 OK"
+        ]
+      }
+    }
+  },
+  "weight": {
+    "pageTitle": "⚖️ Weight",
+    "loading": "Loading...",
+    "pleaseLogin": "Log in first",
+    "statsTitle": "Stats",
+    "latestWeight": "Now",
+    "goalWeight": "Goal",
+    "difference": "Change",
+    "notSet": "Not set",
+    "logWeightTitle": "📊 Add Weight",
+    "weightLabel": "Weight",
+    "enterWeight": "Enter weight",
+    "dateLabel": "Date",
+    "timeLabel": "Time",
+    "logWeightButton": "Save",
+    "goalWeightTitle": "🎯 My Goal",
+    "noGoalSet": "No goal",
+    "updateGoal": "Change Goal",
+    "setGoal": "Set Goal",
+    "goalWeightLabel": "Goal",
+    "enterGoalWeight": "Enter goal",
+    "saveGoalButton": "Save",
+    "cancelButton": "Cancel",
+    "weightTrendTitle": "📈 Trend",
+    "weightCalendarTitle": "📅 Calendar",
+    "weightHistoryTitle": "📋 History",
+    "noDataMessage": "No weight entries yet. Start!",
+    "deleteEntryTitle": "Delete",
+    "deleteConfirmation": "Are you sure?",
+    "deleteWarning": "You cannot undo.",
+    "deleteEntryButton": "Delete",
+    "recordWeight": "Add",
+    "weight": "Weight",
+    "date": "Date",
+    "noRecords": "No records. Start!"
+  },
+  "achievements": {
+    "pageTitle": "🏆 Achievements",
+    "loading": "Loading...",
+    "error": "Error: ",
+    "description": "Your wins on your way to get well",
+    "trophyProgress": "🎯 Trophies",
+    "currentTrophy": "Now",
+    "nextTrophy": "Next",
+    "progressText": "{{progress}}% to {{trophyName}}",
+    "trophyCategories": {
+      "daily": "⭐ Daily",
+      "weekly": "🎖️ Weekly",
+      "monthly": "🏅 Monthly",
+      "yearly": "🏆 Yearly"
+    },
+    "earnedOn": "Got on: {{date}}",
+    "achievementsTitle": "⭐ Achievements",
+    "noAchievements": "No achievements yet. Keep going!",
+    "unlockedOn": "Got on: {{date}}",
+    "for": "For: {{addiction}}"
+  }
+}

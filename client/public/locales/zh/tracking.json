@@ -1,0 +1,176 @@
+{
+  "mood": {
+    "pageTitle": "🎭 心情追踪器",
+    "loading": "加载中...",
+    "moodLegend": "心情图例:",
+    "noMoodRecorded": "这一天没有记录心情",
+    "addMood": "添加心情",
+    "editMood": "编辑心情",
+    "howAreYouFeeling": "你感觉如何？",
+    "moreSpecifically": "更具体地说...",
+    "changePrimary": "← 更改主要心情",
+    "intensityFormLabel": "强度（1-5）",
+    "intensityStatusDisplay": "强度：{{intensity}}/5",
+    "triggersLabel": "触发因素（逗号分隔）",
+    "triggersPlaceholder": "例如 咖啡因、缺乏睡眠、工作压力",
+    "notesLabel": "笔记",
+    "notesPlaceholder": "添加关于你心情的其他笔记...",
+    "saveMoodButton": "保存心情",
+    "cancelButton": "取消",
+    "selectPrimaryError": "请选择主要心情",
+    "loginRequired": "你必须注册才能保存心情",
+    "saveFailed": "保存心情失败",
+    "notesTitle": "笔记: ",
+    "triggersTitle": "触发因素: ",
+    "monthNames": [
+      "一月",
+      "二月",
+      "三月",
+      "四月",
+      "五月",
+      "六月",
+      "七月",
+      "八月",
+      "九月",
+      "十月",
+      "十一月",
+      "十二月"
+    ],
+    "weekdays": [
+      "日",
+      "一",
+      "二",
+      "三",
+      "四",
+      "五",
+      "六"
+    ],
+    "emotions": {
+      "primary": [
+        "😊 快乐",
+        "😢 悲伤",
+        "😠 愤怒",
+        "😰 焦虑",
+        "😌 平静",
+        "⚡ 精力充沛",
+        "😴 疲惫",
+        "😐 中立"
+      ],
+      "secondary": {
+        "😊 快乐": [
+          "😄 欢乐",
+          "🤩 兴奋",
+          "😌 满足",
+          "🙏 感谢",
+          "😎 骄傲"
+        ],
+        "😢 悲伤": [
+          "😞 沮丧",
+          "😕 失望",
+          "😔 孤独",
+          "😩 绝望",
+          "☔ 郁闷"
+        ],
+        "😠 愤怒": [
+          "🤬 疯狂",
+          "😤 烦恼",
+          "😒 不满",
+          "😤 沮丧",
+          "😑 不悦"
+        ],
+        "😰 焦虑": [
+          "😟 担心",
+          "😨 害怕",
+          "😰 紧张",
+          "😩 压力大",
+          "😵 不知所措"
+        ],
+        "😌 平静": [
+          "☮️ 和平",
+          "😌 放松",
+          "😇 宁静",
+          "🌳 脚踏实地",
+          "🧘 冥想"
+        ],
+        "⚡ 精力充沛": [
+          "💪 有动力",
+          "🎯 志向高远",
+          "🚀 富有成效",
+          "💡 受启发",
+          "✨ 闪烁"
+        ],
+        "😴 疲惫": [
+          "🥱 精疲力尽",
+          "😑 懒散",
+          "🪫 耗尽",
+          "😴 嗜睡",
+          "🚪 倦怠"
+        ],
+        "😐 中立": [
+          "🤷 冷漠",
+          "🙈 超然",
+          "👁️ 观察者",
+          "⚖️ 平衡",
+          "😐 中立"
+        ]
+      }
+    }
+  },
+  "weight": {
+    "pageTitle": "⚖️ 体重追踪器",
+    "loading": "加载中...",
+    "pleaseLogin": "请登录以追踪体重",
+    "statsTitle": "体重统计",
+    "latestWeight": "最近的体重",
+    "goalWeight": "目标体重",
+    "difference": "差异",
+    "notSet": "未设置",
+    "logWeightTitle": "📊 记录体重",
+    "weightLabel": "体重",
+    "enterWeight": "输入体重",
+    "dateLabel": "日期",
+    "timeLabel": "时间",
+    "logWeightButton": "记录体重",
+    "goalWeightTitle": "🎯 目标体重",
+    "noGoalSet": "未设置目标",
+    "updateGoal": "更新目标",
+    "setGoal": "设置目标",
+    "goalWeightLabel": "目标体重",
+    "enterGoalWeight": "输入目标体重",
+    "saveGoalButton": "保存目标",
+    "cancelButton": "取消",
+    "weightTrendTitle": "📈 体重趋势",
+    "weightCalendarTitle": "📅 体重日历",
+    "weightHistoryTitle": "📋 体重历史",
+    "noDataMessage": "暂无体重条目。开始追踪体重！",
+    "deleteEntryTitle": "删除体重条目",
+    "deleteConfirmation": "你确定要删除此体重条目吗？",
+    "deleteWarning": "此操作无法撤销。",
+    "deleteEntryButton": "删除条目",
+    "recordWeight": "记录体重",
+    "weight": "体重",
+    "date": "日期",
+    "noRecords": "暂无体重记录。开始追踪！"
+  },
+  "achievements": {
+    "pageTitle": "🏆 成就和奖项",
+    "loading": "加载成就中...",
+    "error": "错误: ",
+    "description": "你通往清醒之旅中的里程碑、成就和奖励",
+    "trophyProgress": "🎯 奖项进度",
+    "currentTrophy": "当前奖项",
+    "nextTrophy": "下一个奖项",
+    "progressText": "{{progress}}% 向 {{trophyName}} 进展",
+    "trophyCategories": {
+      "daily": "⭐ 日奖项",
+      "weekly": "🎖️ 周奖项",
+      "monthly": "🏅 月奖项",
+      "yearly": "🏆 年奖项"
+    },
+    "earnedOn": "获得于: {{date}}",
+    "achievementsTitle": "⭐ 成就",
+    "noAchievements": "暂无成就。继续并解锁里程碑！",
+    "unlockedOn": "解锁于: {{date}}",
+    "for": "对于: {{addiction}}"
+  }
+}

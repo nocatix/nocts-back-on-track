@@ -14,6 +14,10 @@
   overflow-y: auto;
   overflow-x: hidden;
   box-shadow: -4px 0 20px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
 .sidebar.collapsed {
@@ -132,7 +136,7 @@
 
 /* Category styles */
 .nav-category {
-  margin-top: 20px;
+  margin-top: 0;
 }
 
 .category-header {
@@ -223,6 +227,44 @@
   gap: 8px;
 }
 
+.addictions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.addictions-header .category-header {
+  flex: 1;
+  margin: 0;
+}
+
+.add-addiction-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  padding: 0;
+  color: white;
+  background: var(--accent-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.add-addiction-btn:hover {
+  background: var(--accent-dark, #5566d2);
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+}
+
 .addictions-section .category-items {
   margin-left: 12px;
 }
@@ -236,30 +278,101 @@
   font-style: italic;
 }
 
-.add-new-addiction-link {
+/* Dropdown menu for collapsed sidebar */
+.category-dropdown {
+  position: fixed;
+  left: 96px;
+  top: 150px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  z-index: 2000;
+  min-width: 240px;
+  max-width: 300px;
+  animation: slideRight 0.3s ease;
+  pointer-events: auto;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.dropdown-title {
+  margin: 0;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dropdown-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dropdown-items .nav-link {
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  border-radius: 0;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-top: 12px;
-  padding: 12px;
-  color: var(--accent-color);
+  gap: 8px;
   text-decoration: none;
-  transition: all 0.3s ease;
-  font-size: 1.5rem;
-  border-radius: 8px;
-  border: 2px dashed var(--border-color);
+  color: var(--text-primary);
+  cursor: pointer;
+  pointer-events: auto;
 }
 
-.add-new-addiction-link:hover {
-  border-color: var(--accent-color);
+.dropdown-items .nav-link:hover {
   background: var(--bg-secondary);
-  transform: scale(1.02);
+  color: var(--accent-color);
 }
 
-.sidebar.collapsed .add-new-addiction-link {
-  margin-bottom: 0;
-  padding: 8px;
-  font-size: 1.3rem;
+.dropdown-items .nav-link.active {
+  background: var(--accent-color);
+  color: white;
+}
+
+.dropdown-items .addiction-link {
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  border-radius: 0;
+  transition: all 0.2s ease;
+  display: block;
+  text-decoration: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  pointer-events: auto;
+  list-style: none;
+}
+
+.dropdown-items .addiction-link:hover {
+  background: var(--bg-secondary);
+  color: var(--accent-color);
+}
+
+.dropdown-items .addiction-link.active {
+  background: var(--accent-color);
+  color: white;
+}
+
+html.dark .category-dropdown {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 /* Mobile - Bottom Navigation */
