@@ -9,6 +9,12 @@ Your personal addiction recovery companion. A comprehensive Node.js + React appl
 ### 📊 Project Status
 
 [![Publish to GHCR](https://github.com/nocatix/nocts-back-on-track/actions/workflows/publish-ghcr.yml/badge.svg)](https://github.com/nocatix/nocts-back-on-track/actions/workflows/publish-ghcr.yml)
+[![Server Unit Tests](https://github.com/nocatix/nocts-back-on-track/actions/workflows/test.yml/badge.svg?label=Server+Unit+Tests)](https://github.com/nocatix/nocts-back-on-track/actions/workflows/test.yml)
+[![Server Integration Tests](https://github.com/nocatix/nocts-back-on-track/actions/workflows/test.yml/badge.svg?label=Server+Integration+Tests)](https://github.com/nocatix/nocts-back-on-track/actions/workflows/test.yml)
+[![Client Unit Tests](https://github.com/nocatix/nocts-back-on-track/actions/workflows/test.yml/badge.svg?label=Client+Unit+Tests)](https://github.com/nocatix/nocts-back-on-track/actions/workflows/test.yml)
+[![Client Integration Tests](https://github.com/nocatix/nocts-back-on-track/actions/workflows/test.yml/badge.svg?label=Client+Integration+Tests)](https://github.com/nocatix/nocts-back-on-track/actions/workflows/test.yml)
+[![Mobile Unit Tests](https://github.com/nocatix/nocts-back-on-track/actions/workflows/test.yml/badge.svg?label=Mobile+Unit+Tests)](https://github.com/nocatix/nocts-back-on-track/actions/workflows/test.yml)
+[![Mobile Integration Tests](https://github.com/nocatix/nocts-back-on-track/actions/workflows/test.yml/badge.svg?label=Mobile+Integration+Tests)](https://github.com/nocatix/nocts-back-on-track/actions/workflows/test.yml)
 [![Node.js](https://img.shields.io/badge/Node.js-v18-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)](https://react.dev/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-7.0-13AA52?logo=mongodb&logoColor=white)](https://www.mongodb.com/)

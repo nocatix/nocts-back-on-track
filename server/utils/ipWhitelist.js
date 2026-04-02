@@ -12,8 +12,8 @@ function parseCIDR(cidr) {
       throw new Error('Invalid CIDR format. Use: 192.168.2.0/24');
     }
 
-    const range = ipaddr.process(cidr);
-    return range;
+    const [addr, prefix] = ipaddr.parseCIDR(cidr);
+    return { addr, prefix };
   } catch (err) {
     console.error(`Invalid CIDR notation: ${cidr}`, err.message);
     return null;
