@@ -1,5 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { localMoodService } from '../services/localMoodService';
+import remoteMoodService from '../services/remoteMoodService';
+import modeService from '../services/modeService';
+
+const getMoodService = async () => {
+  const mode = await modeService.getActiveMode();
+  if (mode === 'connected') {
+    return remoteMoodService;
+  }
+  return localMoodService;
+};
 
 export const moodService = {
   async getMoods(year, month) {
@@ -7,7 +17,8 @@ export const moodService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      return await localMoodService.getMoodForMonth(user.id, year, month);
+      const service = await getMoodService();
+      return await service.getMoods(user.id, year, month);
     } catch (error) {
       console.error('Error fetching moods:', error);
       throw error;
@@ -19,7 +30,8 @@ export const moodService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      return await localMoodService.getMoodForDate(user.id, new Date(date));
+      const service = await getMoodService();
+      return await service.getMoodByDate(user.id, date);
     } catch (error) {
       console.error('Error fetching mood:', error);
       throw error;
@@ -31,17 +43,8 @@ export const moodService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      const { date, primaryMood, secondaryMood, intensity, notes, triggers } = moodData;
-      
-      return await localMoodService.saveMood(
-        user.id,
-        date,
-        primaryMood,
-        secondaryMood,
-        intensity,
-        notes,
-        triggers
-      );
+      const service = await getMoodService();
+      return await service.createMood(user.id, moodData);
     } catch (error) {
       console.error('Error creating mood:', error);
       throw error;
@@ -53,17 +56,8 @@ export const moodService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      const { primaryMood, secondaryMood, intensity, notes, triggers } = moodData;
-      
-      return await localMoodService.saveMood(
-        user.id,
-        date,
-        primaryMood,
-        secondaryMood,
-        intensity,
-        notes,
-        triggers
-      );
+      const service = await getMoodService();
+      return await service.updateMood(user.id, date, moodData);
     } catch (error) {
       console.error('Error updating mood:', error);
       throw error;
@@ -75,7 +69,8 @@ export const moodService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      return await localMoodService.deleteMood(user.id, new Date(date));
+      const service = await getMoodService();
+      return await service.deleteMood(user.id, date);
     } catch (error) {
       console.error('Error deleting mood:', error);
       throw error;

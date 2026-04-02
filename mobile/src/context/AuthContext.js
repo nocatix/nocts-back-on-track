@@ -1,7 +1,8 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import authService from '../api/authService';
 import { initializeDatabase } from '../db/database';
 import { achievementService } from '../api/achievementService';
+import { useMode } from './ModeContext';
 
 export const AuthContext = createContext();
 
@@ -10,15 +11,18 @@ export function AuthProvider({ children }) {
   const [userToken, setUserToken] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { mode, modeConfigured } = useMode();
 
   // Check if user is already logged in on app start
   useEffect(() => {
-    bootstrapAsync();
-  }, []);
+    if (modeConfigured) {
+      bootstrapAsync();
+    }
+  }, [modeConfigured, mode]);
 
   const bootstrapAsync = async () => {
     try {
-      console.log('[Auth] Starting bootstrap');
+      console.log('[Auth] Starting bootstrap. Mode:', mode);
       
       // Initialize the database first
       try {
