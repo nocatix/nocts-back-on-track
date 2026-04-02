@@ -1,705 +1,308 @@
 {
   "meditation": {
-    "pageTitle": "Meditation",
-    "startMeditation": "Start Meditation",
-    "duration": "Duration (minutes)",
-    "guidedMeditation": "Guided Meditation",
-    "timerId": "Timer",
-    "breathingExercise": "Breathing Exercise",
-    "relaxationTechnique": "Relaxation Technique",
-    "noRecords": "No meditation records yet. Start meditating!",
-    "backToMeditations": "← Back to Meditations",
-    "sessionTimer": "⏱️ Session Timer",
-    "sessionTimerLabel": "Session Timer",
-    "guidedBreathing": "🫁 Guided Breathing",
-    "breathingPace": "Breathing pace",
-    "startBreathingGuide": "▶ Start Breathing Guide",
-    "stopBreathingGuide": "⏹ Stop Breathing Guide",
-    "showBreathingGuide": "Show Breathing Guide",
-    "hideBreathingGuide": "Hide Breathing Guide",
-    "start": "Start",
-    "pause": "Pause",
-    "resume": "Resume",
-    "reset": "Reset",
-    "minutes": "minutes",
-    "meditationMusic": "🎵 Meditation Music",
-    "guide": "Guide",
-    "postureTips": "🧘 Posture Tips",
-    "quickTools": "Quick Tools",
-    "emergencyCalmTitle": "🆘 Emergency Calm",
-    "emergencyCalmDesc": "Instant relief for intense cravings",
-    "emergencyCalm3Min": "3-Min Emergency Calm",
-    "quickBreathingTitle": "🫁 Quick Breathing",
-    "quickBreathingDesc": "Reset your nervous system",
-    "progressTitle": "📈 Your Progress",
-    "sessionsCompleted": "sessions completed",
-    "minsTotal": "mins total",
-    "guidedBreathingExercise": "Guided Breathing Exercise",
-    "breathingTip1": "👉 Breathe in slowly through your nose, hold gently, then exhale through your mouth",
-    "breathingTip2": "💡 This calms your nervous system and reduces cravings naturally",
-    "recommendedMusicTitle": "🎵 Recommended Meditation Music",
-    "listenToMusic": "Listen to ambient music while meditating",
-    "youtubeMusic": "YouTube: Meditation Music",
-    "spotifyMusic": "Spotify: Meditation Playlists",
-    "calmApp": "Calm App",
-    "recentSessionsTitle": "📝 Recent Sessions",
-    "tipsForMeditation": "💡 Tips for Successful Meditation",
+    "pageTitle": "Meditación",
+    "startMeditation": "Comenzar meditación",
+    "duration": "Duración (minutos)",
+    "guidedMeditation": "Meditación guiada",
+    "timerId": "Cronómetro",
+    "breathingExercise": "Ejercicio de respiración",
+    "relaxationTechnique": "Técnica de relajación",
+    "noRecords": "Sin registros de meditación todavía. ¡Comienza a meditar!",
+    "backToMeditations": "← Atrás a meditaciones",
+    "sessionTimer": "⏱️ Cronómetro de sesión",
+    "sessionTimerLabel": "Cronómetro de sesión",
+    "guidedBreathing": "🫁 Respiración guiada",
+    "breathingPace": "Ritmo de respiración",
+    "startBreathingGuide": "▶ Comenzar guía de respiración",
+    "stopBreathingGuide": "⏹ Detener guía de respiración",
+    "showBreathingGuide": "Mostrar guía de respiración",
+    "hideBreathingGuide": "Ocultar guía de respiración",
+    "start": "Comenzar",
+    "pause": "Pausa",
+    "resume": "Reanudar",
+    "reset": "Reiniciar",
+    "minutes": "minutos",
+    "meditationMusic": "🎵 Música de meditación",
+    "guide": "Guía",
+    "postureTips": "🧘 Consejos de postura",
+    "quickTools": "Herramientas rápidas",
+    "emergencyCalmTitle": "🆘 Calma de emergencia",
+    "emergencyCalmDesc": "Alivio instantáneo para antojos intensos",
+    "emergencyCalm3Min": "3 minutos de calma de emergencia",
+    "quickBreathingTitle": "🫁 Respiración rápida",
+    "quickBreathingDesc": "Reinicia tu sistema nervioso",
+    "progressTitle": "📈 Tu progreso",
+    "sessionsCompleted": "sesiones completadas",
+    "minsTotal": "minutos totales",
+    "guidedBreathingExercise": "Ejercicio de respiración guiada",
+    "breathingTip1": "👉 Respira lentamente por tu nariz, sostén suavemente, luego exhala por tu boca",
+    "breathingTip2": "💡 Esto calma tu sistema nervioso y reduce los antojos naturalmente",
+    "recommendedMusicTitle": "🎵 Música de meditación recomendada",
+    "listenToMusic": "Escucha música ambiente mientras meditas",
+    "youtubeMusic": "YouTube: Música de meditación",
+    "spotifyMusic": "Spotify: Listas de reproducción de meditación",
+    "calmApp": "Aplicación Calm",
+    "recentSessionsTitle": "📝 Sesiones recientes",
+    "tipsForMeditation": "💡 Consejos para meditación exitosa",
     "meditations": [
       {
         "id": 1,
-        "title": "Breath Awareness",
+        "title": "Conciencia de la respiración",
         "duration": "5 min",
-        "description": "Start with basic breath awareness to calm your mind.",
-        "guide": "Take a comfortable seat. Close your eyes. Breathe naturally through your nose. Count each exhale from 1 to 10, then start again. If your mind wanders, that's okay - just return to counting. Continue for 5 minutes. This simple practice helps calm anxiety and cravings.",
+        "description": "Comienza con conciencia de respiración básica para calmar tu mente.",
+        "guide": "Toma un asiento cómodo. Cierra los ojos. Respira naturalmente por tu nariz. Cuenta cada exhalación de 1 a 10, luego comienza de nuevo. Si tu mente divaga, está bien - solo vuelve a contar. Continúa durante 5 minutos. Esta práctica simple ayuda a calmar la ansiedad y los antojos.",
         "musicUrl": "https://www.youtube.com/embed/7qJZy4DpOWA"
       },
       {
         "id": 2,
-        "title": "Body Scan",
+        "title": "Exploración corporal",
         "duration": "7 min",
-        "description": "Release tension from your body systematically.",
-        "guide": "Lie down or sit comfortably. Close your eyes. Start at the top of your head. Notice any tension. As you breathe, imagine releasing that tension with each exhale. Slowly move down: forehead, jaw, neck, shoulders, arms, chest, stomach, legs, feet. Spend 10-15 seconds on each area. This technique reduces physical stress from withdrawal.",
+        "description": "Libera tensión de tu cuerpo sistemáticamente.",
+        "guide": "Acuéstate o siéntate cómodamente. Cierra los ojos. Comienza en la parte superior de tu cabeza. Nota cualquier tensión. A medida que respiras, imagina liberar esa tensión con cada exhalación. Muévete lentamente hacia abajo: frente, mandíbula, cuello, hombros, brazos, pecho, estómago, piernas, pies. Pasa 10-15 segundos en cada área. Esta técnica reduce el estrés físico de la abstinencia.",
         "musicUrl": "https://www.youtube.com/embed/2DRyAW0ljHQ"
       },
       {
         "id": 3,
-        "title": "Craving Release",
+        "title": "Liberación de antojos",
         "duration": "10 min",
-        "description": "Specific meditation for handling cravings.",
-        "guide": "Sit comfortably. Close your eyes. Notice any craving in your body without judgment. Don't try to fight it. Observe: where is it? What does it feel like? Does it have a color, shape, or temperature? As you breathe, imagine the craving as a wave passing through you. Watch it rise, peak, and fall. Remember: cravings are temporary. This too shall pass. They fade naturally within 15-20 minutes.",
+        "description": "Meditación específica para manejar antojos.",
+        "guide": "Siéntate cómodamente. Cierra los ojos. Observa cualquier antojo en tu cuerpo sin juzgar. No intentes luchar. Observa: ¿Dónde está? ¿Cómo se siente? ¿Tiene color, forma o temperatura? A medida que respiras, imagina el antojo como una onda pasando a través de ti. Míralo subir, alcanzar su pico y caer. Recuerda: los antojos son temporales. Esto también pasará. Se desvanecen naturalmente en 15-20 minutos.",
         "musicUrl": "https://www.youtube.com/embed/sTzHDPqBN-8"
       },
       {
         "id": 4,
-        "title": "Loving Kindness",
+        "title": "Amabilidad amorosa",
         "duration": "8 min",
-        "description": "Cultivate compassion and self-love during recovery.",
-        "guide": "Sit comfortably. Close your eyes. Place hand on heart. Say silently: \"May I be peaceful. May I be healthy. May I be happy. May I be free from addiction.\" Repeat slowly, feeling each word. Then extend: \"May others also find peace and healing.\" This practice builds self-compassion and motivation for recovery.",
+        "description": "Cultiva compasión y amor propio durante la recuperación.",
+        "guide": "Siéntate cómodamente. Cierra los ojos. Coloca tu mano en tu corazón. Di silenciosamente: 'Que sea pacífico. Que sea saludable. Que sea feliz. Que sea libre de la adicción.' Repite lentamente, sintiendo cada palabra. Luego extiende: 'Que otros también encuentren paz y sanación.' Esta práctica construye autocompasión y motivación para la recuperación.",
         "musicUrl": "https://www.youtube.com/embed/lE5n6gYzJLo"
       }
     ],
     "tips": [
-      "Start with just 5 minutes daily. Consistency matters more than duration.",
-      "Practice at the same time each day to build a habit.",
-      "Cravings peak 15-20 minutes. Meditate through the peak.",
-      "Use meditation when you feel most tempted.",
-      "Your mind will wander - that's normal. Gently bring it back.",
-      "Track your progress. Notice how cravings become easier to handle."
+      "Comienza con solo 5 minutos al día. La consistencia importa más que la duración.",
+      "Medita a la misma hora cada día para construir un hábito.",
+      "Los antojos alcanzan su pico en 15-20 minutos. Medita a través del pico.",
+      "Usa meditación cuando sientas más tentación.",
+      "Tu mente divagará - eso es normal. Tráela de vuelta gentilmente.",
+      "Rastrea tu progreso. Observa cómo los antojos se vuelven más fáciles de manejar."
     ],
     "postureTipsList": [
       {
-        "label": "Spine",
-        "text": "Keep it straight but not rigid - imagine a string from your tail to the top of your head"
+        "label": "Columna vertebral",
+        "text": "Mantenla recta pero no rígida - imagina un hilo desde tu base hasta la cima de tu cabeza"
       },
       {
-        "label": "Shoulders",
-        "text": "Relax down and back, away from your ears"
+        "label": "Hombros",
+        "text": "Relájate hacia abajo y hacia atrás, lejos de tus oídos"
       },
       {
-        "label": "Hands",
-        "text": "Rest on your knees or lap, palms up or down as comfortable"
+        "label": "Manos",
+        "text": "Descansa sobre tus rodillas o regazo, palmas hacia arriba o hacia abajo como sea cómodo"
       },
       {
-        "label": "Chin",
-        "text": "Tuck slightly, eyes looking down naturally (open or closed both fine)"
+        "label": "Barbilla",
+        "text": "Metida ligeramente, ojos mirando naturalmente hacia abajo (abiertos o cerrados están bien)"
       },
       {
-        "label": "Feet",
-        "text": "If sitting, plant firmly on ground. If lying down, let them naturally fall outward"
+        "label": "Pies",
+        "text": "Si estás sentado, plantas firmes en el piso. Si estás acostado, déjalos caer naturalmente hacia afuera"
       }
     ]
   },
-  "crisis": {
-    "pageTitle": "クライシスサポート",
-    "needHelp": "すぐに助けが必要ですか?",
-    "hotlineNumber": "ホットラインの番号",
-    "contactSupport": "緊急サービスに連絡",
-    "breathe": "呼吸する時間をください",
-    "grounding": "グラウンディングテクニック",
-    "crisisResources": "クライシスリソース"
-  },
-  "selfAssessment": {
-    "quizTitle": "Addiction Self-Assessment Quiz",
-    "quizSubtitle": "Understand where you are on your recovery journey",
-    "resultsTitle": "Your Self-Assessment Results",
-    "resultsSubtitle": "Understanding where you are is the first step toward recovery",
-    "questionFormat": "Question {{current}} of {{total}}",
-    "back": "← Back",
-    "startQuiz": "Start the Quiz",
-    "takeAgain": "Take Quiz Again",
-    "startTracking": "Start Tracking",
-    "what": "What This Quiz Does",
-    "important": "Important Notes",
-    "introItems": [
-      "✓ Assesses your relationship with your addiction",
-      "✓ Helps identify your severity level",
-      "✓ Detects functioning user patterns",
-      "✓ Provides personalized recommendations"
-    ],
-    "importantItems": [
-      "🔒 Your responses are private and never saved to a server unless you choose",
-      "📝 This is NOT a medical diagnosis—only professionals can diagnose addiction",
-      "💚 This quiz is designed to be supportive, not judgmental",
-      "🎯 Results provide personalized guidance for your recovery"
-    ],
-    "introMessage": "Taking this quiz is an act of courage and self-awareness. Whatever your results, know that recovery is possible. Let's find out where you are so you can move forward.",
-    "closingMessage": "Your journey to recovery starts with honesty—which you've just demonstrated. Every step forward, no matter how small, matters. You've got this. 💪",
-    "remember": "💚 Remember:",
-    "rememberItems": [
-      "This is not a diagnosis. Only qualified professionals can diagnose addiction.",
-      "Recovery is always possible. People have recovered from far worse than your current situation.",
-      "You deserve support. Seeking help is a sign of strength, not weakness.",
-      "Today is the perfect day to start. Not tomorrow, not next week—now."
-    ],
-    "severityLabel": "Severity",
-    "functioningUserAlert": "⚠️ Functioning User Pattern Detected",
-    "functioningDescription": "You may be experiencing \"functional addiction\"—where you maintain external responsibilities while addiction grows invisibly. This is critical information. The sooner you act, the better your recovery will be.",
-    "recommendations": "📚 Recommended Reading Based on Your Results:",
-    "categories": {
-      "atRisk": "At Risk",
-      "earlyStage": "Early Stage Addiction",
-      "moderate": "Moderate Addiction",
-      "severe": "Severe Addiction"
-    },
-    "severities": {
-      "low": "Low",
-      "mild": "Mild",
-      "moderate": "Moderate",
-      "severe": "Severe",
-      "critical": "Critical"
-    },
-    "descriptions": {
-      "atRisk": "Your responses suggest you may be in the early stages of developing a dependency. While your current use may seem manageable, it's important to be mindful of patterns that could develop over time.",
-      "earlyStage": "Your responses suggest you may have early-stage dependency. The good news is that at this stage, intervention is often most effective. Many people recover easily when they seek help early.",
-      "moderate": "Your responses indicate moderate addiction with meaningful impacts on your life. This is a critical moment where recovery is absolutely possible, but it will require real commitment and support.",
-      "severe": "Your responses suggest severe addiction with substantial impacts on your health, relationships, and life. This is serious, but recovery is still possible. Many people have come back from this point.",
-      "critical": "Your responses indicate critical-level addiction. Your life is in immediate danger. But please know: recovery is possible, and Back on Track is here to support you every step of the way."
-    },
-    "functioning": "🚨 **Important**: Your responses suggest you may be a \"functioning user\"—appearing to maintain life responsibilities while addiction grows. This is particularly dangerous because the hidden damage accelerates while you seem fine. This is exactly why early intervention matters.",
-    "questions": {
-      "frequency": {
-        "question": "How often do you use your substance/engage in the behavior?",
-        "options": [
-          {
-            "text": "Rarely or never"
-          },
-          {
-            "text": "Occasionally (a few times a month)"
-          },
-          {
-            "text": "Regularly (weekly)"
-          },
-          {
-            "text": "Frequently (multiple times per week)"
-          },
-          {
-            "text": "Daily or almost daily"
-          }
-        ]
-      },
-      "impact_relationships": {
-        "question": "Has your use affected your relationships with family or friends?",
-        "options": [
-          {
-            "text": "No impact"
-          },
-          {
-            "text": "Minor disagreements about it"
-          },
-          {
-            "text": "Noticeable strain but relationships intact"
-          },
-          {
-            "text": "Significant damage to relationships"
-          },
-          {
-            "text": "Lost important relationships"
-          }
-        ]
-      },
-      "impact_work": {
-        "question": "How has your use affected your job, school, or responsibilities?",
-        "options": [
-          {
-            "text": "No impact"
-          },
-          {
-            "text": "Minor impact on performance"
-          },
-          {
-            "text": "Noticeable decline but still functioning"
-          },
-          {
-            "text": "Significant problems at work/school"
-          },
-          {
-            "text": "Lost job or failing school"
-          }
-        ]
-      },
-      "quit_attempts": {
-        "question": "Have you tried to stop or cut down?",
-        "options": [
-          {
-            "text": "Never tried"
-          },
-          {
-            "text": "Tried once without real commitment"
-          },
-          {
-            "text": "Tried a few times, with some success"
-          },
-          {
-            "text": "Tried many times, failed each time"
-          },
-          {
-            "text": "Cannot stop despite serious efforts"
-          }
-        ]
-      },
-      "withdrawal": {
-        "question": "Do you experience withdrawal symptoms when you stop or reduce use?",
-        "options": [
-          {
-            "text": "No symptoms at all"
-          },
-          {
-            "text": "Mild discomfort"
-          },
-          {
-            "text": "Noticeable but manageable symptoms"
-          },
-          {
-            "text": "Significant withdrawal discomfort"
-          },
-          {
-            "text": "Severe withdrawal that makes quitting very difficult"
-          }
-        ]
-      },
-      "tolerance": {
-        "question": "Has the amount you need increased over time?",
-        "options": [
-          {
-            "text": "No increase"
-          },
-          {
-            "text": "Slight increase"
-          },
-          {
-            "text": "Moderate increase"
-          },
-          {
-            "text": "Significant increase"
-          },
-          {
-            "text": "Need much more to feel any effect"
-          }
-        ]
-      },
-      "health_safety": {
-        "question": "Has your use caused health or safety problems?",
-        "options": [
-          {
-            "text": "No problems"
-          },
-          {
-            "text": "Minor health concerns"
-          },
-          {
-            "text": "Noticeable physical effects"
-          },
-          {
-            "text": "Significant health issues"
-          },
-          {
-            "text": "Serious health crisis or risk of overdose"
-          }
-        ]
-      },
-      "time_spent": {
-        "question": "How much time do you spend on your addiction or recovering from it?",
-        "options": [
-          {
-            "text": "Very little time"
-          },
-          {
-            "text": "An hour or less per day"
-          },
-          {
-            "text": "1-3 hours per day"
-          },
-          {
-            "text": "3-6 hours per day"
-          },
-          {
-            "text": "6+ hours per day or consumes most of my time"
-          }
-        ]
-      },
-      "consequences": {
-        "question": "Do you continue despite knowing the negative consequences?",
-        "options": [
-          {
-            "text": "I stop when I realize the harm"
-          },
-          {
-            "text": "I sometimes continue despite concerns"
-          },
-          {
-            "text": "I often continue despite knowing the harm"
-          },
-          {
-            "text": "I continue despite terrible consequences"
-          },
-          {
-            "text": "Nothing stops me, even facing disaster"
-          }
-        ]
-      },
-      "functioning": {
-        "question": "使用に関係なく、基本的な生活責任をまだ管理していますか?",
-        "options": [
-          {
-            "text": "すべてが順調に進んでいます"
-          },
-          {
-            "text": "ほとんどの場合、更新しています"
-          },
-          {
-            "text": "努力しながら追っています"
-          },
-          {
-            "text": "物事をかろうじて一緒に保つ"
-          },
-          {
-            "text": "生活が崩壊しています"
-          }
-        ]
-      }
-    }
-  },
   "preparationPlan": {
     "header": {
-      "title": "Make Your Plan & Get Ready to Stop",
-      "subtitle": "Preparation is the foundation of successful recovery. Use this guide to set yourself up for success."
+      "title": "Haz tu plan y prepárate para dejar",
+      "subtitle": "La preparación es la base de la recuperación exitosa. Usa esta guía para prepararte al éxito."
     },
     "motivation": {
-      "title": "Why Preparation Matters",
-      "mainMessage": "Recovery isn't something that just happens—it's something you build.",
-      "description": "The time you spend preparing now will directly determine your success. People who plan their recovery are significantly more likely to stick with it through the difficult first days.",
+      "title": "Por qué importa la preparación",
+      "mainMessage": "La recuperación no es algo que suceda, es algo que construyes.",
+      "description": "El tiempo que pases preparándote ahora determinará directamente tu éxito. Las personas que planean su recuperación tienen muchas más probabilidades de apegarse a ella a través de los días difíciles iniciales.",
       "benefits": [
-        "Preparation reduces impulsive decisions when you're struggling",
-        "It builds confidence and commitment before you start",
-        "It identifies potential obstacles before they catch you off-guard",
-        "It ensures you have support systems in place from day one",
-        "It demonstrates to yourself that you're serious about change"
+        "La preparación reduce decisiones impulsivas cuando estás lidiando",
+        "Te hace estar listo y confiado antes de comenzar",
+        "Identifica obstáculos potenciales antes de sorprenderte",
+        "Asegura sistemas de apoyo desde el día uno",
+        "Demuestra a ti mismo que hablas en serio sobre el cambio"
       ],
-      "insight": "💡 Every minute you spend planning now saves you hours of struggle later."
+      "insight": "💡 Cada minuto que pases en la planificación ahora te ahorra horas de lucha después."
     },
     "assess": {
-      "title": "1. Assess Your Current Situation",
-      "intro": "Before you stop, understand where you are:",
+      "title": "1. Evalúa tu situación actual",
+      "intro": "Antes de dejar, entiende dónde estás:",
       "questions": {
-        "frequency": "How often am I using/engaging? (daily, weekly, multiple times daily)",
-        "money": "How much money am I spending per day/week?",
-        "time": "What time of day do I use most?",
-        "triggers": "What situations trigger my use? (stress, boredom, social, emotional)",
-        "impact": "How has this addiction affected my health, relationships, work, finances?",
-        "obstacles": "What have been my obstacles to quitting in the past?"
+        "frequency": "¿Con qué frecuencia estoy usando/comprometido? (diariamente, semanalmente, varias veces al día)",
+        "money": "¿Cuánto dinero estoy gastando por día/semana?",
+        "time": "¿Cuándo del día estoy usando más?",
+        "triggers": "¿Qué situaciones activan mi uso? (estrés, aburrimiento, social, emocional)",
+        "impact": "¿Cómo ha afectado esta adicción mi salud, relaciones, trabajo, finanzas?",
+        "obstacles": "¿Cuáles han sido mis obstáculos para dejar en el pasado?"
       },
-      "placeholder": "Enter your answer here...",
-      "tip": "Tip: Use this app to track your current usage for a few days before you plan to quit. Real data is more powerful than guesses."
+      "placeholder": "Ingresa tu respuesta aquí...",
+      "tip": "Consejo: Usa esta app para rastrear tu uso actual durante algunos días antes de dejar. Los datos reales son más poderosos que las conjeturas."
     },
     "quitDate": {
-      "title": "2. Set a Specific Quit Date",
-      "mainAdvice": "Pick a date within the next 1-2 weeks. Give yourself enough time to prepare, but not so much that you lose motivation.",
+      "title": "2. Establece una fecha de salida específica",
+      "mainAdvice": "Elige una fecha dentro de 1-2 semanas. Date suficiente tiempo para prepararte, pero no tanto como para perder motivación.",
       "goodTiming": [
-        "✓ Good timing: Pick a day after a stressful event passes (not during)",
-        "✓ Good timing: Pick a day when you have support available"
+        "✓ Buen timing: Elige un día después de que pase un evento estresante",
+        "✓ Buen timing: Elige un día cuando el apoyo esté disponible"
       ],
       "badTiming": [
-        "✗ Bad timing: Don't pick when you're already stressed or emotional",
-        "✗ Bad timing: Don't pick when you'll be alone with easy access"
+        "✗ Mal timing: No elijas cuando ya estés estresado o emocional",
+        "✗ Mal timing: No elijas cuando estarás solo con fácil acceso"
       ],
-      "finalAdvice": "Once you've picked your date, mark it in your calendar. Tell people about it. Post it somewhere you'll see it daily. Make it real."
+      "finalAdvice": "Una vez hayas elegido tu fecha, márcala en el calendario. Cuéntale a la gente. Pónlo donde lo veas diariamente. Hazlo real."
     },
     "triggers": {
-      "title": "3. Identify Your Triggers",
-      "intro": "Triggers are situations, emotions, or people that make you want to use. Knowing them in advance means you can plan for them.",
+      "title": "3. Identifica tus disparadores",
+      "intro": "Los disparadores son situaciones, emociones o personas que te hacen querer usar. Conocerlos de antemano significa que puedes planificar para ellos.",
       "categories": {
         "emotional": {
-          "title": "Emotional Triggers",
-          "description": "Stress, boredom, loneliness, anger, anxiety, sadness... what emotions drive your use?"
+          "title": "Disparadores emocionales",
+          "description": "Estrés, aburrimiento, soledad, ira, ansiedad, tristeza... ¿Qué emoción impulsa tu uso?"
         },
         "social": {
-          "title": "Social Triggers",
-          "description": "Specific people, places, or groups. Do you use with certain friends? In certain locations?"
+          "title": "Disparadores sociales",
+          "description": "Personas, lugares o grupos específicos. ¿Usas con ciertos amigos? ¿En lugares específicos?"
         },
         "environmental": {
-          "title": "Environmental Triggers",
-          "description": "Times of day, locations, objects. Does being in your room trigger you? Late nights?"
+          "title": "Disparadores ambientales",
+          "description": "Horas del día, lugares. ¿Tu cuarto te dispara? ¿Las noches tarde?"
         },
         "habitual": {
-          "title": "Habitual Triggers",
-          "description": "Things you've always done together. Morning coffee ritual? After work routine?"
+          "title": "Disparadores habituales",
+          "description": "Cosas que siempre has hecho juntas. ¿Ritual de café matutino? ¿Rutina después del trabajo?"
         }
       },
-      "action": "Action: For each trigger, write down a specific plan for what you'll do instead."
+      "action": "Acción: Para cada disparador, escribe un plan específico para lo que harás en su lugar."
     },
     "support": {
-      "title": "4. Build Your Support Network",
-      "intro": "You cannot do this alone. Successful recovery requires connection and support. Build your network now, before you quit.",
+      "title": "4. Construye tu red de apoyo",
+      "intro": "No puedes hacer esto solo. La recuperación exitosa requiere conexión y apoyo. Construye tu red ahora, antes de dejar.",
       "people": {
-        "title": "👥 People to Tell",
+        "title": "👥 Personas para contar",
         "items": [
-          "At least one person you trust completely who you can call anytime",
-          "Someone who won't judge you if you struggle",
-          "Someone who will celebrate your wins",
-          "Consider telling a therapist, counselor, or doctor"
+          "Al menos una persona en la que confíes completamente a quien puedas llamar en cualquier momento",
+          "Alguien que no te juzgará si luchas",
+          "Alguien que celebrará tus victorias",
+          "Considera contarle a un terapeuta, consejero o médico"
         ]
       },
       "resources": {
-        "title": "📱 Support Resources",
+        "title": "📱 Recursos de apoyo",
         "items": [
-          "Support groups (AA, NA, SMART Recovery, etc.)",
-          "Therapy or counseling services",
-          "This app - use ALL its features (Diary, Mood, Meditation)",
-          "Helplines and crisis text lines"
+          "Grupos de apoyo (AA, NA, SMART Recovery, etc.)",
+          "Servicios de terapia o asesoramiento",
+          "Esta app - usa TODAS sus funciones (Diario, Estado de ánimo, Meditación)",
+          "Líneas de ayuda y líneas de texto de crisis"
         ]
       },
       "professional": {
-        "title": "🏥 Professional Help",
+        "title": "🏥 Ayuda profesional",
         "items": [
-          "Medical withdrawal support if needed for alcohol or drugs",
-          "Medication-assisted treatment if recommended",
-          "Mental health treatment for underlying issues",
-          "Don't try to do this without help if it's dangerous"
+          "Apoyo de desintoxicación médica si es necesario para alcohol o drogas",
+          "Tratamiento asistido con medicamentos si se recomienda",
+          "Tratamiento de salud mental para problemas subyacentes",
+          "No intentes solo si es peligroso"
         ]
       },
-      "action": "Write down 3-5 specific people you can call when it gets hard. Get their numbers now and save them in your phone."
+      "action": "Escribe 3-5 personas específicas a las que puedas llamar cuando sea difícil. Consigue sus números ahora y guárdalos en tu teléfono."
     },
     "coping": {
-      "title": "5. Plan Your Coping Strategies",
-      "intro": "Cravings will come. You need concrete tools ready BEFORE they arrive.",
+      "title": "5. Planifica tus estrategias de afrontamiento",
+      "intro": "Vendrán antojos. Necesitas herramientas concretas listas ANTES de que lleguen.",
       "strategies": {
         "meditation": {
-          "title": "🧘 Meditation & Mindfulness",
-          "description": "Use this app's Meditation feature. Even 2 minutes helps."
+          "title": "🧘 Meditación y atención plena",
+          "description": "Usa la función de meditación de esta app. Incluso 2 minutos ayudan."
         },
         "distraction": {
-          "title": "🎮 Distraction Strategies",
-          "description": "Use the Craving Game, watch a movie, call a friend, take a shower, exercise."
+          "title": "🎮 Estrategias de distracción",
+          "description": "Usa el juego de antojos, mira una película, llama a un amigo, toma un baño, haz ejercicio."
         },
         "physical": {
-          "title": "💪 Physical Activity",
-          "description": "Walk, run, yoga, dancing—anything to move your body and change your chemistry."
+          "title": "💪 Actividad física",
+          "description": "Camina, corre, yoga, baila - cualquier cosa para mover tu cuerpo y cambiar tu química."
         },
         "journaling": {
-          "title": "📔 Journaling",
-          "description": "Use the Diary feature to write through cravings and emotions."
+          "title": "📔 Escritura en el diario",
+          "description": "Usa la función de diario para escribir a través de antojos y emociones."
         },
         "emotions": {
-          "title": "🎭 Emotional Processing",
-          "description": "Track your moods, name your feelings, feel them without acting on them."
+          "title": "🎭 Procesamiento emocional",
+          "description": "Rastrea tu estado de ánimo, nombra tus sentimientos, siéntelos sin actuar en ellos."
         },
         "connection": {
-          "title": "🤝 Connection",
-          "description": "Call someone, text a friend, attend a support group meeting."
+          "title": "🤝 Conexión",
+          "description": "Llama a alguien, envía un mensaje de texto a un amigo, asiste a una reunión de grupo de apoyo."
         }
       },
-      "action": "Create your personal Crisis Toolkit: Write down 3-5 things you'll do when cravings hit. Post it somewhere visible."
+      "action": "Crea tu kit de herramientas personal para crisis de antojos: Escribe 3-5 cosas que harás cuando te golpeen los antojos. Póstalo en algún lugar visible."
     },
     "remove": {
-      "title": "6. Remove Temptations",
-      "intro": "Make it as hard as possible to use. You can't say no to what isn't in front of you.",
+      "title": "6. Elimina tentaciones",
+      "intro": "Haz lo más difícil posible de usar. No puedes rechazar lo que no tienes.",
       "actions": {
         "clean": {
-          "title": "🚭 Clean Your Space",
-          "description": "Get rid of all supplies, paraphernalia, reminders. Deep clean your room, car, bag."
+          "title": "🚭 Limpia tu espacio",
+          "description": "Deshazte de todos los suministros, parafernalia, recordatorios. Limpieza profunda de tu cuarto, coche, bolsa."
         },
         "delete": {
-          "title": "🗑️ Delete Access",
-          "description": "Delete apps, block websites, unfollow accounts, delete dealer contacts."
+          "title": "🗑️ Elimina acceso",
+          "description": "Elimina apps, bloquea sitios web, deja de seguir cuentas, elimina contactos de traficantes."
         },
         "money": {
-          "title": "💳 Limit Money",
-          "description": "Give control of finances to someone you trust. Remove access cards if needed."
+          "title": "💳 Limita dinero",
+          "description": "Dale el control de tus finanzas a alguien en quien confíes. Elimina tarjetas de acceso si es necesario."
         },
         "avoid": {
-          "title": "📍 Avoid Locations",
-          "description": "Plan routes that avoid your typical using spots. Go different ways."
+          "title": "📍 Evita lugares",
+          "description": "Planifica rutas que eviten tus puntos de uso típicos. Ve por caminos diferentes."
         },
         "distance": {
-          "title": "👥 Distance from People",
-          "description": "Consider telling friends you're quitting—real friends will support you."
+          "title": "👥 Distancia de personas",
+          "description": "Considera decirle a amigos que estás dejando - los verdaderos amigos te apoyarán."
         }
       }
     },
     "fortyEightHours": {
-      "title": "7. Plan for the First 48 Hours",
-      "intro": "The first 48 hours are the hardest. Plan it hour by hour if needed.",
+      "title": "7. Planifica las primeras 48 horas",
+      "intro": "Las primeras 48 horas son las más difíciles. Planifica hora por hora si es necesario.",
       "blocks": {
         "wakeUp": {
-          "title": "When You Wake Up",
-          "description": "Tell someone your quit is starting. Do something healthy (exercise, meditation, healthy breakfast)."
+          "title": "Cuando despiertes",
+          "description": "Cuéntale a alguien que tu salida está comenzando. Haz algo saludable (ejercicio, meditación, desayuno saludable)."
         },
         "morning": {
-          "title": "Morning (After Sleep)",
-          "description": "Unstructured time is dangerous. Plan something: exercise, meet a friend, hobby, meditation."
+          "title": "Mañana (después de dormir)",
+          "description": "El tiempo sin estructura es peligroso. Planifica algo: ejercicio, reúnete con un amigo, hobby, meditación."
         },
         "afternoon": {
-          "title": "Afternoon (Peak Craving Time)",
-          "description": "Call your support person. Use your Crisis Toolkit. This time will pass."
+          "title": "Tarde (hora de antojo pico)",
+          "description": "Llama a tu persona de apoyo. Usa tu kit de herramientas de antojos. Este tiempo pasará."
         },
         "evening": {
-          "title": "Evening (Lonely Time)",
-          "description": "Be around people or on the phone with someone. Stay occupied. Use the Diary to process."
+          "title": "Noche (tiempo solitario)",
+          "description": "Estar con gente o en el teléfono con alguien. Mantente ocupado. Usa el diario para procesar."
         },
         "night": {
-          "title": "At Night (Hardest for Many)",
-          "description": "Prepare for sleep: warm bath, tea, meditation, audiobook. You can do this."
+          "title": "De noche (más difícil para muchos)",
+          "description": "Prepárate para dormir: baño tibio, té, meditación, audiolibro. Puedes hacerlo."
         }
       },
-      "insight": "💡 If the first 48 hours pass without using, your odds of long-term success jump dramatically. You've got this."
+      "insight": "💡 Si las primeras 48 horas pasan sin usar, tus probabilidades de éxito a largo plazo se disparan. Puedes hacerlo."
     },
     "mental": {
-      "title": "8. Prepare Mentally",
-      "intro": "Your mindset determines your success. Plant these truths now, before you start:",
+      "title": "8. Prepárate mentalmente",
+      "intro": "Tu mente determina tu éxito. Planta estas verdades ahora, antes de comenzar:",
       "beliefs": [
-        "✓ This is possible. Millions of people have done it. You can too.",
-        "✓ You're not weak. Addiction is powerful, and you're strong enough to overcome it.",
-        "✓ Cravings are temporary. They peak in 15-20 minutes then fade. You just have to ride the wave.",
-        "✓ Withdrawal is natural. Your body is healing. It will pass.",
-        "✓ Slips happen—but they don't erase your progress. One mistake doesn't mean failure. Get back up.",
-        "✓ You're worth this. Your health, freedom, and future are worth any temporary discomfort."
-      ],
-      "action": "Action: Write these truths down. Put them on your mirror. Read them daily."
-    },
-    "doctor": {
-      "title": "9. Talk to Your Doctor",
-      "intro": "Especially important for alcohol and hard drugs. Medical supervision can make withdrawal safer and more manageable.",
-      "canProvide": {
-        "title": "What Your Doctor Can Provide:",
-        "items": [
-          "Assessment of your addiction severity",
-          "Withdrawal management medication",
-          "Referral to addiction specialists",
-          "Treatment for underlying mental health issues",
-          "Medical detoxification if needed"
-        ]
-      },
-      "beHonest": {
-        "title": "Be Honest With Your Doctor:",
-        "items": [
-          "Tell them what, how much, and how often you've been using",
-          "Tell them your quit date",
-          "Tell them about any medical conditions",
-          "Tell them about medications you're taking"
-        ]
-      },
-      "closing": "This is not judgment—it's healthcare. Doctors help people quit every day. They want to help you."
-    },
-    "tell": {
-      "title": "10. Tell People (Carefully)",
-      "intro": "Accountability is powerful. But choose who you tell carefully.",
-      "positive": {
-        "title": "Tell These People:",
-        "items": [
-          "Someone you completely trust",
-          "People who truly support you",
-          "Your support network",
-          "Your therapist or counselor"
-        ]
-      },
-      "beCareful": {
-        "title": "Be Careful With:",
-        "items": [
-          "People who use and might pressure you",
-          "People who've been judgmental about this before",
-          "People who aren't emotionally healthy themselves",
-          "Social media—you don't need to broadcast to everyone"
-        ]
-      },
-      "whatToSay": "What to say: \"I've decided to quit [addiction] on [date]. I'm telling you because I need your support. If I reach out struggling, please be there for me.\""
-    },
-    "backup": {
-      "title": "11. Create a Backup Plan",
-      "intro": "What if everything goes wrong? Have a plan for crisis moments.",
-      "cravingHits": {
-        "title": "If a Craving Hits Hard",
-        "steps": [
-          "1. Call your support person immediately",
-          "2. Use your Crisis Toolkit (distraction, exercise, etc.)",
-          "3. Get to a safe place if needed",
-          "4. Use the Craving Game or Meditation feature"
-        ]
-      },
-      "almostUse": {
-        "title": "If You Almost Use",
-        "steps": [
-          "1. Tell someone what you're experiencing",
-          "2. Get professional help (therapist emergency line, doctor)",
-          "3. Don't isolate",
-          "4. This is not failure—this is you fighting"
-        ]
-      },
-      "doUse": {
-        "title": "If You Do Use",
-        "steps": [
-          "1. Don't beat yourself up or give up entirely",
-          "2. This is a lapse, not a relapse",
-          "3. Call your support person immediately",
-          "4. Understand what triggered it",
-          "5. Restart your quit date—you haven't failed"
-        ]
-      },
-      "emergencyResources": {
-        "title": "Emergency Resources",
-        "samhsa": "SAMHSA National Helpline: 1-800-662-4357",
-        "crisisText": "Crisis Text Line: Text HOME to 741741",
-        "suicide": "National Suicide Prevention Lifeline: 988"
-      }
-    },
-    "checklist": {
-      "title": "12. Pre-Quit Checklist",
-      "intro": "Before you start, make sure you've done these things:",
-      "items": {
-        "quitDate": "✓ I've set a specific quit date (within 1-2 weeks)",
-        "triggers": "✓ I've identified my top 3 triggers",
-        "triggerPlans": "✓ I've made plans for each trigger",
-        "supportPeople": "✓ I have 3-5 support people identified with their numbers saved",
-        "crisisToolkit": "✓ I've created my personal Crisis Toolkit (5+ strategies)",
-        "cleanSpace": "✓ I've removed temptations from my space",
-        "fortyEightHours": "✓ I've planned my first 48 hours hour by hour",
-        "doctor": "✓ I've talked to my doctor (or scheduled an appointment)",
-        "toldSupport": "✓ I've told at least one support person my quit date",
-        "helplines": "✓ I've saved crisis helpline numbers in my phone",
-        "ready": "✓ I understand that this will be hard—and I'm ready"
-      },
-      "placeholders": {
-        "quitDate": "Notes about your quit date...",
-        "triggers": "List your top 3 triggers...",
-        "triggerPlans": "Describe your plan for each trigger...",
-        "supportPeople": "List your support people and contact info...",
-        "crisisToolkit": "List your 5+ coping strategies...",
-        "cleanSpace": "Describe steps you've taken to clean your space...",
-        "fortyEightHours": "Outline your first 48 hours plan...",
-        "doctor": "Notes about your doctor consultation...",
-        "toldSupport": "Who have you told about your quit date?...",
-        "helplines": "List the helpline numbers you've saved...",
-        "ready": "Your thoughts and feelings about being ready..."
-      }
-    },
-    "final": {
-      "title": "You're Ready",
-      "emoji": "💪",
-      "message1": "You've made your plan. You've prepared your mind and your environment. You have support. You have tools. You know what's coming and you have strategies to handle it.",
-      "message2": "The day you quit isn't the beginning of your recovery—it's just the beginning you can see. Recovery started when you decided to make this change. Every step you've taken to prepare is recovery.",
-      "message3": "You're going to face difficult moments. Cravings will come. Emotions will be overwhelming. Withdrawal might be uncomfortable. But you're not doing this alone. You have people. You have tools. You have this app. You have yourself—and that's enough.",
-      "message4": "Welcome to your new life. It starts now.",
-      "encouragement": "When you're ready to quit, start tracking in this app. Use every tool available. Reach out to your support network. And remember: every single day you don't use is a victory worth celebrating.",
-      "buttonText": "📅 Set Your Stop Date Now"
+        "✓ Esto es posible. Millones de personas lo han hecho. Tú también puedes.",
+        "✓ Esto es difícil, pero se vuelve más fácil.",
+        "✓ Los antojos alcanzan su pico en 15-20 minutos.",
+        "✓ No eres malo. Eres valiente por intentar.",
+        "✓ Cada día que no usas te hace más fuerte."
+      ]
     }
   }
 }

@@ -1,0 +1,48 @@
+{
+  "saved": "Salvato con successo!",
+  "deleted": "Eliminato con successo!",
+  "updated": "Aggiornato con successo!",
+  "error": "Si è verificato un errore. Riprova più tardi.",
+  "serverError": "Errore del server. Riprova più tardi.",
+  "networkError": "Errore di rete. Verifica la tua connessione.",
+  "unauthorized": "Non hai il permesso di eseguire questa azione",
+  "validation": {
+    "required": "Questo campo è obbligatorio",
+    "invalidEmail": "Inserisci un indirizzo email valido",
+    "passwordTooShort": "La password deve essere di almeno 6 caratteri",
+    "passwordMismatch": "Le password non corrispondono",
+    "invalidInput": "Input non valido"
+  },
+  "mainMenu": {
+    "pageTitle": "Menu principale",
+    "failedToLoadAddictions": "Impossibile caricare le dipendenze",
+    "failedToUpdateAddiction": "Impossibile aggiornare la dipendenza",
+    "aboutToCave": "Stai per cedere?",
+    "craviingSupport": "Supporto per il desiderio",
+    "cravineSupportMessage": "Senti il desiderio? Ottieni supporto ora!",
+    "cravingEncouragement": "Puoi farcela. Respira profondamente.",
+    "managedCraving": "Hai gestito il desiderio",
+    "needHelp": "Ho bisogno di aiuto",
+    "whichAddiction": "Quale dipendenza stai affrontando?",
+    "selectAddictionForLogging": "Seleziona la dipendenza che stai affrontando per registrare e ottenere supporto",
+    "noAddictionsToLog": "Nessuna dipendenza in monitoraggio. Aggiungine una prima.",
+    "amazingWork": "🎉 Lavoro fantastico!",
+    "resistedCraving": "Hai resistito al desiderio. È fantastico! Ogni momento in cui sei forte costruisce il tuo recupero.",
+    "messageClosing": "Stai facendo bene! Continua così!",
+    "cravingSupport": {
+      "message": "Senti il desiderio? Ottieni supporto ora!",
+      "encouragement": "Puoi farcela. Respira profondamente.",
+      "buttons": "Ottieni aiuto"
+    },
+    "todaysOutlook": "Prospettiva di oggi",
+    "todaysSavings": "Risparmi di oggi",
+    "totalSaved": "Totale risparmiato",
+    "todaysTips": "Suggerimenti di oggi"
+  },
+  "addictionCard": {
+    "days": "giorni",
+    "saved": "risparmiato",
+    "encouragement": "Stai facendo progressi incredibili!",
+    "youreDoingGreat": "Stai facendo bene! Continua così!"
+  }
+}

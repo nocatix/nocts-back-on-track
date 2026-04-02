@@ -1,0 +1,297 @@
+{
+  "pageTitle": "Scopri nuovi hobby",
+  "subtitle": "Accelera la tua guarigione attraverso attività affascinanti piene di scopo, significato e connessione",
+  "whyHobbiesTitle": "Perché gli hobby sono cruciali per il recupero",
+  "benefits": [
+    {
+      "emoji": "⏰",
+      "title": "Riempire il tuo tempo",
+      "description": "Gli hobby riempiono il tempo che normalmente avresti usato. La noia è pericolosa. L'impegno è sicuro."
+    },
+    {
+      "emoji": "😊",
+      "title": "Rilascia dopamina",
+      "description": "Gli hobby danno al tuo cervello il piacere che cercava dalla dipendenza, naturalmente e in modo sano."
+    },
+    {
+      "emoji": "🎯",
+      "title": "Costruisci uno scopo",
+      "description": "Lavorare per padroneggiare o ottenere qualcosa dà significato alla tua vita oltre al 'non usare'."
+    },
+    {
+      "emoji": "🤝",
+      "title": "Crea comunità",
+      "description": "Gli hobby sociali ti connettono con gli altri, costruendo relazioni sane."
+    },
+    {
+      "emoji": "💪",
+      "title": "Costruisci fiducia",
+      "description": "Imparare e migliorare in qualcosa genera veri risultati e autostima."
+    },
+    {
+      "emoji": "🧠",
+      "title": "Fuga sana",
+      "description": "Gli hobby forniscono una fuga mentale senza far male, solo pura gioia."
+    }
+  ],
+  "filterTitle": "Filtra hobby",
+  "filterOptions": [
+    {
+      "value": "all",
+      "label": "Tutti gli hobby"
+    },
+    {
+      "value": "solo",
+      "label": "😊 Da solo",
+      "subtext": "(da fare da solo)"
+    },
+    {
+      "value": "social",
+      "label": "👥 Sociale",
+      "subtext": "(con altri)"
+    },
+    {
+      "value": "outdoor",
+      "label": "🌳 All'aperto"
+    },
+    {
+      "value": "indoor",
+      "label": "🏠 Al coperto"
+    },
+    {
+      "value": "free",
+      "label": "💰 Gratuito"
+    },
+    {
+      "value": "paid",
+      "label": "💵 A pagamento"
+    }
+  ],
+  "categoryLabels": {
+    "solo": "😊 Da solo",
+    "social": "👥 Sociale",
+    "outdoor": "🌳 All'aperto",
+    "indoor": "🏠 Al coperto",
+    "free": "💰 Gratuito",
+    "paid": "💵 A pagamento"
+  },
+  "recoveryBenefitsTitle": "✨ Benefici per il recupero",
+  "getStartedTitle": "🚀 Inizia",
+  "finalTitle": "Inizia a esplorare",
+  "finalMessages": [
+    "Scegli un hobby che ti attrae davvero. Non pensarci troppo. Provalo.",
+    "Provalo questa settimana. Provalo davvero. Non devi essere bravo, devi solo farlo.",
+    "L'obiettivo non è la perfezione. L'obiettivo è l'impegno, la felicità e una vita sobria degna di essere vissuta."
+  ],
+  "hobbies": [
+    {
+      "id": 1,
+      "name": "Camminare",
+      "emoji": "🚶",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "30 minuti - 2 ore",
+      "description": "Un modo semplice e gratuito per muovere il corpo e chiarire la mente. Le passeggiate riducono il desiderio.",
+      "recovery_benefits": [
+        "Attività fisica",
+        "Aria fresca",
+        "Chiarezza mentale",
+        "Alleviamento dello stress"
+      ],
+      "get_started": "Inizia con una passeggiata di 20 minuti al giorno. Nota quello che ti circonda."
+    },
+    {
+      "id": 2,
+      "name": "Corsa/Jogging",
+      "emoji": "🏃",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "20-60 minuti",
+      "description": "Il rilascio di endorfine più intenso e brucia l'energia nervosa.",
+      "recovery_benefits": [
+        "Rilascio di endorfine",
+        "Esercizio intenso",
+        "Soppressione del desiderio",
+        "Costruire fiducia"
+      ],
+      "get_started": "Se sei nuovo, inizia con intervalli di corsa/camminata. Le app possono guidarti."
+    },
+    {
+      "id": 3,
+      "name": "Escursionismo",
+      "emoji": "⛰️",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "1-4 ore",
+      "description": "Combina il contatto con la natura, l'attività fisica e la definizione di obiettivi in un hobby significativo.",
+      "recovery_benefits": [
+        "Connessione con la natura",
+        "Senso di realizzazione",
+        "Esercizio",
+        "Reimpostazione spirituale"
+      ],
+      "get_started": "Trova un sentiero escursionistico locale. Inizia con i sentieri per principianti."
+    },
+    {
+      "id": 4,
+      "name": "Giardinaggio",
+      "emoji": "🌱",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "30 minuti - 2 ore",
+      "description": "Coltivare cose ti dà uno scopo, pazienza e la soddisfazione di prendersi cura della vita.",
+      "recovery_benefits": [
+        "Senso di scopo",
+        "Connessione con la natura",
+        "Sviluppare pazienza",
+        "Senso di realizzazione"
+      ],
+      "get_started": "Inizia con piante facili da coltivare. Anche un piccolo giardino sul davanzale conta."
+    },
+    {
+      "id": 5,
+      "name": "Esplora la tua città",
+      "emoji": "🗺️",
+      "category": [
+        "solo",
+        "outdoor",
+        "free"
+      ],
+      "duration": "1-3 ore",
+      "description": "Riscopri la tua comunità. Trova parchi e caffè che non avevi notato.",
+      "recovery_benefits": [
+        "Curiosità",
+        "Attività",
+        "Nuova prospettiva",
+        "Rompere la routine"
+      ],
+      "get_started": "Scegli un'area che non conosci bene. Esplora senza meta."
+    },
+    {
+      "id": 6,
+      "name": "Andare in bicicletta",
+      "emoji": "🚴",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "30 minuti - 2 ore",
+      "description": "Un modo divertente e veloce per coprire distanze e sentire la libertà.",
+      "recovery_benefits": [
+        "Velocità e libertà",
+        "Salute cardiovascolare",
+        "Esplorazione",
+        "Endorfine"
+      ],
+      "get_started": "Acquista una bicicletta usata da un negozio locale o online. Investisci in un casco e una serratura."
+    },
+    {
+      "id": 7,
+      "name": "Arrampicata",
+      "emoji": "🧗",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-3 ore",
+      "description": "Una sfida fisica e mentale intensa che costruisce fiducia e concentrazione.",
+      "recovery_benefits": [
+        "Risoluzione di problemi",
+        "Fiducia",
+        "Forza totale del corpo",
+        "Migliorare la concentrazione"
+      ],
+      "get_started": "Inizia a una palestra di arrampicata locale. Gli istruttori insegnano la tecnica corretta e la sicurezza."
+    },
+    {
+      "id": 8,
+      "name": "Fotografia",
+      "emoji": "📸",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-4 ore",
+      "description": "Cattura la bellezza, sviluppa un occhio artistico ed esplora un'uscita creativa.",
+      "recovery_benefits": [
+        "Creatività",
+        "Consapevolezza",
+        "Esplorazione",
+        "Senso di realizzazione"
+      ],
+      "get_started": "Inizia con la fotocamera del tuo telefono. Impara dai tutorial online gratuiti."
+    },
+    {
+      "id": 9,
+      "name": "Sport acquatici",
+      "emoji": "🏄",
+      "category": [
+        "solo",
+        "outdoor",
+        "paid"
+      ],
+      "duration": "1-3 ore",
+      "description": "Surf, kayak o stand-up paddle ti connettono all'acqua e forniscono un'adrenalina.",
+      "recovery_benefits": [
+        "Connessione con la natura",
+        "Adrenalina",
+        "Esercizio totale del corpo",
+        "Momento presente"
+      ],
+      "get_started": "Segui una lezione per principianti sulla spiaggia o sul lago locale. Inizia in acque calme."
+    },
+    {
+      "id": 10,
+      "name": "Lettura",
+      "emoji": "📖",
+      "category": [
+        "solo",
+        "indoor",
+        "free"
+      ],
+      "duration": "30 minuti - 2 ore",
+      "description": "Immergiti nelle storie, impara cose nuove e sfida la tua mente in modo sano.",
+      "recovery_benefits": [
+        "Fuga mentale",
+        "Crescita del vocabolario",
+        "Rilassamento",
+        "Conoscenza"
+      ],
+      "get_started": "Visita la tua biblioteca locale. Prendi libri in prestito gratuitamente."
+    },
+    {
+      "id": 11,
+      "name": "Scrittura/Diario",
+      "emoji": "✍️",
+      "category": [
+        "solo",
+        "indoor",
+        "free"
+      ],
+      "duration": "20-60 minuti",
+      "description": "Elabora le emozioni, tieni traccia del tuo percorso e scopri intuizioni su te stesso.",
+      "recovery_benefits": [
+        "Elaborazione delle emozioni",
+        "Scoperta di sé",
+        "Alleviamento dello stress",
+        "Tracciamento dei progressi"
+      ],
+      "get_started": "Inizia con la scrittura libera. Nessuna regola. Scrivi cose vere."
+    }
+  ]
+}

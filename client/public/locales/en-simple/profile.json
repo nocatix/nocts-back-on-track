@@ -1,18 +1,18 @@
 {
-  "pageTitle": "My Info",
+  "pageTitle": "My Profile",
   "changePassword": "Change Password",
-  "currentPassword": "Old Password",
+  "currentPassword": "Current Password",
   "newPassword": "New Password",
-  "confirmNewPassword": "Type New Password Again",
+  "confirmNewPassword": "Confirm New Password",
   "passwordChanged": "Password changed!",
   "darkMode": "Dark Mode",
   "language": "Language",
-  "unitPreference": "Size Units",
-  "selectLanguage": "Pick language",
-  "resetProgress": "Start Over",
-  "resetProgressWarning": "Sure? This erases all info. Can't undo.",
+  "unitPreference": "Units",
+  "selectLanguage": "Pick Language",
+  "resetProgress": "Delete All Data",
+  "resetProgressWarning": "Are you sure? All data will be deleted.",
   "deleteAccount": "Delete Account",
-  "deleteAccountWarning": "Sure? This deletes everything. Can't undo.",
-  "imperialUnits": "Pounds and Fahrenheit",
-  "metricUnits": "Kilos and Celsius"
+  "deleteAccountWarning": "Are you sure? You cannot undo this.",
+  "imperialUnits": "US Units (Pounds, °F)",
+  "metricUnits": "Metric Units (Kilograms, °C)"
 }

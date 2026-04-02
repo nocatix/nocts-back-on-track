@@ -1,18 +1,18 @@
 {
-  "pageTitle": "Mi Perfil",
+  "pageTitle": "Mi perfil",
   "changePassword": "Cambiar contraseña",
   "currentPassword": "Contraseña actual",
   "newPassword": "Nueva contraseña",
   "confirmNewPassword": "Confirmar nueva contraseña",
-  "passwordChanged": "¡Contraseña cambiada!",
+  "passwordChanged": "¡Contraseña cambiada exitosamente!",
   "darkMode": "Modo oscuro",
   "language": "Idioma",
-  "unitPreference": "Unidades",
-  "selectLanguage": "Seleccionar idioma",
-  "resetProgress": "Reiniciar",
-  "resetProgressWarning": "¿Seguro? Esto borrará todo. No se puede deshacer.",
+  "unitPreference": "Preferencia de unidades",
+  "selectLanguage": "Selecciona idioma",
+  "resetProgress": "Reiniciar todo el progreso",
+  "resetProgressWarning": "¿Estás seguro? Todos los datos excepto tu cuenta serán eliminados.",
   "deleteAccount": "Eliminar cuenta",
-  "deleteAccountWarning": "¿Seguro? Esto borrará todo. No se puede deshacer.",
-  "imperialUnits": "Libras y Fahrenheit",
-  "metricUnits": "Kilogramos y Celsius"
+  "deleteAccountWarning": "¿Estás seguro? Esta acción no se puede deshacer y tu cuenta será eliminada permanentemente.",
+  "imperialUnits": "Unidades imperiales (libras, °F)",
+  "metricUnits": "Unidades métricas (kilogramos, °C)"
 }

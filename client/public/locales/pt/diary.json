@@ -1,0 +1,32 @@
+{
+  "pageTitle": "Meu Diário",
+  "addEntry": "Adicionar nova anotação",
+  "entry": "Anotação",
+  "noEntries": "Nenhuma entrada de diário. Comece a escrever!",
+  "entryDate": "Data da anotação",
+  "entryContent": "Como você se sente?",
+  "entryContentPlaceholder": "Escreva seus pensamentos e sentimentos aqui...",
+  "recentEntries": "Anotações recentes",
+  "previousDay": "◀ Dia anterior",
+  "nextDay": "Próximo dia ▶",
+  "today": "Hoje",
+  "lastSaved": "Último salvamento",
+  "writeHere": "Escreva aqui... Você pode usar markdown:\n# Título 1\n## Título 2\n**Negrito** *Itálico*\n- Pontos de lista",
+  "markdownTip": "💡 Dica: use formatação markdown - **negrito**, *itálico*, # título, - pontos",
+  "hideTip": "▼ Ocultar dica",
+  "showTip": "▶ Mostrar dica",
+  "savingEntry": "Salvando...",
+  "saveEntry": "💾 Salvar anotação",
+  "editEntry": "✏️ Editar anotação",
+  "cancel": "Cancelar",
+  "noEntryForDay": "Nenhuma anotação para este dia.",
+  "journalingTipsTitle": "💭 Dicas de diário para recuperação",
+  "journalingTips": [
+    "Gratidão: Escreva 3 coisas pelas quais é grato todos os dias",
+    "Progresso: Rastreie seus dias de força",
+    "Gatilhos: Anote o que causa compulsão e como lidou com isso",
+    "Emoções: Escreva o que sente para processar",
+    "Objetivos: Lembre-se por que começou essa jornada",
+    "Vitórias: Celebre cada pequena vitória, não importa quão pequena"
+  ]
+}

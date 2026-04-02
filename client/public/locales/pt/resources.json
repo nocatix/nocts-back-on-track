@@ -1,0 +1,308 @@
+{
+  "meditation": {
+    "pageTitle": "Meditação",
+    "startMeditation": "Iniciar meditação",
+    "duration": "Duração (minutos)",
+    "guidedMeditation": "Meditação guiada",
+    "timerId": "Temporizador",
+    "breathingExercise": "Exercício de respiração",
+    "relaxationTechnique": "Técnica de relaxamento",
+    "noRecords": "Nenhum registro de meditação. Comece a meditar!",
+    "backToMeditations": "← Voltar a meditações",
+    "sessionTimer": "⏱️ Temporizador de sessão",
+    "sessionTimerLabel": "Temporizador de sessão",
+    "guidedBreathing": "🫁 Respiração guiada",
+    "breathingPace": "Ritmo de respiração",
+    "startBreathingGuide": "▶ Iniciar guia de respiração",
+    "stopBreathingGuide": "⏹ Parar guia de respiração",
+    "showBreathingGuide": "Mostrar guia de respiração",
+    "hideBreathingGuide": "Ocultar guia de respiração",
+    "start": "Iniciar",
+    "pause": "Pausar",
+    "resume": "Retomar",
+    "reset": "Redefinir",
+    "minutes": "minutos",
+    "meditationMusic": "🎵 Música de meditação",
+    "guide": "Guia",
+    "postureTips": "🧘 Dicas de postura",
+    "quickTools": "Ferramentas rápidas",
+    "emergencyCalmTitle": "🆘 Calma de emergência",
+    "emergencyCalmDesc": "Alívio instantâneo para compulsão intensa",
+    "emergencyCalm3Min": "Calma de emergência 3 minutos",
+    "quickBreathingTitle": "🫁 Respiração rápida",
+    "quickBreathingDesc": "Reiniciar sistema nervoso",
+    "progressTitle": "📈 Seu progresso",
+    "sessionsCompleted": "Sessões completas",
+    "minsTotal": "Minutos totais",
+    "guidedBreathingExercise": "Exercício de respiração guiada",
+    "breathingTip1": "👉 Respire lentamente pelo nariz, prenda a respiração suavemente, depois expire pela boca",
+    "breathingTip2": "💡 Isso pode acalmar seu sistema nervoso e reduzir naturalmente a compulsão",
+    "recommendedMusicTitle": "🎵 Música de meditação recomendada",
+    "listenToMusic": "Ouça música ambiente durante a meditação",
+    "youtubeMusic": "YouTube: Música de meditação",
+    "spotifyMusic": "Spotify: Lista de meditação",
+    "calmApp": "App Calm",
+    "recentSessionsTitle": "📝 Sessões recentes",
+    "tipsForMeditation": "💡 Dicas para meditação bem-sucedida",
+    "meditations": [
+      {
+        "id": 1,
+        "title": "Consciência da respiração",
+        "duration": "5 minutos",
+        "description": "Comece com consciência básica de respiração para acalmar a mente.",
+        "guide": "Sente-se confortavelmente. Feche os olhos. Respire naturalmente pelo nariz. Conte de 1 a 10 a cada expiração, depois recomeça. Se sua mente vagar, está tudo bem - volte à contagem. Continue por 5 minutos. Esta prática simples ajuda a acalmar ansiedade e compulsão.",
+        "musicUrl": "https://www.youtube.com/embed/7qJZy4DpOWA"
+      },
+      {
+        "id": 2,
+        "title": "Verificação corporal",
+        "duration": "7 minutos",
+        "description": "Libere sistematicamente a tensão do seu corpo.",
+        "guide": "Deite-se ou sente-se confortavelmente. Feche os olhos. Comece do topo da cabeça. Observe qualquer tensão. Ao respirar, imagine liberar essa tensão a cada expiração. Mova-se lentamente para baixo: testa, queixo, pescoço, ombros, braços, peito, barriga, pernas, pés. Gaste 10-15 segundos em cada área. Esta técnica reduz o stress físico da abstinência.",
+        "musicUrl": "https://www.youtube.com/embed/2DRyAW0ljHQ"
+      },
+      {
+        "id": 3,
+        "title": "Liberação de compulsão",
+        "duration": "10 minutos",
+        "description": "Uma meditação específica para gerenciar compulsão.",
+        "guide": "Sente-se confortavelmente. Feche os olhos. Observe sem julgamento qualquer compulsão no seu corpo. Não tente lutar contra isso. Observe: onde está? Como se sente? Tem cor, forma ou temperatura? Ao respirar, imagine a compulsão como uma onda passando por você. Observe enquanto sobe, atinge o pico e desce. Lembre-se: compulsão é temporária. Isto também passará. Elas desaparecem naturalmente em 15-20 minutos.",
+        "musicUrl": "https://www.youtube.com/embed/sTzHDPqBN-8"
+      },
+      {
+        "id": 4,
+        "title": "Amor e bondade",
+        "duration": "8 minutos",
+        "description": "Cultive compaixão e amor próprio em sua jornada de recuperação.",
+        "guide": "Sente-se confortavelmente. Feche os olhos. Coloque a mão no coração. Diga silenciosamente: 'Que eu esteja em paz. Que eu seja saudável. Que eu seja feliz. Que seja livre da dependência.' Repita lentamente, sentindo cada palavra. Então expanda: 'Que outros também encontrem paz e cura.' Esta prática constrói autocompaixão e impulso para recuperação.",
+        "musicUrl": "https://www.youtube.com/embed/lE5n6gYzJLo"
+      }
+    ],
+    "tips": [
+      "Comece com apenas 5 minutos por dia. Consistência é mais importante que duração.",
+      "Medite na mesma hora todos os dias para desenvolver o hábito.",
+      "Compulsão atinge pico em 15-20 minutos. Medite além do pico.",
+      "Use meditação quando sentir mais tentação.",
+      "Sua mente vai vagar - é normal. Traga-a de volta gentilmente.",
+      "Rastreie seu progresso. Note quão mais fácil fica gerenciar a compulsão."
+    ],
+    "postureTipsList": [
+      {
+        "label": "Coluna vertebral",
+        "text": "Mantenha direito mas não rígido - imagine uma linha do fundo ao topo da cabeça"
+      },
+      {
+        "label": "Ombros",
+        "text": "Relaxe para baixo e para trás, longe das orelhas"
+      },
+      {
+        "label": "Mãos",
+        "text": "Coloque nos joelhos, palmas para cima ou para baixo como se sinta confortável"
+      },
+      {
+        "label": "Queixo",
+        "text": "Levemente retraído, olhos naturalmente olhando para baixo (abertos ou fechados está bem)"
+      },
+      {
+        "label": "Pés",
+        "text": "Se sentado, pés firmemente plantados no chão. Se deitado, deixe-os cair naturalmente para os lados"
+      }
+    ]
+  },
+  "preparationPlan": {
+    "header": {
+      "title": "Faça um plano e prepare-se para parar",
+      "subtitle": "Preparação é a base da recuperação bem-sucedida. Use este guia para se preparar para o sucesso."
+    },
+    "motivation": {
+      "title": "Por que preparação é importante",
+      "mainMessage": "Recuperação não é algo que acontece, é algo que você constrói.",
+      "description": "O tempo que você gasta preparando agora vai decidir diretamente seu sucesso. Pessoas que planejam recuperação têm muito mais probabilidade de permanecer nos dias iniciais difíceis.",
+      "benefits": [
+        "Preparação reduz decisões impulsivas quando enfrenta dificuldades",
+        "Faz você se sentir preparado e confiante antes de começar",
+        "Identifica obstáculos potenciais antes que o surpreendam",
+        "Garante que o sistema de suporte esteja em ação desde o primeiro dia",
+        "Mostra a si mesmo que é sério sobre mudança"
+      ],
+      "insight": "💡 Cada minuto que você passa planejando agora economizará horas de luta depois."
+    },
+    "assess": {
+      "title": "1. Avalie sua posição atual",
+      "intro": "Antes de parar, entenda onde você está:",
+      "questions": {
+        "frequency": "Com que frequência consumo/me engajo? (diariamente, semanalmente, múltiplas vezes por dia)",
+        "money": "Quanto gasto por dia/semana?",
+        "time": "Que hora do dia sou mais propenso a consumir?",
+        "triggers": "Quais situações acionam meu consumo? (stress, tédio, social, emocional)",
+        "impact": "Como essa dependência afetou minha saúde, relacionamentos, trabalho, finanças?",
+        "obstacles": "Que obstáculos enfrentei ao tentar parar no passado?"
+      },
+      "placeholder": "Digite suas respostas aqui...",
+      "tip": "Dica: Use este app para rastrear seu consumo atual por alguns dias antes de parar. Dados reais são mais poderosos que suposições."
+    },
+    "quitDate": {
+      "title": "2. Defina uma data específica para parar",
+      "mainAdvice": "Escolha uma data dentro de 1-2 semanas. Dê a si mesmo tempo suficiente para se preparar, mas não tanto que perca impulso.",
+      "goodTiming": [
+        "✓ Bom momento: escolha um dia após um evento estressante",
+        "✓ Bom momento: escolha um dia quando suporte estiver disponível"
+      ],
+      "badTiming": [
+        "✗ Mau momento: não escolha quando já estiver stress ou emocional",
+        "✗ Mau momento: não escolha quando estiver sozinho e fácil acesso"
+      ],
+      "finalAdvice": "Após escolher a data, marque no calendário. Diga às pessoas. Coloque em algum lugar que vê todos os dias. Torne real."
+    },
+    "triggers": {
+      "title": "3. Identifique seus gatilhos",
+      "intro": "Gatilhos são situações, emoções ou pessoas que o fazem querer consumir. Conhecê-los antecipadamente significa que pode planejar para eles.",
+      "categories": {
+        "emotional": {
+          "title": "Gatilhos emocionais",
+          "description": "Stress, tédio, solidão, raiva, ansiedade, tristeza... que emoção leva seu consumo?"
+        },
+        "social": {
+          "title": "Gatilhos sociais",
+          "description": "Pessoas, lugares ou grupos específicos. Você consome com certos amigos? Em um local particular?"
+        },
+        "environmental": {
+          "title": "Gatilhos ambientais",
+          "description": "Hora do dia, local. Seu quarto o aciona? Noites?"
+        },
+        "habitual": {
+          "title": "Gatilhos habituais",
+          "description": "Coisas que sempre faz junto. Cerimônia de café da manhã? Rotina pós-trabalho?"
+        }
+      },
+      "action": "Ação: Para cada gatilho, escreva um plano específico para o que fará em vez disso."
+    },
+    "support": {
+      "title": "4. Construa sua rede de suporte",
+      "intro": "Você não pode fazer sozinho. Recuperação bem-sucedida exige conexão e suporte. Construa sua rede agora antes de parar.",
+      "people": {
+        "title": "👥 Pessoas para contar",
+        "items": [
+          "Pelo menos uma pessoa em que confiança completamente, que pode chamar a qualquer momento",
+          "Uma pessoa que não vai julgar se tiver dificuldades",
+          "Uma pessoa que vai celebrar suas vitórias",
+          "Considere contar a um terapeuta, conselheiro ou médico"
+        ]
+      },
+      "resources": {
+        "title": "📱 Recursos de suporte",
+        "items": [
+          "Grupos de suporte (AA, NA, SMART Recovery, etc)",
+          "Serviços de psicoterapia ou aconselhamento",
+          "Este app - use todos os seus recursos (diário, humor, meditação)",
+          "Linhas de ajuda e linhas de texto de crise"
+        ]
+      },
+      "professional": {
+        "title": "🏥 Ajuda profissional",
+        "items": [
+          "Suporte de desintoxicação médica para álcool ou drogas (se necessário)",
+          "Tratamento assistido por medicação (se recomendado)",
+          "Psicoterapia para problemas subjacentes",
+          "Não tente sozinho se for perigoso"
+        ]
+      },
+      "action": "Escreva 3-5 pessoas específicas que pode chamar quando as coisas forem difíceis. Agora obtenha seus números e salve no seu telefone."
+    },
+    "coping": {
+      "title": "5. Planeje suas estratégias de enfrentamento",
+      "intro": "Compulsão vai chegar. Você precisa de ferramentas concretas prontas antes que chegue.",
+      "strategies": {
+        "meditation": {
+          "title": "🧘 Meditação e atenção plena",
+          "description": "Use a função de meditação deste app. Até 2 minutos ajuda."
+        },
+        "distraction": {
+          "title": "🎮 Estratégias de distração",
+          "description": "Use jogo de compulsão, assista filme, chame amigo, tome um banho, faça exercício."
+        },
+        "physical": {
+          "title": "💪 Atividade física",
+          "description": "Caminhada, corrida, ioga, dança - qualquer coisa que mova seu corpo e mude química."
+        },
+        "journaling": {
+          "title": "📔 Diário",
+          "description": "Use a função de diário para escrever sua compulsão e emoções."
+        },
+        "emotions": {
+          "title": "🎭 Processamento emocional",
+          "description": "Rastreie humor, nomeie sentimentos, sinta-os sem agir."
+        },
+        "connection": {
+          "title": "🤝 Conexão",
+          "description": "Chame alguém, envie mensagem a um amigo, participe de reunião de suporte."
+        }
+      },
+      "action": "Crie seu kit de ferramentas pessoal para crise de compulsão: escreva 3-5 coisas que fará quando compulsão chegar. Cole em lugar visível."
+    },
+    "remove": {
+      "title": "6. Remova a tentação",
+      "intro": "Torne o consumo o mais difícil possível. Você não pode recusar o que não tem.",
+      "actions": {
+        "clean": {
+          "title": "🚭 Limpe seu espaço",
+          "description": "Livre-se de todos os suprimentos, ferramentas, lembretes. Limpe completamente seu quarto, carro, bolsa."
+        },
+        "delete": {
+          "title": "🗑️ Delete acesso",
+          "description": "Delete apps, bloqueie websites, pare de seguir contas, delete contatos de fornecedor."
+        },
+        "money": {
+          "title": "💳 Limite dinheiro",
+          "description": "Dê controle financeiro a alguém em que confia. Delete acesso de cartão se necessário."
+        },
+        "avoid": {
+          "title": "📍 Evite lugares",
+          "description": "Planeje rotas que evitem seus pontos de consumo usuais. Caminhe uma rua diferente."
+        },
+        "distance": {
+          "title": "👥 Distância de pessoas",
+          "description": "Considere contar aos amigos que está parando - amigos reais vão apoiar."
+        }
+      }
+    },
+    "fortyEightHours": {
+      "title": "7. Planeje suas primeiras 48 horas",
+      "intro": "As primeiras 48 horas são as mais difíceis. Planeje a cada hora se necessário.",
+      "blocks": {
+        "wakeUp": {
+          "title": "Quando acordar",
+          "description": "Conte a alguém que seu começo começou. Faça algo saudável (exercício, meditação, café da manhã saudável)."
+        },
+        "morning": {
+          "title": "Manhã (após dormir)",
+          "description": "Tempo não-estruturado é perigoso. Planeje algo: exercício, veja amigos, hobby, meditação."
+        },
+        "afternoon": {
+          "title": "Tarde (hora de pico de compulsão)",
+          "description": "Chame sua pessoa de suporte. Use seu kit de ferramentas. Este tempo vai passar."
+        },
+        "evening": {
+          "title": "Noite (tempo sozinho)",
+          "description": "Fique com pessoas ou ao telefone com alguém. Fique ocupado. Use diário para processar."
+        },
+        "night": {
+          "title": "Noite (mais difícil para muitos)",
+          "description": "Prepare-se para dormir: banho quente, chá, meditação, audiolivro. Você consegue."
+        }
+      },
+      "insight": "💡 Se suas primeiras 48 horas passarem sem consumo, suas chances de sucesso a longo prazo aumentam dramaticamente. Você consegue."
+    },
+    "mental": {
+      "title": "8. Preparação mental",
+      "intro": "Sua mente decide seu sucesso. Plante essas verdades agora antes de começar:",
+      "beliefs": [
+        "✓ É possível. Milhões de pessoas fizeram. Você também pode.",
+        "✓ É difícil, mas fica mais fácil.",
+        "✓ Compulsão atinge pico em 15-20 minutos.",
+        "✓ Você não é pessoa ruim. Tentar é corajoso.",
+        "✓ Cada dia que não consome o torna mais forte."
+      ]
+    }
+  }
+}

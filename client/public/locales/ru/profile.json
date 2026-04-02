@@ -4,15 +4,15 @@
   "currentPassword": "Текущий пароль",
   "newPassword": "Новый пароль",
   "confirmNewPassword": "Подтвердить новый пароль",
-  "passwordChanged": "Пароль изменен!",
+  "passwordChanged": "Пароль успешно изменен!",
   "darkMode": "Темный режим",
   "language": "Язык",
-  "unitPreference": "Единицы",
-  "selectLanguage": "Выберите язык",
-  "resetProgress": "Перезагрузить",
-  "resetProgressWarning": "Вы уверены? Это удалит все. Отменить нельзя.",
+  "unitPreference": "Предпочтение единиц",
+  "selectLanguage": "Выбрать язык",
+  "resetProgress": "Сбросить весь прогресс",
+  "resetProgressWarning": "Вы уверены? Все данные кроме вашего аккаунта будут удалены.",
   "deleteAccount": "Удалить аккаунт",
-  "deleteAccountWarning": "Вы уверены? Это удалит все. Отменить нельзя.",
-  "imperialUnits": "Фунты и Фаренгейт",
-  "metricUnits": "Килограммы и Цельсий"
+  "deleteAccountWarning": "Вы уверены? Это действие не может быть отменено, и ваш аккаунт будет удален навсегда.",
+  "imperialUnits": "Имперские единицы (фунты, °F)",
+  "metricUnits": "Метрические единицы (килограммы, °C)"
 }
