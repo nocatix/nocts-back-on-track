@@ -6,7 +6,9 @@ COPY client/package*.json ./
 
 RUN npm install
 
-COPY client .
+COPY client/* .
+COPY client/public ./public
+COPY client/src ./src
 
 # Build the React app with the backend URL environment variable
 # Use localhost since the browser will access the backend via the exposed port
