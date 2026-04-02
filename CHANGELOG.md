@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2026-04-02
+
+### ✨ Features
+
+#### **100% Mobile-Web Feature Parity**
+- **PrivacyPolicyScreen**: Comprehensive privacy policy with 8 expandable sections covering data collection, storage, protection, and user rights
+- **FunctioningUserScreen**: Educational content on the dangers of functional addiction with 8 in-depth sections and recovery guidance
+- **Enhanced Therapy Page**: Added medication partnership content to explain how therapy and medication work together in recovery
+- **Updated Resources Hub**: Integrated new educational pages into the resources navigation
+
+### 🎨 UI/UX
+
+#### **Dark Mode Enhancements**
+- Full dark mode support on all 26 core pages (100% parity achieved)
+- Consistent theme.colors.* integration across all new screens
+- Fixed scroll clipping with proper bottom padding (+40px) on educational screens
+
+### 🐛 Fixed
+
+#### **Component & Build Fixes**
+- **Slider Import**: Fixed React Native Slider component import - moved from `react-native` to `@react-native-community/slider`
+- **JSX Syntax**: Fixed missing closing tag in CravingGameScreen recoveryText
+- **Dependencies**: Added `@react-native-community/slider` to package.json dependencies
+- **MoodScreen**: Updated to use community slider package with proper theme integration
+
+### 📱 Mobile App
+
+#### **Feature Completeness**
+- All 26 core pages now available on mobile (matches web exactly)
+- Educational resources fully accessible from Resources Hub
+- Complete dark mode coverage across all screens
+
 ## [1.3.0] - 2026-04-02
 
 ### 🐛 Fixed

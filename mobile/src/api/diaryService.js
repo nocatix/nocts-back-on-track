@@ -15,33 +15,37 @@ export const diaryService = {
   async getDiaryEntries(limit = 50, offset = 0) {
     try {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
-      if (!user) throw new Error('User not found');
+      if (!user) return [];
       
       const service = await getDiaryService();
-      return await service.getDiaries(user.id);
+      return await service.getDiaryEntries(user.id, limit, offset);
     } catch (error) {
-      console.error('Error fetching diary entries:', error);
-      throw error;
+      if (error.message !== 'User not found') {
+        console.error('Error fetching diary entries:', error);
+      }
+      return [];
     }
   },
 
   async getDiaryEntryById(id) {
     try {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
-      if (!user) throw new Error('User not found');
+      if (!user) return null;
       
       const service = await getDiaryService();
       return await service.getDiary(user.id, id);
     } catch (error) {
-      console.error('Error fetching diary entry:', error);
-      throw error;
+      if (error.message !== 'User not found') {
+        console.error('Error fetching diary entry:', error);
+      }
+      return null;
     }
   },
 
   async createDiaryEntry(entryData) {
     try {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
-      if (!user) throw new Error('User not found');
+      if (!user) throw new Error('User not authenticated');
       
       const service = await getDiaryService();
       return await service.createDiary(user.id, entryData);

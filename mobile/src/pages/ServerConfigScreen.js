@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   View,
   Text,
@@ -10,17 +10,22 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
+  SafeAreaView,
 } from 'react-native';
 import { useMode } from '../context/ModeContext';
+import { DarkModeContext } from '../context/DarkModeContext';
+import { getTheme } from '../utils/theme';
 import modeService from '../services/modeService';
 
 export default function ServerConfigScreen({ navigation }) {
-  const { updateServerUrl } = useMode();
+  const { updateServerUrl, switchMode } = useMode();
   const [serverUrl, setServerUrl] = useState('');
   const [testing, setTesting] = useState(false);
   const [validating, setValidating] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState(null);
   const [error, setError] = useState('');
+  const { isDarkMode } = useContext(DarkModeContext);
+  const theme = getTheme(isDarkMode);
 
   const handleUrlChange = (text) => {
     setServerUrl(text);
@@ -135,29 +140,59 @@ export default function ServerConfigScreen({ navigation }) {
     );
   };
 
+  const handleSwitchToStandalone = async () => {
+    Alert.alert(
+      'Switch to Standalone?',
+      'Are you sure you want to switch back to standalone mode? This will clear your current session.',
+      [
+        { text: 'Cancel', onPress: () => {} },
+        {
+          text: 'Switch',
+          onPress: async () => {
+            try {
+              await switchMode('standalone');
+            } catch (error) {
+              console.error('Error switching mode:', error);
+              Alert.alert('Error', `Failed to switch mode: ${error.message}`);
+            }
+          },
+          style: 'destructive',
+        },
+      ]
+    );
+  };
+
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
-    >
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Server Configuration</Text>
-          <Text style={styles.subtitle}>
+    <SafeAreaView style={[styles.safeContainer, { backgroundColor: theme.colors.background }]}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.keyboardAvoidingView}
+      >
+        <ScrollView 
+          style={[styles.content, { backgroundColor: theme.colors.background }]} 
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.header}>
+          <Text style={[styles.title, { color: theme.colors.text }]}>Server Configuration</Text>
+          <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
             Enter your Nocts server address to connect
           </Text>
         </View>
 
-        <View style={styles.formContainer}>
-          <Text style={styles.label}>Server URL</Text>
+        <View style={[styles.formContainer, { backgroundColor: theme.colors.cardBg }]}>
+          <Text style={[styles.label, { color: theme.colors.text }]}>Server URL</Text>
           <TextInput
             style={[
               styles.input,
-              error && styles.inputError,
-              connectionStatus === 'success' && styles.inputSuccess,
+              {
+                backgroundColor: theme.colors.inputBg,
+                borderColor: error ? theme.colors.error : connectionStatus === 'success' ? theme.colors.success : theme.colors.inputBorder,
+                color: theme.colors.text,
+              },
             ]}
             placeholder="e.g., 192.168.1.100:5000"
-            placeholderTextColor="#d1d5db"
+            placeholderTextColor={theme.colors.textTertiary}
             value={serverUrl}
             onChangeText={handleUrlChange}
             editable={!testing && !validating}
@@ -165,17 +200,17 @@ export default function ServerConfigScreen({ navigation }) {
             autoCorrect={false}
           />
 
-          {error && <Text style={styles.errorText}>{error}</Text>}
+          {error && <Text style={[styles.errorText, { color: theme.colors.error }]}>{error}</Text>}
 
           {connectionStatus === 'success' && (
-            <Text style={styles.successText}>✓ Connection successful</Text>
+            <Text style={[styles.successText, { color: theme.colors.success }]}>✓ Connection successful</Text>
           )}
 
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={[
                 styles.button,
-                styles.testButton,
+                { backgroundColor: theme.colors.textTertiary },
                 (testing || validating || !serverUrl) && styles.buttonDisabled,
               ]}
               onPress={testConnection}
@@ -191,7 +226,7 @@ export default function ServerConfigScreen({ navigation }) {
             <TouchableOpacity
               style={[
                 styles.button,
-                styles.confirmButton,
+                { backgroundColor: theme.colors.primary },
                 (validating || !serverUrl || connectionStatus !== 'success') &&
                   styles.buttonDisabled,
               ]}
@@ -212,40 +247,91 @@ export default function ServerConfigScreen({ navigation }) {
               onPress={handleSkip}
               disabled={validating}
             >
-              <Text style={styles.skipButtonText}>Skip for Now</Text>
+              <Text style={[styles.skipButtonText, { color: theme.colors.textSecondary }]}>Skip for Now</Text>
             </TouchableOpacity>
           )}
         </View>
 
-        <View style={styles.infoContainer}>
-          <Text style={styles.infoTitle}>Server URL Format:</Text>
-          <Text style={styles.infoText}>
+        <TouchableOpacity
+          style={[styles.switchToStandaloneButton, { borderColor: theme.colors.error }]}
+          onPress={handleSwitchToStandalone}
+        >
+          <Text style={[styles.switchToStandaloneText, { color: theme.colors.error }]}>
+            ← Switch Back to Standalone
+          </Text>
+        </TouchableOpacity>
+
+        <View style={[
+          styles.infoContainer,
+          { 
+            backgroundColor: isDarkMode ? '#1e3a5f' : '#f0f9ff',
+            borderLeftColor: isDarkMode ? '#0284c7' : '#0284c7',
+          }
+        ]}>
+          <Text style={[
+            styles.infoTitle,
+            { color: isDarkMode ? '#7dd3fc' : '#0c4a6e' }
+          ]}>Server URL Format:</Text>
+          <Text style={[
+            styles.infoText,
+            { color: isDarkMode ? '#7dd3fc' : '#0c4a6e' }
+          ]}>
             • Local Network: http://192.168.1.100:5000
           </Text>
-          <Text style={styles.infoText}>• Hostname: http://server-name:5000</Text>
-          <Text style={styles.infoText}>
+          <Text style={[
+            styles.infoText,
+            { color: isDarkMode ? '#7dd3fc' : '#0c4a6e' }
+          ]}>• Hostname: http://server-name:5000</Text>
+          <Text style={[
+            styles.infoText,
+            { color: isDarkMode ? '#7dd3fc' : '#0c4a6e' }
+          ]}>
             • Include protocol (http:// or https://)
           </Text>
-          <Text style={styles.infoText}>• Default port is 5000 for Nocts</Text>
+          <Text style={[
+            styles.infoText,
+            { color: isDarkMode ? '#7dd3fc' : '#0c4a6e' }
+          ]}>• Default port is 5000 for Nocts</Text>
         </View>
 
-        <View style={styles.debugContainer}>
-          <Text style={styles.debugTitle}>Need help?</Text>
-          <Text style={styles.debugText}>
+        <View style={[
+          styles.debugContainer,
+          {
+            backgroundColor: isDarkMode ? '#713f12' : '#fef3c7',
+            borderLeftColor: isDarkMode ? '#ca8a04' : '#ca8a04',
+          }
+        ]}>
+          <Text style={[
+            styles.debugTitle,
+            { color: isDarkMode ? '#fbbf24' : '#78350f' }
+          ]}>Need help?</Text>
+          <Text style={[
+            styles.debugText,
+            { color: isDarkMode ? '#fbbf24' : '#78350f' }
+          ]}>
             Make sure your Nocts server is running and accessible from your device on the same network.
           </Text>
         </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeContainer: {
+    flex: 1,
+  },
+  keyboardAvoidingView: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
   },
   content: {
+    flex: 1,
+  },
+  scrollContent: {
     paddingHorizontal: 20,
     paddingVertical: 30,
   },
@@ -255,16 +341,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#1f2937',
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 14,
-    color: '#6b7280',
     lineHeight: 20,
   },
   formContainer: {
-    backgroundColor: '#fff',
     borderRadius: 12,
     padding: 20,
     marginBottom: 24,
@@ -277,35 +360,21 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#374151',
     marginBottom: 8,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#d1d5db',
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 12,
     fontSize: 16,
-    color: '#1f2937',
     marginBottom: 8,
-    backgroundColor: '#f9fafb',
-  },
-  inputError: {
-    borderColor: '#ef4444',
-    backgroundColor: '#fef2f2',
-  },
-  inputSuccess: {
-    borderColor: '#10b981',
-    backgroundColor: '#f0fdf4',
   },
   errorText: {
-    color: '#ef4444',
     fontSize: 12,
     marginBottom: 12,
   },
   successText: {
-    color: '#10b981',
     fontSize: 12,
     marginBottom: 12,
     fontWeight: '500',
@@ -321,16 +390,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 10,
   },
-  testButton: {
-    backgroundColor: '#9ca3af',
-  },
   testButtonText: {
     color: '#fff',
     fontSize: 14,
     fontWeight: '600',
-  },
-  confirmButton: {
-    backgroundColor: '#6366f1',
   },
   confirmButtonText: {
     color: '#fff',
@@ -345,45 +408,49 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   skipButtonText: {
-    color: '#6b7280',
     fontSize: 14,
   },
+  switchToStandaloneButton: {
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    alignItems: 'center',
+    marginTop: 12,
+    marginBottom: 24,
+  },
+  switchToStandaloneText: {
+    fontSize: 14,
+    fontWeight: '600',
+  },
   infoContainer: {
-    backgroundColor: '#f0f9ff',
     borderRadius: 8,
     padding: 16,
     marginBottom: 20,
     borderLeftWidth: 4,
-    borderLeftColor: '#0284c7',
   },
   infoTitle: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#0c4a6e',
     marginBottom: 8,
   },
   infoText: {
     fontSize: 12,
-    color: '#0c4a6e',
     lineHeight: 18,
     marginBottom: 4,
   },
   debugContainer: {
-    backgroundColor: '#fef3c7',
     borderRadius: 8,
     padding: 16,
     borderLeftWidth: 4,
-    borderLeftColor: '#ca8a04',
   },
   debugTitle: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#78350f',
     marginBottom: 6,
   },
   debugText: {
     fontSize: 12,
-    color: '#78350f',
     lineHeight: 18,
   },
 });

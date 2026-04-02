@@ -27,12 +27,15 @@ export function ModeProvider({ children }) {
       
       if (storedMode) {
         setMode(storedMode);
-        setModeConfigured(true);
         
         if (storedMode === 'connected' && storedServerUrl) {
           setServerUrl(storedServerUrl);
         }
       }
+      
+      // Mark mode configuration as complete - either we have a stored mode or user needs to select
+      setModeConfigured(true);
+      console.log('[ModeContext] Bootstrap complete');
     } catch (err) {
       console.error('[ModeContext] Error during bootstrap:', err);
       setError(err.message);

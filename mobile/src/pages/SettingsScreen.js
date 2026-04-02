@@ -7,15 +7,27 @@ import {
   TouchableOpacity,
   Alert,
   ActivityIndicator,
+  Switch,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 import { useMode } from '../context/ModeContext';
+import { DarkModeContext } from '../context/DarkModeContext';
+import { BiometricContext } from '../context/BiometricContext';
+import { getTheme } from '../utils/theme';
 import { AuthContext } from '../context/AuthContext';
 import modeService from '../services/modeService';
+import LanguageSelector from '../components/LanguageSelector';
 
 export default function SettingsScreen({ navigation }) {
+  const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
   const { mode, serverUrl, switchMode, clearModeData } = useMode();
   const { user, logout } = useContext(AuthContext);
+  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
+  const { isBiometricAvailable, isBiometricEnabled, enableBiometric, disableBiometric } = useContext(BiometricContext);
+  const theme = getTheme(isDarkMode);
   const [connectionStatus, setConnectionStatus] = useState(null);
   const [testing, setTesting] = useState(false);
 
@@ -53,19 +65,19 @@ export default function SettingsScreen({ navigation }) {
     const newMode = mode === 'standalone' ? 'connected' : 'standalone';
     
     Alert.alert(
-      'Switch Mode?',
-      `You're about to switch from ${mode} to ${newMode} mode.\n\nYour current data will not be transferred. You'll need to log in again.`,
+      t('settings.confirmSwitchMode', 'Switch Mode?'),
+      t('settings.switchModeMessage', 'You\'re about to switch from {{mode}} to a different mode.\n\nYour current data will not be transferred. You\'ll need to log in again.', { mode }),
       [
-        { text: 'Cancel', onPress: () => {} },
+        { text: t('common.cancel', 'Cancel'), onPress: () => {} },
         {
-          text: 'Switch Mode',
+          text: t('settings.switchModeButton', 'Switch Mode'),
           onPress: async () => {
             try {
               await logout();
               await switchMode(newMode);
               // Navigation will be handled by RootNavigator when mode changes
             } catch (error) {
-              Alert.alert('Error', 'Failed to switch mode: ' + error.message);
+              Alert.alert(t('common.error', 'Error'), 'Failed to switch mode: ' + error.message);
             }
           },
           style: 'destructive',
@@ -76,19 +88,19 @@ export default function SettingsScreen({ navigation }) {
 
   const handleClearAllData = () => {
     Alert.alert(
-      'Clear All Data?',
-      'This will delete all local data and log you out. This cannot be undone.',
+      t('settings.confirmClearAllData', 'Clear All Data?'),
+      t('settings.clearDataMessage', 'This will delete all local data and log you out. This cannot be undone.'),
       [
-        { text: 'Cancel', onPress: () => {} },
+        { text: t('common.cancel', 'Cancel'), onPress: () => {} },
         {
-          text: 'Clear Data',
+          text: t('settings.clearDataButton', 'Clear Data'),
           onPress: async () => {
             try {
               await clearModeData();
               await logout();
               // This will clear everything and reset to mode selection
             } catch (error) {
-              Alert.alert('Error', 'Failed to clear data: ' + error.message);
+              Alert.alert(t('common.error', 'Error'), 'Failed to clear data: ' + error.message);
             }
           },
           style: 'destructive',
@@ -99,17 +111,17 @@ export default function SettingsScreen({ navigation }) {
 
   const handleLogout = () => {
     Alert.alert(
-      'Log Out?',
-      'You will need to log in again.',
+      t('settings.confirmLogout', 'Log Out?'),
+      t('settings.logoutMessage', 'You will need to log in again.'),
       [
-        { text: 'Cancel', onPress: () => {} },
+        { text: t('common.cancel', 'Cancel'), onPress: () => {} },
         {
-          text: 'Log Out',
+          text: t('settings.logOutButton', 'Log Out'),
           onPress: async () => {
             try {
               await logout();
             } catch (error) {
-              Alert.alert('Error', 'Failed to logout: ' + error.message);
+              Alert.alert(t('common.error', 'Error'), 'Failed to logout: ' + error.message);
             }
           },
           style: 'destructive',
@@ -119,95 +131,161 @@ export default function SettingsScreen({ navigation }) {
   };
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView 
+      style={[
+        styles.container, 
+        { 
+          backgroundColor: theme.colors.background,
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        }
+      ]} 
+      showsVerticalScrollIndicator={false}
+    >
       {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.title}>Settings</Text>
+      <View style={[styles.header, { backgroundColor: theme.colors.cardBg, borderBottomColor: theme.colors.border }]}>
+        <Text style={[styles.title, { color: theme.colors.text }]}>{t('settings.title', 'Settings')}</Text>
       </View>
 
-      {/* User Info Section */}
-      {user && (
+      {/* User Info Section - Hide in standalone mode */}
+      {user && mode === 'connected' && (
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>User Information</Text>
-          <View style={styles.card}>
+          <Text style={[styles.sectionTitle, { color: theme.colors.textSecondary }]}>{t('settings.userInformation', 'User Information')}</Text>
+          <View style={[styles.card, { backgroundColor: theme.colors.cardBg, borderColor: theme.colors.border }]}>
             <View style={styles.row}>
-              <Text style={styles.label}>Username:</Text>
-              <Text style={styles.value}>{user.username}</Text>
+              <Text style={[styles.label, { color: theme.colors.textSecondary }]}>{t('settings.username', 'Username')}:</Text>
+              <Text style={[styles.value, { color: theme.colors.text }]}>{user.username}</Text>
             </View>
             {user.fullName && (
               <View style={styles.row}>
-                <Text style={styles.label}>Full Name:</Text>
-                <Text style={styles.value}>{user.fullName}</Text>
+                <Text style={[styles.label, { color: theme.colors.textSecondary }]}>{t('settings.fullName', 'Full Name')}:</Text>
+                <Text style={[styles.value, { color: theme.colors.text }]}>{user.fullName}</Text>
               </View>
             )}
             {user.nameOnPhone && (
               <View style={styles.row}>
-                <Text style={styles.label}>Display Name:</Text>
-                <Text style={styles.value}>{user.nameOnPhone}</Text>
+                <Text style={[styles.label, { color: theme.colors.textSecondary }]}>{t('settings.displayName', 'Display Name')}:</Text>
+                <Text style={[styles.value, { color: theme.colors.text }]}>{user.nameOnPhone}</Text>
               </View>
             )}
           </View>
         </View>
       )}
 
+      {/* Display/Theme Section */}
+      <View style={styles.section}>
+        <Text style={[styles.sectionTitle, { color: theme.colors.textSecondary }]}>{t('settings.display', 'Display')}</Text>
+        <View style={[styles.card, { backgroundColor: theme.colors.cardBg, borderColor: theme.colors.border }]}>
+          <View style={[styles.row, { justifyContent: 'space-between', alignItems: 'center' }]}>
+            <View>
+              <Text style={[styles.label, { color: theme.colors.text }]}>{t('settings.darkMode', 'Dark Mode')}</Text>
+              <Text style={[styles.description, { color: theme.colors.textTertiary }]}>{t('settings.useDarkTheme', 'Use dark theme')}</Text>
+            </View>
+            <Switch
+              value={isDarkMode}
+              onValueChange={toggleDarkMode}
+              trackColor={{ false: '#d1d5db', true: '#a78bfa' }}
+              thumbColor={isDarkMode ? '#818cf8' : '#f3f4f6'}
+            />
+          </View>
+        </View>
+      </View>
+
+      {/* Language Section */}
+      <View style={styles.section}>
+        <Text style={[styles.sectionTitle, { color: theme.colors.textSecondary }]}>{t('settings.language', 'Language')}</Text>
+        <View style={[styles.card, { backgroundColor: theme.colors.cardBg, borderColor: theme.colors.border }]}>
+          <LanguageSelector />
+        </View>
+      </View>
+
+      {/* Security Section - Standalone only */}
+      {mode === 'standalone' && isBiometricAvailable && (
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: theme.colors.textSecondary }]}>{t('settings.security', 'Security')}</Text>
+          <View style={[styles.card, { backgroundColor: theme.colors.cardBg, borderColor: theme.colors.border }]}>
+            <View style={[styles.row, { justifyContent: 'space-between', alignItems: 'center' }]}>
+              <View>
+                <Text style={[styles.label, { color: theme.colors.text }]}>{t('settings.biometricLock', 'Biometric Lock')}</Text>
+                <Text style={[styles.description, { color: theme.colors.textTertiary }]}>{t('settings.requireFingerprintOrFaceId', 'Require fingerprint or face ID')}</Text>
+              </View>
+              <Switch
+                value={isBiometricEnabled}
+                onValueChange={(value) => {
+                  if (value) {
+                    enableBiometric();
+                  } else {
+                    disableBiometric();
+                  }
+                }}
+                trackColor={{ false: '#d1d5db', true: '#a78bfa' }}
+                thumbColor={isBiometricEnabled ? '#818cf8' : '#f3f4f6'}
+              />
+            </View>
+          </View>
+        </View>
+      )}
+
       {/* Mode Section */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>App Mode</Text>
-        <View style={styles.card}>
+        <Text style={[styles.sectionTitle, { color: theme.colors.textSecondary }]}>{t('settings.appMode', 'App Mode')}</Text>
+        <View style={[styles.card, { backgroundColor: theme.colors.cardBg, borderColor: theme.colors.border }]}>
           <View style={styles.row}>
-            <Text style={styles.label}>Current Mode:</Text>
-            <View style={styles.modeTag}>
-              <Text style={styles.modeTagText}>{mode}</Text>
+            <Text style={[styles.label, { color: theme.colors.textSecondary }]}>{t('settings.currentMode', 'Current Mode')}:</Text>
+            <View style={[styles.modeTag, { backgroundColor: theme.colors.primary }]}>
+              <Text style={[styles.modeTagText, { color: '#fff' }]}>{mode}</Text>
             </View>
           </View>
 
           {mode === 'standalone' && (
-            <Text style={styles.modeDescription}>
-              📱 Running locally without server connection
+            <Text style={[styles.modeDescription, { color: theme.colors.textTertiary }]}>
+              📱 {t('settings.runningLocally', 'Running locally without server connection')}
             </Text>
           )}
 
           {mode === 'connected' && (
             <>
-              <Text style={styles.modeDescription}>
-                🌐 Connected to server for sync and multi-device access
+              <Text style={[styles.modeDescription, { color: theme.colors.textTertiary }]}>
+                🌐 {t('settings.connectedToServer', 'Connected to server for sync and multi-device access')}
               </Text>
               <View style={styles.row}>
-                <Text style={styles.label}>Server:</Text>
-                <Text style={styles.value}>{serverUrl}</Text>
+                <Text style={[styles.label, { color: theme.colors.textSecondary }]}>{t('settings.server', 'Server')}:</Text>
+                <Text style={[styles.value, { color: theme.colors.text }]}>{serverUrl}</Text>
               </View>
               <View style={[styles.row, { alignItems: 'center' }]}>
-                <Text style={styles.label}>Connection:</Text>
+                <Text style={[styles.label, { color: theme.colors.textSecondary }]}>{t('settings.connection', 'Connection')}:</Text>
                 {testing ? (
-                  <ActivityIndicator size="small" color="#6366f1" />
+                  <ActivityIndicator size="small" color={theme.colors.primary} />
                 ) : connectionStatus === 'online' ? (
-                  <View style={styles.statusOnline}>
-                    <Text style={styles.statusText}>🟢 Online</Text>
+                  <View style={[styles.statusOnline, { backgroundColor: theme.colors.success }]}>
+                    <Text style={[styles.statusText, { color: '#fff' }]}>🟢 {t('settings.online', 'Online')}</Text>
                   </View>
                 ) : (
-                  <View style={styles.statusOffline}>
-                    <Text style={styles.statusText}>🔴 Offline</Text>
+                  <View style={[styles.statusOffline, { backgroundColor: theme.colors.error }]}>
+                    <Text style={[styles.statusText, { color: '#fff' }]}>🔴 {t('settings.offline', 'Offline')}</Text>
                   </View>
                 )}
               </View>
               <TouchableOpacity
-                style={styles.testButton}
+                style={[styles.testButton, { backgroundColor: theme.colors.primary }]}
                 onPress={testConnection}
                 disabled={testing}
               >
-                <Text style={styles.testButtonText}>
-                  {testing ? 'Testing...' : 'Test Connection'}
+                <Text style={[styles.testButtonText, { color: '#fff' }]}>
+                  {testing ? t('settings.testing', 'Testing...') : t('settings.testConnection', 'Test Connection')}
                 </Text>
               </TouchableOpacity>
             </>
           )}
 
           <TouchableOpacity
-            style={styles.switchButton}
+            style={[styles.switchButton, { backgroundColor: theme.colors.primary, borderColor: theme.colors.primary }]}
             onPress={handleSwitchMode}
           >
-            <Text style={styles.switchButtonText}>
-              Switch to {mode === 'standalone' ? 'Server' : 'Standalone'} Mode
+            <Text style={[styles.switchButtonText, { color: '#fff' }]}>
+              {mode === 'standalone' ? t('settings.switchToServer', 'Switch to Server Mode') : t('settings.switchToStandalone', 'Switch to Standalone Mode')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -215,46 +293,46 @@ export default function SettingsScreen({ navigation }) {
 
       {/* Data Section */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Data Management</Text>
-        <View style={styles.card}>
-          <Text style={styles.sectionDescription}>
-            Choose how to manage your data
+        <Text style={[styles.sectionTitle, { color: theme.colors.textSecondary }]}>{t('settings.dataManagement', 'Data Management')}</Text>
+        <View style={[styles.card, { backgroundColor: theme.colors.cardBg, borderColor: theme.colors.border }]}>
+          <Text style={[styles.sectionDescription, { color: theme.colors.textTertiary }]}>
+            {t('settings.chooseManageData', 'Choose how to manage your data')}
           </Text>
           <TouchableOpacity
-            style={styles.dangerButton}
+            style={[styles.dangerButton, { backgroundColor: theme.colors.error }]}
             onPress={handleClearAllData}
           >
-            <Text style={styles.dangerButtonText}>🗑️ Clear All Data</Text>
+            <Text style={[styles.dangerButtonText, { color: '#fff' }]}>🗑️ {t('settings.clearAllData', 'Clear All Data')}</Text>
           </TouchableOpacity>
-          <Text style={styles.buttonDescription}>
-            Deletes all local data and resets the app
+          <Text style={[styles.buttonDescription, { color: theme.colors.textTertiary }]}>
+            {t('settings.deletesAllData', 'Deletes all local data and resets the app')}
           </Text>
         </View>
       </View>
 
       {/* Account Section */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Account</Text>
-        <View style={styles.card}>
+        <Text style={[styles.sectionTitle, { color: theme.colors.textSecondary }]}>{t('settings.account', 'Account')}</Text>
+        <View style={[styles.card, { backgroundColor: theme.colors.cardBg, borderColor: theme.colors.border }]}>
           <TouchableOpacity
-            style={styles.logoutButton}
+            style={[styles.logoutButton, { backgroundColor: theme.colors.error }]}
             onPress={handleLogout}
           >
-            <Text style={styles.logoutButtonText}>Sign Out</Text>
+            <Text style={[styles.logoutButtonText, { color: '#fff' }]}>{t('settings.signOut', 'Sign Out')}</Text>
           </TouchableOpacity>
-          <Text style={styles.buttonDescription}>
-            You'll need to log in again
+          <Text style={[styles.buttonDescription, { color: theme.colors.textTertiary }]}>
+            {t('settings.needLoginAgain', 'You\'ll need to log in again')}
           </Text>
         </View>
       </View>
 
       {/* App Info */}
       <View style={styles.section}>
-        <View style={styles.card}>
-          <Text style={styles.appInfo}>Nocts: Back on Track</Text>
-          <Text style={styles.appVersion}>v1.3.0</Text>
-          <Text style={styles.appDescription}>
-            Your companion for recovery and habit tracking
+        <View style={[styles.card, { backgroundColor: theme.colors.cardBg, borderColor: theme.colors.border }]}>
+          <Text style={[styles.appInfo, { color: theme.colors.text }]}>{t('settings.appTitle', 'Nocts: Back on Track')}</Text>
+          <Text style={[styles.appVersion, { color: theme.colors.textSecondary }]}>{t('settings.appVersion', 'v1.3.0')}</Text>
+          <Text style={[styles.appDescription, { color: theme.colors.textTertiary }]}>
+            {t('settings.appDescription', 'Your companion for recovery and habit tracking')}
           </Text>
         </View>
       </View>
@@ -344,6 +422,11 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     marginBottom: 12,
     marginTop: 8,
+  },
+  description: {
+    fontSize: 12,
+    color: '#9ca3af',
+    marginTop: 4,
   },
   statusOnline: {
     flexDirection: 'row',

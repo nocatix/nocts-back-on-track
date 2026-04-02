@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { DarkModeContext } from '../context/DarkModeContext';
+import { getTheme } from '../utils/theme';
 import { withdrawalHelper } from '../utils/withdrawalHelper';
 
 export default function AddictionCard({ addiction, onPress }) {
+  const { isDarkMode } = useContext(DarkModeContext);
+  const theme = getTheme(isDarkMode);
   const daysSince = withdrawalHelper.calculateDaysSinceStart(addiction.startDate);
   const phase = withdrawalHelper.getPhaseByDays(addiction.type, daysSince);
   const percentage = withdrawalHelper.calculatePercentageComplete(
@@ -19,13 +23,13 @@ export default function AddictionCard({ addiction, onPress }) {
   };
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.card}>
+    <TouchableOpacity onPress={onPress} style={[styles.card, { backgroundColor: theme.colors.cardBg, borderColor: theme.colors.border }]}>
       <View style={styles.header}>
-        <Text style={styles.title}>{addiction.name}</Text>
+        <Text style={[styles.title, { color: theme.colors.text }]}>{addiction.name}</Text>
         <View
           style={[
             styles.badge,
-            { backgroundColor: phaseColors[phase] || '#6366f1' },
+            { backgroundColor: phaseColors[phase] || theme.colors.primary },
           ]}
         >
           <Text style={styles.badgeText}>
@@ -35,23 +39,23 @@ export default function AddictionCard({ addiction, onPress }) {
       </View>
 
       <View style={styles.progressContainer}>
-        <View style={styles.progressBar}>
+        <View style={[styles.progressBar, { backgroundColor: theme.colors.inputBg }]}>
           <View
             style={[
               styles.progressFill,
               {
                 width: `${percentage}%`,
-                backgroundColor: phaseColors[phase] || '#6366f1',
+                backgroundColor: phaseColors[phase] || theme.colors.primary,
               },
             ]}
           />
         </View>
-        <Text style={styles.progressText}>{percentage}% complete</Text>
+        <Text style={[styles.progressText, { color: theme.colors.textSecondary }]}>{percentage}% complete</Text>
       </View>
 
       <View style={styles.footer}>
-        <Text style={styles.phaseText}>
-          Phase: <Text style={styles.phaseBold}>{phase}</Text>
+        <Text style={[styles.phaseText, { color: theme.colors.textSecondary }]}>
+          Phase: <Text style={[styles.phaseBold, { color: theme.colors.text }]}>{phase}</Text>
         </Text>
       </View>
     </TouchableOpacity>

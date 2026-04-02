@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   View,
   Text,
@@ -8,11 +8,17 @@ import {
   ActivityIndicator,
   TextInput,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
+import { DarkModeContext } from '../context/DarkModeContext';
+import { getTheme } from '../utils/theme';
 import diaryService from '../api/diaryService';
 import Button from '../components/Button';
 
 export default function DiaryScreen() {
+  const insets = useSafeAreaInsets();
+  const { isDarkMode } = useContext(DarkModeContext);
+  const theme = getTheme(isDarkMode);
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -30,7 +36,7 @@ export default function DiaryScreen() {
     setLoading(true);
     setError('');
     try {
-      const data = await diaryService.getDiaryEntries({ limit: 50 });
+      const data = await diaryService.getDiaryEntries(50, 0);
       // Sort by most recent first
       const sorted = data.sort(
         (a, b) => new Date(b.date) - new Date(a.date)
@@ -87,10 +93,21 @@ export default function DiaryScreen() {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView 
+      style={[
+        styles.container, 
+        { 
+          backgroundColor: theme.colors.background,
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        }
+      ]}
+    >
       {!showNewEntryForm ? (
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Your Diary</Text>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>Your Diary</Text>
           <Button
             title="+ Write New Entry"
             onPress={() => setShowNewEntryForm(true)}
@@ -99,19 +116,19 @@ export default function DiaryScreen() {
         </View>
       ) : (
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>New Entry</Text>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>New Entry</Text>
 
-          {error && <Text style={styles.errorText}>{error}</Text>}
+          {error && <Text style={[styles.errorText, { color: theme.colors.error }]}>{error}</Text>}
 
           <TextInput
-            style={styles.textInput}
+            style={[styles.textInput, { backgroundColor: theme.colors.inputBg, color: theme.colors.text, borderColor: theme.colors.inputBorder }]}
             placeholder="Write your thoughts here..."
             value={newEntry}
             onChangeText={setNewEntry}
             multiline
             numberOfLines={8}
             editable={!submitting}
-            placeholderTextColor="#999"
+            placeholderTextColor={theme.colors.textTertiary}
           />
 
           <View style={styles.buttonGroup}>
@@ -121,10 +138,10 @@ export default function DiaryScreen() {
                 setNewEntry('');
                 setError('');
               }}
-              style={styles.cancelButton}
+              style={[styles.cancelButton, { borderColor: theme.colors.border }]}
               disabled={submitting}
             >
-              <Text style={styles.cancelButtonText}>Cancel</Text>
+              <Text style={[styles.cancelButtonText, { color: theme.colors.textSecondary }]}>Cancel</Text>
             </TouchableOpacity>
 
             <Button
@@ -138,32 +155,32 @@ export default function DiaryScreen() {
       )}
 
       <View style={styles.section}>
-        <Text style={styles.entriesTitle}>
+        <Text style={[styles.entriesTitle, { color: theme.colors.text }]}>
           {entries.length === 0 ? 'No entries yet' : `${entries.length} Entries`}
         </Text>
 
         {loading ? (
-          <ActivityIndicator size="large" color="#6366f1" style={{ marginVertical: 20 }} />
+          <ActivityIndicator size="large" color={theme.colors.primary} style={{ marginVertical: 20 }} />
         ) : error && entries.length === 0 ? (
-          <View style={styles.errorContainer}>
-            <Text style={styles.errorMessage}>{error}</Text>
+          <View style={[styles.errorContainer, { backgroundColor: theme.colors.error, opacity: 0.1 }]}>
+            <Text style={[styles.errorMessage, { color: theme.colors.error }]}>{error}</Text>
             <Button title="Retry" onPress={fetchEntries} />
           </View>
         ) : entries.length === 0 ? (
-          <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>📔 Start journaling your thoughts</Text>
-            <Text style={styles.emptySubtext}>
+          <View style={[styles.emptyContainer, { backgroundColor: theme.colors.surfaceBackground, borderColor: theme.colors.border }]}>
+            <Text style={[styles.emptyText, { color: theme.colors.text }]}>📔 Start journaling your thoughts</Text>
+            <Text style={[styles.emptySubtext, { color: theme.colors.textSecondary }]}>
               Your diary is a safe space to express yourself
             </Text>
           </View>
         ) : (
           <View>
             {entries.map((entry, index) => (
-              <View key={index} style={styles.entryCard}>
+              <View key={index} style={[styles.entryCard, { backgroundColor: theme.colors.cardBg, borderLeftColor: theme.colors.primary }]}>
                 <View style={styles.entryHeader}>
-                  <Text style={styles.entryDate}>{formatDate(entry.date)}</Text>
+                  <Text style={[styles.entryDate, { color: theme.colors.textTertiary }]}>{formatDate(entry.date)}</Text>
                 </View>
-                <Text style={styles.entryContent}>
+                <Text style={[styles.entryContent, { color: theme.colors.text }]}>
                   {entry.content.substring(0, 150)}
                   {entry.content.length > 150 ? '...' : ''}
                 </Text>

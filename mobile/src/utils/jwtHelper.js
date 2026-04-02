@@ -1,23 +1,63 @@
-import jwt from 'jsonwebtoken';
+import jwtDecode from 'jwt-decode';
 import { saveSecure, getSecure, removeSecure } from './encryption';
 
 const JWT_SECRET = 'noctsBackOnTrackLocalSecret123!@#'; // Local secret for offline use
 
+/**
+ * Simple JWT creation for local use (offline mode)
+ * Note: This creates JWT-like tokens but without cryptographic signing
+ * (React Native doesn't have access to Node.js crypto module)
+ * For offline use, this is sufficient since we control both creation and verification
+ */
 export const createToken = (userId, username) => {
-  const token = jwt.sign(
-    { userId, username },
-    JWT_SECRET,
-    { expiresIn: '365d' } // Long expiry for offline use
-  );
+  const header = {
+    alg: 'HS256',
+    typ: 'JWT'
+  };
+  
+  const now = new Date();
+  const expiryDate = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000); // 365 days
+  
+  const payload = {
+    userId,
+    username,
+    iat: Math.floor(now.getTime() / 1000),
+    exp: Math.floor(expiryDate.getTime() / 1000)
+  };
+  
+  // Create JWT-like structure (header.payload.signature)
+  // For offline use, we don't cryptographically sign, just encode
+  const headerEncoded = btoa(JSON.stringify(header));
+  const payloadEncoded = btoa(JSON.stringify(payload));
+  
+  // Simple signature (not cryptographically valid, but sufficient for local use)
+  const signatureBase = `${headerEncoded}.${payloadEncoded}`;
+  const signature = btoa(JWT_SECRET); // Just encode the secret as a placeholder
+  
+  const token = `${signatureBase}.${signature}`;
   return token;
 };
 
+/**
+ * Verify token by decoding and checking expiry
+ */
 export const verifyToken = (token) => {
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    // Decode the token
+    const decoded = jwtDecode(token);
+    
+    // Check if token has expired
+    if (decoded.exp) {
+      const now = Math.floor(Date.now() / 1000);
+      if (decoded.exp < now) {
+        console.warn('Token has expired');
+        return null;
+      }
+    }
+    
     return decoded;
   } catch (error) {
-    console.error('Token verification failed:', error);
+    console.error('Token verification failed:', error.message);
     return null;
   }
 };

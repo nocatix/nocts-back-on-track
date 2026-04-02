@@ -15,20 +15,22 @@ export const weightService = {
   async getWeights(limit = 100, offset = 0) {
     try {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
-      if (!user) throw new Error('User not found');
+      if (!user) return [];
       
       const service = await getWeightService();
       return await service.getWeights(user.id);
     } catch (error) {
-      console.error('Error fetching weights:', error);
-      throw error;
+      if (error.message !== 'User not found') {
+        console.error('Error fetching weights:', error);
+      }
+      return [];
     }
   },
 
   async createWeight(weightData) {
     try {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
-      if (!user) throw new Error('User not found');
+      if (!user) throw new Error('User not authenticated');
       
       const service = await getWeightService();
       return await service.createWeight(user.id, weightData);

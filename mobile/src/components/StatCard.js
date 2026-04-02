@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { DarkModeContext } from '../context/DarkModeContext';
+import { getTheme } from '../utils/theme';
 
 export default function StatCard({ label, value, icon, color = '#6366f1' }) {
+  const { isDarkMode } = useContext(DarkModeContext);
+  const theme = getTheme(isDarkMode);
+  
   return (
-    <View style={[styles.card, { borderLeftColor: color }]}>
-      <Text style={styles.label}>{label}</Text>
+    <View style={[styles.card, { backgroundColor: theme.colors.cardBg, borderLeftColor: color }]}>
+      <Text style={[styles.label, { color: theme.colors.textSecondary }]}>{label}</Text>
       <Text style={[styles.value, { color }]}>{value}</Text>
     </View>
   );

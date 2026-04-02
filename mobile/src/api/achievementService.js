@@ -25,26 +25,30 @@ export const achievementService = {
   async getAchievements() {
     try {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
-      if (!user) throw new Error('User not found');
+      if (!user) return [];
       
       const service = await getAchievementService();
       return await service.getAchievements(user.id);
     } catch (error) {
-      console.error('Error fetching achievements:', error);
-      throw error;
+      if (error.message !== 'User not found') {
+        console.error('Error fetching achievements:', error);
+      }
+      return [];
     }
   },
 
   async getTrophies() {
     try {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
-      if (!user) throw new Error('User not found');
+      if (!user) return [];
       
       const service = await getTrophyService();
       return await service.getTrophies(user.id);
     } catch (error) {
-      console.error('Error fetching trophies:', error);
-      throw error;
+      if (error.message !== 'User not found') {
+        console.error('Error fetching trophies:', error);
+      }
+      return [];
     }
   },
 
