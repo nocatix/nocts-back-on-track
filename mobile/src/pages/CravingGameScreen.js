@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import {
   View,
   Text,
@@ -6,27 +6,18 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
-  ActivityIndicator,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useFocusEffect } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { DarkModeContext } from '../context/DarkModeContext';
 import { getTheme } from '../utils/theme';
+import cravingGameWords from '../data/cravingGameWords';
+import Button from '../components/Button';
 
-const WORD_LIST = [
-  'RECOVERY', 'SOBER', 'COURAGE', 'STRENGTH', 'PROGRESS', 'FREEDOM',
-  'HEALING', 'TRIUMPH', 'VICTORY', 'MINDFUL', 'BALANCE', 'CLARITY',
-  'GRATEFUL', 'HONEST', 'BRAVE', 'WORTHY', 'CAPABLE', 'FOCUSED',
-  'HEALTHY', 'HOPEFUL', 'PEACEFUL', 'RESILIENT', 'TRANSFORM', 'BELIEVE'
-];
-
-const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-
-const getWordOfDay = () => {
-  const today = new Date().toDateString();
-  const seed = today.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
-  return WORD_LIST[seed % WORD_LIST.length];
+const getLetterStatus = (letter, position, word) => {
+  if (word[position] === letter) return 'correct'; // Green
+  if (word.includes(letter)) return 'present'; // Yellow
+  return 'absent'; // Gray
 };
 
 export default function CravingGameScreen() {
@@ -34,219 +25,302 @@ export default function CravingGameScreen() {
   const { isDarkMode } = useContext(DarkModeContext);
   const theme = getTheme(isDarkMode);
 
-  const [gameState, setGameState] = useState('loading');
-  const [word, setWord] = useState('');
-  const [guessedLetters, setGuessedLetters] = useState(new Set());
-  const [wrongCount, setWrongCount] = useState(0);
+  const [answer, setAnswer] = useState('');
+  const [attempts, setAttempts] = useState([]); // Array of { word, feedback }
+  const [currentRow, setCurrentRow] = useState(0);
+  const [currentInput, setCurrentInput] = useState('');
+  const [gameStatus, setGameStatus] = useState('playing'); // 'playing', 'won', 'lost'
   const [message, setMessage] = useState('');
+  const [showTips, setShowTips] = useState(true);
 
-  const MAX_WRONG = 6;
+  const KEYBOARD = [
+    'QWERTYUIOP'.split(''),
+    'ASDFGHJKL'.split(''),
+    'ZXCVBNM'.split(''),
+  ];
 
-  useFocusEffect(
-    React.useCallback(() => {
-      initializeGame();
-    }, [])
-  );
-
-  const initializeGame = async () => {
-    setGameState('loading');
-    // Simulate loading
-    await new Promise(resolve => setTimeout(resolve, 300));
-    const todayWord = getWordOfDay();
-    setWord(todayWord);
-    setGuessedLetters(new Set());
-    setWrongCount(0);
-    setMessage('');
-    setGameState('playing');
-  };
-
-  const handleLetterGuess = (letter) => {
-    if (guessedLetters.has(letter)) return;
-
-    const newGuessed = new Set(guessedLetters);
-    newGuessed.add(letter);
-    setGuessedLetters(newGuessed);
-
-    if (!word.includes(letter)) {
-      const newWrongCount = wrongCount + 1;
-      setWrongCount(newWrongCount);
-      
-      if (newWrongCount >= MAX_WRONG) {
-        setGameState('lost');
-        setMessage(`Game Over! The word was: ${word}`);
-      }
+  // Initialize game
+  useEffect(() => {
+    if (!answer) {
+      const randomWord = cravingGameWords[Math.floor(Math.random() * cravingGameWords.length)];
+      setAnswer(randomWord);
     }
+  }, [answer]);
+
+  const handleSubmitWord = useCallback(() => {
+    if (currentInput.length !== 5) {
+      setMessage('Word must be 5 letters');
+      setTimeout(() => setMessage(''), 2000);
+      return;
+    }
+
+    const guessWord = currentInput.toUpperCase();
+    const feedback = guessWord.split('').map((letter, idx) => ({
+      letter,
+      status: getLetterStatus(letter, idx, answer)
+    }));
+
+    const newAttempts = [...attempts, { word: guessWord, feedback }];
+    setAttempts(newAttempts);
 
     // Check if won
-    const wordLetters = new Set(word.split(''));
-    const allGuessed = Array.from(wordLetters).every(l => newGuessed.has(l));
-    
-    if (allGuessed && wordLetters.size > 0) {
-      setGameState('won');
-      setMessage('Congratulations! You won!');
+    if (guessWord === answer) {
+      setGameStatus('won');
+      setMessage('🎉 Amazing! When you overcome cravings, you can overcome anything!');
+      return;
+    }
+
+    // Check if lost
+    if (newAttempts.length >= 6) {
+      setGameStatus('lost');
+      setMessage(`Game Over! The word was: ${answer}`);
+      return;
+    }
+
+    setCurrentRow(newAttempts.length);
+    setCurrentInput('');
+  }, [currentInput, attempts, answer]);
+
+  const handleLetterClick = (letter) => {
+    if (gameStatus !== 'playing' || currentInput.length >= 5) return;
+    setCurrentInput(currentInput + letter);
+  };
+
+  const handleBackspace = () => {
+    if (currentInput.length > 0) {
+      setCurrentInput(currentInput.slice(0, -1));
+      setMessage('');
     }
   };
 
-  const displayWord = word
-    .split('')
-    .map(letter => (guessedLetters.has(letter) ? letter : '_'))
-    .join(' ');
+  const handleEnter = () => {
+    handleSubmitWord();
+  };
 
-  const isLetterGuessed = (letter) => guessedLetters.has(letter);
-  const isLetterWrong = (letter) => guessedLetters.has(letter) && !word.includes(letter);
+  const startNewGame = () => {
+    const randomWord = cravingGameWords[Math.floor(Math.random() * cravingGameWords.length)];
+    setAnswer(randomWord);
+    setAttempts([]);
+    setCurrentRow(0);
+    setCurrentInput('');
+    setGameStatus('playing');
+    setMessage('');
+  };
 
-  if (gameState === 'loading') {
-    return (
-      <View style={[styles.container, { backgroundColor: theme.colors.background, justifyContent: 'center', alignItems: 'center' }]}>
-        <ActivityIndicator size="large" color={theme.colors.primary} />
-      </View>
-    );
-  }
+  const getLetterKeyStatus = (letter) => {
+    for (const attempt of attempts) {
+      for (const { letter: l, status } of attempt.feedback) {
+        if (l === letter) return status;
+      }
+    }
+    return null;
+  };
+
+  const getTileColor = (status) => {
+    switch (status) {
+      case 'correct':
+        return '#10b981'; // Green
+      case 'present':
+        return '#f59e0b'; // Orange/Yellow
+      case 'absent':
+        return '#6b7280'; // Gray
+      default:
+        return theme.colors.border;
+    }
+  };
+
+  const getTileTextColor = (status) => {
+    return status ? '#ffffff' : theme.colors.text;
+  };
 
   return (
     <ScrollView
       style={[
         styles.container,
-        {
-          backgroundColor: theme.colors.background,
-          paddingTop: insets.top,
-          paddingBottom: insets.bottom,
-          paddingLeft: insets.left,
-          paddingRight: insets.right,
-        },
+        { backgroundColor: theme.colors.background, paddingTop: insets.top }
       ]}
-      contentContainerStyle={styles.scrollContent}
+      contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}
     >
-      {/* Title */}
-      <Text style={[styles.title, { color: theme.colors.text }]}>Craving Game</Text>
-      <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
-        Play for the day and keep your mind busy
-      </Text>
-
-      {/* Game Status */}
-      <View style={[styles.statusBar, { backgroundColor: theme.colors.cardBg, borderColor: theme.colors.border }]}>
-        <View style={styles.statusItem}>
-          <Text style={[styles.statusLabel, { color: theme.colors.textSecondary }]}>Wrong Guesses</Text>
-          <Text style={[styles.statusValue, { color: gameState === 'lost' ? theme.colors.error : theme.colors.text }]}>
-            {wrongCount}/{MAX_WRONG}
-          </Text>
-        </View>
-        
-        {gameState === 'playing' && (
-          <View style={styles.statusItem}>
-            <Text style={[styles.statusLabel, { color: theme.colors.textSecondary }]}>Score</Text>
-            <Text style={[styles.statusValue, { color: theme.colors.primary }]}>
-              {word.length > 0 ? Math.max(0, (word.split('').filter(l => !guessedLetters.has(l)).length * 10) + 50) : 0}
-            </Text>
-          </View>
-        )}
-
-        {gameState === 'won' && (
-          <View style={styles.statusItem}>
-            <Text style={[styles.statusLabel, { color: theme.colors.success }]}>Status</Text>
-            <Text style={[styles.statusValue, { color: theme.colors.success }]}>Won!</Text>
-          </View>
-        )}
-
-        {gameState === 'lost' && (
-          <View style={styles.statusItem}>
-            <Text style={[styles.statusLabel, { color: theme.colors.error }]}>Status</Text>
-            <Text style={[styles.statusValue, { color: theme.colors.error }]}>Lost!</Text>
-          </View>
-        )}
-      </View>
-
-      {/* Word Display */}
-      <View style={[styles.wordDisplay, { backgroundColor: theme.colors.cardBg, borderColor: theme.colors.border }]}>
-        <Text style={[styles.word, { color: theme.colors.primary, fontSize: 32 }]}>
-          {displayWord}
+      <View style={styles.header}>
+        <Text style={[styles.title, { color: theme.colors.text }]}>🎮 Craving Game</Text>
+        <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
+          Keep your mind sharp and distracted from cravings
         </Text>
       </View>
 
-      {/* Hangman Progress */}
-      <View style={[styles.hangmanContainer, { backgroundColor: theme.colors.cardBg, borderColor: theme.colors.border }]}>
-        <MaterialCommunityIcons 
-          name={
-            wrongCount === 0 ? 'circle-outline' :
-            wrongCount === 1 ? 'head' :
-            wrongCount === 2 ? 'human-male-height-variant' :
-            wrongCount === 3 ? 'human-male-board' :
-            wrongCount === 4 ? 'human-male' :
-            'emoticon-sad'
-          }
-          size={56}
-          color={wrongCount >= MAX_WRONG ? theme.colors.error : theme.colors.primary}
-        />
-        <Text style={[styles.hangmanLabel, { color: theme.colors.textSecondary }]}>
-          {MAX_WRONG - wrongCount} chances left
-        </Text>
-      </View>
-
-      {/* Message */}
       {message && (
         <View style={[
-          styles.message,
-          { backgroundColor: gameState === 'won' ? '#dcfce7' : gameState === 'lost' ? '#fee2e2' : theme.colors.cardBg }
+          styles.messageBox,
+          {
+            backgroundColor: gameStatus === 'won' || gameStatus === 'lost' 
+              ? theme.colors.primary + '20'
+              : theme.colors.warning + '20'
+          }
         ]}>
-          <Text style={[
-            styles.messageText,
-            { color: gameState === 'won' ? '#166534' : gameState === 'lost' ? '#991b1b' : theme.colors.text }
-          ]}>
+          <Text style={[styles.messageText, { color: theme.colors.text }]}>
             {message}
           </Text>
         </View>
       )}
 
-      {/* Keyboard */}
-      <View style={styles.keyboard}>
-        {Array.from(Array(26)).map((_, i) => {
-          const letter = ALPHABET[i];
-          const isWrong = isLetterWrong(letter);
-          const isGuessed = isLetterGuessed(letter);
+      {/* Wordle Board */}
+      <View style={styles.board}>
+        {Array(6).fill(null).map((_, rowIdx) => (
+          <View key={rowIdx} style={styles.row}>
+            {Array(5).fill(null).map((_, colIdx) => {
+              const attempt = attempts[rowIdx];
+              const isCurrentRow = rowIdx === currentRow;
+              const letterValue = isCurrentRow 
+                ? currentInput[colIdx] || '' 
+                : attempt?.feedback[colIdx]?.letter || '';
+              const status = attempt?.feedback[colIdx]?.status;
 
-          return (
-            <TouchableOpacity
-              key={letter}
-              style={[
-                styles.letterButton,
-                {
-                  backgroundColor: isGuessed ? (isWrong ? theme.colors.error : theme.colors.primary) : theme.colors.cardBg,
-                  borderColor: theme.colors.border,
-                  opacity: isGuessed ? 1 : 1,
-                },
-              ]}
-              onPress={() => handleLetterGuess(letter)}
-              disabled={isGuessed || gameState !== 'playing'}
-            >
-              <Text style={[
-                styles.letterText,
-                {
-                  color: isGuessed ? 'white' : theme.colors.text,
-                  opacity: isGuessed ? 1 : 1,
-                }
-              ]}>
-                {letter}
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
+              return (
+                <View
+                  key={colIdx}
+                  style={[
+                    styles.tile,
+                    {
+                      borderColor: letterValue ? getTileColor(status) : theme.colors.border,
+                      backgroundColor: status ? getTileColor(status) : theme.colors.cardBg,
+                    }
+                  ]}
+                >
+                  <Text
+                    style={[
+                      styles.tileLetter,
+                      { color: getTileTextColor(status) }
+                    ]}
+                  >
+                    {letterValue}
+                  </Text>
+                </View>
+              );
+            })}
+          </View>
+        ))}
       </View>
 
-      {/* New Game Button */}
-      {gameState !== 'playing' && (
-        <TouchableOpacity
-          style={[styles.newGameButton, { backgroundColor: theme.colors.primary }]}
-          onPress={initializeGame}
-        >
-          <Text style={styles.newGameButtonText}>Play Again Tomorrow</Text>
-        </TouchableOpacity>
+      {/* Keyboard */}
+      <View style={styles.keyboardContainer}>
+        {KEYBOARD.map((row, rowIdx) => (
+          <View key={rowIdx} style={styles.keyboardRow}>
+            {rowIdx === 2 && (
+              <TouchableOpacity
+                style={[styles.keyboardButton, styles.wideButton, { backgroundColor: theme.colors.cardBg }]}
+                onPress={handleBackspace}
+              >
+                <MaterialCommunityIcons name="backspace" size={20} color={theme.colors.text} />
+              </TouchableOpacity>
+            )}
+
+            {row.map((letter) => {
+              const letterStatus = getLetterKeyStatus(letter);
+              return (
+                <TouchableOpacity
+                  key={letter}
+                  style={[
+                    styles.keyboardButton,
+                    {
+                      backgroundColor: letterStatus 
+                        ? getTileColor(letterStatus)
+                        : theme.colors.cardBg,
+                      borderColor: theme.colors.border,
+                    }
+                  ]}
+                  onPress={() => handleLetterClick(letter)}
+                  disabled={gameStatus !== 'playing' || currentInput.length >= 5}
+                >
+                  <Text
+                    style={[
+                      styles.keyboardButtonText,
+                      { color: getTileTextColor(letterStatus) }
+                    ]}
+                  >
+                    {letter}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+
+            {rowIdx === 2 && (
+              <TouchableOpacity
+                style={[styles.keyboardButton, styles.wideButton, { backgroundColor: theme.colors.primary }]}
+                onPress={handleEnter}
+              >
+                <Text style={styles.enterButtonText}>Enter</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        ))}
+      </View>
+
+      {/* Game Controls */}
+      {gameStatus !== 'playing' && (
+        <Button
+          title="Play Again"
+          onPress={startNewGame}
+          style={styles.playAgainButton}
+        />
       )}
 
       {/* Tips */}
-      <View style={styles.tipsSection}>
-        <Text style={[styles.tipsTitle, { color: theme.colors.text }]}>💡 Tips</Text>
-        <Text style={[styles.tipText, { color: theme.colors.textSecondary }]}>
-          Each recovery-themed word is your word of the day. Play to keep your mind engaged and beat cravings!
+      <TouchableOpacity
+        style={[styles.tipsHeader, { backgroundColor: theme.colors.cardBg }]}
+        onPress={() => setShowTips(!showTips)}
+      >
+        <Text style={[styles.tipsTitle, { color: theme.colors.text }]}>
+          💪 How to Play
+        </Text>
+        <MaterialCommunityIcons
+          name={showTips ? 'chevron-up' : 'chevron-down'}
+          size={20}
+          color={theme.colors.primary}
+        />
+      </TouchableOpacity>
+
+      {showTips && (
+        <View style={[styles.tips, { backgroundColor: theme.colors.surfaceBackground }]}>
+          <View style={styles.tipItem}>
+            <Text style={[styles.tipLabel, { color: theme.colors.text }]}>🟩 Green</Text>
+            <Text style={[styles.tipDescription, { color: theme.colors.textSecondary }]}>
+              Correct letter in correct spot
+            </Text>
+          </View>
+          <View style={styles.tipItem}>
+            <Text style={[styles.tipLabel, { color: theme.colors.text }]}>🟨 Yellow</Text>
+            <Text style={[styles.tipDescription, { color: theme.colors.textSecondary }]}>
+              Correct letter in wrong spot
+            </Text>
+          </View>
+          <View style={styles.tipItem}>
+            <Text style={[styles.tipLabel, { color: theme.colors.text }]}>⬜ Gray</Text>
+            <Text style={[styles.tipDescription, { color: theme.colors.textSecondary }]}>
+              Letter not in word
+            </Text>
+          </View>
+          <View style={[styles.divider, { borderTopColor: theme.colors.border }]} />
+          <View>
+            <Text style={[styles.strategyTitle, { color: theme.colors.text }]}>
+              💡 Strategy Tips:
+            </Text>
+            <Text style={[styles.strategyText, { color: theme.colors.textSecondary }]}>
+              • Use common letters first (E, A, R, O, I){'\n'}
+              • Try different vowels in each guess{'\n'}
+              • Cravings peak in 15-20 minutes—keep guessing until they pass{'\n'}
+              • You have 6 attempts to find the word
+            </Text>
+          </View>
+        </View>
+      )}
+
+      {/* Recovery Message */}
+      <View style={[styles.recoveryBox, { backgroundColor: theme.colors.primary + '20' }]}>
+        <Text style={[styles.recoveryTitle, { color: theme.colors.primary }]}>
+          🧠 Why This Game Helps Recovery
+        </Text>
+        <Text style={[styles.recoveryText, { color: theme.colors.text }]}>
+          Cravings are strongest in the first 15-20 minutes, then fade. This game occupies your mind and gives you a winning experience—proof that you can overcome challenges through focus and strategy.
         </Text>
       </View>
     </ScrollView>
@@ -257,117 +331,148 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  scrollContent: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
+  header: {
+    paddingHorizontal: 20,
+    paddingVertical: 15,
   },
   title: {
-    fontSize: 24,
-    fontWeight: '700',
-    marginBottom: 4,
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 8,
   },
   subtitle: {
     fontSize: 14,
-    marginBottom: 16,
+    lineHeight: 20,
   },
-  statusBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: 12,
+  messageBox: {
+    marginHorizontal: 20,
+    marginBottom: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 12,
     borderRadius: 8,
-    borderWidth: 1,
-    marginBottom: 16,
-  },
-  statusItem: {
-    alignItems: 'center',
-  },
-  statusLabel: {
-    fontSize: 12,
-  },
-  statusValue: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginTop: 4,
-  },
-  wordDisplay: {
-    padding: 24,
-    marginBottom: 16,
-    borderRadius: 8,
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: 100,
-  },
-  word: {
-    fontWeight: '700',
-    letterSpacing: 8,
-  },
-  hangmanContainer: {
-    alignItems: 'center',
-    padding: 16,
-    borderRadius: 8,
-    borderWidth: 1,
-    marginBottom: 16,
-  },
-  hangmanLabel: {
-    fontSize: 12,
-    marginTop: 8,
-  },
-  message: {
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 16,
   },
   messageText: {
     fontSize: 14,
     fontWeight: '600',
     textAlign: 'center',
   },
-  keyboard: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+  board: {
+    marginHorizontal: 12,
+    marginBottom: 20,
     gap: 6,
-    marginBottom: 16,
   },
-  letterButton: {
-    width: '18%',
-    aspectRatio: 1,
-    borderRadius: 8,
+  row: {
+    flexDirection: 'row',
+    gap: 6,
+    justifyContent: 'center',
+  },
+  tile: {
+    width: 54,
+    height: 54,
+    borderWidth: 2,
+    borderRadius: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  tileLetter: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  keyboardContainer: {
+    marginHorizontal: 8,
+    marginBottom: 16,
+    gap: 6,
+  },
+  keyboardRow: {
+    flexDirection: 'row',
+    gap: 4,
+    justifyContent: 'center',
+  },
+  keyboardButton: {
+    minWidth: 32,
+    height: 44,
+    borderRadius: 4,
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 6,
+    paddingHorizontal: 6,
   },
-  letterText: {
+  wideButton: {
+    minWidth: 50,
+  },
+  keyboardButtonText: {
     fontSize: 12,
     fontWeight: '600',
   },
-  newGameButton: {
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    alignItems: 'center',
+  enterButtonText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#ffffff',
+  },
+  playAgainButton: {
+    marginHorizontal: 20,
     marginBottom: 16,
   },
-  newGameButtonText: {
-    color: 'white',
+  tipsHeader: {
+    marginHorizontal: 20,
+    marginBottom: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 8,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  tipsTitle: {
     fontSize: 16,
     fontWeight: '600',
   },
-  tipsSection: {
-    padding: 12,
-    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+  tips: {
+    marginHorizontal: 20,
+    marginBottom: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     borderRadius: 8,
-    marginTop: 16,
   },
-  tipsTitle: {
+  tipItem: {
+    marginBottom: 12,
+  },
+  tipLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  tipDescription: {
+    fontSize: 13,
+    lineHeight: 19,
+  },
+  divider: {
+    borderTopWidth: 1,
+    marginVertical: 12,
+  },
+  strategyTitle: {
     fontSize: 14,
     fontWeight: '600',
     marginBottom: 8,
   },
-  tipText: {
-    fontSize: 12,
-    lineHeight: 18,
+  strategyText: {
+    fontSize: 13,
+    lineHeight: 20,
+  },
+  recoveryBox: {
+    marginHorizontal: 20,
+    marginBottom: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 8,
+  },
+  recoveryTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 8,
+  },
+  recoveryText: {
+    fontSize: 13,
+    lineHeight: 19,
   },
 });

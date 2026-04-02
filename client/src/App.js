@@ -15,6 +15,7 @@ import Diary from './pages/Diary';
 import CravingGame from './pages/CravingGame';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Profile from './pages/Profile';
+import Settings from './pages/Settings';
 import Achievements from './pages/Achievements';
 import Mood from './pages/Mood';
 import Weight from './pages/Weight';
@@ -136,6 +137,14 @@ export default function App() {
                 element={
                   <ProtectedRoute isAuthenticated={!!token}>
                     <Profile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/settings"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <Settings />
                   </ProtectedRoute>
                 }
               />

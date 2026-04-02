@@ -33,12 +33,16 @@ import MemoriesScreen from './src/pages/MemoriesScreen';
 import AchievementsScreen from './src/pages/AchievementsScreen';
 import ResourcesHubScreen from './src/pages/ResourcesHubScreen';
 import WithdrawalSymptomsScreen from './src/pages/WithdrawalSymptomsScreen';
+import WithdrawalTimelineScreen from './src/pages/WithdrawalTimelineScreen';
 import CrisisHotlinesScreen from './src/pages/CrisisHotlinesScreen';
 import TherapyInfoScreen from './src/pages/TherapyInfoScreen';
 import HowToSucceedScreen from './src/pages/HowToSucceedScreen';
 import WhyUseThisScreen from './src/pages/WhyUseThisScreen';
+import PrivacyPolicyScreen from './src/pages/PrivacyPolicyScreen';
+import FunctioningUserScreen from './src/pages/FunctioningUserScreen';
 import CravingGameScreen from './src/pages/CravingGameScreen';
 import ExercisesScreen from './src/pages/ExercisesScreen';
+import MindfulnessScreen from './src/pages/MindfulnessScreen';
 import HobbiesScreen from './src/pages/HobbiesScreen';
 import PreparationPlanScreen from './src/pages/PreparationPlanScreen';
 import SelfAssessmentScreen from './src/pages/SelfAssessmentScreen';
@@ -236,6 +240,11 @@ function AppStack({ theme }) {
             options={{ title: 'Withdrawal Symptoms' }}
           />
           <ResourcesStack.Screen
+            name="WithdrawalTimeline"
+            component={WithdrawalTimelineScreen}
+            options={{ title: 'Withdrawal Timeline' }}
+          />
+          <ResourcesStack.Screen
             name="CrisisHotlines"
             component={CrisisHotlinesScreen}
             options={{ title: 'Crisis Hotlines' }}
@@ -264,6 +273,16 @@ function AppStack({ theme }) {
             name="SelfAssessment"
             component={SelfAssessmentScreen}
             options={{ title: 'Self-Assessment' }}
+          />
+          <ResourcesStack.Screen
+            name="PrivacyPolicy"
+            component={PrivacyPolicyScreen}
+            options={{ title: 'Privacy Policy' }}
+          />
+          <ResourcesStack.Screen
+            name="FunctioningUser"
+            component={FunctioningUserScreen}
+            options={{ title: 'The Myth of The Functioning User' }}
           />
         </ResourcesStack.Navigator>
       );
@@ -370,6 +389,23 @@ function AppStack({ theme }) {
             fontSize: 18,
             fontWeight: '600',
             color: theme.colors.text,
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Mindfulness"
+        component={MindfulnessScreen}
+        options={{
+          title: 'Mindfulness',
+          tabBarLabel: 'Mindfulness',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="brain" color={color} size={size} />
+          ),
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: theme.colors.cardBg,
+            borderBottomWidth: 1,
+            borderBottomColor: theme.colors.border,
           },
         }}
       />

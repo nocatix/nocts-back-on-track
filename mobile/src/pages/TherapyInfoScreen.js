@@ -117,7 +117,7 @@ export default function TherapyInfoScreen() {
         {
           backgroundColor: theme.colors.background,
           paddingTop: insets.top,
-          paddingBottom: insets.bottom,
+          paddingBottom: insets.bottom + 40,
           paddingLeft: insets.left,
           paddingRight: insets.right,
         },
@@ -135,6 +135,86 @@ export default function TherapyInfoScreen() {
         scrollEnabled={false}
         contentContainerStyle={styles.listContent}
       />
+
+      {/* Medication Partnership Section */}
+      <View style={[styles.medicationSection, { backgroundColor: theme.colors.cardBg, borderColor: theme.colors.border }]}>
+        <View style={styles.medicationHeader}>
+          <Text style={styles.medicationIcon}>💊</Text>
+          <View>
+            <Text style={[styles.medicationTitle, { color: theme.colors.text }]}>Why Medication Complements Therapy</Text>
+            <Text style={[styles.medicationSubtitle, { color: theme.colors.textSecondary }]}>The power of combining treatments</Text>
+          </View>
+        </View>
+
+        <Text style={[styles.medicationText, { color: theme.colors.text }]}>
+          Many people misunderstand medication in recovery. Medication isn't "cheating"—it's a powerful tool that often makes therapy more effective.
+        </Text>
+
+        <View style={styles.medicationBenefits}>
+          <View style={[styles.benefitCard, { backgroundColor: theme.colors.surfaceBackground }]}>
+            <Text style={styles.benefitIcon}>🧠</Text>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.benefitTitle, { color: theme.colors.text }]}>Treating Chemical Imbalances</Text>
+              <Text style={[styles.benefitDesc, { color: theme.colors.textSecondary }]}>
+                Medications correct imbalances in dopamine and serotonin, reducing cravings and making therapy more effective.
+              </Text>
+            </View>
+          </View>
+
+          <View style={[styles.benefitCard, { backgroundColor: theme.colors.surfaceBackground }]}>
+            <Text style={styles.benefitIcon}>😌</Text>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.benefitTitle, { color: theme.colors.text }]}>Managing Co-Occurring Issues</Text>
+              <Text style={[styles.benefitDesc, { color: theme.colors.textSecondary }]}>
+                Treating depression, anxiety, or PTSD removes barriers to recovery.
+              </Text>
+            </View>
+          </View>
+
+          <View style={[styles.benefitCard, { backgroundColor: theme.colors.surfaceBackground }]}>
+            <Text style={styles.benefitIcon}>🛑</Text>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.benefitTitle, { color: theme.colors.text }]}>Reducing Cravings</Text>
+              <Text style={[styles.benefitDesc, { color: theme.colors.textSecondary }]}>
+                Medications give you breathing room to focus on therapy instead of fighting constant urges.
+              </Text>
+            </View>
+          </View>
+
+          <View style={[styles.benefitCard, { backgroundColor: theme.colors.surfaceBackground }]}>
+            <Text style={styles.benefitIcon}>🔄</Text>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.benefitTitle, { color: theme.colors.text }]}>Preventing Relapse</Text>
+              <Text style={[styles.benefitDesc, { color: theme.colors.textSecondary }]}>
+                Medication provides stability in early recovery while you learn new coping skills.
+              </Text>
+            </View>
+          </View>
+
+          <View style={[styles.benefitCard, { backgroundColor: theme.colors.surfaceBackground }]}>
+            <Text style={styles.benefitIcon}>📊</Text>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.benefitTitle, { color: theme.colors.text }]}>Evidence-Based Approach</Text>
+              <Text style={[styles.benefitDesc, { color: theme.colors.textSecondary }]}>
+                Research consistently shows that therapy + medication produces better outcomes than either alone.
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={[styles.commonMedBox, { backgroundColor: theme.colors.surfaceBackground, borderLeftColor: theme.colors.primary }]}>
+          <Text style={[styles.medBoxTitle, { color: theme.colors.text }]}>Common Medications in Recovery:</Text>
+          <Text style={[styles.medBoxText, { color: theme.colors.textSecondary }]}>
+            <Text style={{ fontWeight: '600' }}>For Alcohol:</Text> Naltrexone, Acamprosate, Disulfiram
+          </Text>
+          <Text style={[styles.medBoxText, { color: theme.colors.textSecondary }]}>
+            <Text style={{ fontWeight: '600' }}>For Opioids:</Text> Buprenorphine, Methadone, Naltrexone
+          </Text>
+          <Text style={[styles.medBoxText, { color: theme.colors.textSecondary }]}>
+            <Text style={{ fontWeight: '600' }}>For Co-Occurring Issues:</Text> SSRIs for depression/anxiety
+          </Text>
+        </View>
+      </View>
 
       {/* How to Find Section */}
       <View style={styles.section}>
@@ -316,5 +396,76 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '500',
     lineHeight: 18,
+  },
+  medicationSection: {
+    marginHorizontal: 16,
+    marginVertical: 20,
+    padding: 16,
+    borderRadius: 10,
+    borderWidth: 1,
+  },
+  medicationHeader: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 12,
+    gap: 12,
+  },
+  medicationIcon: {
+    fontSize: 28,
+  },
+  medicationTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  medicationSubtitle: {
+    fontSize: 12,
+    fontStyle: 'italic',
+  },
+  medicationText: {
+    fontSize: 13,
+    lineHeight: 18,
+    marginBottom: 12,
+    fontWeight: '500',
+  },
+  medicationBenefits: {
+    marginVertical: 12,
+    gap: 10,
+  },
+  benefitCard: {
+    flexDirection: 'row',
+    padding: 10,
+    borderRadius: 8,
+    gap: 10,
+    alignItems: 'flex-start',
+  },
+  benefitIcon: {
+    fontSize: 18,
+    marginTop: 2,
+  },
+  benefitTitle: {
+    fontSize: 12,
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  benefitDesc: {
+    fontSize: 11,
+    lineHeight: 15,
+  },
+  commonMedBox: {
+    padding: 10,
+    borderRadius: 8,
+    borderLeftWidth: 3,
+    marginTop: 12,
+  },
+  medBoxTitle: {
+    fontSize: 12,
+    fontWeight: '600',
+    marginBottom: 6,
+  },
+  medBoxText: {
+    fontSize: 11,
+    lineHeight: 16,
+    marginBottom: 4,
   },
 });

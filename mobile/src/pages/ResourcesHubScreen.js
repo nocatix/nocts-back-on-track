@@ -69,6 +69,22 @@ const RESOURCES = [
     color: '#8b5cf6',
     screenName: 'WhyUseThis',
   },
+  {
+    id: 'privacy',
+    title: 'Privacy Policy',
+    description: 'How we keep your data secure and private',
+    icon: 'shield-check',
+    color: '#10b981',
+    screenName: 'PrivacyPolicy',
+  },
+  {
+    id: 'functioning',
+    title: 'The Myth of the Functioning User',
+    description: 'Why functional addiction is a dangerous illusion',
+    icon: 'alert-circle',
+    color: '#f97316',
+    screenName: 'FunctioningUser',
+  },
 ];
 
 export default function ResourcesHubScreen({ navigation }) {
