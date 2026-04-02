@@ -56,7 +56,6 @@ const SelfAssessment = () => {
     let recommendations = [];
 
     const functioningScore = scores.functioning || 0;
-    const consequenceScore = scores.consequences || 0;
 
     if (percentageScore < 15) {
       category = t('selfAssessment.categories.atRisk');

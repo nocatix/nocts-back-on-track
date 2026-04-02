@@ -20,7 +20,7 @@ export default function Memories() {
 
   useEffect(() => {
     fetchMemories();
-  }, [token]);
+  }, []);
 
   const fetchMemories = async () => {
     try {

@@ -5,7 +5,6 @@ import apiClient from '../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import Footer from '../components/Footer';
-import { DarkModeContext } from '../context/DarkModeContext';
 
 export default function Login() {
   const { t } = useTranslation(['common', 'auth']);

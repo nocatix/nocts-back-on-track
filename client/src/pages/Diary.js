@@ -2,12 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import './Diary.css';
 import apiClient from '../api/axiosConfig';
-import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { getCookie, setCookie } from '../utils/cookieHelper';
 
 export default function Diary() {
-  const navigate = useNavigate();
   const { token } = useContext(AuthContext);
   const { t } = useTranslation('diary');
   const [currentDate, setCurrentDate] = useState(new Date());

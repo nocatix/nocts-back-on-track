@@ -43,6 +43,7 @@ const Weight = () => {
       // Then fetch weights with the correct unit
       fetchWeightsWithUnit(targetUnit);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, user]);
 
   // Update goal weight display when unit changes
@@ -66,6 +67,7 @@ const Weight = () => {
     if (token) {
       fetchWeightsWithUnit(unit);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [unit, token]);
 
   const fetchWeights = async () => {

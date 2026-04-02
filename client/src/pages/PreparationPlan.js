@@ -11,7 +11,6 @@ const PreparationPlan = () => {
   const [expandedSection, setExpandedSection] = useState(null);
   const [showStopDateModal, setShowStopDateModal] = useState(false);
   const [responses, setResponses] = useState({});
-  const [loading, setLoading] = useState(true);
   const saveTimers = useRef({});
 
   const toggleSection = (id) => {
@@ -35,8 +34,6 @@ const PreparationPlan = () => {
         }
       } catch (err) {
         console.error('[PreparationPlan] Error loading preparation data:', err.response?.data || err.message);
-      } finally {
-        setLoading(false);
       }
     };
 

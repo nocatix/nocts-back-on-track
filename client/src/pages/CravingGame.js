@@ -14,7 +14,6 @@ const getLetterStatus = (letter, position, word) => {
 };
 
 export default function CravingGame() {
-  const navigate = useNavigate();
   const [answer, setAnswer] = useState('');
   const [attempts, setAttempts] = useState([]); // Array of { word, feedback }
   const [currentRow, setCurrentRow] = useState(0);

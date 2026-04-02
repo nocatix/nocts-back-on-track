@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { DarkModeContext } from '../context/DarkModeContext';
 import { useContext } from 'react';
 import './Footer.css';
+import packageJson from '../../package.json';
 
 export default function Footer() {
   const { isDarkMode } = useContext(DarkModeContext);
   const currentYear = new Date().getFullYear();
-  const VERSION = '1.1.25';
+  const VERSION = packageJson.version;
 
   return (
     <footer className={`footer ${isDarkMode ? 'dark' : ''}`}>

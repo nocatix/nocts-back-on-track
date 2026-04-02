@@ -5,8 +5,6 @@ import apiClient from '../api/axiosConfig';
 import './SetStopDateModal.css';
 
 export default function SetStopDateModal({ onClose, onSuccess }) {
-  const { t } = useTranslation();
-  const { token } = useContext(AuthContext);
   const [selectedAddictionType, setSelectedAddictionType] = useState('');
   const [customAddictionName, setCustomAddictionName] = useState('');
   const [selectedDate, setSelectedDate] = useState('');

@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import './Meditation.css';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getCookie, setCookie } from '../utils/cookieHelper';
 
 export default function Meditation() {
-  const navigate = useNavigate();
   const { t } = useTranslation('resources');
   const [selectedMeditation, setSelectedMeditation] = React.useState(null);
   const [showMeditationTips, setShowMeditationTips] = React.useState(() => {
@@ -23,7 +21,6 @@ export default function Meditation() {
     const saved = getCookie('meditationSessions');
     return saved ? JSON.parse(saved) : [];
   });
-  const [selectedTool, setSelectedTool] = React.useState(null);
 
   const meditations = t('meditation.meditations', { returnObjects: true });
   const tips = t('meditation.tips', { returnObjects: true });
@@ -61,6 +58,16 @@ export default function Meditation() {
     return () => clearInterval(interval);
   }, [isBreathing, breathDuration]);
 
+  const completeSession = useCallback(() => {
+    const newSession = {
+      date: new Date().toLocaleDateString(),
+      duration: sessionMinutes,
+      type: selectedMeditation?.title || 'Quick Session'
+    };
+    setSessions([...sessions, newSession]);
+    setCookie('meditationSessions', JSON.stringify([...sessions, newSession]), 365);
+  }, [sessionMinutes, selectedMeditation, sessions]);
+
   // Timer logic
   React.useEffect(() => {
     if (!timerActive) return;
@@ -77,17 +84,7 @@ export default function Meditation() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [timerActive]);
-
-  const completeSession = () => {
-    const newSession = {
-      date: new Date().toLocaleDateString(),
-      duration: sessionMinutes,
-      type: selectedMeditation?.title || 'Quick Session'
-    };
-    setSessions([...sessions, newSession]);
-    setCookie('meditationSessions', JSON.stringify([...sessions, newSession]), 365);
-  };
+  }, [timerActive, completeSession, sessionMinutes, sessions]);
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);

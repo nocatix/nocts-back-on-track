@@ -6,15 +6,18 @@ import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import { DarkModeProvider } from './context/DarkModeContext';
 import { LanguageProvider } from './context/LanguageContext';
+import { AddictionsProvider } from './context/AddictionsContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <DarkModeProvider>
       <AuthProvider>
-        <LanguageProvider>
-          <App />
-        </LanguageProvider>
+        <AddictionsProvider>
+          <LanguageProvider>
+            <App />
+          </LanguageProvider>
+        </AddictionsProvider>
       </AuthProvider>
     </DarkModeProvider>
   </React.StrictMode>

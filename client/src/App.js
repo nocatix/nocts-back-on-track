@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import apiClient from './api/axiosConfig';
 import { AuthContext } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -9,6 +8,9 @@ import MainMenu from './pages/MainMenu';
 import AddNewAddiction from './pages/AddNewAddiction';
 import AddictionDetail from './pages/AddictionDetail';
 import Meditation from './pages/Meditation';
+import Mindfulness from './pages/Mindfulness';
+import Exercise from './pages/Exercise';
+import Therapy from './pages/Therapy';
 import Diary from './pages/Diary';
 import CravingGame from './pages/CravingGame';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -30,9 +32,6 @@ import Footer from './components/Footer';
 import AchievementNotification from './components/AchievementNotification';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import Sidebar from './components/Sidebar.js';
-
-// Configure API URL (already configured in apiClient)
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 function ProtectedRoute({ children, isAuthenticated }) {
   return isAuthenticated ? children : <Navigate to="/login" />;
@@ -81,6 +80,30 @@ export default function App() {
                 element={
                   <ProtectedRoute isAuthenticated={!!token}>
                     <Meditation />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/mindfulness"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <Mindfulness />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/exercise"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <Exercise />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/therapy"
+                element={
+                  <ProtectedRoute isAuthenticated={!!token}>
+                    <Therapy />
                   </ProtectedRoute>
                 }
               />

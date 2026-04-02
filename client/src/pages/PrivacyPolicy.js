@@ -1,10 +1,7 @@
 import React from 'react';
 import './PrivacyPolicy.css';
-import { useNavigate } from 'react-router-dom';
 
 export default function PrivacyPolicy() {
-  const navigate = useNavigate();
-
   return (
     <div className="privacy-page">
       <div className="privacy-content">

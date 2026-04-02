@@ -2,20 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from 'react-i18next';
 import './Mood.css';
-
-const EMOTIONS = {
-  primary: ['😊 Happy', '😢 Sad', '😠 Angry', '😰 Anxious', '😌 Calm', '⚡ Energetic', '😴 Tired', '😐 Neutral'],
-  secondary: {
-    '😊 Happy': ['😄 Joyful', '🤩 Excited', '😌 Content', '🙏 Grateful', '😎 Proud'],
-    '😢 Sad': ['😞 Depressed', '😕 Disappointed', '😔 Lonely', '😩 Hopeless', '☔ Melancholic'],
-    '😠 Angry': ['🤬 Furious', '😤 Irritated', '😒 Resentful', '😤 Frustrated', '😑 Annoyed'],
-    '😰 Anxious': ['😟 Worried', '😨 Panicked', '😰 Nervous', '😩 Stressed', '😵 Overwhelmed'],
-    '😌 Calm': ['☮️ Peaceful', '😌 Relaxed', '😇 Serene', '🌳 Grounded', '🧘 Meditative'],
-    '⚡ Energetic': ['💪 Motivated', '🎯 Ambitious', '🚀 Productive', '💡 Inspired', '✨ Vibrant'],
-    '😴 Tired': ['🥱 Exhausted', '😑 Lazy', '🪫 Drained', '😴 Sleepy', '🚪 Burnt Out'],
-    '😐 Neutral': ['🤷 Indifferent', '🙈 Detached', '👁️ Observant', '⚖️ Balanced', '😐 Neutral']
-  }
-};
+import apiClient from '../api/axiosConfig';
 
 const PRIMARY_COLORS = {
   '😊 Happy': '#FFD700',

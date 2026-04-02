@@ -6,7 +6,7 @@ import Logo from './Logo';
 import './Header.css';
 
 export default function Header() {
-  const { user, logout } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
   const { t } = useTranslation();
   const navigate = useNavigate();
 

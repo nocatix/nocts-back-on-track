@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { withdrawalSymptoms, symptomCategories, getSymptomsByCategory } from '../data/withdrawalSymptoms';
+import { symptomCategories, getSymptomsByCategory } from '../data/withdrawalSymptoms';
 import './WithdrawalSymptoms.css';
 
 const WithdrawalSymptoms = () => {

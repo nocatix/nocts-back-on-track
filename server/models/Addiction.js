@@ -91,9 +91,18 @@ addictionSchema.methods.getDaysStopped = function() {
 // Calculate days remaining until planned stop date
 addictionSchema.methods.getDaysUntilPlannedStop = function() {
   if (!this.plannedStopDate) return null;
+  
+  // Get the current date at midnight UTC
   const now = new Date();
-  if (now > this.plannedStopDate) return 0; // Already past the date
-  const msRemaining = this.plannedStopDate - now;
+  const utcMidnightToday = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0));
+  
+  // Get the planned stop date at midnight UTC
+  const plannedStop = new Date(this.plannedStopDate);
+  const utcMidnightStop = new Date(Date.UTC(plannedStop.getUTCFullYear(), plannedStop.getUTCMonth(), plannedStop.getUTCDate(), 0, 0, 0, 0));
+  
+  const msRemaining = utcMidnightStop - utcMidnightToday;
+  if (msRemaining <= 0) return 0; // Already past the date
+  
   const daysRemaining = Math.ceil(msRemaining / (1000 * 60 * 60 * 24));
   return daysRemaining;
 };

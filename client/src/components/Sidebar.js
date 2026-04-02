@@ -4,15 +4,14 @@ import { DarkModeContext } from '../context/DarkModeContext';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { getCookie, setCookie } from '../utils/cookieHelper';
-import apiClient from '../api/axiosConfig';
+import { useAddictions } from '../context/AddictionsContext';
 import './Sidebar.css';
 
 export default function Sidebar() {
-  const { token, user } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const { t } = useTranslation();
-  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
-  const [addictions, setAddictions] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { isDarkMode } = useContext(DarkModeContext);
+  const { addictions, loading } = useAddictions();
   const [collapsed, setCollapsed] = useState(() => {
     const savedCollapsed = getCookie('sidebarCollapsed');
     return savedCollapsed !== null ? savedCollapsed : false;
@@ -36,22 +35,6 @@ export default function Sidebar() {
   });
   const [openDropdown, setOpenDropdown] = useState(null);
   const location = useLocation();
-
-  useEffect(() => {
-    const fetchAddictions = async () => {
-      if (!token) return;
-      
-      try {
-        const response = await apiClient.get('/api/addictions');
-        setAddictions(response.data);
-        setLoading(false);
-      } catch (err) {
-        setLoading(false);
-      }
-    };
-
-    fetchAddictions();
-  }, [token]);
 
   useEffect(() => {
     // Save sidebar collapsed state to cookie
@@ -83,10 +66,6 @@ export default function Sidebar() {
         [category]: !prev[category]
       }));
     }
-  };
-
-  const closeDropdown = () => {
-    setOpenDropdown(null);
   };
 
   const NavCategory = ({ name, category, icon, children }) => {
@@ -243,6 +222,33 @@ export default function Sidebar() {
           </Link>
           
           <Link
+            to="/mindfulness"
+            className={`nav-link ${isActive('/mindfulness') ? 'active' : ''}`}
+            title="Mindfulness"
+          >
+            <span className="emoji">🧠</span>
+            <span className="text">{t('navigation.mindfulness')}</span>
+          </Link>
+          
+          <Link
+            to="/exercise"
+            className={`nav-link ${isActive('/exercise') ? 'active' : ''}`}
+            title="Exercise"
+          >
+            <span className="emoji">💪</span>
+            <span className="text">{t('navigation.exercise')}</span>
+          </Link>
+          
+          <Link
+            to="/therapy"
+            className={`nav-link ${isActive('/therapy') ? 'active' : ''}`}
+            title="Therapy"
+          >
+            <span className="emoji">💊</span>
+            <span className="text">{t('navigation.therapy')}</span>
+          </Link>
+          
+          <Link
             to="/hobbies"
             className={`nav-link ${isActive('/hobbies') ? 'active' : ''}`}
             title="Hobbies"
@@ -377,6 +383,9 @@ export default function Sidebar() {
               <h3 className="dropdown-title">{t('navigation.selfCareSupport') || 'Self-Care & Support'}</h3>
               <div className="dropdown-items">
                 <Link to="/meditation" className={`nav-link ${isActive('/meditation') ? 'active' : ''}`}><span className="emoji">🧘</span> {t('navigation.meditation')}</Link>
+                <Link to="/mindfulness" className={`nav-link ${isActive('/mindfulness') ? 'active' : ''}`}><span className="emoji">🧠</span> {t('navigation.mindfulness')}</Link>
+                <Link to="/exercise" className={`nav-link ${isActive('/exercise') ? 'active' : ''}`}><span className="emoji">💪</span> {t('navigation.exercise')}</Link>
+                <Link to="/therapy" className={`nav-link ${isActive('/therapy') ? 'active' : ''}`}><span className="emoji">💊</span> {t('navigation.therapy')}</Link>
                 <Link to="/hobbies" className={`nav-link ${isActive('/hobbies') ? 'active' : ''}`}><span className="emoji">🎯</span> {t('navigation.hobbies')}</Link>
                 <Link to="/craving-game" className={`nav-link ${isActive('/craving-game') ? 'active' : ''}`}><span className="emoji">🎮</span> {t('navigation.cravingGame')}</Link>
                 <Link to="/crisis" className={`nav-link ${isActive('/crisis') ? 'active' : ''}`}><span className="emoji">🆘</span> {t('navigation.crisis')}</Link>

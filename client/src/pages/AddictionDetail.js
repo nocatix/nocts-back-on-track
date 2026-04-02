@@ -3,6 +3,7 @@ import './AddictionDetail.css';
 import apiClient from '../api/axiosConfig';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { useAddictions } from '../context/AddictionsContext';
 import WithdrawalTimeline from '../components/WithdrawalTimeline';
 import { getFrequencyLabel, getCostLabel } from '../utils/withdrawalHelper';
 import { addictionDatabase } from '../data/addictions';
@@ -12,6 +13,7 @@ export default function AddictionDetail() {
   const navigate = useNavigate();
   const location = useLocation();
   const { token } = useContext(AuthContext);
+  const { removeAddiction, updateAddiction } = useAddictions();
   const [addiction, setAddiction] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -83,6 +85,34 @@ export default function AddictionDetail() {
         
         // Open edit mode if navigated from pledge conversion
         if (location.state?.editMode) {
+          // Populate editData with addiction values
+          let isoString = '';
+          try {
+            if (addictionData.stopDate) {
+              const stopDate = new Date(addictionData.stopDate);
+              if (!isNaN(stopDate.getTime())) {
+                const year = stopDate.getFullYear();
+                const month = String(stopDate.getMonth() + 1).padStart(2, '0');
+                const day = String(stopDate.getDate()).padStart(2, '0');
+                const hours = String(stopDate.getHours()).padStart(2, '0');
+                const minutes = String(stopDate.getMinutes()).padStart(2, '0');
+                isoString = `${year}-${month}-${day}T${hours}:${minutes}`;
+              }
+            }
+          } catch (err) {
+            console.error('Error parsing stop date:', err);
+          }
+          
+          const frequencyValue = addictionData.frequencyPerDay ? Number(addictionData.frequencyPerDay) : 0;
+          const costValue = addictionData.moneySpentPerDay ? Number(addictionData.moneySpentPerDay) : 0;
+          
+          setEditData({
+            name: addictionData.name || '',
+            frequencyPerDay: frequencyValue,
+            moneySpentPerDay: costValue,
+            notes: addictionData.notes || '',
+            stopDate: isoString
+          });
           setIsEditing(true);
         }
       } catch (err) {
@@ -99,7 +129,7 @@ export default function AddictionDetail() {
     if (token && id) {
       fetchAddiction();
     }
-  }, [id, token]);
+  }, [id, token, location.state?.editMode]);
 
   useEffect(() => {
     // Scroll to element if there's a URL fragment
@@ -143,6 +173,8 @@ export default function AddictionDetail() {
     try {
       await apiClient.delete(`/api/addictions/${id}`);
       setShowDeleteConfirm(false);
+      // Remove from context
+      removeAddiction(id);
       navigate('/');
     } catch (err) {
       setError('Failed to delete addiction');
@@ -217,6 +249,8 @@ export default function AddictionDetail() {
       
       setAddiction(response.data);
       setIsEditing(false);
+      // Update in context
+      updateAddiction(response.data);
       
       // Force refetch of achievements/trophies after edit
       try {

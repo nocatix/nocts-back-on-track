@@ -7,8 +7,7 @@ import './Profile.css';
 import apiClient from '../api/axiosConfig';
 
 const Profile = () => {
-  const { user, token, setUser, loading } = useAuth();
-  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
+  const { user, setUser, loading } = useAuth();
   const { t } = useTranslation(['profile', 'messages']);
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
@@ -38,7 +37,7 @@ const Profile = () => {
 
   const handleUnitPreferenceChange = async (preference) => {
     try {
-      const response = await apiClient.put('/api/auth/unit-preference', 
+      await apiClient.put('/api/auth/unit-preference', 
         { unitPreference: preference }
       );
       setUnitPreference(preference);
@@ -120,6 +119,33 @@ const Profile = () => {
       {error && <div className="profile-message error">{error}</div>}
       
       <div className="profile-card">
+        <h2>{t('unitPreference')}</h2>
+        <div className="unit-preference-section">
+          <p>Choose your preferred unit of measurement:</p>
+          <div className="unit-buttons">
+            <button 
+              className={`unit-button ${unitPreference === 'metric' ? 'active' : ''}`}
+              onClick={() => handleUnitPreferenceChange('metric')}
+            >
+              <span>🌍</span>
+              <span>{t('metricUnits')}</span>
+            </button>
+            <button 
+              className={`unit-button ${unitPreference === 'imperial' ? 'active' : ''}`}
+              onClick={() => handleUnitPreferenceChange('imperial')}
+            >
+              <span>🇺🇸</span>
+              <span>{t('imperialUnits')}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="profile-card">
+        <LanguageSelector />
+      </div>
+      
+      <div className="profile-card">
         <h2>{t('changePassword')}</h2>
         <form onSubmit={handlePasswordSubmit} className="profile-form">
           <div className="form-group">
@@ -164,33 +190,6 @@ const Profile = () => {
             {loading ? t('common:loading') : t('changePassword')}
           </button>
         </form>
-      </div>
-      
-      <div className="profile-card">
-        <h2>{t('unitPreference')}</h2>
-        <div className="unit-preference-section">
-          <p>Choose your preferred unit of measurement:</p>
-          <div className="unit-buttons">
-            <button 
-              className={`unit-button ${unitPreference === 'metric' ? 'active' : ''}`}
-              onClick={() => handleUnitPreferenceChange('metric')}
-            >
-              <span>🌍</span>
-              <span>{t('metricUnits')}</span>
-            </button>
-            <button 
-              className={`unit-button ${unitPreference === 'imperial' ? 'active' : ''}`}
-              onClick={() => handleUnitPreferenceChange('imperial')}
-            >
-              <span>🇺🇸</span>
-              <span>{t('imperialUnits')}</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="profile-card">
-        <LanguageSelector />
       </div>
       
       <div className="profile-section">

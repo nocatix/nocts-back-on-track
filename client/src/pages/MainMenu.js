@@ -4,13 +4,14 @@ import './MainMenu.css';
 import apiClient from '../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { calculateDailyPredictions, formatDayCount, getWithdrawalStage } from '../utils/withdrawalHelper';
+import { useAddictions } from '../context/AddictionsContext';
+import { calculateDailyPredictions, formatDayCount } from '../utils/withdrawalHelper';
 import { getCookie, setCookie } from '../utils/cookieHelper';
 import { getRandomQuote } from '../data/motivationalQuotes';
 
 export default function MainMenu() {
   const { t } = useTranslation(['messages', 'common']);
-  const [addictions, setAddictions] = useState([]);
+  const { addictions } = useAddictions();
   const [pledges, setPledges] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -35,11 +36,8 @@ export default function MainMenu() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch addictions
-        const addictionsResponse = await apiClient.get('/api/addictions');
-        console.log('Fetched addictions:', addictionsResponse.data);
-        setAddictions(addictionsResponse.data);
-        const dailyPredictions = calculateDailyPredictions(addictionsResponse.data);
+        // Calculate predictions from context addictions
+        const dailyPredictions = calculateDailyPredictions(addictions);
         console.log('Daily predictions:', dailyPredictions);
         setPredictions(dailyPredictions);
 
@@ -73,7 +71,7 @@ export default function MainMenu() {
       fetchData();
       checkTrophies();
     }
-  }, [token]);
+  }, [token, addictions, t]);
 
   // Save daily tip state to cookie
   useEffect(() => {
@@ -121,22 +119,6 @@ export default function MainMenu() {
     setCravingStep('initial');
   };
 
-  const handleDeletePlannedStop = async (addictionId) => {
-    try {
-      await apiClient.put(`/api/addictions/${addictionId}/planned-stop-date`, {
-        plannedStopDate: null
-      });
-      // Refresh addictions
-      const response = await apiClient.get('/api/addictions');
-      setAddictions(response.data);
-      const dailyPredictions = calculateDailyPredictions(response.data);
-      setPredictions(dailyPredictions);
-    } catch (err) {
-      console.error('Failed to delete planned stop date:', err);
-      setError(t('mainMenu.failedToUpdateAddiction'));
-    }
-  };
-
   const handleDeletePledge = async (pledgeId) => {
     try {
       await apiClient.delete(`/api/pledges/${pledgeId}`);
@@ -162,14 +144,11 @@ export default function MainMenu() {
       setShowPledgeConversionModal(false);
       setDuePledge(null);
 
-      // Refresh pledges and addictions
+      // Refresh pledges
       const pledgesResponse = await apiClient.get('/api/pledges');
       setPledges(pledgesResponse.data);
 
-      const addictionsResponse = await apiClient.get('/api/addictions');
-      setAddictions(addictionsResponse.data);
-      const dailyPredictions = calculateDailyPredictions(addictionsResponse.data);
-      setPredictions(dailyPredictions);
+      // Predictions will be recalculated via useEffect when addictions context updates
 
       // Navigate to the addiction edit page with editMode enabled
       navigate(`/addiction/${newAddiction._id}`, { state: { editMode: true } });

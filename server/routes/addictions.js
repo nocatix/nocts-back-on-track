@@ -254,6 +254,44 @@ router.put('/:id/planned-stop-date', auth, async (req, res) => {
   }
 });
 
+/**
+ * @route   PUT /api/addictions/:id/caved
+ * @desc    Mark addiction as relapsed - resets stopDate to today and removes achievements
+ * @access  Private (requires JWT token)
+ * @returns {Object} Updated addiction object
+ */
+router.put('/:id/caved', auth, async (req, res) => {
+  try {
+    // Find the addiction and verify it belongs to the user
+    const addiction = await Addiction.findOne({
+      _id: req.params.id,
+      userId: req.user.userId
+    });
+
+    if (!addiction) {
+      return res.status(404).json({ message: 'Addiction not found' });
+    }
+
+    // Reset the stop date to today (timestamp when they caved)
+    addiction.stopDate = new Date();
+    addiction.updatedAt = new Date();
+    await addiction.save();
+
+    // Remove all achievements and trophies for this addiction
+    await Promise.all([
+      Achievement.deleteMany({
+        userId: req.user.userId,
+        addictionId: addiction._id
+      }),
+      Trophy.deleteMany({ userId: req.user.userId })
+    ]);
+
+    res.json(enrichAddictionData(addiction));
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
 // Delete addiction
 router.delete('/:id', auth, async (req, res) => {
   try {

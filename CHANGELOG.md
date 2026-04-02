@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2026-04-02
+
+### 🐛 Fixed
+
+#### **Pledge Date Calculation Issue**
+- **Timezone-aware Date Calculations**: Fixed off-by-one error in pledge day calculations caused by mixing UTC and local timezone conversions
+- **UTC-based Midnight Computation**: Modified `getDaysUntilStop()` in Pledge model and `getDaysUntilPlannedStop()` in Addiction model to use consistent UTC midnight calculations
+- **Pledge Display Logic**: Pledges set for tomorrow now correctly show `daysUntilStop = 1` instead of 0, preventing premature "Time to Stop" alerts
+- **Consistent Date Handling**: All date boundary calculations now use UTC to avoid timezone-related bugs across different server locations
+
 ## [1.2.0] - 2026-04-01
 
 ### ✨ Enhanced
