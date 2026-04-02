@@ -2,7 +2,7 @@
 
 Your personal addiction recovery companion. A comprehensive Node.js + React application for tracking your recovery journey, providing a holistic support system to monitor progress, stay motivated, and maintain emotional well-being.
 
-**Version 1.2.0** - Now featuring modernized 2026 UI design with glassmorphism, responsive mobile navigation, and enhanced animations!
+**Version 1.4.0** - Full mobile-web feature parity achieved! Complete addiction recovery ecosystem with dark mode, dual-mode support, and 100% feature parity across all platforms.
 
 ---
 
