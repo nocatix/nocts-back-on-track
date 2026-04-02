@@ -18,33 +18,38 @@ export const addictionService = {
   async getAddictions() {
     try {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
-      if (!user) throw new Error('User not found');
+      if (!user) return [];  // Return empty array if user not found (don't log error)
       
       const service = await getAddictionService();
       return await service.getAddictions(user.id);
     } catch (error) {
-      console.error('Error fetching addictions:', error);
-      throw error;
+      // Only log if it's not a "User not found" error
+      if (error.message !== 'User not found') {
+        console.error('Error fetching addictions:', error);
+      }
+      return [];
     }
   },
 
   async getAddictionById(id) {
     try {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
-      if (!user) throw new Error('User not found');
+      if (!user) return null;
       
       const service = await getAddictionService();
       return await service.getAddiction(user.id, id);
     } catch (error) {
-      console.error('Error fetching addiction:', error);
-      throw error;
+      if (error.message !== 'User not found') {
+        console.error('Error fetching addiction:', error);
+      }
+      return null;
     }
   },
 
   async createAddiction(addictionData) {
     try {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
-      if (!user) throw new Error('User not found');
+      if (!user) throw new Error('User not authenticated');
       
       const { name, stopDate, frequencyPerDay, moneySpentPerDay, notes } = addictionData;
       

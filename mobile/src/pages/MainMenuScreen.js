@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../context/AuthContext';
 import { useMode } from '../context/ModeContext';
 import { DarkModeContext } from '../context/DarkModeContext';
@@ -13,6 +14,7 @@ import Button from '../components/Button';
 
 export default function MainMenuScreen({ navigation }) {
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
   const { user, logout } = useContext(AuthContext);
   const { mode } = useMode();
   const { isDarkMode } = useContext(DarkModeContext);
@@ -60,12 +62,12 @@ export default function MainMenuScreen({ navigation }) {
     >
       <View style={styles.statsContainer}>
         <StatCard
-          label="Total Addictions"
+          label={t('dashboard.totalAddictions', 'Total Addictions')}
           value={addictions.length.toString()}
           color={theme.colors.primary}
         />
         <StatCard
-          label="Active Trackers"
+          label={t('dashboard.activeTrackers', 'Active Trackers')}
           value={addictions.filter((a) => a.status === 'active').length.toString()}
           color={theme.colors.success}
         />
@@ -73,14 +75,14 @@ export default function MainMenuScreen({ navigation }) {
 
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>Your Addictions</Text>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>{t('dashboard.yourAddictions', 'Your Addictions')}</Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
             <TouchableOpacity>
-              <Text style={[styles.addButton, { color: theme.colors.primary }]}>+ Add New</Text>
+              <Text style={[styles.addButton, { color: theme.colors.primary }]}>{t('dashboard.addNew', '+ Add New')}</Text>
             </TouchableOpacity>
             {mode === 'connected' && (
               <TouchableOpacity onPress={handleLogout} style={[styles.logoutButton, { backgroundColor: theme.colors.error }]}>
-                <Text style={styles.logoutText}>Logout</Text>
+                <Text style={styles.logoutText}>{t('dashboard.logout', 'Logout')}</Text>
               </TouchableOpacity>
             )}
           </View>
@@ -91,14 +93,14 @@ export default function MainMenuScreen({ navigation }) {
         ) : error ? (
           <View style={[styles.errorContainer, { backgroundColor: theme.colors.error, opacity: 0.1 }]}>
             <Text style={[styles.errorText, { color: theme.colors.error }]}>{error}</Text>
-            <Button title="Retry" onPress={fetchAddictions} />
+            <Button title={t('dashboard.retry', 'Retry')} onPress={fetchAddictions} />
           </View>
         ) : addictions.length === 0 ? (
           <View style={[styles.emptyContainer, { backgroundColor: theme.colors.surfaceBackground, borderColor: theme.colors.border }]}>
-            <Text style={[styles.emptyText, { color: theme.colors.text }]}>No addictions tracked yet.</Text>
-            <Text style={[styles.emptySubtext, { color: theme.colors.textSecondary }]}>Start your recovery journey!</Text>
+            <Text style={[styles.emptyText, { color: theme.colors.text }]}>{t('dashboard.noAddictionsYet', 'No addictions tracked yet.')}</Text>
+            <Text style={[styles.emptySubtext, { color: theme.colors.textSecondary }]}>{t('dashboard.startRecoveryJourney', 'Start your recovery journey!')}</Text>
             <Button
-              title="Add Your First Addiction"
+              title={t('dashboard.addFirstAddiction', 'Add Your First Addiction')}
               onPress={() => navigation.navigate('AddNewAddiction')}
               style={{ marginTop: 16 }}
             />

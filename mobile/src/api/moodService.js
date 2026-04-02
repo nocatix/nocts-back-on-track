@@ -15,33 +15,37 @@ export const moodService = {
   async getMoods(year, month) {
     try {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
-      if (!user) throw new Error('User not found');
+      if (!user) return [];
       
       const service = await getMoodService();
       return await service.getMoodForMonth(user.id, year, month);
     } catch (error) {
-      console.error('Error fetching moods:', error);
-      throw error;
+      if (error.message !== 'User not found') {
+        console.error('Error fetching moods:', error);
+      }
+      return [];
     }
   },
 
   async getMoodById(date) {
     try {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
-      if (!user) throw new Error('User not found');
+      if (!user) return null;
       
       const service = await getMoodService();
       return await service.getMoodForDate(user.id, date);
     } catch (error) {
-      console.error('Error fetching mood:', error);
-      throw error;
+      if (error.message !== 'User not found') {
+        console.error('Error fetching mood:', error);
+      }
+      return null;
     }
   },
 
   async createMood(moodData) {
     try {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
-      if (!user) throw new Error('User not found');
+      if (!user) throw new Error('User not authenticated');
       
       const service = await getMoodService();
       return await service.createMood(user.id, moodData);

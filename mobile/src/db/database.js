@@ -120,6 +120,48 @@ export const initializeDatabase = async () => {
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY(userId) REFERENCES users(id)
       );
+      
+      CREATE TABLE IF NOT EXISTS preparation_plans (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        userId INTEGER NOT NULL,
+        addictionId INTEGER,
+        assessFrequency TEXT,
+        assessMoney TEXT,
+        assessTime TEXT,
+        assessTriggers TEXT,
+        assessImpact TEXT,
+        assessObstacles TEXT,
+        assessFrequencyIv TEXT,
+        assessFrequencyAuthTag TEXT,
+        assessMoneyIv TEXT,
+        assessMoneyAuthTag TEXT,
+        assessTimeIv TEXT,
+        assessTimeAuthTag TEXT,
+        assessTriggersIv TEXT,
+        assessTriggersAuthTag TEXT,
+        assessImpactIv TEXT,
+        assessImpactAuthTag TEXT,
+        assessObstaclesIv TEXT,
+        assessObstaclesAuthTag TEXT,
+        synced INTEGER DEFAULT 0,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(userId) REFERENCES users(id),
+        FOREIGN KEY(addictionId) REFERENCES addictions(id)
+      );
+      
+      CREATE TABLE IF NOT EXISTS self_assessments (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        userId INTEGER NOT NULL,
+        addictionId INTEGER,
+        score INTEGER,
+        responses TEXT,
+        responsesIv TEXT,
+        responsesAuthTag TEXT,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(userId) REFERENCES users(id),
+        FOREIGN KEY(addictionId) REFERENCES addictions(id)
+      );
     `);
     
     dbInitialized = true;

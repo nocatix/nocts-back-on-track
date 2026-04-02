@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { Appearance } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getTheme } from '../utils/theme';
 
 export const DarkModeContext = createContext();
 
@@ -49,4 +50,14 @@ export function DarkModeProvider({ children }) {
       {children}
     </DarkModeContext.Provider>
   );
+}
+
+export function useTheme() {
+  const context = React.useContext(DarkModeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within a DarkModeProvider');
+  }
+  const { isDarkMode } = context;
+  const theme = getTheme(isDarkMode);
+  return { colors: theme.colors };
 }
