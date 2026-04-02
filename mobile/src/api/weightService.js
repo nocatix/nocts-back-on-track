@@ -1,5 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { localWeightService } from '../services/localWeightService';
+import remoteWeightService from '../services/remoteWeightService';
+import modeService from '../services/modeService';
+
+const getWeightService = async () => {
+  const mode = await modeService.getActiveMode();
+  if (mode === 'connected') {
+    return remoteWeightService;
+  }
+  return localWeightService;
+};
 
 export const weightService = {
   async getWeights(limit = 100, offset = 0) {
@@ -7,7 +17,8 @@ export const weightService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      return await localWeightService.getWeights(user.id, limit, offset);
+      const service = await getWeightService();
+      return await service.getWeights(user.id);
     } catch (error) {
       console.error('Error fetching weights:', error);
       throw error;
@@ -19,15 +30,8 @@ export const weightService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      const { weight, unit, notes, date } = weightData;
-      
-      return await localWeightService.addWeight(
-        user.id,
-        date || new Date().toISOString().split('T')[0],
-        weight,
-        unit || 'lbs',
-        notes
-      );
+      const service = await getWeightService();
+      return await service.createWeight(user.id, weightData);
     } catch (error) {
       console.error('Error creating weight:', error);
       throw error;
@@ -39,7 +43,8 @@ export const weightService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      return await localWeightService.updateWeight(user.id, id, weightData);
+      const service = await getWeightService();
+      return await service.updateWeight(user.id, id, weightData);
     } catch (error) {
       console.error('Error updating weight:', error);
       throw error;
@@ -51,7 +56,8 @@ export const weightService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      return await localWeightService.deleteWeight(user.id, id);
+      const service = await getWeightService();
+      return await service.deleteWeight(user.id, id);
     } catch (error) {
       console.error('Error deleting weight:', error);
       throw error;

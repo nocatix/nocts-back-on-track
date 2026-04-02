@@ -1,5 +1,18 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { localAddictionService } from '../services/localAddictionService';
+import remoteAddictionService from '../services/remoteAddictionService';
+import modeService from '../services/modeService';
+
+/**
+ * Get appropriate addiction service based on mode
+ */
+const getAddictionService = async () => {
+  const mode = await modeService.getActiveMode();
+  if (mode === 'connected') {
+    return remoteAddictionService;
+  }
+  return localAddictionService;
+};
 
 export const addictionService = {
   async getAddictions() {
@@ -7,7 +20,8 @@ export const addictionService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      return await localAddictionService.getAddictions(user.id);
+      const service = await getAddictionService();
+      return await service.getAddictions(user.id);
     } catch (error) {
       console.error('Error fetching addictions:', error);
       throw error;
@@ -19,7 +33,8 @@ export const addictionService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      return await localAddictionService.getAddiction(user.id, id);
+      const service = await getAddictionService();
+      return await service.getAddiction(user.id, id);
     } catch (error) {
       console.error('Error fetching addiction:', error);
       throw error;
@@ -33,7 +48,8 @@ export const addictionService = {
       
       const { name, stopDate, frequencyPerDay, moneySpentPerDay, notes } = addictionData;
       
-      return await localAddictionService.createAddiction(
+      const service = await getAddictionService();
+      return await service.createAddiction(
         user.id,
         name,
         stopDate,
@@ -52,7 +68,8 @@ export const addictionService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      return await localAddictionService.updateAddiction(user.id, id, addictionData);
+      const service = await getAddictionService();
+      return await service.updateAddiction(user.id, id, addictionData);
     } catch (error) {
       console.error('Error updating addiction:', error);
       throw error;
@@ -64,7 +81,8 @@ export const addictionService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      return await localAddictionService.deleteAddiction(user.id, id);
+      const service = await getAddictionService();
+      return await service.deleteAddiction(user.id, id);
     } catch (error) {
       console.error('Error deleting addiction:', error);
       throw error;
@@ -73,9 +91,8 @@ export const addictionService = {
 
   async getCravings(addictionId) {
     try {
-      // For local use, you might track cravings differently
-      // This is a placeholder implementation
-      return [];
+      const service = await getAddictionService();
+      return await service.getCravings(addictionId);
     } catch (error) {
       console.error('Error fetching cravings:', error);
       throw error;

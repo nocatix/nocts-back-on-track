@@ -1,6 +1,25 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { localAchievementService } from '../services/localAchievementService';
 import { localTrophyService } from '../services/localTrophyService';
+import remoteAchievementService from '../services/remoteAchievementService';
+import remoteTrophyService from '../services/remoteTrophyService';
+import modeService from '../services/modeService';
+
+const getAchievementService = async () => {
+  const mode = await modeService.getActiveMode();
+  if (mode === 'connected') {
+    return remoteAchievementService;
+  }
+  return localAchievementService;
+};
+
+const getTrophyService = async () => {
+  const mode = await modeService.getActiveMode();
+  if (mode === 'connected') {
+    return remoteTrophyService;
+  }
+  return localTrophyService;
+};
 
 export const achievementService = {
   async getAchievements() {
@@ -8,7 +27,8 @@ export const achievementService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      return await localAchievementService.getAchievements(user.id);
+      const service = await getAchievementService();
+      return await service.getAchievements(user.id);
     } catch (error) {
       console.error('Error fetching achievements:', error);
       throw error;
@@ -20,7 +40,8 @@ export const achievementService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      return await localTrophyService.getTrophies(user.id);
+      const service = await getTrophyService();
+      return await service.getTrophies(user.id);
     } catch (error) {
       console.error('Error fetching trophies:', error);
       throw error;
@@ -32,8 +53,8 @@ export const achievementService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      // For local version, you can implement logic to check achievements
-      return { message: 'Achievements checked' };
+      const service = await getAchievementService();
+      return await service.checkAchievements(user.id);
     } catch (error) {
       console.error('Error checking achievements:', error);
       throw error;
@@ -45,7 +66,8 @@ export const achievementService = {
       const user = JSON.parse(await AsyncStorage.getItem('user'));
       if (!user) throw new Error('User not found');
       
-      return await localAchievementService.initializeAchievements(user.id);
+      const service = await getAchievementService();
+      return await service.initializeAchievements(user.id);
     } catch (error) {
       console.error('Error initializing achievements:', error);
       throw error;

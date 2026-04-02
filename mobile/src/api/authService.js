@@ -1,14 +1,56 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 import { localAuthService } from '../services/localAuthService';
 import { saveToken, getToken, removeToken } from '../utils/jwtHelper';
+import modeService from '../services/modeService';
+
+/**
+ * Get remote API client for connected mode
+ */
+const getRemoteClient = async () => {
+  const serverUrl = await modeService.getServerUrl();
+  if (!serverUrl) {
+    throw new Error('Server URL not configured');
+  }
+  
+  return axios.create({
+    baseURL: `${serverUrl}/api`,
+    timeout: 10000,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+};
 
 export const authService = {
   async login(username, password) {
     try {
-      const result = await localAuthService.login(username, password);
+      const mode = await modeService.getActiveMode();
+      console.log('[AuthService] Login mode:', mode);
+      
+      let result;
+      
+      if (mode === 'standalone') {
+        // Standalone mode - use local authentication
+        result = await localAuthService.login(username, password);
+        await saveToken(result.token);
+      } else if (mode === 'connected') {
+        // Connected mode - use remote API
+        const client = await getRemoteClient();
+        const response = await client.post('/auth/login', {
+          username,
+          password,
+        });
+        result = response.data;
+        
+        if (result.token) {
+          await AsyncStorage.setItem('userToken', result.token);
+        }
+      } else {
+        throw new Error('Mode not configured');
+      }
       
       if (result.token) {
-        await saveToken(result.token);
         await AsyncStorage.setItem('user', JSON.stringify(result.user));
       }
       
@@ -21,10 +63,33 @@ export const authService = {
 
   async register(username, fullName, password) {
     try {
-      const result = await localAuthService.register(username, fullName, password);
+      const mode = await modeService.getActiveMode();
+      console.log('[AuthService] Register mode:', mode);
+      
+      let result;
+      
+      if (mode === 'standalone') {
+        // Standalone mode - use local registration
+        result = await localAuthService.register(username, fullName, password);
+        await saveToken(result.token);
+      } else if (mode === 'connected') {
+        // Connected mode - use remote API
+        const client = await getRemoteClient();
+        const response = await client.post('/auth/register', {
+          username,
+          fullName,
+          password,
+        });
+        result = response.data;
+        
+        if (result.token) {
+          await AsyncStorage.setItem('userToken', result.token);
+        }
+      } else {
+        throw new Error('Mode not configured');
+      }
       
       if (result.token) {
-        await saveToken(result.token);
         await AsyncStorage.setItem('user', JSON.stringify(result.user));
       }
       
@@ -37,7 +102,27 @@ export const authService = {
 
   async logout() {
     try {
+      const mode = await modeService.getActiveMode();
+      console.log('[AuthService] Logout mode:', mode);
+      
+      if (mode === 'connected') {
+        // Try to notify server (optional)
+        try {
+          const token = await AsyncStorage.getItem('userToken');
+          if (token) {
+            const client = await getRemoteClient();
+            await client.post('/auth/logout', {}, {
+              headers: { Authorization: `Bearer ${token}` },
+            });
+          }
+        } catch (serverError) {
+          console.warn('Error notifying server of logout:', serverError);
+          // Continue with local cleanup anyway
+        }
+      }
+      
       await removeToken();
+      await AsyncStorage.removeItem('userToken');
       await AsyncStorage.removeItem('user');
     } catch (error) {
       console.error('Logout error:', error);
@@ -56,13 +141,36 @@ export const authService = {
 
   async verifyToken() {
     try {
-      const token = await getToken();
-      if (!token) {
+      const mode = await modeService.getActiveMode();
+      
+      if (mode === 'standalone') {
+        const token = await getToken();
+        if (!token) {
+          return null;
+        }
+        
+        const user = await localAuthService.getUserFromToken(token);
+        return user;
+      } else if (mode === 'connected') {
+        const token = await AsyncStorage.getItem('userToken');
+        if (!token) {
+          return null;
+        }
+        
+        // Verify token with server
+        try {
+          const client = await getRemoteClient();
+          const response = await client.get('/auth/me', {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          return response.data.user;
+        } catch (error) {
+          console.error('Token verification failed:', error);
+          return null;
+        }
+      } else {
         return null;
       }
-      
-      const user = await localAuthService.getUserFromToken(token);
-      return user;
     } catch (error) {
       console.error('Token verification error:', error);
       return null;
@@ -71,19 +179,39 @@ export const authService = {
 
   async updatePreferences(username, unitPreference) {
     try {
+      const mode = await modeService.getActiveMode();
+      console.log('[AuthService] Update preferences mode:', mode);
+      
       // Get current user
       const user = await this.getCurrentUser();
       if (!user) {
         throw new Error('User not found');
       }
       
-      const result = await localAuthService.updateUserPreferences(user.id, unitPreference);
-      
-      // Update stored user
-      user.unitPreference = unitPreference;
-      await AsyncStorage.setItem('user', JSON.stringify(user));
-      
-      return result;
+      if (mode === 'standalone') {
+        // Update locally
+        const result = await localAuthService.updateUserPreferences(user.id, unitPreference);
+        
+        // Update stored user
+        user.unitPreference = unitPreference;
+        await AsyncStorage.setItem('user', JSON.stringify(user));
+        
+        return result;
+      } else if (mode === 'connected') {
+        // Update via server API
+        const token = await AsyncStorage.getItem('userToken');
+        const client = await getRemoteClient();
+        const response = await client.post('/auth/preferences', 
+          { unitPreference },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        
+        // Update stored user
+        const updatedUser = { ...user, unitPreference };
+        await AsyncStorage.setItem('user', JSON.stringify(updatedUser));
+        
+        return response.data;
+      }
     } catch (error) {
       console.error('Error updating preferences:', error);
       throw error;
