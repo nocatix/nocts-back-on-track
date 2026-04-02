@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,9 @@ import {
   TouchableOpacity,
   Animated,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { DarkModeContext } from '../context/DarkModeContext';
+import { getTheme } from '../utils/theme';
 import Button from '../components/Button';
 
 const MEDITATIONS = [
@@ -41,6 +44,9 @@ const MEDITATIONS = [
 ];
 
 export default function MeditationScreen() {
+  const insets = useSafeAreaInsets();
+  const { isDarkMode } = useContext(DarkModeContext);
+  const theme = getTheme(isDarkMode);
   const [activeMeditation, setActiveMeditation] = useState(null);
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -84,7 +90,7 @@ export default function MeditationScreen() {
 
   if (activeMeditation && isPlaying) {
     return (
-      <View style={styles.meditationContainer}>
+      <View style={[styles.meditationContainer, { backgroundColor: isDarkMode ? '#1e1b4b' : '#1e1b4b' }]}>
         <TouchableOpacity
           onPress={() => setIsPlaying(!isPlaying)}
           style={styles.closeButton}
@@ -100,6 +106,7 @@ export default function MeditationScreen() {
               styles.breathingCircle,
               {
                 transform: [{ scale: scaleValue }],
+                backgroundColor: 'rgba(99, 102, 241, 0.2)',
               },
             ]}
           >
@@ -130,62 +137,73 @@ export default function MeditationScreen() {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Meditation & Mindfulness</Text>
-        <Text style={styles.headerSubtitle}>
+    <ScrollView 
+      style={[
+        styles.container, 
+        { 
+          backgroundColor: theme.colors.background,
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        }
+      ]}
+    >
+      <View style={[styles.header, { backgroundColor: theme.colors.cardBg, borderBottomColor: theme.colors.border }]}>
+        <Text style={[styles.headerTitle, { color: theme.colors.text }]}>Meditation & Mindfulness</Text>
+        <Text style={[styles.headerSubtitle, { color: theme.colors.textSecondary }]}>
           Take time to calm your mind and body
         </Text>
       </View>
 
-      <View style={styles.tipsContainer}>
-        <Text style={styles.tipsTitle}>💡 Tips for Meditation</Text>
-        <Text style={styles.tipItem}>• Find a quiet, comfortable place</Text>
-        <Text style={styles.tipItem}>• Sit or lie down in a relaxed position</Text>
-        <Text style={styles.tipItem}>• Focus on your breath</Text>
-        <Text style={styles.tipItem}>• Don't judge your thoughts</Text>
+      <View style={[styles.tipsContainer, { backgroundColor: theme.colors.surfaceBackground, borderLeftColor: theme.colors.primary }]}>
+        <Text style={[styles.tipsTitle, { color: theme.colors.text }]}>💡 Tips for Meditation</Text>
+        <Text style={[styles.tipItem, { color: theme.colors.textSecondary }]}>• Find a quiet, comfortable place</Text>
+        <Text style={[styles.tipItem, { color: theme.colors.textSecondary }]}>• Sit or lie down in a relaxed position</Text>
+        <Text style={[styles.tipItem, { color: theme.colors.textSecondary }]}>• Focus on your breath</Text>
+        <Text style={[styles.tipItem, { color: theme.colors.textSecondary }]}>• Don't judge your thoughts</Text>
       </View>
 
       <View style={styles.meditationsSection}>
-        <Text style={styles.sectionTitle}>Guided Sessions</Text>
+        <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>Guided Sessions</Text>
 
         {MEDITATIONS.map((meditation) => (
           <TouchableOpacity
             key={meditation.id}
             onPress={() => startMeditation(meditation)}
-            style={styles.meditationCard}
+            style={[styles.meditationCard, { backgroundColor: theme.colors.cardBg, borderColor: theme.colors.border }]}
           >
             <View style={styles.meditationCardLeft}>
               <Text style={styles.meditationIcon}>{meditation.icon}</Text>
               <View>
-                <Text style={styles.meditationCardTitle}>{meditation.title}</Text>
-                <Text style={styles.meditationCardDesc}>
+                <Text style={[styles.meditationCardTitle, { color: theme.colors.text }]}>{meditation.title}</Text>
+                <Text style={[styles.meditationCardDesc, { color: theme.colors.textTertiary }]}>
                   {meditation.description}
                 </Text>
               </View>
             </View>
-            <Text style={styles.meditationDuration}>{meditation.duration}m</Text>
+            <Text style={[styles.meditationDuration, { color: theme.colors.primary, backgroundColor: theme.colors.primary, opacity: 0.1 }]}>{meditation.duration}m</Text>
           </TouchableOpacity>
         ))}
       </View>
 
       <View style={styles.benefitsSection}>
-        <Text style={styles.sectionTitle}>Benefits of Meditation</Text>
+        <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>Benefits of Meditation</Text>
         <View style={styles.benefitItem}>
           <Text style={styles.benefitIcon}>😌</Text>
-          <Text style={styles.benefitText}>Reduces stress and anxiety</Text>
+          <Text style={[styles.benefitText, { color: theme.colors.text }]}>Reduces stress and anxiety</Text>
         </View>
         <View style={styles.benefitItem}>
           <Text style={styles.benefitIcon}>🧠</Text>
-          <Text style={styles.benefitText}>Improves mental clarity</Text>
+          <Text style={[styles.benefitText, { color: theme.colors.text }]}>Improves mental clarity</Text>
         </View>
         <View style={styles.benefitItem}>
           <Text style={styles.benefitIcon}>❤️</Text>
-          <Text style={styles.benefitText}>Promotes emotional well-being</Text>
+          <Text style={[styles.benefitText, { color: theme.colors.text }]}>Promotes emotional well-being</Text>
         </View>
         <View style={styles.benefitItem}>
           <Text style={styles.benefitIcon}>💤</Text>
-          <Text style={styles.benefitText}>Better sleep quality</Text>
+          <Text style={[styles.benefitText, { color: theme.colors.text }]}>Better sleep quality</Text>
         </View>
       </View>
     </ScrollView>

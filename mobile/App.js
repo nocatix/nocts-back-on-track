@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import React, { useEffect, useContext } from 'react';
+import { View, ActivityIndicator, AppState } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AuthProvider, AuthContext } from './src/context/AuthContext';
-import { DarkModeProvider } from './src/context/DarkModeContext';
+import { DarkModeProvider, DarkModeContext } from './src/context/DarkModeContext';
 import { ModeProvider, useMode } from './src/context/ModeContext';
+import { BiometricProvider, BiometricContext } from './src/context/BiometricContext';
+import { getTheme } from './src/utils/theme';
 
 // Pages
 import LoginScreen from './src/pages/LoginScreen';
@@ -20,6 +23,7 @@ import MeditationScreen from './src/pages/MeditationScreen';
 import SettingsScreen from './src/pages/SettingsScreen';
 import ModeSelectionScreen from './src/pages/ModeSelectionScreen';
 import ServerConfigScreen from './src/pages/ServerConfigScreen';
+import BiometricLockScreen from './src/pages/BiometricLockScreen';
 
 // Components
 import OfflineIndicator from './src/components/OfflineIndicator';
@@ -27,12 +31,12 @@ import OfflineIndicator from './src/components/OfflineIndicator';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function AuthStack() {
+function AuthStack({ theme }) {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        cardStyle: { backgroundColor: 'white' },
+        cardStyle: { backgroundColor: theme.colors.background },
       }}
     >
       <Stack.Screen name="Login" component={LoginScreen} />
@@ -41,18 +45,20 @@ function AuthStack() {
   );
 }
 
-function HomeStack() {
-  return (
+function AppStack({ theme }) {
+  // HomeStack as nested function to access theme
+  const HomeStackNav = () => (
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#fff',
+          backgroundColor: theme.colors.cardBg,
           borderBottomWidth: 1,
-          borderBottomColor: '#eee',
+          borderBottomColor: theme.colors.border,
         },
         headerTitleStyle: {
           fontSize: 18,
           fontWeight: '600',
+          color: theme.colors.text,
         },
         headerBackTitleVisible: false,
       }}
@@ -77,23 +83,29 @@ function HomeStack() {
       />
     </Stack.Navigator>
   );
-}
 
-function AppStack() {
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#6366f1',
-        tabBarInactiveTintColor: '#9ca3af',
+        tabBarActiveTintColor: theme.colors.primary,
+        tabBarInactiveTintColor: theme.colors.textTertiary,
+        tabBarStyle: {
+          backgroundColor: theme.colors.cardBg,
+          borderTopColor: theme.colors.border,
+          borderTopWidth: 1,
+        },
       }}
     >
       <Tab.Screen
         name="HomeTab"
-        component={HomeStack}
+        component={HomeStackNav}
         options={{
           title: 'Home',
           tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
         }}
       />
       <Tab.Screen
@@ -102,15 +114,19 @@ function AppStack() {
         options={{
           title: 'Mood Tracker',
           tabBarLabel: 'Mood',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="emoticon-happy" color={color} size={size} />
+          ),
           headerShown: true,
           headerStyle: {
-            backgroundColor: '#fff',
+            backgroundColor: theme.colors.cardBg,
             borderBottomWidth: 1,
-            borderBottomColor: '#eee',
+            borderBottomColor: theme.colors.border,
           },
           headerTitleStyle: {
             fontSize: 18,
             fontWeight: '600',
+            color: theme.colors.text,
           },
         }}
       />
@@ -120,15 +136,19 @@ function AppStack() {
         options={{
           title: 'Diary',
           tabBarLabel: 'Diary',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="notebook" color={color} size={size} />
+          ),
           headerShown: true,
           headerStyle: {
-            backgroundColor: '#fff',
+            backgroundColor: theme.colors.cardBg,
             borderBottomWidth: 1,
-            borderBottomColor: '#eee',
+            borderBottomColor: theme.colors.border,
           },
           headerTitleStyle: {
             fontSize: 18,
             fontWeight: '600',
+            color: theme.colors.text,
           },
         }}
       />
@@ -138,15 +158,19 @@ function AppStack() {
         options={{
           title: 'Meditation',
           tabBarLabel: 'Meditate',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="meditation" color={color} size={size} />
+          ),
           headerShown: true,
           headerStyle: {
-            backgroundColor: '#fff',
+            backgroundColor: theme.colors.cardBg,
             borderBottomWidth: 1,
-            borderBottomColor: '#eee',
+            borderBottomColor: theme.colors.border,
           },
           headerTitleStyle: {
             fontSize: 18,
             fontWeight: '600',
+            color: theme.colors.text,
           },
         }}
       />
@@ -156,15 +180,19 @@ function AppStack() {
         options={{
           title: 'Settings',
           tabBarLabel: 'Settings',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="cog" color={color} size={size} />
+          ),
           headerShown: true,
           headerStyle: {
-            backgroundColor: '#fff',
+            backgroundColor: theme.colors.cardBg,
             borderBottomWidth: 1,
-            borderBottomColor: '#eee',
+            borderBottomColor: theme.colors.border,
           },
           headerTitleStyle: {
             fontSize: 18,
             fontWeight: '600',
+            color: theme.colors.text,
           },
         }}
       />
@@ -175,27 +203,43 @@ function AppStack() {
 function RootNavigator() {
   const { userToken, loading: authLoading } = React.useContext(AuthContext);
   const { mode, modeConfigured, loading: modeLoading, isServerConfigured } = useMode();
+  const { isDarkMode, loading: themeLoading } = React.useContext(DarkModeContext);
+  const { isBiometricEnabled, isAuthenticated, setIsAuthenticated } = React.useContext(BiometricContext);
+  const theme = getTheme(isDarkMode);
+  const appStateRef = React.useRef(new AppState());
+
+  // Handle app state changes (backgrounding) to re-lock biometric
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', handleAppStateChange);
+    return () => subscription.remove();
+  }, [isBiometricEnabled, isAuthenticated]);
+
+  const handleAppStateChange = (nextAppState) => {
+    if (nextAppState === 'background' && isBiometricEnabled && isAuthenticated) {
+      setIsAuthenticated(false);
+    }
+  };
 
   console.log('[RootNavigator] State:', { userToken, authLoading, mode, modeConfigured, modeLoading });
 
   // Wait for both mode and auth to load
-  if (modeLoading || authLoading) {
+  if (modeLoading || authLoading || themeLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#6366f1" />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.colors.background }}>
+        <ActivityIndicator size="large" color={theme.colors.primary} />
       </View>
     );
   }
 
   // Step 1: Mode not set - show mode selection
-  if (!modeConfigured) {
+  if (mode === null) {
     return (
       <NavigationContainer>
-        <StatusBar barStyle="dark-content" backgroundColor="white" />
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={theme.colors.cardBg} />
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
-            cardStyle: { backgroundColor: 'white' },
+            cardStyle: { backgroundColor: theme.colors.background },
           }}
         >
           <Stack.Screen name="ModeSelection" component={ModeSelectionScreen} />
@@ -208,11 +252,11 @@ function RootNavigator() {
   if (mode === 'connected' && !isServerConfigured()) {
     return (
       <NavigationContainer>
-        <StatusBar barStyle="dark-content" backgroundColor="white" />
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={theme.colors.cardBg} />
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
-            cardStyle: { backgroundColor: 'white' },
+            cardStyle: { backgroundColor: theme.colors.background },
           }}
         >
           <Stack.Screen name="ServerConfig" component={ServerConfigScreen} />
@@ -222,12 +266,15 @@ function RootNavigator() {
   }
 
   // Step 3: Mode configured - proceed with normal auth flow
+  // Show biometric lock overlay if enabled in standalone mode
   return (
     <NavigationContainer>
-      <StatusBar barStyle="dark-content" backgroundColor="white" />
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={theme.colors.cardBg} />
       <View style={{ flex: 1 }}>
-        {userToken == null ? <AuthStack /> : <AppStack />}
+        {userToken == null ? <AuthStack theme={theme} /> : <AppStack theme={theme} />}
         <OfflineIndicator />
+        {/* Biometric Lock Overlay - only in standalone mode */}
+        {mode === 'standalone' && isBiometricEnabled && !isAuthenticated && <BiometricLockScreen />}
       </View>
     </NavigationContainer>
   );
@@ -237,9 +284,11 @@ export default function App() {
   return (
     <ModeProvider>
       <DarkModeProvider>
-        <AuthProvider>
-          <RootNavigator />
-        </AuthProvider>
+        <BiometricProvider>
+          <AuthProvider>
+            <RootNavigator />
+          </AuthProvider>
+        </BiometricProvider>
       </DarkModeProvider>
     </ModeProvider>
   );

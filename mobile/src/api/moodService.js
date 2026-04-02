@@ -18,7 +18,7 @@ export const moodService = {
       if (!user) throw new Error('User not found');
       
       const service = await getMoodService();
-      return await service.getMoods(user.id, year, month);
+      return await service.getMoodForMonth(user.id, year, month);
     } catch (error) {
       console.error('Error fetching moods:', error);
       throw error;
@@ -31,7 +31,7 @@ export const moodService = {
       if (!user) throw new Error('User not found');
       
       const service = await getMoodService();
-      return await service.getMoodByDate(user.id, date);
+      return await service.getMoodForDate(user.id, date);
     } catch (error) {
       console.error('Error fetching mood:', error);
       throw error;

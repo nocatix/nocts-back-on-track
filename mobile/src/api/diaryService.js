@@ -18,7 +18,7 @@ export const diaryService = {
       if (!user) throw new Error('User not found');
       
       const service = await getDiaryService();
-      return await service.getDiaries(user.id);
+      return await service.getDiaryEntries(user.id, limit, offset);
     } catch (error) {
       console.error('Error fetching diary entries:', error);
       throw error;

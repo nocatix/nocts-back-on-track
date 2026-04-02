@@ -1,13 +1,19 @@
 import * as SQLite from 'expo-sqlite';
 
 let db = null;
+let dbInitialized = false;
 
 export const initializeDatabase = async () => {
+  if (dbInitialized && db) {
+    console.log('Database already initialized');
+    return;
+  }
+
   try {
     db = await SQLite.openDatabaseAsync('noctsDB.db');
-    console.log('Database initialized');
+    console.log('Database opened successfully');
     
-    // Create tables
+    // Create tables with proper error handling
     await db.execAsync(`
       PRAGMA foreign_keys = ON;
       
@@ -116,6 +122,8 @@ export const initializeDatabase = async () => {
       );
     `);
     
+    dbInitialized = true;
+    console.log('Database tables created successfully');
     return db;
   } catch (error) {
     console.error('Error initializing database:', error);
@@ -124,8 +132,8 @@ export const initializeDatabase = async () => {
 };
 
 export const getDatabase = () => {
-  if (!db) {
-    throw new Error('Database not initialized');
+  if (!db || !dbInitialized) {
+    throw new Error('Database not initialized. Call initializeDatabase() first');
   }
   return db;
 };

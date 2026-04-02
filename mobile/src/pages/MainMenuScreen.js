@@ -1,14 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import { AuthContext } from '../context/AuthContext';
+import { useMode } from '../context/ModeContext';
+import { DarkModeContext } from '../context/DarkModeContext';
+import { getTheme } from '../utils/theme';
 import addictionService from '../api/addictionService';
 import AddictionCard from '../components/AddictionCard';
 import StatCard from '../components/StatCard';
 import Button from '../components/Button';
 
 export default function MainMenuScreen({ navigation }) {
+  const insets = useSafeAreaInsets();
   const { user, logout } = useContext(AuthContext);
+  const { mode } = useMode();
+  const { isDarkMode } = useContext(DarkModeContext);
+  const theme = getTheme(isDarkMode);
   const [addictions, setAddictions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -38,49 +46,57 @@ export default function MainMenuScreen({ navigation }) {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.greeting}>Welcome back!</Text>
-          <Text style={styles.userName}>{user?.nameOnPhone || 'User'}</Text>
-        </View>
-        <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
-          <Text style={styles.logoutText}>Logout</Text>
-        </TouchableOpacity>
-      </View>
-
+    <ScrollView 
+      style={[
+        styles.container, 
+        { 
+          backgroundColor: theme.colors.background,
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        }
+      ]}
+    >
       <View style={styles.statsContainer}>
         <StatCard
           label="Total Addictions"
           value={addictions.length.toString()}
-          color="#6366f1"
+          color={theme.colors.primary}
         />
         <StatCard
           label="Active Trackers"
           value={addictions.filter((a) => a.status === 'active').length.toString()}
-          color="#22c55e"
+          color={theme.colors.success}
         />
       </View>
 
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Your Addictions</Text>
-          <TouchableOpacity>
-            <Text style={styles.addButton}>+ Add New</Text>
-          </TouchableOpacity>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>Your Addictions</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+            <TouchableOpacity>
+              <Text style={[styles.addButton, { color: theme.colors.primary }]}>+ Add New</Text>
+            </TouchableOpacity>
+            {mode === 'connected' && (
+              <TouchableOpacity onPress={handleLogout} style={[styles.logoutButton, { backgroundColor: theme.colors.error }]}>
+                <Text style={styles.logoutText}>Logout</Text>
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
 
         {loading ? (
-          <ActivityIndicator size="large" color="#6366f1" style={{ marginVertical: 20 }} />
+          <ActivityIndicator size="large" color={theme.colors.primary} style={{ marginVertical: 20 }} />
         ) : error ? (
-          <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>{error}</Text>
+          <View style={[styles.errorContainer, { backgroundColor: theme.colors.error, opacity: 0.1 }]}>
+            <Text style={[styles.errorText, { color: theme.colors.error }]}>{error}</Text>
             <Button title="Retry" onPress={fetchAddictions} />
           </View>
         ) : addictions.length === 0 ? (
-          <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>No addictions tracked yet.</Text>
-            <Text style={styles.emptySubtext}>Start your recovery journey!</Text>
+          <View style={[styles.emptyContainer, { backgroundColor: theme.colors.surfaceBackground, borderColor: theme.colors.border }]}>
+            <Text style={[styles.emptyText, { color: theme.colors.text }]}>No addictions tracked yet.</Text>
+            <Text style={[styles.emptySubtext, { color: theme.colors.textSecondary }]}>Start your recovery journey!</Text>
             <Button
               title="Add Your First Addiction"
               onPress={() => navigation.navigate('AddNewAddiction')}
@@ -112,38 +128,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f9fafb',
   },
-  header: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  greeting: {
-    fontSize: 14,
-    color: '#666',
-  },
-  userName: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#111',
-    marginTop: 4,
-  },
-  logoutButton: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 6,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
-  },
-  logoutText: {
-    fontSize: 12,
-    color: '#666',
-    fontWeight: '500',
-  },
   statsContainer: {
     paddingHorizontal: 20,
     paddingVertical: 12,
@@ -167,6 +151,17 @@ const styles = StyleSheet.create({
     color: '#6366f1',
     fontWeight: '600',
     fontSize: 14,
+  },
+  logoutButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 6,
+    borderWidth: 0,
+  },
+  logoutText: {
+    fontSize: 12,
+    color: '#fff',
+    fontWeight: '500',
   },
   errorContainer: {
     backgroundColor: '#fee2e2',

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { DarkModeContext } from '../context/DarkModeContext';
+import { getTheme } from '../utils/theme';
 
 export default function Button({
   onPress,
@@ -8,9 +10,12 @@ export default function Button({
   style,
   disabled = false,
 }) {
+  const { isDarkMode } = useContext(DarkModeContext);
+  const theme = getTheme(isDarkMode);
+  
   return (
     <TouchableOpacity
-      style={[styles.button, style, disabled && styles.disabled]}
+      style={[styles.button, { backgroundColor: theme.colors.primary }, style, disabled && styles.disabled]}
       onPress={onPress}
       disabled={loading || disabled}
     >
