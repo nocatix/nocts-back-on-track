@@ -27,10 +27,10 @@ const router = express.Router();
  */
 router.post('/register', async (req, res) => {
   try {
-    const { username, fullName, password } = req.body;
+    const { username, password } = req.body;
     
     // Validate all required fields are provided
-    if (!username || !fullName || !password) {
+    if (!username || !password) {
       return res.status(400).json({ message: 'All fields are required' });
     }
     
@@ -41,7 +41,7 @@ router.post('/register', async (req, res) => {
     }
     
     // Create new user (password will be hashed by User model pre-save middleware)
-    const user = new User({ username, fullName, password });
+    const user = new User({ username, password });
     await user.save();
     
     // Generate JWT token for immediate login
@@ -54,7 +54,7 @@ router.post('/register', async (req, res) => {
     res.status(201).json({
       message: 'User registered successfully',
       token,
-      user: { id: user._id, username: user.username, fullName: user.fullName }
+      user: { id: user._id, username: user.username }
     });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
