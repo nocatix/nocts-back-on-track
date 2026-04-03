@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from 'react-i18next';
+import apiClient from '../api/axiosConfig';
 import './Achievements.css';
 
 const Achievements = () => {
@@ -20,80 +21,20 @@ const Achievements = () => {
 
     const fetchAchievementsAndTrophies = async () => {
       try {
-        const API_BASE_URL = 'http://localhost:5000';
-        
         // Check and award new trophies
-        await fetch(`${API_BASE_URL}/api/trophies/check`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        });
+        await apiClient.post('/api/trophies/check');
 
         // Fetch trophy progress
-        const progressResponse = await fetch(`${API_BASE_URL}/api/trophies/progress`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        
-        if (progressResponse.ok) {
-          try {
-            const progressData = await progressResponse.json();
-            setTrophyProgress(progressData);
-          } catch (parseError) {
-            console.warn('Failed to parse trophy progress response:', parseError);
-          }
-        }
+        const progressResponse = await apiClient.get('/api/trophies/progress');
+        setTrophyProgress(progressResponse.data);
 
         // Fetch achievements
-        const achievementsResponse = await fetch(`${API_BASE_URL}/api/achievements`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        
-        console.log('Achievements response status:', achievementsResponse.status);
-        console.log('Achievements response headers:', achievementsResponse.headers);
-        const achievementsText = await achievementsResponse.text();
-        console.log('Achievements response body:', achievementsText);
-        
-        if (!achievementsResponse.ok) {
-          throw new Error('Failed to fetch achievements');
-        }
-        
-        try {
-          const achievementsData = JSON.parse(achievementsText);
-          setAchievements(achievementsData);
-        } catch (parseError) {
-          console.error('Failed to parse achievements response:', parseError);
-          console.error('Response headers:', achievementsResponse.headers);
-          throw new Error('Invalid response format from achievements endpoint');
-        }
+        const achievementsResponse = await apiClient.get('/api/achievements');
+        setAchievements(achievementsResponse.data);
 
         // Fetch trophies
-        const trophiesResponse = await fetch(`${API_BASE_URL}/api/trophies`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        
-        if (!trophiesResponse.ok) {
-          throw new Error('Failed to fetch trophies');
-        }
-
-        try {
-          const trophiesData = await trophiesResponse.json();
-          setTrophies(trophiesData);
-        } catch (parseError) {
-          console.error('Failed to parse trophies response:', parseError);
-          console.error('Response headers:', trophiesResponse.headers);
-          throw new Error('Invalid response format from trophies endpoint');
-        }
+        const trophiesResponse = await apiClient.get('/api/trophies');
+        setTrophies(trophiesResponse.data);
 
         setLoading(false);
       } catch (err) {
@@ -118,46 +59,17 @@ const Achievements = () => {
 
     const interval = setInterval(async () => {
       try {
-        const API_BASE_URL = 'http://localhost:5000';
-        
         // Fetch achievements
-        const achievementsResponse = await fetch(`${API_BASE_URL}/api/achievements`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        
-        if (achievementsResponse.ok) {
-          const achievementsData = await achievementsResponse.json();
-          setAchievements(achievementsData);
-        }
+        const achievementsResponse = await apiClient.get('/api/achievements');
+        setAchievements(achievementsResponse.data);
 
         // Fetch trophies
-        const trophiesResponse = await fetch(`${API_BASE_URL}/api/trophies`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        
-        if (trophiesResponse.ok) {
-          const trophiesData = await trophiesResponse.json();
-          setTrophies(trophiesData);
-        }
+        const trophiesResponse = await apiClient.get('/api/trophies');
+        setTrophies(trophiesResponse.data);
 
         // Fetch trophy progress
-        const progressResponse = await fetch(`${API_BASE_URL}/api/trophies/progress`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        
-        if (progressResponse.ok) {
-          const progressData = await progressResponse.json();
-          setTrophyProgress(progressData);
-        }
+        const progressResponse = await apiClient.get('/api/trophies/progress');
+        setTrophyProgress(progressResponse.data);
       } catch (err) {
         console.error('Error refetching achievements:', err);
       }

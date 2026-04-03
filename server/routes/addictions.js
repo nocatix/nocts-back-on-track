@@ -131,9 +131,26 @@ router.post('/', auth, async (req, res) => {
 // Update addiction
 router.put('/:id', auth, async (req, res) => {
   try {
+    const {
+      name,
+      stopDate,
+      frequencyPerDay,
+      moneySpentPerDay,
+      notes,
+      plannedStopDate,
+    } = req.body;
+
+    const updates = { updatedAt: Date.now() };
+    if (name !== undefined) updates.name = name;
+    if (stopDate !== undefined) updates.stopDate = stopDate;
+    if (frequencyPerDay !== undefined) updates.frequencyPerDay = frequencyPerDay;
+    if (moneySpentPerDay !== undefined) updates.moneySpentPerDay = moneySpentPerDay;
+    if (notes !== undefined) updates.notes = notes;
+    if (plannedStopDate !== undefined) updates.plannedStopDate = plannedStopDate;
+
     const addiction = await Addiction.findOneAndUpdate(
       { _id: req.params.id, userId: req.user.userId },
-      { ...req.body, updatedAt: Date.now() },
+      updates,
       { new: true }
     );
     

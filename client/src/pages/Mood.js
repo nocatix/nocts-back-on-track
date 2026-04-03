@@ -80,29 +80,14 @@ const Mood = () => {
 
     const fetchMoods = async () => {
       try {
-        const API_BASE_URL = 'http://localhost:5000';
-        const response = await fetch(`${API_BASE_URL}/api/moods/month/${year}/${month + 1}`, {
-          headers: { Authorization: `Bearer ${token}` }
+        const response = await apiClient.get(`/api/moods/month/${year}/${month + 1}`);
+
+        const moodMap = {};
+        response.data.forEach((mood) => {
+          const dateKey = toLocalDateKey(new Date(mood.date));
+          moodMap[dateKey] = mood;
         });
-
-        if (!response.ok) {
-          console.error(`Error fetching moods: ${response.status} ${response.statusText}`);
-          return;
-        }
-
-        try {
-          const data = await response.json();
-
-          const moodMap = {};
-          data.forEach(mood => {
-            const dateKey = toLocalDateKey(new Date(mood.date));
-            moodMap[dateKey] = mood;
-          });
-          setMoods(moodMap);
-        } catch (parseError) {
-          console.error('Failed to parse moods response:', parseError);
-          console.error('Response status:', response.status);
-        }
+        setMoods(moodMap);
       } catch (error) {
         console.error('Error fetching moods:', error);
       }
@@ -148,33 +133,23 @@ const Mood = () => {
     }
 
     try {
-      const API_BASE_URL = 'http://localhost:5000';
       const dateString = toLocalDateKey(selectedDate);
-      const response = await fetch(`${API_BASE_URL}/api/moods`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          date: dateString,
-          primaryMood: selectedPrimary,
-          secondaryMood: selectedSecondary,
-          intensity,
-          notes,
-          triggers: triggers ? triggers.split(',').map(t => t.trim()) : []
-        })
+      const response = await apiClient.post('/api/moods', {
+        date: dateString,
+        primaryMood: selectedPrimary,
+        secondaryMood: selectedSecondary,
+        intensity,
+        notes,
+        triggers: triggers ? triggers.split(',').map((t) => t.trim()) : []
       });
 
-      if (response.ok) {
-        const mood = await response.json();
-        const dateKey = toLocalDateKey(selectedDate);
-        setMoods(prev => ({
-          ...prev,
-          [dateKey]: mood
-        }));
-        setShowWheel(false);
-      }
+      const mood = response.data;
+      const dateKey = toLocalDateKey(selectedDate);
+      setMoods((prev) => ({
+        ...prev,
+        [dateKey]: mood
+      }));
+      setShowWheel(false);
     } catch (error) {
       console.error('Error saving mood:', error);
       setMessage(t('mood.saveFailed'));

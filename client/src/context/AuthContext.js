@@ -1,22 +1,18 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import apiClient from '../api/axiosConfig';
-import { setCookie, getCookie, deleteCookie } from '../utils/cookieHelper';
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(localStorage.getItem('token') || getCookie('loginInfo')?.token || null);
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (token) {
       localStorage.setItem('token', token);
-      // Save login info to cookie (expires in 30 days)
-      setCookie('loginInfo', { token }, 30);
     } else {
       localStorage.removeItem('token');
-      deleteCookie('loginInfo');
     }
   }, [token]);
 
@@ -44,7 +40,6 @@ export function AuthProvider({ children }) {
     setToken(null);
     setUser(null);
     localStorage.removeItem('token');
-    deleteCookie('loginInfo');
   };
 
   return (

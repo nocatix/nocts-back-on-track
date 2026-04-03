@@ -3,7 +3,9 @@ export const setCookie = (name, value, days = 365) => {
   const date = new Date();
   date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
   const expires = `expires=${date.toUTCString()}`;
-  document.cookie = `${name}=${JSON.stringify(value)};${expires};path=/`;
+  const encodedValue = encodeURIComponent(JSON.stringify(value));
+  const secureAttr = window.location.protocol === 'https:' ? ';Secure' : '';
+  document.cookie = `${name}=${encodedValue};${expires};path=/;SameSite=Strict${secureAttr}`;
 };
 
 export const getCookie = (name) => {
@@ -13,7 +15,7 @@ export const getCookie = (name) => {
     let cookie = cookies[i].trim();
     if (cookie.indexOf(nameEQ) === 0) {
       try {
-        return JSON.parse(cookie.substring(nameEQ.length));
+        return JSON.parse(decodeURIComponent(cookie.substring(nameEQ.length)));
       } catch (error) {
         console.error(`Error parsing cookie ${name}:`, error);
         return null;

@@ -31,8 +31,8 @@ app.use(helmet({
   // so the default same-origin resource policy breaks otherwise valid CORS.
   crossOriginResourcePolicy: false,
 }));
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 app.use((req, res, next) => {
   const startedAt = Date.now();
@@ -62,18 +62,20 @@ app.use((req, res, next) => {
 const getAllowedOrigins = () => {
   const clientUrl = process.env.CLIENT_URL || 'http://localhost:3000';
   const allowedOrigins = [clientUrl];
-  
-  // Always allow localhost and 127.0.0.1 for development
-  allowedOrigins.push(
-    'http://localhost:3000',
-    'http://localhost:5000',
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:5000',
-    /^http:\/\/192\.168\..*/,
-    /^http:\/\/10\..*/,
-    /^http:\/\/172\.(1[6-9]|2[0-9]|3[0-1])\..*/,
-    'http://host.docker.internal:3000'
-  );
+
+  // Only allow local-network origins in development.
+  if (process.env.NODE_ENV !== 'production') {
+    allowedOrigins.push(
+      'http://localhost:3000',
+      'http://localhost:5000',
+      'http://127.0.0.1:3000',
+      'http://127.0.0.1:5000',
+      /^http:\/\/192\.168\..*/,
+      /^http:\/\/10\..*/,
+      /^http:\/\/172\.(1[6-9]|2[0-9]|3[0-1])\..*/,
+      'http://host.docker.internal:3000'
+    );
+  }
   
   return {
     origin: allowedOrigins,
@@ -86,7 +88,7 @@ const getAllowedOrigins = () => {
 app.use(cors(getAllowedOrigins()));
 
 // IP Whitelist Middleware
-const ipWhitelist = process.env.IP_WHITELIST || '127.0.0.0/8,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,::1/128,::/0';
+const ipWhitelist = process.env.IP_WHITELIST || '127.0.0.0/8,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,::1/128';
 app.use(createIPWhitelistMiddleware(ipWhitelist));
 
 // Force HTTPS redirect (with exceptions for local network)

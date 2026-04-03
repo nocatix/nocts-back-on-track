@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { localAuthService } from '../services/localAuthService';
 import { saveToken, getToken, removeToken } from '../utils/jwtHelper';
+import { saveSecure, getSecure, removeSecure } from '../utils/encryption';
 import modeService from '../services/modeService';
 
 /**
@@ -44,14 +45,14 @@ export const authService = {
         result = response.data;
         
         if (result.token) {
-          await AsyncStorage.setItem('userToken', result.token);
+          await saveToken(result.token);
         }
       } else {
         throw new Error('Mode not configured');
       }
       
       if (result.token) {
-        await AsyncStorage.setItem('user', JSON.stringify(result.user));
+        await saveSecure('user', JSON.stringify(result.user));
       }
       
       return result;
@@ -83,14 +84,14 @@ export const authService = {
         result = response.data;
         
         if (result.token) {
-          await AsyncStorage.setItem('userToken', result.token);
+          await saveToken(result.token);
         }
       } else {
         throw new Error('Mode not configured');
       }
       
       if (result.token) {
-        await AsyncStorage.setItem('user', JSON.stringify(result.user));
+        await saveSecure('user', JSON.stringify(result.user));
       }
       
       return result;
@@ -109,10 +110,11 @@ export const authService = {
         // Try to notify server (optional)
         try {
           const token = await AsyncStorage.getItem('userToken');
-          if (token) {
+          const secureToken = token || await getToken();
+          if (secureToken) {
             const client = await getRemoteClient();
             await client.post('/auth/logout', {}, {
-              headers: { Authorization: `Bearer ${token}` },
+              headers: { Authorization: `Bearer ${secureToken}` },
             });
           }
         } catch (serverError) {
@@ -124,6 +126,7 @@ export const authService = {
       await removeToken();
       await AsyncStorage.removeItem('userToken');
       await AsyncStorage.removeItem('user');
+      await removeSecure('user');
     } catch (error) {
       console.error('Logout error:', error);
     }
@@ -131,7 +134,7 @@ export const authService = {
 
   async getCurrentUser() {
     try {
-      const userJson = await AsyncStorage.getItem('user');
+      const userJson = await getSecure('user');
       return userJson ? JSON.parse(userJson) : null;
     } catch (error) {
       console.error('Error getting current user:', error);
@@ -152,7 +155,7 @@ export const authService = {
         const user = await localAuthService.getUserFromToken(token);
         return user;
       } else if (mode === 'connected') {
-        const token = await AsyncStorage.getItem('userToken');
+        const token = await getToken();
         if (!token) {
           return null;
         }
@@ -194,12 +197,12 @@ export const authService = {
         
         // Update stored user
         user.unitPreference = unitPreference;
-        await AsyncStorage.setItem('user', JSON.stringify(user));
+        await saveSecure('user', JSON.stringify(user));
         
         return result;
       } else if (mode === 'connected') {
         // Update via server API
-        const token = await AsyncStorage.getItem('userToken');
+        const token = await getToken();
         const client = await getRemoteClient();
         const response = await client.post('/auth/preferences', 
           { unitPreference },
@@ -208,7 +211,7 @@ export const authService = {
         
         // Update stored user
         const updatedUser = { ...user, unitPreference };
-        await AsyncStorage.setItem('user', JSON.stringify(updatedUser));
+        await saveSecure('user', JSON.stringify(updatedUser));
         
         return response.data;
       }

@@ -1,5 +1,6 @@
 import { getDatabase } from '../db/database';
 import { createToken, verifyToken } from '../utils/jwtHelper';
+import bcrypt from 'bcryptjs';
 
 export const localAuthService = {
   async register(username, fullName, password) {
@@ -16,9 +17,7 @@ export const localAuthService = {
         throw new Error('Username already exists');
       }
       
-      // For standalone mode, store password as simple hash (local only, not for production)
-      // Use a simple btoa encoding for local storage
-      const hashedPassword = btoa(password);
+      const hashedPassword = await bcrypt.hash(password, 10);
       
       // Create user
       const result = await db.runAsync(
@@ -60,9 +59,8 @@ export const localAuthService = {
         throw new Error('User not found');
       }
       
-      // Verify password - simple comparison with btoa encoded password
-      const encodedPassword = btoa(password);
-      if (encodedPassword !== user.password) {
+      const isValidPassword = await bcrypt.compare(password, user.password);
+      if (!isValidPassword) {
         throw new Error('Invalid password');
       }
       
