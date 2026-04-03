@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] - 2026-04-03
+
+### 🔒 Security & Access Control
+
+#### **Owner-Only Merge and Release Controls**
+- **CODEOWNERS**: Added `.github/CODEOWNERS` requiring `@nocatix` review on all pull requests
+- **Owner approval gate**: New `owner-approval-gate.yml` workflow enforces `@nocatix` must approve any PR before it can merge to main; surfaced as a required status check
+- **Publish guards**: All publish jobs (`build-apk.yml`, `publish-ghcr.yml`) now reject runs from anyone other than `nocatix`
+
+### 🔧 Build & CI/CD
+
+#### **APK Artifact Pipeline**
+- **Separated build from publish**: New `build-apk-artifact.yml` builds the APK on every push to main and uploads it as a GitHub Actions artifact (`mobile-apk-<sha>`)
+- **Artifact-based release publish**: `build-apk.yml` now downloads the pre-built artifact at release time instead of rebuilding, ensuring the exact tested APK is published
+- **Artifact preflight check**: Publish workflow queries the GitHub Actions API before downloading; fails early with a clear error if the artifact is missing or expired
+- **Latest APK alias**: Stable releases now also attach `nocts-back-on-track-latest.apk` so the download URL is stable across versions
+- **Local Gradle build in CI**: Replaced EAS Cloud build with a direct local Gradle `assembleRelease` build using `JAVA_HOME` env var; upgraded Node.js to 20 in workflow
+
+#### **README QR Code**
+- **Direct APK download QR**: Added QR code at the top of `README.md` linking to `releases/latest/download/nocts-back-on-track-latest.apk` for easy mobile installation
+
 ## [1.4.11] - 2026-04-03
 
 ### 🔧 Build & Infrastructure
