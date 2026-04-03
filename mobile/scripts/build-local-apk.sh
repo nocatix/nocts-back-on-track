@@ -42,6 +42,7 @@ export PATH="$JAVA_HOME/bin:$PATH"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ANDROID_DIR="$(cd "$SCRIPT_DIR/../android" && pwd)"
+MOBILE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 SDK_CANDIDATES=(
 	"${ANDROID_HOME:-}"
@@ -84,6 +85,15 @@ fi
 echo "Using JAVA_HOME=$JAVA_HOME"
 echo "Using ANDROID_HOME=$ANDROID_HOME"
 echo "Running Gradle task $TASK"
+
+SLIDER_HEADER="$MOBILE_DIR/node_modules/@react-native-community/slider/common/cpp/react/renderer/components/RNCSlider/RNCSliderMeasurementsManager.h"
+if [[ -f "$SLIDER_HEADER" ]] && grep -q "ContextContainer::Shared" "$SLIDER_HEADER"; then
+	echo "Applying local slider C++ compatibility patch"
+	sed -i 's/ContextContainer::Shared/std::shared_ptr<const ContextContainer>/g' "$SLIDER_HEADER"
+	if ! grep -q '^#include <memory>$' "$SLIDER_HEADER"; then
+		sed -i '/#include <react\/utils\/ContextContainer.h>/a #include <memory>' "$SLIDER_HEADER"
+	fi
+fi
 
 cd "$ANDROID_DIR"
 ./gradlew "$TASK" --no-daemon --stacktrace "$@"
