@@ -57,7 +57,7 @@ const getAllowedOrigins = () => {
 app.use(cors(getAllowedOrigins()));
 
 // IP Whitelist Middleware
-const ipWhitelist = process.env.IP_WHITELIST || '127.0.0.0/8,192.168.2.0/24,10.0.0.0/8';
+const ipWhitelist = process.env.IP_WHITELIST || '127.0.0.0/8,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,::1/128,::/0';
 app.use(createIPWhitelistMiddleware(ipWhitelist));
 
 // Force HTTPS redirect (with exceptions for local network)
