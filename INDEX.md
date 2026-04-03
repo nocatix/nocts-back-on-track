@@ -232,9 +232,9 @@ bash mobile/scripts/build-local-apk.sh release
 
 ## 📞 Need Help?
 
-1. **Quick questions?** → [PIPELINE_TROUBLESHOOTING.md](PIPELINE_TROUBLESHOOTING.md)
-2. **Build is failing?** → [PIPELINE_TROUBLESHOOTING.md](PIPELINE_TROUBLESHOOTING.md#-troubleshooting)
-3. **Want to understand the system?** → [OFFLINE_ARCHITECTURE.md](OFFLINE_ARCHITECTURE.md)
+1. **Quick questions?** → [QUICK_START_APK_BUILDS.md](QUICK_START_APK_BUILDS.md)
+2. **Build is failing?** → [CI-CD-SETUP.md](CI-CD-SETUP.md)
+3. **Want to understand the system?** → [mobile/OFFLINE_ARCHITECTURE.md](mobile/OFFLINE_ARCHITECTURE.md)
 4. **Setting up for first time?** → [CI-CD-SETUP.md](CI-CD-SETUP.md)
 5. **Just want to build?** → [QUICK_START_APK_BUILDS.md](QUICK_START_APK_BUILDS.md)
 
@@ -250,7 +250,7 @@ bash mobile/scripts/build-local-apk.sh release
 - ✅ Data encryption for sensitive fields
 - ✅ All API services converted to local storage
 - ✅ Auth context updated for database initialization
-- ✅ Complete documentation (5 files)
+- ✅ Complete documentation (2 files in mobile/)
 
 ### Phase 2: CI/CD Automation
 - ✅ GitHub Actions workflow for APK building

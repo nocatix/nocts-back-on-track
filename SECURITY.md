@@ -143,6 +143,7 @@ Example flow:
 | `Strict-Transport-Security` | Enforce HTTPS | `max-age=31536000` |
 | `Content-Security-Policy` | Resource loading restrictions | `default-src 'self'` |
 | `Referrer-Policy` | Limit referrer data | `no-referrer` |
+| `Cross-Origin-Resource-Policy` | Allow cross-origin API use | `false` (disabled) — required for Docker frontend/backend split |
 
 ### CORS (Cross-Origin Resource Sharing)
 
@@ -150,7 +151,8 @@ Example flow:
 - ✅ Origins allowed:
   - `http://localhost:3000`
   - `http://127.0.0.1:3000`
-  - Local network IPs via pattern matching
+  - Local network IPs via pattern matching (IPv4 and IPv6)
+  - IPv6 loopback `::1` and mapped addresses
 
 - ✅ Methods: GET, POST, PUT, DELETE, OPTIONS
 - ✅ Credentials: Enabled (for cookie-based auth)
@@ -331,8 +333,8 @@ For security vulnerabilities, please report responsibly:
 
 ---
 
-**Last Updated**: March 31, 2026
-**Version**: 1.0
+**Last Updated**: April 3, 2026
+**Version**: 1.1
 **Status**: Production Ready
 
 
@@ -348,6 +350,7 @@ For security vulnerabilities, please report responsibly:
 - Restricted to CLIENT_URL origin
 - Credentials enabled for secure cross-origin requests
 - Only allows necessary HTTP methods (GET, POST, PUT, DELETE)
+- `Cross-Origin-Resource-Policy` disabled in Helmet to allow the frontend (separate origin in Docker) to consume API responses
 
 ### 6. API Security
 - All sensitive endpoints require authentication token
