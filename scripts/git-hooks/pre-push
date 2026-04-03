@@ -3,17 +3,20 @@
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-# Check if we're trying to push to main
-if [ "$1" = "origin" ] && [ "$2" = "refs/heads/main:refs/heads/main" ]; then
-    echo "❌ ERROR: Direct push to 'main' branch is not allowed."
-    echo ""
-    echo "✅ Please follow this workflow:"
-    echo "   1. Push your topic branch: git push origin $BRANCH"
-    echo "   2. Create a Pull Request on GitHub"
-    echo "   3. After review, merge via Pull Request on GitHub"
-    echo ""
-    exit 1
-fi
+# Parse updates sent on stdin by git pre-push hook.
+# Format per line: <local ref> <local sha1> <remote ref> <remote sha1>
+while read -r local_ref local_sha remote_ref remote_sha; do
+    if [ "$remote_ref" = "refs/heads/main" ]; then
+        echo "❌ ERROR: Direct push to 'main' branch is not allowed."
+        echo ""
+        echo "✅ Please follow this workflow:"
+        echo "   1. Push your topic branch: git push origin $BRANCH"
+        echo "   2. Create a Pull Request on GitHub"
+        echo "   3. After review, merge via Pull Request on GitHub"
+        echo ""
+        exit 1
+    fi
+done
 
 # Also check if current branch is main and we're pushing (catches most cases)
 if [ "$BRANCH" = "main" ]; then
