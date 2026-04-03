@@ -92,6 +92,7 @@ The following rules should be enforced on GitHub:
 2. **Require status checks to pass before merging**
    - Require branches to be up to date before merging
    - Require CI/CD workflows to pass
+   - Require `Owner Approval Gate / owner-approval` to pass
 
 3. **Require code review from code owners**
    - If you have a CODEOWNERS file
@@ -105,6 +106,39 @@ The following rules should be enforced on GitHub:
 6. **Include administrators**
    - Even admins follow the workflow
 
+## Owner-Only Merge and Release Policy
+
+To enforce that only `@nocatix` can merge PRs into `main` and create/publish releases:
+
+1. **Branch Ruleset for `main`**
+   - Target: `refs/heads/main`
+   - Require pull requests before merging
+   - Require approvals (1+)
+   - Require code owner review
+   - Restrict who can push to matching branches: `nocatix` only
+   - Disable bypass for administrators (or keep only `nocatix` as admin)
+
+2. **CODEOWNERS enforcement**
+   - `.github/CODEOWNERS` contains `* @nocatix`
+   - Ensure "Require review from Code Owners" is enabled in the branch rule
+
+3. **Owner approval status check**
+   - `.github/workflows/owner-approval-gate.yml` enforces that PRs targeting `main` include an approval from `@nocatix`
+   - Add `Owner Approval Gate / owner-approval` to required status checks on `main`
+
+4. **PR submissions remain open**
+   - Contributors can still push branches and open PRs
+   - They cannot merge to `main` without owner approval and required checks
+
+5. **Release permissions**
+   - Repository Settings -> Collaborators and Teams
+   - Keep `Write/Maintain/Admin` access only for `nocatix` (or trusted maintainers that should also be allowed to create releases)
+   - Note: GitHub release creation is tied to repository write-level permissions.
+
+6. **Workflow-level release gate (already configured)**
+   - Publish workflows run only when `github.actor == 'nocatix'`
+   - This prevents non-owner release events from publishing artifacts/images
+
 ### Setting Up GitHub Rules
 
 1. Go to repository **Settings**
@@ -114,7 +148,9 @@ The following rules should be enforced on GitHub:
 5. Enable the following options:
    - ☑ Require a pull request before merging
    - ☑ Require approvals (set to 1)
+   - ☑ Require review from Code Owners
    - ☑ Require status checks to pass before merging
+   - ☑ Select required check: `Owner Approval Gate / owner-approval`
    - ☑ Require branches to be up to date before merging
    - ☑ Restrict who can push to matching branches (select appropriate teams)
    - ☑ Include administrators

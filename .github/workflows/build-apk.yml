@@ -7,7 +7,7 @@ on:
 
 jobs:
   publish-apk:
-    if: github.event.release.draft == false
+    if: github.event.release.draft == false && github.actor == 'nocatix'
     runs-on: ubuntu-latest
     name: Publish APK
     permissions:
