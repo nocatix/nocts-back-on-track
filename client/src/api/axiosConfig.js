@@ -1,7 +1,17 @@
 import axios from 'axios';
 
-// Get API URL from environment variable, fallback to localhost for development
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+function getDefaultApiBaseUrl() {
+  if (typeof window === 'undefined') {
+    return 'http://localhost:5000';
+  }
+
+  const { protocol, hostname } = window.location;
+  return `${protocol}//${hostname}:5000`;
+}
+
+// Use build-time override when provided, otherwise derive the backend host
+// from the browser location so published images are not tied to localhost.
+const API_BASE_URL = process.env.REACT_APP_API_URL || getDefaultApiBaseUrl();
 
 // Create axios instance with base URL
 const apiClient = axios.create({
