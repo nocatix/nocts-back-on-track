@@ -1,8 +1,14 @@
 # 🎯 Back on Track - Recovery Companion
 
+## 📱 Download APK
+
+[Direct download latest APK](https://github.com/nocatix/nocts-back-on-track/releases/latest/download/nocts-back-on-track-latest.apk)
+
+[![Download latest APK QR](https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fgithub.com%2Fnocatix%2Fnocts-back-on-track%2Freleases%2Flatest%2Fdownload%2Fnocts-back-on-track-latest.apk)](https://github.com/nocatix/nocts-back-on-track/releases/latest/download/nocts-back-on-track-latest.apk)
+
 Your personal addiction recovery companion. A comprehensive Node.js + React application for tracking your recovery journey, providing a holistic support system to monitor progress, stay motivated, and maintain emotional well-being.
 
-**Version 1.4.0** - Full mobile-web feature parity achieved! Complete addiction recovery ecosystem with dark mode, dual-mode support, and 100% feature parity across all platforms.
+**Version 1.4.11** - Full mobile-web feature parity achieved! Complete addiction recovery ecosystem with dark mode, dual-mode support, and 100% feature parity across all platforms. Includes local APK builds, dynamic API host resolution, structured logging, and full IPv6 support.
 
 ---
 

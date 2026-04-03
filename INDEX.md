@@ -9,13 +9,6 @@
   - Essential setup checklist
   - **Read this if:** You just want to get building APKs quickly
 
-- **[PIPELINE_TROUBLESHOOTING.md](PIPELINE_TROUBLESHOOTING.md)**
-  - FAQ section with common questions
-  - Troubleshooting guide for every common error
-  - Advanced configuration options
-  - Understanding the pipeline flow
-  - **Read this if:** Something isn't working or you need help
-
 ### Comprehensive Guides
 - **[CI-CD-SETUP.md](CI-CD-SETUP.md)**
   - Complete setup instructions (300+ lines)
@@ -27,7 +20,7 @@
   - Full troubleshooting reference
   - **Read this if:** You want to deeply understand the CI/CD system
 
-- **[OFFLINE_ARCHITECTURE.md](OFFLINE_ARCHITECTURE.md)**
+- **[mobile/OFFLINE_ARCHITECTURE.md](mobile/OFFLINE_ARCHITECTURE.md)**
   - Technical deep-dive into the offline-first architecture
   - SQLite schema with all 8 tables
   - Service layer design patterns
@@ -35,27 +28,12 @@
   - Security considerations
   - **Read this if:** You're a developer and want technical details
 
-- **[OFFLINE_SETUP.md](OFFLINE_SETUP.md)**
+- **[mobile/OFFLINE_SETUP.md](mobile/OFFLINE_SETUP.md)**
   - Step-by-step setup for the offline mobile app
   - Required dependencies and packages
   - Environment configuration
   - Running the app locally
   - **Read this if:** You're setting up the offline mobile app for development
-
-### Reference & Migration
-- **[IMPLEMENTATION_REFERENCE.md](IMPLEMENTATION_REFERENCE.md)**
-  - Code examples for all service functions
-  - Database schema reference
-  - Migration patterns from HTTP to local
-  - Common usage examples
-  - **Read this if:** You need code examples or patterns
-
-- **[OFFLINE_IMPACT_SUMMARY.md](OFFLINE_IMPACT_SUMMARY.md)**
-  - Summary of all changes made
-  - Performance metrics
-  - What changed and why
-  - Business impact
-  - **Read this if:** You want a high-level overview
 
 ---
 
@@ -127,6 +105,12 @@ All in `mobile/src/api/`:
   - Fallback implementation
   - Integrated as npm script
 
+- **[mobile/scripts/build-local-apk.sh](mobile/scripts/build-local-apk.sh)**
+  - One-command local APK build (no EAS Cloud required)
+  - Auto-detects Android SDK and selects Java 17/21
+  - Supports `debug` and `release` modes
+  - Useful for offline or air-gapped environments
+
 ### Configuration
 - **[mobile/eas.json](mobile/eas.json)** - EAS Build configuration (profile: production)
 - **[mobile/app.json](mobile/app.json)** - Expo app config (updated for offline)
@@ -158,10 +142,14 @@ git tag v1.2.0
 git push origin main v1.2.0
 # → APK built and available in GitHub Releases
 
-# Manual build locally
+# EAS Cloud build (manual)
 cd mobile
 npm run eas:prod
-# → Build runs, waits for completion
+# → Build runs in EAS and waits for completion
+
+# Local build (no internet / no EAS account required)
+bash mobile/scripts/build-local-apk.sh release
+# → APK output to mobile/android/app/build/outputs/apk/release/
 ```
 
 ### Finding Built APKs
@@ -213,11 +201,8 @@ npm run eas:prod
 │
 ├── QUICK_START_APK_BUILDS.md ............... 👈 START HERE
 ├── CI-CD-SETUP.md .......................... Complete setup guide
-├── PIPELINE_TROUBLESHOOTING.md ............ FAQ & troubleshooting
-├── OFFLINE_ARCHITECTURE.md ............... Technical deep-dive
-├── OFFLINE_SETUP.md ....................... Setup instructions
-├── IMPLEMENTATION_REFERENCE.md ........... Code examples
-├── OFFLINE_IMPACT_SUMMARY.md ............ Changes summary
+├── mobile/OFFLINE_ARCHITECTURE.md ......... Technical deep-dive
+├── mobile/OFFLINE_SETUP.md ................ Setup instructions
 └── INDEX.md (this file) ................... File directory
 ```
 
@@ -233,27 +218,23 @@ npm run eas:prod
 **If you have 30 minutes:**
 1. [QUICK_START_APK_BUILDS.md](QUICK_START_APK_BUILDS.md)
 2. [CI-CD-SETUP.md](CI-CD-SETUP.md)
-3. [PIPELINE_TROUBLESHOOTING.md](PIPELINE_TROUBLESHOOTING.md)
 
 **If you have 1-2 hours:**
-1. [OFFLINE_IMPACT_SUMMARY.md](OFFLINE_IMPACT_SUMMARY.md)
-2. [OFFLINE_ARCHITECTURE.md](OFFLINE_ARCHITECTURE.md)
-3. [OFFLINE_SETUP.md](OFFLINE_SETUP.md)
-4. [CI-CD-SETUP.md](CI-CD-SETUP.md)
-5. [IMPLEMENTATION_REFERENCE.md](IMPLEMENTATION_REFERENCE.md)
+1. [mobile/OFFLINE_ARCHITECTURE.md](mobile/OFFLINE_ARCHITECTURE.md)
+2. [mobile/OFFLINE_SETUP.md](mobile/OFFLINE_SETUP.md)
+3. [CI-CD-SETUP.md](CI-CD-SETUP.md)
 
 **If you're developing:**
-1. [OFFLINE_SETUP.md](OFFLINE_SETUP.md) - Setup development environment
-2. [IMPLEMENTATION_REFERENCE.md](IMPLEMENTATION_REFERENCE.md) - Service examples
-3. [OFFLINE_ARCHITECTURE.md](OFFLINE_ARCHITECTURE.md) - Technical patterns
+1. [mobile/OFFLINE_SETUP.md](mobile/OFFLINE_SETUP.md) - Setup development environment
+2. [mobile/OFFLINE_ARCHITECTURE.md](mobile/OFFLINE_ARCHITECTURE.md) - Technical patterns
 
 ---
 
 ## 📞 Need Help?
 
-1. **Quick questions?** → [PIPELINE_TROUBLESHOOTING.md](PIPELINE_TROUBLESHOOTING.md)
-2. **Build is failing?** → [PIPELINE_TROUBLESHOOTING.md](PIPELINE_TROUBLESHOOTING.md#-troubleshooting)
-3. **Want to understand the system?** → [OFFLINE_ARCHITECTURE.md](OFFLINE_ARCHITECTURE.md)
+1. **Quick questions?** → [QUICK_START_APK_BUILDS.md](QUICK_START_APK_BUILDS.md)
+2. **Build is failing?** → [CI-CD-SETUP.md](CI-CD-SETUP.md)
+3. **Want to understand the system?** → [mobile/OFFLINE_ARCHITECTURE.md](mobile/OFFLINE_ARCHITECTURE.md)
 4. **Setting up for first time?** → [CI-CD-SETUP.md](CI-CD-SETUP.md)
 5. **Just want to build?** → [QUICK_START_APK_BUILDS.md](QUICK_START_APK_BUILDS.md)
 
@@ -269,7 +250,7 @@ npm run eas:prod
 - ✅ Data encryption for sensitive fields
 - ✅ All API services converted to local storage
 - ✅ Auth context updated for database initialization
-- ✅ Complete documentation (5 files)
+- ✅ Complete documentation (2 files in mobile/)
 
 ### Phase 2: CI/CD Automation
 - ✅ GitHub Actions workflow for APK building

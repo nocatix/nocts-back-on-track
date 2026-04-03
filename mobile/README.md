@@ -62,9 +62,9 @@ A fully-featured React Native mobile application for iOS and Android built with 
 - Loading states for operations
 - Responsive design for all screen sizes
 - Clean, modern UI with accent color (#6366f1)
-- **NEW: Complete offline operation**
-- **NEW: Local data encryption**
-- **NEW: Zero latency operations**
+- Complete offline operation
+- Local data encryption
+- Zero latency operations
 
 ## 📱 Project Structure
 
@@ -76,10 +76,8 @@ mobile/
 ├── babel.config.js                 # Babel configuration
 ├── jest.config.js                  # Testing configuration
 ├── jest.setup.js                   # Jest setup
-├── OFFLINE_ARCHITECTURE.md         # Technical documentation (NEW!)
-├── OFFLINE_SETUP.md                # Setup and configuration guide (NEW!)
-├── MIGRATION_SUMMARY.md            # Changes and migration info (NEW!)
-├── IMPLEMENTATION_REFERENCE.md     # Code examples and reference (NEW!)
+├── OFFLINE_ARCHITECTURE.md         # Technical documentation
+├── OFFLINE_SETUP.md                # Setup and configuration guide
 ├── src/
 │   ├── api/                        # API services (now local!)
 │   │   ├── authService.js          # Auth service (now local)
@@ -88,7 +86,7 @@ mobile/
 │   │   ├── diaryService.js         # Diary entries (now local)
 │   │   ├── achievementService.js   # Achievements (now local)
 │   │   └── weightService.js        # Weight tracking (now local)
-│   ├── services/                   # Local database services (NEW!)
+│   ├── services/                   # Local database services
 │   │   ├── localAuthService.js     # Auth logic
 │   │   ├── localAddictionService.js # Addiction CRUD
 │   │   ├── localMoodService.js     # Mood CRUD
@@ -97,7 +95,7 @@ mobile/
 │   │   ├── localMemoryService.js   # Memory CRUD
 │   │   ├── localAchievementService.js # Achievement management
 │   │   └── localTrophyService.js   # Trophy management
-│   ├── db/                         # Database layer (NEW!)
+│   ├── db/                         # Database layer
 │   │   └── database.js             # SQLite initialization and schema
 │   ├── components/                 # Reusable components
 │   │   ├── FormInput.js            # Text input field
@@ -108,19 +106,43 @@ mobile/
 │   ├── context/                    # React contexts
 │   │   ├── AuthContext.js          # Auth state (now manages DB init)
 │   │   └── DarkModeContext.js      # Dark mode state management
-│   ├── pages/                      # App screens
-│   │   ├── LoginScreen.js          # Login page
-│   │   ├── RegisterScreen.js       # Registration page
-│   │   ├── MainMenuScreen.js       # Dashboard/home page
-│   │   ├── AddNewAddictionScreen.js # Add addiction form
-│   │   ├── AddictionDetailScreen.js # Addiction details view
-│   │   ├── MoodScreen.js           # Mood tracker
-│   │   ├── DiaryScreen.js          # Diary entries
-│   │   └── MeditationScreen.js     # Meditation sessions
+   ├── pages/                      # App screens (29 total)
+   │   ├── LoginScreen.js
+   │   ├── RegisterScreen.js
+   │   ├── ModeSelectionScreen.js
+   │   ├── MainMenuScreen.js
+   │   ├── AddNewAddictionScreen.js
+   │   ├── AddictionDetailScreen.js
+   │   ├── MoodScreen.js
+   │   ├── DiaryScreen.js
+   │   ├── WeightScreen.js
+   │   ├── MeditationScreen.js
+   │   ├── MemoriesScreen.js
+   │   ├── AchievementsScreen.js
+   │   ├── ProfileScreen.js
+   │   ├── SettingsScreen.js
+   │   ├── ServerConfigScreen.js
+   │   ├── ResourcesHubScreen.js
+   │   ├── TherapyInfoScreen.js
+   │   ├── PrivacyPolicyScreen.js
+   │   ├── FunctioningUserScreen.js
+   │   ├── HowToSucceedScreen.js
+   │   ├── CravingGameScreen.js
+   │   ├── CrisisHotlinesScreen.js
+   │   ├── ExercisesScreen.js
+   │   ├── HobbiesScreen.js
+   │   ├── MindfulnessScreen.js
+   │   ├── PreparationPlanScreen.js
+   │   ├── SelfAssessmentScreen.js
+   │   ├── BiometricLockScreen.js
+   │   └── WithdrawalSymptomsScreen.js
 │   └── utils/                      # Utility functions
 │       ├── withdrawalHelper.js     # Withdrawal phase calculations
-│       ├── jwtHelper.js            # Local JWT management (NEW!)
-│       └── encryption.js           # Data encryption/decryption (NEW!)
+       ├── jwtHelper.js            # Local JWT management
+       └── encryption.js           # Data encryption/decryption
+└── scripts/
+    ├── build-local-apk.sh         # One-command local APK build (no EAS required)
+    └── update-version.js          # Version bump script
 └── assets/                         # App icons and images
 ```
 
@@ -194,17 +216,6 @@ After installation, check these guides:
    - Development tips
    - Testing procedures
    - Common issues
-
-3. **[IMPLEMENTATION_REFERENCE.md](./IMPLEMENTATION_REFERENCE.md)** - Code examples
-   - How to use the API
-   - Database queries
-   - Common patterns
-   - Performance tips
-
-4. **[MIGRATION_SUMMARY.md](./MIGRATION_SUMMARY.md)** - What changed
-   - Breaking changes
-   - File changes
-   - Architecture evolution
 
 ## 🔐 Authentication (Now Local!)
 
@@ -375,9 +386,12 @@ Currently configured for basic Jest setup. Expand with React Native testing libr
 
 ### Android Build
 ```bash
-npm run eas
-# Or using Expo's build service:
+# Cloud build via EAS
 eas build --platform android
+
+# Local build (no EAS account / no internet required)
+bash scripts/build-local-apk.sh release
+# APK output: android/app/build/outputs/apk/release/app-release.apk
 ```
 
 ### iOS Build
@@ -387,27 +401,25 @@ eas build --platform ios
 
 See [EAS Build documentation](https://docs.expo.dev/build/introduction/) for detailed instructions.
 
-## 🤝 Integration with Web Client
+## � Architecture
 
-This mobile app shares the same backend API as the web client in `../client/`. The API service layer abstracts backend calls, making it easy to:
-- Sync data between mobile and web
-- Maintain consistent business logic
-- Share API response formats
-- Coordinate authentication
+The mobile app is **fully offline-first** — all data is stored in a local SQLite database on the device. There is no dependency on the web backend (`../server/`). The two apps share the same general feature set but use separate data stores.
+
+For technical details see [OFFLINE_ARCHITECTURE.md](./OFFLINE_ARCHITECTURE.md).
 
 ## 📝 Development Guidelines
 
 ### Adding New Screens
 1. Create new file in `src/pages/ScreenName.js`
 2. Add route to `App.js` navigation
-3. Import any needed services
+3. Import any needed local services from `src/api/` (which delegate to `src/services/`)
 4. Use existing components when possible
 
-### Adding API Endpoints
-1. Create service file in `src/api/serviceNameService.js`
-2. Use `axiosConfig` instance for requests
-3. Handle errors consistently
-4. Export named functions for each endpoint
+### Adding Local Service Operations
+1. Add the function to the relevant `src/services/local*.js` file
+2. Expose it through the matching `src/api/*Service.js` wrapper
+3. Handle SQLite errors consistently
+4. Export named functions for each operation
 
 ### Creating Reusable Components
 1. Add to `src/components/` directory
@@ -422,11 +434,10 @@ This mobile app shares the same backend API as the web client in `../client/`. T
 - Reinstall dependencies: `rm -rf node_modules && npm install`
 - Check Node version: `node --version` (should be 18+)
 
-### API requests failing
-- Verify backend is running
-- Check API URL in `.env`
-- Ensure device/emulator can reach backend (not `localhost`)
-- Check Axios interceptor logs
+### Data not saving / loading
+- The app uses a local SQLite database — no backend is needed
+- Check logs for SQLite errors in the Expo console
+- If the database is corrupt, uninstall and reinstall the app to reset it
 
 ### Navigation not working
 - Verify screen names match exactly in App.js
@@ -438,7 +449,7 @@ This mobile app shares the same backend API as the web client in `../client/`. T
 - [React Native Docs](https://reactnative.dev/)
 - [Expo Documentation](https://docs.expo.dev/)
 - [React Navigation](https://reactnavigation.org/)
-- [Axios Documentation](https://axios-http.com/)
+- [expo-sqlite Docs](https://docs.expo.dev/sdk/sqlite/)
 
 ## 📄 License
 

@@ -67,6 +67,24 @@ git push origin main
 3. Click **Run workflow**
 4. Monitor the build
 
+### Option D: Local Build (No Internet / No EAS Account)
+
+Build the APK entirely on your machine without any cloud service:
+
+```bash
+# Release APK (default)
+bash mobile/scripts/build-local-apk.sh release
+
+# Debug APK
+bash mobile/scripts/build-local-apk.sh debug
+```
+
+✅ Output APK is written to:
+`mobile/android/app/build/outputs/apk/<mode>/app-<mode>.apk`
+
+> **Requirements**: Android SDK, Java 17 or 21, Node.js.
+> The script auto-detects `ANDROID_HOME` / `ANDROID_SDK_ROOT` and common SDK paths.
+
 ## 📥 Getting Your APK
 
 ### From GitHub Releases (Easiest)

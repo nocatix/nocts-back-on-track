@@ -257,11 +257,20 @@ GitHub Actions Triggered
 ## Tips & Best Practices
 
 1. **Always test locally first**
+
+   **Option A: EAS Cloud build**
    ```bash
    cd mobile
    npm install
-   eas build --local --platform android
+   eas build --platform android --non-interactive
    ```
+
+   **Option B: Fully local build (no EAS account / no internet required)**
+   ```bash
+   bash mobile/scripts/build-local-apk.sh release
+   # APK output: mobile/android/app/build/outputs/apk/release/app-release.apk
+   ```
+   > Requires Android SDK + Java 17 or 21. The script auto-detects both.
 
 2. **Monitor the first few runs**
    - Check GitHub Actions logs

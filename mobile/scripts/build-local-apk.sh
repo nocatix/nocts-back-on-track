@@ -16,7 +16,10 @@ case "$MODE" in
 esac
 
 # Prefer Java 21/17 to avoid Groovy parser issues with very new JDKs (e.g. Java 25).
+# Check JAVA_HOME first (e.g. set by CI via actions/setup-java), then fall back to
+# well-known system paths.
 JAVA_CANDIDATES=(
+	"${JAVA_HOME:-}"
 	"/usr/lib/jvm/java-21-openjdk"
 	"/usr/lib/jvm/java-21"
 	"/usr/lib/jvm/java-17-openjdk"
@@ -25,7 +28,7 @@ JAVA_CANDIDATES=(
 
 JAVA_HOME_SELECTED=""
 for candidate in "${JAVA_CANDIDATES[@]}"; do
-	if [[ -x "$candidate/bin/java" ]]; then
+	if [[ -n "$candidate" && -x "$candidate/bin/java" ]]; then
 		JAVA_HOME_SELECTED="$candidate"
 		break
 	fi

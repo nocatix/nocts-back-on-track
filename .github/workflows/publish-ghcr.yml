@@ -1,12 +1,9 @@
 name: Publish to GHCR
 
 on:
-  push:
-    branches:
-      - main
-    tags:
-      - 'v*'
-  workflow_dispatch:
+  release:
+    types:
+      - published
 
 env:
   REGISTRY: ghcr.io
@@ -14,53 +11,79 @@ env:
 
 jobs:
   build-and-push:
+    if: github.event.release.draft == false
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       packages: write
 
     steps:
-      - name: Checkout code
+      - name: Checkout code at release tag
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event.release.tag_name }}
 
-      - name: Check for code changes
-        id: changes
+      - name: Validate release tag format
         run: |
-          if [[ $GITHUB_REF == refs/tags/* ]]; then
-            echo "trigger=tag" >> $GITHUB_OUTPUT
-            echo "Changed files: New release tag"
+          set -euo pipefail
+          TAG="${{ github.event.release.tag_name }}"
+          IS_PRERELEASE="${{ github.event.release.prerelease }}"
+
+          if [[ "$IS_PRERELEASE" == "true" ]]; then
+            if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+-beta\.[0-9]+$ ]]; then
+              echo "Invalid beta tag: $TAG"
+              echo "Expected format: vX.Y.Z-beta.N"
+              exit 1
+            fi
           else
-            CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} 2>/dev/null | wc -l)
-            echo "trigger=push" >> $GITHUB_OUTPUT
-            echo "Changed files: $CHANGED_FILES"
+            if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "Invalid release tag: $TAG"
+              echo "Expected format: vX.Y.Z"
+              exit 1
+            fi
           fi
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Extract and increment version
-        id: version
+      - name: Compute release channel and tags
+        id: meta
         run: |
-          if [[ $GITHUB_REF == refs/tags/* ]]; then
-            VERSION=${GITHUB_REF#refs/tags/}
+          set -euo pipefail
+          VERSION="${GITHUB_REF_NAME#v}"
+          if [[ "${{ github.event.release.prerelease }}" == "true" ]]; then
+            CHANNEL="beta"
+            {
+              echo "backend_tags<<EOF"
+              echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:${VERSION}"
+              echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:beta"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+            {
+              echo "frontend_tags<<EOF"
+              echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:${VERSION}"
+              echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:beta"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
           else
-            # Read current version
-            CURRENT=$(cat version.txt 2>/dev/null || echo "1.0.0")
-            
-            # Parse MAJOR.MINOR.REVISION
-            IFS='.' read -r MAJOR MINOR REVISION <<< "$CURRENT"
-            
-            # Increment REVISION by default
-            NEW_REVISION=$((REVISION + 1))
-            VERSION="${MAJOR}.${MINOR}.${NEW_REVISION}"
-            
-            # Update version.txt
-            echo "$VERSION" > version.txt
+            CHANNEL="release"
+            {
+              echo "backend_tags<<EOF"
+              echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:${VERSION}"
+              echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:latest"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+            {
+              echo "frontend_tags<<EOF"
+              echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:${VERSION}"
+              echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:latest"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
           fi
-          echo "version=${VERSION}" >> $GITHUB_OUTPUT
-          echo "Publishing version: ${VERSION}"
+
+          echo "channel=${CHANNEL}" >> "$GITHUB_OUTPUT"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
 
       - name: Log in to Container Registry
         uses: docker/login-action@v3
@@ -75,9 +98,7 @@ jobs:
           context: .
           file: ./Dockerfile.server
           push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:${{ steps.version.outputs.version }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:latest
+          tags: ${{ steps.meta.outputs.backend_tags }}
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:buildcache
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:buildcache,mode=max
 
@@ -87,178 +108,13 @@ jobs:
           context: .
           file: ./Dockerfile.client
           push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:${{ steps.version.outputs.version }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:latest
+          tags: ${{ steps.meta.outputs.frontend_tags }}
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:buildcache
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:buildcache,mode=max
 
-      - name: Configure Git
-        if: github.ref == 'refs/heads/main'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global url."https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
-
-      - name: Commit and push version update
-        if: github.ref == 'refs/heads/main'
-        run: |
-          git add version.txt
-          if git diff --cached --quiet; then
-            echo "No version changes to commit"
-          else
-            git commit -m "Bump version to ${{ steps.version.outputs.version }}"
-            git push origin main
-          fi
-
-      - name: Generate Changelog
-        if: github.ref == 'refs/heads/main'
-        id: changelog
-        run: |
-          # Get all tags sorted by version
-          TAGS=$(git tag -l 'v*' --sort=-version:refname)
-          
-          # Get the previous tag (if any)
-          PREV_TAG=$(echo "$TAGS" | head -n 2 | tail -n 1)
-          
-          if [ -z "$PREV_TAG" ]; then
-            # First release - get all commits
-            CHANGELOG=$(git log --pretty=format:"- %h: %s (%an)" --reverse)
-            CHANGELOG_SECTION="## 📝 Initial Release Commits"$'\n'"$CHANGELOG"
-          else
-            # Get commits between previous tag and current version
-            CHANGELOG=$(git log ${PREV_TAG}..HEAD --pretty=format:"- %h: %s (%an)")
-            CHANGELOG_SECTION="## 📝 Changelog from $PREV_TAG"$'\n'"$CHANGELOG"
-          fi
-          
-          # Save to output
-          echo "changelog<<EOF" >> $GITHUB_OUTPUT
-          echo "$CHANGELOG_SECTION" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-      - name: Create Release for Main Branch
-        if: github.ref == 'refs/heads/main'
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ steps.version.outputs.version }}
-          name: Release v${{ steps.version.outputs.version }}
-          body: |
-            # 🎯 NOCTS - Back On Track v${{ steps.version.outputs.version }}
-            
-            An addiction recovery companion app that helps users track their journey to sobriety with personalized support, motivation, and science-backed withdrawal timeline tracking.
-            
-            ## 📝 What Changed in This Release
-            ${{ steps.changelog.outputs.changelog }}
-            
-            ## ✨ Key Features
-            
-            ### 📊 Addiction Tracking
-            - Track 15 different addiction types (alcohol, nicotine, cannabis, hard drugs, gambling, shopping, social media, gaming, coffee, sugar, doomscrolling, overeating, pornography, and more)
-            - Log daily cravings and moments of weakness
-            - Monitor financial impact of addictions
-            - Set personalized frequency tracking
-            
-            ### 📅 Withdrawal Timeline & Predictions
-            - Science-backed withdrawal symptom timelines for each addiction
-            - Real-time difficulty ratings based on recovery day
-            - Color-coded difficulty indicators (Very Low to Extreme)
-            - Day-by-day symptom predictions
-            - Personalized recovery roadmap
-            
-            ### 💪 Recovery Tools
-            - **Craving Game**: Distraction game to help overcome urges
-            - **Meditation Guide**: Guided relaxation and mindfulness sessions
-            - **Mood Tracker**: Daily emotional check-ins
-            - **Weight Tracker**: Monitor health recovery progress
-            - **Diary**: Private journal for reflection and thoughts
-            - **Memories**: Save milestones and achievements
-            
-            ### 🏆 Gamification & Motivation
-            - Achievement system with unlockable badges
-            - Trophy collection for major milestones
-            - Daily motivational quotes for encouragement
-            - Progress visualization
-            
-            ### 🔐 Privacy & Security
-            - Secure authentication system
-            - Encrypted data storage
-            - Privacy-first design
-            - Comprehensive privacy policy
-            
-            ### 🎨 User Experience
-            - Responsive mobile-friendly interface
-            - Dark mode support
-            - Intuitive navigation
-            - Real-time synchronization
-            
-            ## 🚀 Getting Started
-            
-            ### Using Docker (Recommended)
-            ```bash
-            docker compose -f docker-compose-ghcr.yml up
-            ```
-            
-            ### Docker Images
-            - **Backend**: `${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:v${{ steps.version.outputs.version }}`
-            - **Frontend**: `${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:v${{ steps.version.outputs.version }}`
-            
-            ### Manual Setup
-            ```bash
-            # Install backend dependencies
-            npm install
-            
-            # Install frontend dependencies
-            cd client && npm install
-            
-            # Start backend
-            npm run dev
-            
-            # In another terminal, start frontend
-            cd client && npm start
-            ```
-            
-            ## 📋 System Requirements
-            - **Backend**: Node.js 18+, MongoDB
-            - **Frontend**: Modern web browser (Chrome, Firefox, Safari, Edge)
-            - **Memory**: 2GB minimum
-            - **Storage**: 1GB for database
-            
-            ## 🏗️ Technology Stack
-            - **Frontend**: React.js with Bootstrap
-            - **Backend**: Express.js
-            - **Database**: MongoDB
-            - **Authentication**: JWT-based
-            - **Deployment**: Docker & GHCR
-            
-            ## 📝 Version Info
-            - **Release Date**: ${{ github.event.head_commit.timestamp || 'N/A' }}
-            - **Commit**: `${{ github.sha }}`
-            - **Images**: Available on GitHub Container Registry
-            
-            ## 🔗 Links
-            - [GitHub Repository](https://github.com/${{ github.repository }})
-            - [Container Registry](https://github.com/${{ github.repository }}/pkgs/container)
-            - [Issues & Support](https://github.com/${{ github.repository }}/issues)
-            
-            ## 📖 Documentation
-            For detailed setup instructions, features, and troubleshooting, see the [README](https://github.com/${{ github.repository }}/blob/main/README.md)
-            
-            ---
-            **Thank you for choosing NOCTS - Back On Track!** 🌟
-          draft: false
-          prerelease: false
-          generate_release_notes: false
-
       - name: Publish Summary
-        if: github.ref == 'refs/heads/main'
         run: |
-          echo "## ✅ Build & Publish Complete" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Images Published to GHCR" >> $GITHUB_STEP_SUMMARY
-          echo "- Backend: \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:${{ steps.version.outputs.version }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- Frontend: \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:${{ steps.version.outputs.version }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Trigger: ${{ steps.changes.outputs.trigger }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Commit: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- Branch: \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- Repository: \`${{ github.repository }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "## GHCR Publish Complete" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Channel: ${{ steps.meta.outputs.channel }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Version: ${{ steps.meta.outputs.version }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Release: ${{ github.event.release.tag_name }}" >> "$GITHUB_STEP_SUMMARY"
