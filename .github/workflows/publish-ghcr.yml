@@ -87,8 +87,6 @@ jobs:
           context: .
           file: ./Dockerfile.client
           push: true
-          build-args: |
-            REACT_APP_API_URL=http://localhost:5000
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:${{ steps.version.outputs.version }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:latest
