@@ -43,6 +43,38 @@ export PATH="$JAVA_HOME/bin:$PATH"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ANDROID_DIR="$(cd "$SCRIPT_DIR/../android" && pwd)"
 
+SDK_CANDIDATES=(
+	"${ANDROID_HOME:-}"
+	"${ANDROID_SDK_ROOT:-}"
+	"$HOME/Android/Sdk"
+	"/opt/android-sdk"
+	"/usr/lib/android-sdk"
+	"/usr/local/android-sdk"
+)
+
+ANDROID_SDK_SELECTED=""
+for candidate in "${SDK_CANDIDATES[@]}"; do
+	if [[ -n "$candidate" && -d "$candidate/platforms" ]]; then
+		ANDROID_SDK_SELECTED="$candidate"
+		break
+	fi
+done
+
+if [[ -z "$ANDROID_SDK_SELECTED" ]]; then
+	echo "Android SDK not found."
+	echo "Set ANDROID_HOME or install SDK at ~/Android/Sdk."
+	exit 4
+fi
+
+export ANDROID_HOME="$ANDROID_SDK_SELECTED"
+export ANDROID_SDK_ROOT="$ANDROID_SDK_SELECTED"
+
+LOCAL_PROPERTIES="$ANDROID_DIR/local.properties"
+SDK_ESCAPED="${ANDROID_SDK_SELECTED//\\/\\\\}"
+if [[ ! -f "$LOCAL_PROPERTIES" ]] || ! grep -q "^sdk.dir=$SDK_ESCAPED$" "$LOCAL_PROPERTIES"; then
+	printf 'sdk.dir=%s\n' "$SDK_ESCAPED" > "$LOCAL_PROPERTIES"
+fi
+
 if [[ "$MODE" == "debug" ]]; then
 	TASK=":app:assembleDebug"
 else
@@ -50,6 +82,7 @@ else
 fi
 
 echo "Using JAVA_HOME=$JAVA_HOME"
+echo "Using ANDROID_HOME=$ANDROID_HOME"
 echo "Running Gradle task $TASK"
 
 cd "$ANDROID_DIR"
