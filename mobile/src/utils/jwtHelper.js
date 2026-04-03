@@ -1,8 +1,6 @@
 import jwtDecode from 'jwt-decode';
 import { saveSecure, getSecure, removeSecure } from './encryption';
 
-const JWT_SECRET = 'noctsBackOnTrackLocalSecret123!@#'; // Local secret for offline use
-
 /**
  * Simple JWT creation for local use (offline mode)
  * Note: This creates JWT-like tokens but without cryptographic signing
@@ -30,9 +28,9 @@ export const createToken = (userId, username) => {
   const headerEncoded = btoa(JSON.stringify(header));
   const payloadEncoded = btoa(JSON.stringify(payload));
   
-  // Simple signature (not cryptographically valid, but sufficient for local use)
+  // Non-cryptographic local marker for offline mode token shape.
   const signatureBase = `${headerEncoded}.${payloadEncoded}`;
-  const signature = btoa(JWT_SECRET); // Just encode the secret as a placeholder
+  const signature = btoa(`local:${userId}:${payload.iat}`);
   
   const token = `${signatureBase}.${signature}`;
   return token;

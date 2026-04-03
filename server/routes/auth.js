@@ -5,6 +5,7 @@
 
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const rateLimit = require('express-rate-limit');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
 const Addiction = require('../models/Addiction');
@@ -19,6 +20,14 @@ const { createLogger } = require('../utils/logger');
 const router = express.Router();
 const logger = createLogger({ name: 'backend:auth' });
 
+const authRateLimit = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many authentication attempts. Please try again later.' },
+});
+
 /**
  * @route   POST /api/auth/register
  * @desc    Create a new user account
@@ -27,7 +36,7 @@ const logger = createLogger({ name: 'backend:auth' });
  * @param   {string} password - User's password (will be hashed)
  * @returns {Object} JWT token and user info
  */
-router.post('/register', async (req, res) => {
+router.post('/register', authRateLimit, async (req, res) => {
   try {
     const { username, password } = req.body;
     logger.verbose('Registration attempt', {
@@ -84,7 +93,7 @@ router.post('/register', async (req, res) => {
  * @param   {string} password - User's password
  * @returns {Object} JWT token and user info
  */
-router.post('/login', async (req, res) => {
+router.post('/login', authRateLimit, async (req, res) => {
   try {
     const { username, password } = req.body;
     logger.verbose('Login attempt', {
@@ -191,8 +200,12 @@ router.put('/change-password', auth, async (req, res) => {
       return res.status(400).json({ message: 'Current password and new password are required' });
     }
     
-    if (newPassword.length < 6) {
-      return res.status(400).json({ message: 'Password must be at least 6 characters' });
+    if (newPassword.length < 8) {
+      return res.status(400).json({ message: 'Password must be at least 8 characters' });
+    }
+
+    if (!/[A-Z]/.test(newPassword) || !/[0-9]/.test(newPassword)) {
+      return res.status(400).json({ message: 'Password must contain at least one uppercase letter and one number' });
     }
     
     const user = await User.findById(req.user.userId);

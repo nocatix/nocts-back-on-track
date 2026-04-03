@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import DOMPurify from 'dompurify';
 import './Diary.css';
 import apiClient from '../api/axiosConfig';
 import { AuthContext } from '../context/AuthContext';
@@ -173,7 +174,7 @@ export default function Diary() {
           {content ? (
             <div
               className="diary-content"
-              dangerouslySetInnerHTML={{ __html: parseMarkdown(content) }}
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(parseMarkdown(content)) }}
             />
           ) : (
             <p className="no-entry">{t('noEntryForDay')}</p>
