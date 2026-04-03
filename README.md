@@ -152,29 +152,68 @@ Your personal addiction recovery companion. A comprehensive Node.js + React appl
 
 <div align="center">
 
-### Dashboard
-![Dashboard](docs/screenshots/dashboard.png)
+### Dashboard (Dark Mode)
+![Dashboard](docs/screenshots/auto/route__home__after-auth.png)
 
-### Addiction Detail & Tracking
-![Addiction Detail](docs/screenshots/addiction-detail.png)
-![Addiction Detail 2](docs/screenshots/addiction-detail2.png)
-
-### Mood Tracker
-![Mood Tracker](docs/screenshots/mood-tracker.png)
+### Add New Addiction
+![Addiction Form](docs/screenshots/auto/form__add-addiction__filled.png)
 
 ### Diary
-![Diary](docs/screenshots/diary.png)
+![Diary](docs/screenshots/auto/route____diary.png)
+
+### Mood Tracker
+![Mood Tracker](docs/screenshots/auto/route____mood.png)
 
 ### Memories
-![Memories](docs/screenshots/memories.png)
+![Memories](docs/screenshots/auto/route____memories.png)
 
 ### Weight Tracker
-![Weight Tracker](docs/screenshots/weight-tracker.png)
+![Weight Tracker](docs/screenshots/auto/route____weight.png)
 
 ### Meditation
-![Meditation](docs/screenshots/meditation.png)
+![Meditation](docs/screenshots/auto/route____meditation.png)
+
+### Crisis Support
+![Crisis Support](docs/screenshots/auto/route____crisis.png)
+
+### Craving Game
+![Craving Game](docs/screenshots/auto/route____craving-game.png)
 
 </div>
+
+## Automated Screenshot Capture
+
+Use the built-in browser automation to open the app, walk through routes and major flows, and generate screenshots.
+
+Prerequisites:
+- Backend and frontend are running, or use `--start-stack` in the script below
+- Node.js and npm installed
+
+Run from repository root:
+
+```bash
+npm run screenshots:capture
+```
+
+Auto-start backend + frontend before capture:
+
+```bash
+bash scripts/capture-app-screenshots.sh --start-stack
+```
+
+Useful environment variables:
+- `BASE_URL` (default: `http://localhost:3000`)
+- `SCREENSHOT_DIR` (default: `docs/screenshots/auto`)
+- `APP_USERNAME` and `APP_PASSWORD` to reuse an existing account (otherwise a throwaway account is created)
+- `HEADLESS=false` to see the browser while running
+- `PAGE_WAIT_MS=1500` to increase wait time on slower machines
+- `SCREENSHOT_VIEWPORT_WIDTH=1800` and `SCREENSHOT_VIEWPORT_HEIGHT=1200` to control screenshot size
+- `SCREENSHOT_SCALE_FACTOR=2` for higher-resolution images
+- `SCREENSHOT_UI_SCALE=1.35` to enlarge in-app text and controls in captures
+- `SCREENSHOT_FULL_PAGE=true` to capture full scroll height (default is viewport-only for larger-looking screenshots)
+- `SCREENSHOT_THEME=dark` to force dark mode (`dark`, `light`, or `system`)
+
+Screenshots are saved under `docs/screenshots/auto` by default.
 
 ## 🛠️ Technical Stack
 
