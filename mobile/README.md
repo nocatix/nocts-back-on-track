@@ -62,9 +62,9 @@ A fully-featured React Native mobile application for iOS and Android built with 
 - Loading states for operations
 - Responsive design for all screen sizes
 - Clean, modern UI with accent color (#6366f1)
-- **NEW: Complete offline operation**
-- **NEW: Local data encryption**
-- **NEW: Zero latency operations**
+- Complete offline operation
+- Local data encryption
+- Zero latency operations
 
 ## 📱 Project Structure
 
@@ -76,10 +76,8 @@ mobile/
 ├── babel.config.js                 # Babel configuration
 ├── jest.config.js                  # Testing configuration
 ├── jest.setup.js                   # Jest setup
-├── OFFLINE_ARCHITECTURE.md         # Technical documentation (NEW!)
-├── OFFLINE_SETUP.md                # Setup and configuration guide (NEW!)
-├── MIGRATION_SUMMARY.md            # Changes and migration info (NEW!)
-├── IMPLEMENTATION_REFERENCE.md     # Code examples and reference (NEW!)
+├── OFFLINE_ARCHITECTURE.md         # Technical documentation
+├── OFFLINE_SETUP.md                # Setup and configuration guide
 ├── src/
 │   ├── api/                        # API services (now local!)
 │   │   ├── authService.js          # Auth service (now local)
@@ -88,7 +86,7 @@ mobile/
 │   │   ├── diaryService.js         # Diary entries (now local)
 │   │   ├── achievementService.js   # Achievements (now local)
 │   │   └── weightService.js        # Weight tracking (now local)
-│   ├── services/                   # Local database services (NEW!)
+│   ├── services/                   # Local database services
 │   │   ├── localAuthService.js     # Auth logic
 │   │   ├── localAddictionService.js # Addiction CRUD
 │   │   ├── localMoodService.js     # Mood CRUD
@@ -97,7 +95,7 @@ mobile/
 │   │   ├── localMemoryService.js   # Memory CRUD
 │   │   ├── localAchievementService.js # Achievement management
 │   │   └── localTrophyService.js   # Trophy management
-│   ├── db/                         # Database layer (NEW!)
+│   ├── db/                         # Database layer
 │   │   └── database.js             # SQLite initialization and schema
 │   ├── components/                 # Reusable components
 │   │   ├── FormInput.js            # Text input field
@@ -119,8 +117,11 @@ mobile/
 │   │   └── MeditationScreen.js     # Meditation sessions
 │   └── utils/                      # Utility functions
 │       ├── withdrawalHelper.js     # Withdrawal phase calculations
-│       ├── jwtHelper.js            # Local JWT management (NEW!)
-│       └── encryption.js           # Data encryption/decryption (NEW!)
+       ├── jwtHelper.js            # Local JWT management
+       └── encryption.js           # Data encryption/decryption
+└── scripts/
+    ├── build-local-apk.sh         # One-command local APK build (no EAS required)
+    └── update-version.js          # Version bump script
 └── assets/                         # App icons and images
 ```
 
@@ -194,17 +195,6 @@ After installation, check these guides:
    - Development tips
    - Testing procedures
    - Common issues
-
-3. **[IMPLEMENTATION_REFERENCE.md](./IMPLEMENTATION_REFERENCE.md)** - Code examples
-   - How to use the API
-   - Database queries
-   - Common patterns
-   - Performance tips
-
-4. **[MIGRATION_SUMMARY.md](./MIGRATION_SUMMARY.md)** - What changed
-   - Breaking changes
-   - File changes
-   - Architecture evolution
 
 ## 🔐 Authentication (Now Local!)
 
@@ -375,9 +365,12 @@ Currently configured for basic Jest setup. Expand with React Native testing libr
 
 ### Android Build
 ```bash
-npm run eas
-# Or using Expo's build service:
+# Cloud build via EAS
 eas build --platform android
+
+# Local build (no EAS account / no internet required)
+bash scripts/build-local-apk.sh release
+# APK output: android/app/build/outputs/apk/release/app-release.apk
 ```
 
 ### iOS Build
