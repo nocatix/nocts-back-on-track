@@ -31,11 +31,7 @@ jobs:
           set -euo pipefail
           TAG="${{ github.event_name == 'workflow_dispatch' && inputs.tag_name || github.event.release.tag_name }}"
 
-          if [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+-beta\.[0-9]+$ ]]; then
-            IS_PRERELEASE="true"
-          elif [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            IS_PRERELEASE="false"
-          else
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-beta\.[0-9]+)?$ ]]; then
             echo "Invalid tag: $TAG"
             echo "Expected format: vX.Y.Z or vX.Y.Z-beta.N"
             exit 1
@@ -135,7 +131,7 @@ jobs:
           tag_name: ${{ steps.meta.outputs.tag_name }}
           files: release-artifacts/${{ steps.meta.outputs.apk_name }}
           draft: false
-          prerelease: ${{ steps.meta.outputs.is_prerelease }}
+          prerelease: ${{ steps.meta.outputs.is_prerelease == 'true' }}
           fail_on_unmatched_files: true
 
       - name: Attach stable latest APK alias
