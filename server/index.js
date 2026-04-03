@@ -24,7 +24,11 @@ const app = express();
 connectDB();
 
 // Security Middleware
-app.use(helmet()); // Adds various HTTP headers for security
+app.use(helmet({
+  // API requests come from the frontend on a different origin in Docker,
+  // so the default same-origin resource policy breaks otherwise valid CORS.
+  crossOriginResourcePolicy: false,
+}));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
