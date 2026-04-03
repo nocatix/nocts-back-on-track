@@ -9,7 +9,8 @@
     "client": "cd client && npm start",
     "build": "cd client && npm run build",
     "apk:local": "cd mobile && npm run apk:local",
-    "apk:local:debug": "cd mobile && npm run apk:local:debug"
+    "apk:local:debug": "cd mobile && npm run apk:local:debug",
+    "screenshots:capture": "bash ./scripts/capture-app-screenshots.sh"
   },
   "keywords": [
     "addiction",
@@ -26,6 +27,7 @@
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.0",
+    "playwright": "^1.59.1",
     "validator": "^13.9.0"
   },
   "devDependencies": {
