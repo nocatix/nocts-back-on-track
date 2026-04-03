@@ -11,8 +11,7 @@ COPY client/src ./src
 
 # Build the React app with the backend URL environment variable
 # Accept as build arg to allow override via docker-compose
-# Default to relative /api path so it works with any proxy setup
-ARG REACT_APP_API_URL=/api
+ARG REACT_APP_API_URL=http://localhost:5000
 ENV REACT_APP_API_URL=${REACT_APP_API_URL}
 RUN npm run build
 
