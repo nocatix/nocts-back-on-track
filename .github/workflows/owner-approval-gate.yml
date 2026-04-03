@@ -34,6 +34,14 @@ jobs:
           script: |
             const ownerLogin = 'nocatix';
             const pr = context.payload.pull_request;
+            const authorLogin = (pr.user?.login || '').toLowerCase();
+
+            // GitHub does not allow authors to approve their own PRs.
+            // If the repository owner authored the PR, treat this gate as satisfied.
+            if (authorLogin === ownerLogin.toLowerCase()) {
+              core.info(`PR author is @${ownerLogin}; skipping explicit owner review requirement.`);
+              return;
+            }
 
             const { data: reviews } = await github.rest.pulls.listReviews({
               owner: context.repo.owner,

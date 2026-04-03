@@ -86,7 +86,8 @@ If you accidentally try to commit to main, you'll see:
 The following rules should be enforced on GitHub:
 
 1. **Require pull request reviews before merging**
-   - At least 1 approval required
+   - Keep PR workflow enabled
+   - For solo-owner maintenance, do not require a numeric approval count (GitHub blocks self-approval)
    - Dismiss stale pull request approvals when new commits are pushed
 
 2. **Require status checks to pass before merging**
@@ -95,7 +96,7 @@ The following rules should be enforced on GitHub:
    - Require `Owner Approval Gate / owner-approval` to pass
 
 3. **Require code review from code owners**
-   - If you have a CODEOWNERS file
+   - Enable only when at least one additional code owner can review
 
 4. **Dismiss stale pull request approvals when new commits are pushed**
    - Ensures reviews are current
@@ -113,17 +114,18 @@ To enforce that only `@nocatix` can merge PRs into `main` and create/publish rel
 1. **Branch Ruleset for `main`**
    - Target: `refs/heads/main`
    - Require pull requests before merging
-   - Require approvals (1+)
-   - Require code owner review
+   - Do not set a required approval count for solo-owner repos
+   - Disable required code owner review for solo-owner repos (or add another code owner)
    - Restrict who can push to matching branches: `nocatix` only
    - Disable bypass for administrators (or keep only `nocatix` as admin)
 
 2. **CODEOWNERS enforcement**
    - `.github/CODEOWNERS` contains `* @nocatix`
-   - Ensure "Require review from Code Owners" is enabled in the branch rule
+   - Enable "Require review from Code Owners" only if you add another code owner who can review
 
 3. **Owner approval status check**
-   - `.github/workflows/owner-approval-gate.yml` enforces that PRs targeting `main` include an approval from `@nocatix`
+   - `.github/workflows/owner-approval-gate.yml` enforces that PRs targeting `main` include an approval from `@nocatix` when the PR author is not `@nocatix`
+   - Owner-authored PRs pass this gate automatically because GitHub does not allow self-approval
    - Add `Owner Approval Gate / owner-approval` to required status checks on `main`
 
 4. **PR submissions remain open**
@@ -147,8 +149,8 @@ To enforce that only `@nocatix` can merge PRs into `main` and create/publish rel
 4. For pattern, enter: `main`
 5. Enable the following options:
    - ☑ Require a pull request before merging
-   - ☑ Require approvals (set to 1)
-   - ☑ Require review from Code Owners
+   - ☐ Require approvals (leave disabled for solo-owner workflow)
+   - ☐ Require review from Code Owners (enable only if another code owner can review)
    - ☑ Require status checks to pass before merging
    - ☑ Select required check: `Owner Approval Gate / owner-approval`
    - ☑ Require branches to be up to date before merging
@@ -189,6 +191,17 @@ git checkout feature/your-feature
 # Push to your topic branch (NOT main)
 git push origin feature/your-feature
 ```
+
+### Cannot approve my own PR
+
+**Cause:** GitHub does not allow pull request authors to approve their own PR.
+
+**Solution for this repo policy:**
+
+- Keep `Owner Approval Gate / owner-approval` as a required status check
+- For `main` branch rules, disable required numeric approvals
+- Disable required code owner review unless another code owner can approve
+- Owner-authored PRs will pass the owner gate automatically
 
 ### I accidentally committed to main locally (before pushing)
 
