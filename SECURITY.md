@@ -319,7 +319,7 @@ npm run lint
 
 For security vulnerabilities, please report responsibly:
 1. Do NOT publish vulnerability publicly
-2. Email: [security contact for project]
+2. Email: nocatix (at) gmail (dot) com
 3. Include: description, steps to reproduce, impact
 4. No responsible disclosure required; good faith appreciated
 
