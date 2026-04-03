@@ -10,8 +10,9 @@ COPY client/public ./public
 COPY client/src ./src
 
 # Build the React app with the backend URL environment variable
-# Use localhost since the browser will access the backend via the exposed port
-ENV REACT_APP_API_URL=http://localhost:5000
+# Accept as build arg to allow override via docker-compose
+ARG REACT_APP_API_URL=http://backend:5000
+ENV REACT_APP_API_URL=${REACT_APP_API_URL}
 RUN npm run build
 
 # Use a lighter image for serving the built app
