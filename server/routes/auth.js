@@ -14,8 +14,10 @@ const Diary = require('../models/Diary');
 const Memory = require('../models/Memory');
 const Mood = require('../models/Mood');
 const Weight = require('../models/Weight');
+const { createLogger } = require('../utils/logger');
 
 const router = express.Router();
+const logger = createLogger({ name: 'backend:auth' });
 
 /**
  * @route   POST /api/auth/register
@@ -28,21 +30,30 @@ const router = express.Router();
 router.post('/register', async (req, res) => {
   try {
     const { username, password } = req.body;
+    logger.verbose('Registration attempt', {
+      username,
+      hasPassword: Boolean(password),
+      origin: req.get('origin'),
+      ip: req.ip,
+    });
     
     // Validate all required fields are provided
     if (!username || !password) {
+      logger.warn('Registration rejected due to missing fields', { username });
       return res.status(400).json({ message: 'All fields are required' });
     }
     
     // Check if username is already taken
     const existingUser = await User.findOne({ username });
     if (existingUser) {
+      logger.info('Registration rejected because username already exists', { username });
       return res.status(409).json({ message: 'Username already taken' });
     }
     
     // Create new user (password will be hashed by User model pre-save middleware)
     const user = new User({ username, password });
     await user.save();
+    logger.info('Registration successful', { userId: user._id, username: user.username });
     
     // Generate JWT token for immediate login
     const token = jwt.sign(
@@ -57,6 +68,11 @@ router.post('/register', async (req, res) => {
       user: { id: user._id, username: user.username }
     });
   } catch (error) {
+    logger.error('Registration failed', {
+      message: error.message,
+      stack: error.stack,
+      username: req.body?.username,
+    });
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
@@ -71,20 +87,29 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
+    logger.verbose('Login attempt', {
+      username,
+      hasPassword: Boolean(password),
+      origin: req.get('origin'),
+      ip: req.ip,
+    });
     
     // Validate required fields
     if (!username || !password) {
+      logger.warn('Login rejected due to missing fields', { username });
       return res.status(400).json({ message: 'Username and password are required' });
     }
     
     // Find user by username
     const user = await User.findOne({ username });
     if (!user) {
+      logger.info('Login rejected because user was not found', { username });
       return res.status(401).json({ message: 'Invalid credentials' });
     }
     
     const isPasswordValid = await user.comparePassword(password);
     if (!isPasswordValid) {
+      logger.info('Login rejected because password was invalid', { username, userId: user._id });
       return res.status(401).json({ message: 'Invalid credentials' });
     }
     
@@ -100,6 +125,11 @@ router.post('/login', async (req, res) => {
       user: { id: user._id, username: user.username, fullName: user.fullName }
     });
   } catch (error) {
+    logger.error('Login failed', {
+      message: error.message,
+      stack: error.stack,
+      username: req.body?.username,
+    });
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });

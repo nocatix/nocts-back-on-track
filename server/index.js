@@ -17,8 +17,10 @@ const memoryRoutes = require('./routes/memories');
 const trophyRoutes = require('./routes/trophies');
 const preparationRoutes = require('./routes/preparation');
 const { createIPWhitelistMiddleware } = require('./utils/ipWhitelist');
+const { createLogger } = require('./utils/logger');
 
 const app = express();
+const logger = createLogger({ name: 'backend' });
 
 // Connect to database
 connectDB();
@@ -31,6 +33,29 @@ app.use(helmet({
 }));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
+app.use((req, res, next) => {
+  const startedAt = Date.now();
+
+  logger.verbose('Incoming request', {
+    method: req.method,
+    path: req.originalUrl,
+    ip: req.ip,
+    origin: req.get('origin'),
+    userAgent: req.get('user-agent'),
+  });
+
+  res.on('finish', () => {
+    logger.verbose('Completed request', {
+      method: req.method,
+      path: req.originalUrl,
+      statusCode: res.statusCode,
+      durationMs: Date.now() - startedAt,
+    });
+  });
+
+  next();
+});
 
 // CORS configuration - restrict to your domain in production
 // Allows local network addresses for development
@@ -121,7 +146,12 @@ app.use('/api', (req, res) => {
 
 // Global error handler middleware
 app.use((err, req, res, next) => {
-  console.error('Error:', err.message);
+  logger.error('Unhandled application error', {
+    message: err.message,
+    path: req.originalUrl,
+    method: req.method,
+    stack: err.stack,
+  });
   
   // Ensure JSON response
   res.setHeader('Content-Type', 'application/json');
@@ -144,10 +174,10 @@ if (process.env.NODE_ENV === 'production') {
   const credentials = { key: privateKey, cert: certificate };
   
   https.createServer(credentials, app).listen(PORT, () => {
-    console.log(`Secure server running on port ${PORT}`);
+    logger.info('Secure server running', { port: PORT, logLevel: logger.level });
   });
 } else {
   app.listen(PORT, () => {
-    console.log(`Development server running on port ${PORT}`);
+    logger.info('Development server running', { port: PORT, logLevel: logger.level });
   });
 }

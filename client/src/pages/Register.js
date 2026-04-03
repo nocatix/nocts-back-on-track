@@ -5,6 +5,9 @@ import apiClient from '../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import Footer from '../components/Footer';
+import createLogger from '../utils/logger';
+
+const logger = createLogger('frontend:register');
 
 export default function Register() {
   const { t } = useTranslation(['common', 'auth', 'validation', 'messages']);
@@ -28,7 +31,16 @@ export default function Register() {
     e.preventDefault();
     setError('');
 
+    logger.info('Submitting registration form', {
+      username: formData.username,
+      hasPassword: Boolean(formData.password),
+      passwordsMatch: formData.password === formData.confirmPassword,
+    });
+
     if (formData.password !== formData.confirmPassword) {
+      logger.warn('Registration blocked because passwords do not match', {
+        username: formData.username,
+      });
       setError(t('auth:passwordsNotMatch'));
       return;
     }
@@ -42,9 +54,19 @@ export default function Register() {
       setToken(response.data.token);
       setUser(response.data.user);
       localStorage.setItem('token', response.data.token);
+      logger.info('Registration completed successfully', {
+        username: response.data.user?.username,
+        userId: response.data.user?.id,
+      });
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.message || t('common:error'));
+      logger.error('Registration request failed in UI', {
+        username: formData.username,
+        message: err.message,
+        status: err.response?.status,
+        response: err.response?.data,
+      });
+      setError(err.response?.data?.message || err.message || t('common:error'));
     }
   };
 
