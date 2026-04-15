@@ -1,7 +1,10 @@
 const crypto = require('crypto');
 
-// Use encryption key from environment or generate a default for development
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || crypto.randomBytes(32).toString('hex');
+// Enforce a stable encryption key to avoid unreadable data after restart.
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
+if (!ENCRYPTION_KEY || ENCRYPTION_KEY.length !== 64) {
+  throw new Error('ENCRYPTION_KEY is required and must be a 64-character hex string');
+}
 const ALGORITHM = 'aes-256-gcm';
 
 /**

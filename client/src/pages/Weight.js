@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from 'react-i18next';
 import './Weight.css';
+import apiClient from '../api/axiosConfig';
 
 const Weight = () => {
   const { t } = useTranslation('tracking');
@@ -76,24 +77,9 @@ const Weight = () => {
 
   const fetchWeightsWithUnit = async (targetUnit) => {
     try {
-      const API_BASE_URL = 'http://localhost:5000';
-      const response = await fetch(`${API_BASE_URL}/api/weights`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      
-      if (!response.ok) {
-        console.error(`Error fetching weights: ${response.status} ${response.statusText}`);
-        return;
-      }
-
-      try {
-        const data = await response.json();
-        // Convert weights from kg (storage unit) to display unit
-        convertWeights(data, targetUnit);
-      } catch (parseError) {
-        console.error('Failed to parse weights response:', parseError);
-        console.error('Response status:', response.status);
-      }
+      const response = await apiClient.get('/api/weights');
+      // Convert weights from kg (storage unit) to display unit
+      convertWeights(response.data, targetUnit);
     } catch (err) {
       console.error('Error fetching weights:', err);
     }
@@ -126,7 +112,6 @@ const Weight = () => {
     }
 
     try {
-      const API_BASE_URL = 'http://localhost:5000';
       const dateTime = new Date(`${selectedDate}T${selectedTime}`);
       
       // Convert weight to kg for storage
@@ -135,29 +120,17 @@ const Weight = () => {
         weightInKg = (weightInKg / 2.20462).toFixed(2);
       }
       
-      const response = await fetch(`${API_BASE_URL}/api/weights`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          weight: weightInKg,
-          unit: 'kg',
-          date: dateTime.toISOString()
-        })
+      await apiClient.post('/api/weights', {
+        weight: weightInKg,
+        unit: 'kg',
+        date: dateTime.toISOString()
       });
 
-      if (response.ok) {
-        setCurrentWeight('');
-        const now = new Date();
-        setSelectedDate(now.toISOString().split('T')[0]);
-        setSelectedTime(`${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`);
-        fetchWeights();
-      } else {
-        setMessage('Error logging weight');
-        setTimeout(() => setMessage(''), 3000);
-      }
+      setCurrentWeight('');
+      const now = new Date();
+      setSelectedDate(now.toISOString().split('T')[0]);
+      setSelectedTime(`${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`);
+      fetchWeights();
     } catch (err) {
       console.error('Error logging weight:', err);
       setMessage('Error logging weight');
@@ -193,20 +166,14 @@ const Weight = () => {
 
   const confirmDeleteWeight = async () => {
     try {
-      const API_BASE_URL = 'http://localhost:5000';
-      const response = await fetch(`${API_BASE_URL}/api/weights/${selectedWeightId}`, {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await apiClient.delete(`/api/weights/${selectedWeightId}`);
 
-      if (response.ok) {
-        setMessage('Weight entry deleted successfully!');
-        setTimeout(() => setMessage(''), 3000);
-        fetchWeights();
-        setShowDeleteModal(false);
-        setSelectedWeightId(null);
-        setSelectedWeightValue(null);
-      }
+      setMessage('Weight entry deleted successfully!');
+      setTimeout(() => setMessage(''), 3000);
+      fetchWeights();
+      setShowDeleteModal(false);
+      setSelectedWeightId(null);
+      setSelectedWeightValue(null);
     } catch (err) {
       console.error('Error deleting weight:', err);
       setMessage('Failed to delete weight entry');

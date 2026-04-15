@@ -1,5 +1,4 @@
 import * as SecureStore from 'expo-secure-store';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Buffer } from 'buffer';
 
 /**
@@ -38,29 +37,13 @@ export const decrypt = (encrypted) => {
 
 // For sensitive data like auth tokens
 export const saveSecure = async (key, value) => {
-  try {
-    await SecureStore.setItemAsync(key, value);
-  } catch (error) {
-    // Fallback to AsyncStorage if SecureStore fails
-    console.warn('SecureStore failed, using AsyncStorage:', error);
-    await AsyncStorage.setItem(key, value);
-  }
+  await SecureStore.setItemAsync(key, value);
 };
 
 export const getSecure = async (key) => {
-  try {
-    return await SecureStore.getItemAsync(key);
-  } catch (error) {
-    console.warn('SecureStore failed, using AsyncStorage:', error);
-    return await AsyncStorage.getItem(key);
-  }
+  return await SecureStore.getItemAsync(key);
 };
 
 export const removeSecure = async (key) => {
-  try {
-    await SecureStore.deleteItemAsync(key);
-  } catch (error) {
-    console.warn('SecureStore deletion failed, using AsyncStorage:', error);
-    await AsyncStorage.removeItem(key);
-  }
+  await SecureStore.deleteItemAsync(key);
 };

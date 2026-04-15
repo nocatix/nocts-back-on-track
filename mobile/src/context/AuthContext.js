@@ -37,24 +37,6 @@ export function AuthProvider({ children }) {
       if (currentUser) {
         setUser(currentUser);
         setUserToken('authenticated');
-      } else if (mode === 'standalone') {
-        // In standalone mode, auto-authenticate with a local guest user
-        console.log('[Auth] Standalone mode detected - auto-authenticating guest user');
-        try {
-          const result = await authService.login('guest', 'guest');
-          setUser(result.user);
-          setUserToken('authenticated');
-        } catch (guestError) {
-          // If can't login as guest, try to register
-          console.log('[Auth] Auto-login failed, attempting auto-register');
-          try {
-            const result = await authService.register('guest', 'Guest User', 'guest');
-            setUser(result.user);
-            setUserToken('authenticated');
-          } catch (registerError) {
-            console.error('[Auth] Error creating guest user:', registerError);
-          }
-        }
       }
     } catch (err) {
       console.error('[Auth] Error during bootstrap:', err);
